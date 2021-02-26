@@ -8,7 +8,7 @@
     <meta name="description" content="Hand clasp - Job Board HTML5 Template" />
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hand Clasp - Job Board HTML5 Template</title>
+    <title>Hand Clasp </title>
 
     <!-- Favicon -->
     <link href="images/favicon.ico" rel="shortcut icon" />
@@ -16,20 +16,11 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
 
-    <!-- CSS Global Compulsory (Do not remove)-->
-    <link rel="stylesheet" href="css/font-awesome/all.min.css" />
-    <link rel="stylesheet" href="css/flaticon/flaticon.css" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 
-    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
-    <link rel="stylesheet" href="css/datetimepicker/datetimepicker.min.css" />
-    <link rel="stylesheet" href="css/select2/select2.css" />
-
-    <!-- Template Style -->
-    <link rel="stylesheet" href="css/style.css" />
+    {% block css%}
     <style>
 
-        p {
+        .name {
             position: relative;
             font-family: Impact, sans-serif;
             font-size: 45px;
@@ -41,7 +32,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: rgba(255, 255, 255, 0);
         }
-
         @keyframes animate {0% {
             background-position: -500%;
         }
@@ -51,11 +41,14 @@
         }
     </style>
 
-    {% block css%}
         <!-- CSS Global Compulsory (Do not remove)-->
         <link rel="stylesheet" href="css/font-awesome/all.min.css" />
         <link rel="stylesheet" href="css/flaticon/flaticon.css" />
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+
+        <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
+        <link rel="stylesheet" href="css/datetimepicker/datetimepicker.min.css" />
+        <link rel="stylesheet" href="css/select2/select2.css" />
 
         <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
         <link rel="stylesheet" href="css/owl-carousel/owl.carousel.min.css" />
@@ -80,18 +73,7 @@ Header -->
                 <span></span>
             </button>
 
-            <p><B><FONT face="Helvetica">Hand Clasp</FONT></B></p>
-
-
-
-
-
-
-
-
-
-
-
+            <p class="name"><B><FONT face="Helvetica">Hand Clasp</FONT></B></p>
 
             <div class="navbar-collapse collapse justify-content-start">
                 <ul class="nav navbar-nav">
@@ -205,6 +187,50 @@ Header -->
                     </li>
                     <li class="dropdown nav-item mega-menu active">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Trainning</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
+                        <ul class="dropdown-menu megamenu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-sm-6 col-lg-5 mb-3 mb-lg-0">
+                                        <h6 class="mb-3 nav-title">Search Types</h6>
+                                        <ul class="list-unstyled mt-lg-3">
+                                            <li><a href="search-style-under-banner.html">Search style under banner</a></li>
+                                            <li><a href="search-style-above-banner.html">Search style above banner</a></li>
+                                            <li><a href="search-style-below-banner.html">Search style below banner</a></li>
+                                            <li><a href="search-style-advanced.html">Advanced Search style</a></li>
+                                            <li><a href="search-style-classic.html">Search style classic</a></li>
+                                            <li><a href="search-style-with-filter.html">Search style with filter</a></li>
+                                            <li><a href="search-style-advanced-02.html">Advanced Search style 02 </a></li>
+                                            <li><a href="search-style-advanced-03.html">Advanced Search style 03 </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 mb-3 mb-sm-0">
+                                        <h6 class="mb-3 nav-title"><B><FONT face="Helvetica">Trainning</FONT></B></h6>
+                                        <ul class="list-unstyled mt-lg-3">
+                                            <li><a href="element-feature-box.html">Feature box</a></li>
+                                            <li><a href="element-testimonials.html">Testimonials</a></li>
+                                            <li><a href="element-accordion.html">Accordion</a></li>
+                                            <li><a href="element-tabs.html">Tabs</a></li>
+                                            <li class="active"><a href="element-typography.html">Typography</a></li>
+                                            <li><a href="element-counter.html">counter</a></li>
+                                            <li><a href="element-countdown.html">Countdown</a></li>
+                                            <li><a href="element-category.html">Category</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="menu-banner bg-dark p-3 pt-4 text-center border-radius h-100 d-none d-lg-block">
+                                            <h5 class="text-primary mb-3 pt-2">Advertise your job with us</h5>
+                                            <span class="text-light"> Starting from</span>
+                                            <h3 class="text-white my-3">$99 <small>/mo</small></h3>
+                                            <p class="text-primary p-2 small text-white">Save 30% for new customer</p>
+                                            <a class="btn btn-light btn-sm" href="post-a-job.html">Post a job now!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-item mega-menu active">
+                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Event</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
                         <ul class="dropdown-menu megamenu">
                             <li>
                                 <div class="row">

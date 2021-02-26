@@ -7,7 +7,228 @@
 
 
 {% block body %}
+    <!--=================================
+    banner -->
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/event.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>Event Title</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="Title"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>Location</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="town or country"></div>
+                                    </div>
+                                </div>
 
+                                <div class="form-group col-lg-2 col-md-4">
+                                    <div class="mt-0">
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Events</button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="d-md-inline-block advance-search-btn">
+                                        <a class="more-search p-0 collapsed" data-toggle="collapse" href="#advanced-search" role="button" aria-expanded="false" aria-controls="advanced-search">Advanced search <i class="fas fa-angle-down pl-1"></i></a>
+                                    </div>
+                                </div>
+                                <div class="collapse advanced-search col-lg-12" id="advanced-search">
+                                    <div class="card card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 datetimepickers">
+                                                <label>Event Date</label>
+                                                <div class="input-group date" id="datetimepicker-01" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input" placeholder="Date" data-target="#datetimepicker-01">
+                                                    <div class="input-group-append" data-target="#datetimepicker-01" data-toggle="datetimepicker" >
+                                                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg col-md-6 mb-0">
+                                                <label>Event Type</label>
+                                                <select class="form-control basic-select">
+                                                    <option value="Other">Other</option>
+                                                    <option value="Study Day">Study Day</option>
+                                                    <option value="Seminar">Seminar</option>
+                                                    <option value="Product Launch">Product Launch</option>
+                                                    <option value="Athletic Event">Athletic Event</option>
+                                                    <option value="Festival">Festival</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="blog-post text-center mt-4">
+                        <div class="blog-post-image">
+                            <img class="img-fluid" src="images/blog/02.jpg" alt="">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="blog-post-details">
+                                <div class="blog-post-category">
+                                    <a class="mb-1" href="#">Recruitment</a>
+                                </div>
+                                <div class="blog-post-title">
+                                    <h4><a href="blog-detail.html">How to sell yourself in a job interview</a></h4>
+                                </div>
+                                <div class="blog-post-description">
+                                    <p class="mb-0">Motivation is not an accident or something that someone else can give you — you are the only one with the power to motivate you. Motivation cannot be an external force, it must come from within as the natural product of your desire to achieve something and your belief that you are capable to succeed at your goal.</p>
+                                </div>
+                            </div>
+                            <div class="blog-post-footer">
+                                <div class="blog-post-time">
+                                    <a href="#"><i class="far fa-clock"></i>25 March 2020</a>
+                                </div>
+                                <div class="blog-post-author">
+                                    <span>By<a href="#"><img src="images/avatar/08.jpg" alt="">John Doe</a></span>
+                                </div>
+
+                                <div class="blog-post-share">
+                                    <div class="share-box">
+                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                        <ul class="list-unstyled share-box-social">
+                                            <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <ul class="pagination mt-4 mb-lg-0">
+                                <li class="page-item disabled mr-auto">
+                                    <span class="page-link b-radius-none">Prev</span>
+                                </li>
+                                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item ml-auto">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="blog-sidebar">
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>About The Events</h5>
+                            </div>
+                            <p>The concept of corporate event encompasses company dinners, meetings, conferences, symposiums and even recreational activities </p>
+                            <ol class="pl-3">
+                                <li class="mb-2">Events, meetings and other activities are very effective communication tools both at an internal and external level.</li>
+                                <li class="mb-2">They enable and foster interpersonal relationships</li>
+                                <li class="mb-2">They reward achievements and recognize success</li>
+                                <li class="mb-2">They improve motivation and working mood.</li>
+                                <li class="mb-2">They promote business and sales</li>
+                            </ol>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Recent Events</h5>
+                            </div>
+                            <div class="d-flex mb-3 align-items-start">
+                                <div class="avatar avatar-xl">
+                                    <img class="img-fluid" src="images/blog/06.jpg" alt="">
+                                </div>
+                                <div class="ml-3 recent-posts">
+                                    <a href="#"><b>Expanding Access to Tech Talent</b></a>
+                                    <a class="d-block font-sm mt-1 text-light" href="#">25 Feb 2020</a>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3 align-items-start">
+                                <div class="avatar avatar-xl">
+                                    <img class="img-fluid" src="images/blog/07.jpg" alt="">
+                                </div>
+                                <div class="ml-3 recent-posts">
+                                    <a href="#"><b>How to become an Account Manager</b></a>
+                                    <a class="d-block font-sm mt-1 text-light" href="#">20 March 2020</a>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3 align-items-start">
+                                <div class="avatar avatar-xl">
+                                    <img class="img-fluid" src="images/blog/08.jpg" alt="">
+                                </div>
+                                <div class="ml-3 recent-posts">
+                                    <a href="#"><b>Job interview tips for older workers</b></a>
+                                    <a class="d-block font-sm mt-1 text-light" href="#">15 Jan 2020</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Subscribe & Follow</h5>
+                            </div>
+                            <div class="social">
+                                <ul class="list-unstyled">
+                                    <li class="facebook">
+                                        <a class="text-uppercase" href="#"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
+                                        <a class="follow ml-auto" href="https://www.facebook.com/hand.calsp">Like </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a class="text-uppercase" href="#"> <i class="fab fa-instagram mr-3"></i>instagram</a>
+                                        <a class="follow ml-auto" href="https://www.instagram.com/hand_clasp/?hl=en">Follow </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Popular Tags</h5>
+                            </div>
+                            <div class="popular-tag">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">Bootstrap</a></li>
+                                    <li><a href="#">HTML5</a></li>
+                                    <li><a href="#">Wordpress</a></li>
+                                    <li><a href="#">CSS3</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                    <li><a href="#">Multipurpose</a></li>
+                                    <li><a href="#">Fashion</a></li>
+                                    <li><a href="#">Color</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    blog -->
 
 {% endblock %}
 
