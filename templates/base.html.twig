@@ -5,10 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Jobber - Job Board HTML5 Template" />
+    <meta name="description" content="Hand clasp - Job Board HTML5 Template" />
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Jobber - Job Board HTML5 Template</title>
+    <title>Hand Clasp - Job Board HTML5 Template</title>
 
     <!-- Favicon -->
     <link href="images/favicon.ico" rel="shortcut icon" />
@@ -27,6 +27,29 @@
 
     <!-- Template Style -->
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+
+        p {
+            position: relative;
+            font-family: Impact, sans-serif;
+            font-size: 45px;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #F1801D, #fff3cd, #e0a800);
+            background-repeat: no-repeat;
+            background-size: 80%;
+            animation: animate 5s infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0);
+        }
+
+        @keyframes animate {0% {
+            background-position: -500%;
+        }
+            100% {
+                background-position: 500%;
+            }
+        }
+    </style>
 
     {% block css%}
         <!-- CSS Global Compulsory (Do not remove)-->
@@ -56,13 +79,24 @@ Header -->
                 <span></span>
                 <span></span>
             </button>
-            <a class="navbar-brand" href="index.html">
-                <img class="img-fluid" src="images/logo.svg" alt="logo">
-            </a>
+
+            <p><B><FONT face="Helvetica">Hand Clasp</FONT></B></p>
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="navbar-collapse collapse justify-content-start">
                 <ul class="nav navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home<i class="fas fa-chevron-down fa-xs"></i></a>
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="index.html">index Default</a></li>
                             <li><a class="dropdown-item" href="index-02.html">index 02</a></li>
@@ -74,7 +108,7 @@ Header -->
                         </ul>
                     </li>
                     <li class="dropdown nav-item ">
-                        <a href="properties.html" class="nav-link" data-toggle="dropdown">Pages<i class="fas fa-chevron-down fa-xs"></i></a>
+                        <a href="properties.html" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Pages</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
                         <ul class="dropdown-menu megamenu dropdown-menu-lg">
                             <li>
                                 <div class="row">
@@ -160,7 +194,7 @@ Header -->
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Listing <i class="fas fa-chevron-down fa-xs"></i>
+                            <B><FONT face="Helvetica">Opportunities</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="job-grid.html">Job Grid</a></li>
@@ -170,7 +204,7 @@ Header -->
                         </ul>
                     </li>
                     <li class="dropdown nav-item mega-menu active">
-                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">Elements<i class="fas fa-chevron-down fa-xs"></i></a>
+                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Trainning</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
                         <ul class="dropdown-menu megamenu">
                             <li>
                                 <div class="row">
@@ -188,7 +222,7 @@ Header -->
                                         </ul>
                                     </div>
                                     <div class="col-sm-6 col-lg-3 mb-3 mb-sm-0">
-                                        <h6 class="mb-3 nav-title">Elements</h6>
+                                        <h6 class="mb-3 nav-title"><B><FONT face="Helvetica">Trainning</FONT></B></h6>
                                         <ul class="list-unstyled mt-lg-3">
                                             <li><a href="element-feature-box.html">Feature box</a></li>
                                             <li><a href="element-testimonials.html">Testimonials</a></li>
@@ -215,7 +249,7 @@ Header -->
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Employer <i class="fas fa-chevron-down fa-xs"></i>
+                            <B><FONT face="Helvetica">Complaints </FONT></B><i class="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="employer-grid.html">Employer Grid</a></li>
@@ -238,7 +272,7 @@ Header -->
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Candidates <i class="fas fa-chevron-down fa-xs"></i>
+                            <B><FONT face="Helvetica"> Meeting</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="candidates-grid.html">Candidates Grid</a></li>
@@ -272,6 +306,7 @@ Header -->
 Header -->
 
 {% block body %}{% endblock %}
+
 
 <!--=================================
 Action box & Counter -->
@@ -338,7 +373,7 @@ footer -->
             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
                 <h5 class="text-dark mb-4">Subscribe Us</h5>
                 <div class="footer-subscribe">
-                    <p>Sign Up to our Newsletter to get the latest news and offers.</p>
+                    Sign Up to our Newsletter to get the latest news and offers
                     <form>
                         <div class="form-group">
                             <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
@@ -360,7 +395,7 @@ footer -->
             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
                 <h5 class="text-dark mb-4">Download App</h5>
                 <div class="footer-subscribe">
-                    <p>Download the latest Slick new job apps now</p>
+                    Download the latest Slick new job apps now
                     <div class="d-inline-block">
                         <a class="btn btn-white btn-sm btn-app " href="#">
                             <i class="fab fa-apple"></i>
@@ -395,7 +430,7 @@ footer -->
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-                    <p class="mb-0"> &copy;Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="#"> Jobber </a> All Rights Reserved </p>
+                    class="mb-0"> &copy;Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="#"> Jobber </a> All Rights Reserved
                 </div>
             </div>
         </div>
