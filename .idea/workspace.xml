@@ -22,6 +22,7 @@
     <list default="true" id="e1842150-5afb-44f5-8b7d-6ae45eadf255" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Type.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,6 +210,7 @@
       <workItem from="1614381378244" duration="126000" />
       <workItem from="1614381516357" duration="129000" />
       <workItem from="1614381660136" duration="228000" />
+      <workItem from="1614382012128" duration="602000" />
     </task>
     <servers />
   </component>
