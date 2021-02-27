@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RendezVousController!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h1><h1>Liste des Rendez-vous</h1>
+            <table border="2">
+                <tr>
+                    <td>ID</td>
+                    <td>Date</td>
+                    <td>Meet</td>
+                    <td>Description</td>
+                    <td>Email</td>
+                    <td>UPDATE</td>
+                    <td>DELETE</td>
+                </tr>
+                {% for r in rendezvous %}
+                    <tr>
+                        <td> {{ r.id }}</td>
+                        <td> {{ r.date|date('Y-m-d H:i:s') }}</td>
+                        <td> {{ r.meet }}</td>
+                        <td> {{ r.description }}</td>
+                        <td> {{ r.email }}</td>
+                        <td><a href="{{ path ('update',{ 'id':r.id}) }}">Update</a></td>
+                        <td><a href="{{ path ('d',{ 'id':r.id}) }}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table> </h1>
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/RendezVousController.php'|file_link(0) }}">src/Controller/RendezVousController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
+        </ul>
+    </div>
+{% endblock %}
