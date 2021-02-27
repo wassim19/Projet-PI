@@ -42,6 +42,11 @@ class Evenement
      */
     private $localitation;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_societe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Evenement
     public function setLocalitation(string $localitation): self
     {
         $this->localitation = $localitation;
+
+        return $this;
+    }
+
+    public function getIdSociete(): ?int
+    {
+        return $this->id_societe;
+    }
+
+    public function setIdSociete(int $id_societe): self
+    {
+        $this->id_societe = $id_societe;
 
         return $this;
     }
