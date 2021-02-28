@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReclamationController!{% endblock %}
+{% block title %}Reclamation index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>les reclamations </h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Motif</th>
+                <th>gsm</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.message }}</td>
+                <td>{{ reclamation.motif }}</td>
+                <td>{{ reclamation.gsm }}</td>
+                <td>
+                    <button ><a href="{{ path('reclamation_delete', {'id': reclamation.id}) }}">delete</a>
+                    </button>
+                    <button>
+                    <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/leowa/OneDrive/Documents/PI/Projet-PI/src/Controller/ReclamationController.php'|file_link(0) }}">src/Controller/ReclamationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/leowa/OneDrive/Documents/PI/Projet-PI/templates/reclamation/index.html.twig'|file_link(0) }}">templates/reclamation/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div align="center"><a  href="{{ path('reclamation_new') }}">Create new</a></div>
 {% endblock %}

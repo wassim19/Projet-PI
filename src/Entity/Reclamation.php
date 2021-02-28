@@ -17,6 +17,22 @@ class Reclamation
      */
     private $id;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
 
 
     /**
@@ -28,6 +44,11 @@ class Reclamation
      * @ORM\Column(type="string", length=255)
      */
     private $motif;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $GSM;
 
 
 
@@ -51,6 +72,18 @@ class Reclamation
     public function setMotif(string $motif): self
     {
         $this->motif = $motif;
+
+        return $this;
+    }
+
+    public function getGSM(): ?string
+    {
+        return $this->GSM;
+    }
+
+    public function setGSM(string $GSM): self
+    {
+        $this->GSM = $GSM;
 
         return $this;
     }
