@@ -69,8 +69,11 @@ class EvenementSocieteController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> e7aa34ca065abae5ed152f19d9183bd6910fc615
     /**
      * @Route("/addevent", name="addevent")
      */
