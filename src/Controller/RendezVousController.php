@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RendezVo;
+use App\Entity\RendezVous;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
