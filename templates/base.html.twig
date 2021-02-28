@@ -343,6 +343,16 @@ Header -->
                             <li><a class="dropdown-item" href="my-resume.html">My Resume <span class="badge badge-danger ml-2">CV</span></a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <B><FONT face="Helvetica"> reclamation</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="{{ path('reclamation_index') }}">reclamation</a></li>
+                            <li><a href="{{ path('reclamation_new') }}">ajouter reclamation</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             {% block content %}
