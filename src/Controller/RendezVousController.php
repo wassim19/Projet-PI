@@ -14,9 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RendezVousController extends AbstractController
 {
-    /**
-     * @Route("/rendez/vous", name="rendez_vous")
-     */
+
     public function index(): Response
     {
         return $this->render('rendez_vous/index.html.twig', [
@@ -27,15 +25,18 @@ class RendezVousController extends AbstractController
     /**
      * @param RendezVousRepository $repository
      * @return Response
-     * @Route("/afficher",name="rendezvous")
+     * @Route("/rdvafficher",name="rendezvous")
      */
     public function listrendezvous(RendezVousRepository $repository){
         $rendezvous=$repository->findAll();
         return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
     }
+
     /**
-     *  @Route ("/addr",name="addrendez-vous")
-    */
+     * @Route ("/addrdv",name="addrendez-vous")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     function add(Request $request){
         $rendezvous=new RendezVous();
         $form=$this->createForm(RendezVousType::class,$rendezvous);
@@ -50,8 +51,12 @@ class RendezVousController extends AbstractController
         return $this->render("rendez_vous/index.html.twig",array('form'=>$form->createView()));
 
     }
+
     /**
-     * @Route ("/supp/{id}",name="d")
+     * @Route ("/supprdv {id}",name="d")
+     * @param $id
+     * @param RendezVousRepository $repository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function Delete( $id , RendezVousRepository $repository)
     {
@@ -61,8 +66,13 @@ class RendezVousController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('rendezvous');
     }
+
     /**
-     * @Route("rendezvous/Update/{id}",name="update")
+     * @Route("Updaterdv {id}",name="update")
+     * @param RendezVousRepository $repository
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     function Update(RendezVousRepository $repository,$id,Request $request){
         $rendezvous=$repository->find($id);
