@@ -74,5 +74,5 @@ class FormationController extends AbstractController
 
         return $this->redirectToRoute("afficheformation");
     }
-    
+
 }
