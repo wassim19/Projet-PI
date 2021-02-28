@@ -17,8 +17,7 @@ class EventType extends AbstractType
             ->add('type')
             ->add('description')
             ->add('localitation')
-            ->add('id_societe')
-        ;
+            ->add('id_societe');
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -27,8 +26,4 @@ class EventType extends AbstractType
             'data_class' => Evenement::class,
         ]);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1382d52acb7e00edeaabd2f5cf215c53ec3e4185
