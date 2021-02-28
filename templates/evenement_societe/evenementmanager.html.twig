@@ -66,8 +66,8 @@ Manage Events -->
                                 <td><i class="far fa-star"></i></td>
                                 <td>
                                     <ul class="list-unstyled mb-0 d-flex">
-                                        <li><a href="#" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
-                                        <li><a href="#" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+                                        <li><a href="{{ path('eventinfo',{'id':e.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
+                                        <li><a href="{{ path('updateevent',{'id':e.id})}}" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
                                         <li><a href="{{ path('socdeleteevenement',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
                                     </ul>
                                 </td>
@@ -76,21 +76,7 @@ Manage Events -->
                             </tbody>
                         </table>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <ul class="pagination mt-3">
-                                <li class="page-item disabled mr-auto">
-                                    <span class="page-link b-radius-none">Prev</span>
-                                </li>
-                                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item ml-auto">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
