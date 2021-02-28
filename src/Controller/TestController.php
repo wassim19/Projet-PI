@@ -3,7 +3,9 @@
 namespace App\Controller;
 use App\Entity\RendezVo;
 use App\Entity\RendezVous;
+use App\Entity\Test;
 use App\Form\RendezVousType;
+use App\Form\TestType;
 use App\Repository\RendezVousRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +40,7 @@ class TestController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('default/pdf.html.twig', [
+        $html = $this->renderView('test/pdf.html.twig', [
             'title' => "Welcome to our PDF Test"
         ]);
 
@@ -50,20 +52,29 @@ class TestController extends AbstractController
 
         // Render the HTML as PDF
         $dompdf->render();
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
 
-        // Store PDF Binary Data
-        $output = $dompdf->output();
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route ("/addr",name="a")
+     */
+    function add(Request $request){
+        $test=new Test();
+        $form=$this->createForm(TestType::class,$test);
+        $form->add('Ajouter',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($test);
+            $em->flush();
+            return $this->redirectToRoute('test/index.html.twig');
+        }
+        return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 
-        // In this case, we want to write the file in the public directory
-        $publicDirectory = $this->get('kernel')->getProjectDir() . '/public';
-        // e.g /var/www/project/public/mypdf.pdf
-        $pdfFilepath = $publicDirectory . '/mypdf.pdf';
-
-        // Write file to the desired path
-        file_put_contents($pdfFilepath, $output);
-
-        // Send some text response
-        return new Response("The PDF file has been succesfully generated !");
     }
 
 }
