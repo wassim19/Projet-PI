@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\EventType;
+use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,10 +25,17 @@ class EvenementSocieteController extends AbstractController
      */
     public function evenement(): Response
     {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->findAll();
+
         return $this->render('evenement_societe/evenement.html.twig', [
-            'controller_name' => 'EvenementSocieteController',
+            'evenement' => $evenement,
         ]);
     }
+
+
+
+
 
     /**
      * @Route("/addevent", name="addevent")
@@ -35,17 +43,9 @@ class EvenementSocieteController extends AbstractController
     public function AddEvent(Request $request)
     {
         $event= new Evenement();
-        $form= $this->createFormBuilder($event)
-            ->add('dateAt',DateTimeType::class)
-            ->add('title',TextType::class)
-            ->add('type',TextType::class)
-            ->add('description',TextType::class)
-            ->add('localitation',TextType::class)
-            ->add('id_societe',TextType::class)
-            ->add('Add',SubmitType::class)
-        ->getForm();
 
-
+        $form=$this->createForm(EventType::class,$event);
+        $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
@@ -59,5 +59,8 @@ class EvenementSocieteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+
 
 }

@@ -7,8 +7,17 @@
 
 
 {% block body %}
+
+
+
+
+
+
+
+
     <!--=================================
     banner -->
+
     <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/event.jpg);">
         <div class="container">
             <div class="row">
@@ -77,30 +86,29 @@
 
     <!--=================================
 blog -->
+
     <section class="space-ptb">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-
+    {% for e in evenement %}
                     <div class="blog-post text-center mt-4">
                         <div class="blog-post-image">
                             <img class="img-fluid" src="images/blog/02.jpg" alt="">
                         </div>
                         <div class="blog-post-content">
                             <div class="blog-post-details">
-                                <div class="blog-post-category">
-                                    <a class="mb-1" href="#">Recruitment</a>
-                                </div>
+
                                 <div class="blog-post-title">
-                                    <h4><a href="blog-detail.html">How to sell yourself in a job interview</a></h4>
+                                    <h4><a href="blog-detail.html">{{ e.title }}</a></h4>
                                 </div>
                                 <div class="blog-post-description">
-                                    <p class="mb-0">Motivation is not an accident or something that someone else can give you — you are the only one with the power to motivate you. Motivation cannot be an external force, it must come from within as the natural product of your desire to achieve something and your belief that you are capable to succeed at your goal.</p>
+                                    <p class="mb-0">{{ e.title }}</p>
                                 </div>
                             </div>
                             <div class="blog-post-footer">
                                 <div class="blog-post-time">
-                                    <a href="#"><i class="far fa-clock"></i>25 March 2020</a>
+                                    <a href="#"><i class="far fa-clock"></i>{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
                                 </div>
                                 <div class="blog-post-author">
                                     <span>By<a href="#"><img src="images/avatar/08.jpg" alt="">John Doe</a></span>
@@ -118,9 +126,12 @@ blog -->
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
+    {% endfor %}
                     <div class="row justify-content-center">
                         <div class="col-12 text-center">
                             <ul class="pagination mt-4 mb-lg-0">
@@ -227,6 +238,7 @@ blog -->
             </div>
         </div>
     </section>
+
     <!--=================================
     blog -->
 

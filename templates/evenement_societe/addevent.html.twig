@@ -4,14 +4,25 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
-    {{ form_row(form.title,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
-    {{ form_row(form.type,{ 'attr':{ 'placeholder':"Type",'class':"form-control"}}) }}
-    {{ form_row(form.description,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
-    {{ form_row(form.dateAt) }}
-    {{ form_row(form.localitation,{ 'attr':{ 'placeholder':"Localisation",'class':"form-control"}}) }}
-    {{ form_row(form.id_societe,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
-    {{ form_end(form) }}
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
+            <section class="space-ptb">
+                <div class="container">
+                    {{ form_start(form) }}
+                    {{ form_row(form.title,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
+                    {{ form_row(form.type,{ 'attr':{ 'placeholder':"Type",'class':"form-control"}}) }}
+                    {{ form_row(form.description,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
+                    {{ form_row(form.dateAt) }}
+                    {{ form_row(form.localitation,{ 'attr':{ 'placeholder':"Localisation",'class':"form-control"}}) }}
+                    {{ form_row(form.id_societe,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
+                    {{ form_row(form.Add,{ 'attr':{ 'class':"btn btn-primary"}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
+    </div>
+
+
 
 
 
