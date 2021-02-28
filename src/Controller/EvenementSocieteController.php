@@ -20,6 +20,42 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
 {
+
+    /**
+     * @Route("/manager", name="manager")
+     */
+    public function index(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->findAll();
+
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/socdeleteevenement/{id}", name="socdeleteevenement")
+     */
+    public function deleteevent(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $event = $entityManager->getRepository(Evenement::class)->find($id);
+
+
+
+
+
+        $entityManager->remove($event);
+        $entityManager->flush();
+
+
+
+        return $this->redirectToRoute("manager");
+    }
+
     /**
      * @Route("/evenementsociete", name="evenementsociete")
      */
@@ -33,6 +69,11 @@ class EvenementSocieteController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e7aa34ca065abae5ed152f19d9183bd6910fc615
     /**
      * @Route("/addevent", name="addevent")
      */
@@ -48,6 +89,8 @@ class EvenementSocieteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
+
+            return $this->redirectToRoute("evenementsociete");
 
         }
 
