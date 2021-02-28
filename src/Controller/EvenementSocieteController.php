@@ -20,6 +20,21 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
 {
+    /**
+     * @Route("/adminevent", name="adminevent")
+     */
+    public function AdminEvent(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->findAll();
+
+
+        return $this->render('evenement_societe/adminevent.html.twig', [
+            'evenement' => $evenement,
+        ]);
+
+    }
 
     /**
      * @Route("/eventinfo{id}", name="eventinfo")
@@ -61,7 +76,7 @@ class EvenementSocieteController extends AbstractController
         $entityManager->remove($event);
         $entityManager->flush();
 
-        return $this->redirectToRoute("manager");
+        return $this->redirectToRoute("evenementsociete");
     }
 
     /**
@@ -94,6 +109,29 @@ class EvenementSocieteController extends AbstractController
         }
 
         return $this->render('evenement_societe/addevent.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/updateevent{id}", name="updateevent")
+     */
+    public function UpdateEvent(Request $request,$id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $event = $entityManager->getRepository(Evenement::class)->find($id);
+
+        $form=$this->createForm(EventType::class,$event);
+        $form->add('Update',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+            $entityManager->flush();
+            return $this->redirectToRoute("evenementsociete");
+        }
+
+        return $this->render('evenement_societe/updateevent.html.twig', [
             'form' => $form->createView(),
         ]);
     }

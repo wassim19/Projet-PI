@@ -2,48 +2,45 @@
 
 namespace App\Controller;
 
-use App\Entity\Offre;
-use App\Form\EventType;
-use App\Form\OffreType;
-use App\Repository\OffreRepository;
+use App\Entity\ParticipantE;
+use App\Form\ParticipantEType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class OffreController extends AbstractController
+class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/offre", name="offre")
+     * @Route("/participantt", name="participant")
      */
     public function index(): Response
     {
-        return $this->render('offre/index.html.twig', [
-            'controller_name' => 'OffreController',
+        return $this->render('participant/index.html.twig', [
+            'controller_name' => 'ParticipantController',
         ]);
     }
-    /**
-     * @Route("/addoffre", name="addoffre")
-     */
-    public function Addoffre(Request $request)
-    {
-        $offre= new Offre();
 
-        $form=$this->createForm(OffreType::class,$offre);
+    /**
+     * @Route("/participant", name="participant")
+     */
+    public function Addparticipant(Request $request)
+    {
+        $event= new ParticipantE();
+        $form=$this->createForm(ParticipantEType::class,$event);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($offre);
+            $entityManager->persist($event);
             $entityManager->flush();
-
+            return $this->redirectToRoute("evenementsociete");
         }
 
-        return $this->render('offre/addoffre.html.twig', [
+        return $this->render('evenement_societe/participant.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
 }

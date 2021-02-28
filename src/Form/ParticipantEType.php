@@ -2,33 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Evenement;
+use App\Entity\ParticipantE;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventType extends AbstractType
+class ParticipantEType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateAt')
-            ->add('title')
-            ->add('type')
-            ->add('description')
-            ->add('localitation')
-            ->add('id_societe')
+            ->add('mail')
+            ->add('nom')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Evenement::class,
+            'data_class' => ParticipantE::class,
         ]);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1382d52acb7e00edeaabd2f5cf215c53ec3e4185
