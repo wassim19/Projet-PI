@@ -20,21 +20,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
 {
-    /**
-     * @Route("/adminevent", name="adminevent")
-     */
-    public function AdminEvent(): Response
-    {
 
-        $rep=$this->getDoctrine()->getRepository(Evenement::class);
-        $evenement=$rep->findAll();
-
-
-        return $this->render('evenement_societe/adminevent.html.twig', [
-            'evenement' => $evenement,
-        ]);
-
-    }
 
     /**
      * @Route("/eventinfo{id}", name="eventinfo")
@@ -76,7 +62,7 @@ class EvenementSocieteController extends AbstractController
         $entityManager->remove($event);
         $entityManager->flush();
 
-        return $this->redirectToRoute("evenementsociete");
+        return $this->redirectToRoute("manager");
     }
 
     /**
