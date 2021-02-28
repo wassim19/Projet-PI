@@ -23,7 +23,7 @@
                 {% for r in rendezvous %}
                     <tr>
                         <td> {{ r.id }}</td>
-                        <td> {{ r.date|date('Y-m-d H:i:s') }}</td>
+                        <td align="right"> {{ r.date|date('Y-m-d H:i:s') }}</td>
                         <td> {{ r.meet }}</td>
                         <td> {{ r.description }}</td>
                         <td> {{ r.email }}</td>
