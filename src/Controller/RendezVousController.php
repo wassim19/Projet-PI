@@ -26,14 +26,14 @@ class RendezVousController extends AbstractController
     /**
      * @param RendezVousRepository $repository
      * @return Response
-     * @Route("/affiche",name="rendezvous")
+     * @Route("/afficher",name="rendezvous")
      */
-    public function listclassrrom(RendezVousRepository $repository){
+    public function listrendezvous(RendezVousRepository $repository){
         $rendezvous=$repository->findAll();
         return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
     }
     /**
-     *  @Route ("/add",name="addrendez-vous")
+     *  @Route ("/addr",name="addrendez-vous")
     */
     function add(Request $request){
         $rendezvous=new RendezVous();
