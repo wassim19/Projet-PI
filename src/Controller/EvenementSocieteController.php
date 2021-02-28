@@ -22,13 +22,28 @@ class EvenementSocieteController extends AbstractController
 {
 
     /**
+     * @Route("/eventinfo{id}", name="eventinfo")
+     */
+    public function show(int $id)
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->findAll();
+        return $this->render('evenement_societe/eventinfo.html.twig', [
+            'evenement' => $evenement,
+        ]);
+
+
+    }
+
+    /**
      * @Route("/manager", name="manager")
      */
-    public function index(): Response
+    public function manager(): Response
     {
 
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
         $evenement=$rep->findAll();
+
 
         return $this->render('evenement_societe/evenementmanager.html.twig', [
             'evenement' => $evenement,
@@ -36,22 +51,15 @@ class EvenementSocieteController extends AbstractController
     }
 
     /**
-     * @Route("/socdeleteevenement/{id}", name="socdeleteevenement")
+     * @Route("/socdeleteevenement{id}", name="socdeleteevenement")
      */
     public function deleteevent(int $id): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
-
-
-
-
-
         $entityManager->remove($event);
         $entityManager->flush();
-
-
 
         return $this->redirectToRoute("manager");
     }
@@ -63,13 +71,10 @@ class EvenementSocieteController extends AbstractController
     {
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
         $evenement=$rep->findAll();
-
         return $this->render('evenement_societe/evenement.html.twig', [
             'evenement' => $evenement,
         ]);
     }
-
-
 
     /**
      * @Route("/addevent", name="addevent")
@@ -77,7 +82,6 @@ class EvenementSocieteController extends AbstractController
     public function AddEvent(Request $request)
     {
         $event= new Evenement();
-
         $form=$this->createForm(EventType::class,$event);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
@@ -86,17 +90,11 @@ class EvenementSocieteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
-
             return $this->redirectToRoute("evenementsociete");
-
         }
 
         return $this->render('evenement_societe/addevent.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
-
-
-
 }
