@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\offre;
-use App\Repository\offreRepository;
+use App\Entity\Offre;
+use App\Form\EventType;
+use App\Form\OffreType;
+use App\Repository\OffreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,29 +24,26 @@ class OffreController extends AbstractController
         ]);
     }
     /**
-     * @param offreRepository $repository
-     * @return Response
-     * @Route("/affiche",name="offre")
+     * @Route("/addoffre", name="addoffre")
      */
-    public function listclassrrom(offreRepository $repository){
-        $offre=$repository->findAll();
-        return $this->render('offre/affiche.html.twig',array("offre"=>$offre));
-    }
-    /**
-     *  @Route ("/add",name="addoffre")
-     */
-    function add(Request $request){
-        $offre=new offre();
-        $form=$this->createForm(offreType::class,$offre);
-        $form->add('Ajouter',SubmitType::class);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($offre);
-            $em->flush();
-            return $this->redirectToRoute('offre');
-        }
-        return $this->render("offre/index.html.twig",array('form'=>$form->createView()));
+    public function Addoffre(Request $request)
+    {
+        $offre= new Offre();
 
+        $form=$this->createForm(OffreType::class,$offre);
+        $form->add('Add',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offre);
+            $entityManager->flush();
+
+        }
+
+        return $this->render('offre/addoffre.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
+
 }
