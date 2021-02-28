@@ -75,4 +75,21 @@ class FormationController extends AbstractController
         return $this->redirectToRoute("afficheformation");
     }
 
+    /**
+     * @Route("rendezvous/Update/{id}",name="update")
+     */
+    function Update(formationrepository $repository,$id,Request $request){
+        $formation=$repository->find($id);
+        $form=$this->createForm(FormationType::class,$formation);
+        $form->add('Update',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('afficheformation');
+        }
+        return $this->render("formation/update.html.twig",array('f'=>$form->createView()));
+
+    }
+
 }
