@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Evenement;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,11 @@ class EventType extends AbstractType
             ->add('type')
             ->add('description')
             ->add('localitation')
-            ->add('id_societe');
+            ->add('id_societe')
+            ->add('my_picture',FileType::class,[
+                'mapped'=>false,
+                'label'=> 'Upload Picture'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

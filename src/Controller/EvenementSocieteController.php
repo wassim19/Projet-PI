@@ -25,10 +25,12 @@ class EvenementSocieteController extends AbstractController
     /**
      * @Route("/eventinfo{id}", name="eventinfo")
      */
-    public function show(int $id)
+    public function show(int $id): Response
     {
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
-        $evenement=$rep->findAll();
+        $evenement=$rep->find($id);
+        dump($evenement);
+
         return $this->render('evenement_societe/eventinfo.html.twig', [
             'evenement' => $evenement,
         ]);
@@ -78,6 +80,14 @@ class EvenementSocieteController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $file = $request->files->get('event')['my_picture'];
+            $upload_directory = $this->getParameter('upload_directory');
+            $filename = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $upload_directory,
+                $filename
+            );
+            $event->setPicture($filename);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
