@@ -60,7 +60,7 @@ class EvenementSocieteController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
         $entityManager->remove($event);
-        $entityManager->flush();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       $entityManager->flush();
 
         return $this->redirectToRoute("manager");
     }
@@ -114,7 +114,7 @@ class EvenementSocieteController extends AbstractController
         {
 
             $entityManager->flush();
-            return $this->redirectToRoute("evenementsociete");
+            return $this->redirectToRoute("evenementsociete"); 
         }
 
         return $this->render('evenement_societe/updateevent.html.twig', [
