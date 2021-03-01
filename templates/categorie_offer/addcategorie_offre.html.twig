@@ -5,9 +5,18 @@
 {% block body %}
 
     {{ form_start(form) }}
-    {{ form_row(form.type,{ 'attr':{ 'placeholder':"Type",'class':"form-control"}}) }}
+    <div class="form-group col-md-3 mb-md-0 select-border">
 
-    {{ form_end(form) }}
+        <select class="form-control basic-select">
+            <option value="value 01" selected="selected">type offre</option>
+            <option value="value 02">ingénierie</option>
+            <option value="value 03">sante </option>
+            <option value="value 04">gestion/l'economie </option>
+            <option value="value 05">droit</option>
+            <option value="value 06">mode</option>
+
+        </select>
+    </div>
 
 
 
