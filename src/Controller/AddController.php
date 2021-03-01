@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Controller;
-
 use App\Form\AddsocieteType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EvenementRepository;
@@ -20,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Validator\Constraints\DateTime;
 class AddController extends AbstractController
+
 {
     /**
      * @Route("/user", name="user")
@@ -34,6 +33,15 @@ class AddController extends AbstractController
 
         return $this->render('user/add1.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/add", name="add")
+     */
+    public function index(): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'controller_name' => 'TestController',
         ]);
     }
 
