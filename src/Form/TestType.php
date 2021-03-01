@@ -12,7 +12,7 @@ class TestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('test')
+
             ->add('chronometre')
             ->add('email')
         ;
