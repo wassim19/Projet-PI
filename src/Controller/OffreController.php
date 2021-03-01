@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
 use App\Entity\Offre;
 use App\Form\EventType;
 use App\Form\OffreType;
@@ -45,5 +46,37 @@ class OffreController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/deleteoffre{id}", name="deleteoffre")
+     */
+    public function deleteoffre(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $offre = $entityManager->getRepository(Offre::class)->find($id);
+        $entityManager->remove($offre);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("adminoffrebackaffiche");
+    }
+
+
+    /**
+     * @Route("/adminoffrebackaffiche", name="adminoffrebackaffiche")
+     */
+    public function AdmiNoffre(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Offre::class);
+        $offre=$rep->findAll();
+
+
+        return $this->render('offre/offreadmine.html.twig', [
+            'offre' => $offre,
+        ]);
+
+    }
+
 
 }
