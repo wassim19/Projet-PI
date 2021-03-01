@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
 use App\Entity\ParticipantE;
 use App\Form\ParticipantEType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -12,6 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ParticipantController extends AbstractController
 {
+
+    /**
+     * @Route("/evenementsociete", name="evenementsociete")
+     */
+    public function evenement(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->findAll();
+        return $this->render('evenement_societe/evenement.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
     /**
      * @Route("/participant_e", name="participant_e")
      */

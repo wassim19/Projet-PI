@@ -17,6 +17,13 @@ class Evenement
      */
     private $id;
 
+    // ...
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $picture;
+
     /**
      * @ORM\Column(type="datetime")
      */
@@ -52,6 +59,11 @@ class Evenement
         return $this->id;
     }
 
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
     public function getDateAt(): ?\DateTimeInterface
     {
         return $this->dateAt;
@@ -67,6 +79,13 @@ class Evenement
     public function getTitle(): ?string
     {
         return $this->title;
+    }
+
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
     }
 
     public function setTitle(string $title): self
