@@ -1,17 +1,5 @@
 {% extends 'base.html.twig' %}
-
-
-
-
-
 {% block body %}
-
-
-
-
-
-
-
 
     <!--=================================
     banner -->
@@ -41,37 +29,8 @@
                                         <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Events</button>
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <div class="d-md-inline-block advance-search-btn">
-                                        <a class="more-search p-0 collapsed" data-toggle="collapse" href="#advanced-search" role="button" aria-expanded="false" aria-controls="advanced-search">Advanced search <i class="fas fa-angle-down pl-1"></i></a>
-                                    </div>
-                                </div>
-                                <div class="collapse advanced-search col-lg-12" id="advanced-search">
-                                    <div class="card card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6 datetimepickers">
-                                                <label>Event Date</label>
-                                                <div class="input-group date" id="datetimepicker-01" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" placeholder="Date" data-target="#datetimepicker-01">
-                                                    <div class="input-group-append" data-target="#datetimepicker-01" data-toggle="datetimepicker" >
-                                                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg col-md-6 mb-0">
-                                                <label>Event Type</label>
-                                                <select class="form-control basic-select">
-                                                    <option value="Other">Other</option>
-                                                    <option value="Study Day">Study Day</option>
-                                                    <option value="Seminar">Seminar</option>
-                                                    <option value="Product Launch">Product Launch</option>
-                                                    <option value="Athletic Event">Athletic Event</option>
-                                                    <option value="Festival">Festival</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+
                             </form>
                         </div>
                     </div>
@@ -130,21 +89,7 @@ blog -->
 
                     </div>
     {% endfor %}
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <ul class="pagination mt-4 mb-lg-0">
-                                <li class="page-item disabled mr-auto">
-                                    <span class="page-link b-radius-none">Prev</span>
-                                </li>
-                                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item ml-auto">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
                     <div class="blog-sidebar">
@@ -165,34 +110,22 @@ blog -->
                         <div class="widget">
                             <div class="widget-title">
                                 <h5>Recent Events</h5>
-                            </div>
+                            </div>{% set i =0 %}
+                            {% for e in evenement %}
+                                {% if i<3 %}
+                                    {% set i = i +1 %}
                             <div class="d-flex mb-3 align-items-start">
                                 <div class="avatar avatar-xl">
                                     <img class="img-fluid" src="images/blog/06.jpg" alt="">
                                 </div>
                                 <div class="ml-3 recent-posts">
-                                    <a href="#"><b>Expanding Access to Tech Talent</b></a>
-                                    <a class="d-block font-sm mt-1 text-light" href="#">25 Feb 2020</a>
+                                    <a href="{{ path('eventinfo',{'id':e.id})}}">{{ e.title }}</a>
+                                    <a class="d-block font-sm mt-1 text-light" href="#">{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
                                 </div>
                             </div>
-                            <div class="d-flex mb-3 align-items-start">
-                                <div class="avatar avatar-xl">
-                                    <img class="img-fluid" src="images/blog/07.jpg" alt="">
-                                </div>
-                                <div class="ml-3 recent-posts">
-                                    <a href="#"><b>How to become an Account Manager</b></a>
-                                    <a class="d-block font-sm mt-1 text-light" href="#">20 March 2020</a>
-                                </div>
-                            </div>
-                            <div class="d-flex mb-3 align-items-start">
-                                <div class="avatar avatar-xl">
-                                    <img class="img-fluid" src="images/blog/08.jpg" alt="">
-                                </div>
-                                <div class="ml-3 recent-posts">
-                                    <a href="#"><b>Job interview tips for older workers</b></a>
-                                    <a class="d-block font-sm mt-1 text-light" href="#">15 Jan 2020</a>
-                                </div>
-                            </div>
+                            {% endif %}
+                            {% endfor %}
+
                         </div>
 
                         <div class="widget">
@@ -202,11 +135,11 @@ blog -->
                             <div class="social">
                                 <ul class="list-unstyled">
                                     <li class="facebook">
-                                        <a class="text-uppercase" href="#"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
+                                        <a class="text-uppercase" href="https://www.facebook.com/hand.calsp"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
                                         <a class="follow ml-auto" href="https://www.facebook.com/hand.calsp">Like </a>
                                     </li>
                                     <li class="instagram">
-                                        <a class="text-uppercase" href="#"> <i class="fab fa-instagram mr-3"></i>instagram</a>
+                                        <a class="text-uppercase" href="https://www.instagram.com/hand_clasp/?hl=en"> <i class="fab fa-instagram mr-3"></i>instagram</a>
                                         <a class="follow ml-auto" href="https://www.instagram.com/hand_clasp/?hl=en">Follow </a>
                                     </li>
                                 </ul>

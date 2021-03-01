@@ -65,17 +65,7 @@ class EvenementSocieteController extends AbstractController
         return $this->redirectToRoute("manager");
     }
 
-    /**
-     * @Route("/evenementsociete", name="evenementsociete")
-     */
-    public function evenement(): Response
-    {
-        $rep=$this->getDoctrine()->getRepository(Evenement::class);
-        $evenement=$rep->findAll();
-        return $this->render('evenement_societe/evenement.html.twig', [
-            'evenement' => $evenement,
-        ]);
-    }
+
 
     /**
      * @Route("/addevent", name="addevent")
