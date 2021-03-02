@@ -38,7 +38,6 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
@@ -47,6 +46,7 @@ class ParticipantController extends AbstractController
                 ->setIdParticipant($event->getId());
             $entityManager->persist($participation);
             $entityManager->flush();
+
             return $this->redirectToRoute("evenementsociete");
         }
 
@@ -55,4 +55,6 @@ class ParticipantController extends AbstractController
         ]);
 
     }
+
+
 }

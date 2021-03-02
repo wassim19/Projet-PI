@@ -131,9 +131,9 @@ class OffreController extends AbstractController
     }
 
     /**
-     * @Route("/updateevent{id}", name="updateevent")
+     * @Route("/updateoffre{id}", name="updateoffre")
      */
-    public function UpdateEvent(Request $request,$id)
+    public function UpdateOffre(Request $request,$id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);

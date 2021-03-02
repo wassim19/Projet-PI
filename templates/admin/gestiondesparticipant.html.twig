@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {{ dump(participation) }}
-    {{ dump(paticipant) }}
+    {{ dump(participant) }}
     <!--=================================
     candidate post-box list -->
     <section class="space-ptb">
@@ -23,7 +23,7 @@
                 <div class="col-lg-9">
                     <div class="row">
                         {% for f in participation %}
-                        {% for e in paticipant %}
+                        {% for e in participant %}
                         <div class="col-md-6 mb-3">
                             <div class="candidate-list candidate-grid">
                                 <div class="candidate-list-image">
