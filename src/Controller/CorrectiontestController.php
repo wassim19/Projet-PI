@@ -28,12 +28,12 @@ class CorrectiontestController extends AbstractController
      * @param CorrectiontestRepository $repository
      * @param $id
      * @return Response
-     * @Route ("/nn{id}",name="nn")
+     * @Route ("/nn",name="nn")
      */
-    public function listnote(CorrectiontestRepository $repository,$id){
-        $correction=$repository->find($id);
+    public function listnote(CorrectiontestRepository $repository){
+        $correction=$repository->findAll();
 
-        return $this->render('correctiontest/note.html.twig',array("correction"=>$correction));
+        return $this->render('correctiontest/index.html.twig',array("correction"=>$correction));
     }
 
 
@@ -51,9 +51,17 @@ class CorrectiontestController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $em->persist($correction);
             $em->flush();
-            return $this->redirectToRoute('nn');
+            return $this->redirectToRoute('note',array("id"=>$correction->getId()));
         }
         return $this->render("correctiontest/reponse.html.twig",array('form'=>$form->createView(),"correction"=>$correction));
 
+    }
+    /**
+     * @Route("/note{id}",name="note")
+     */
+    public function note($id){
+        $repo=$this->getDoctrine()->getRepository(Correctiontest::class);
+        $correction=$repo->find($id);
+        return $this->render('correctiontest/note.html.twig',['correction' =>$correction]);
     }
 }
