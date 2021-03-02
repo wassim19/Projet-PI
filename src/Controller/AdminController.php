@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Entity\ParticipantE;
+use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,6 +14,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
+
+    /**
+     * @Route("/gestiondesparticipant{id}", name="gestiondesparticipant")
+     */
+    public function gestionpar($id): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(ParticipationE::class);
+        $paticipant=$rep->findBy(array('id_evenement' => $id));
+
+        $rep1=$this->getDoctrine()->getRepository(ParticipantE::class);
+        $s=$rep1->findBy(array('id' => $paticipant));
+
+
+
+
+
+        return $this->render('admin/gestiondesparticipant.html.twig', [
+            'paticipant' => $s,
+        ]);
+    }
 
 
 

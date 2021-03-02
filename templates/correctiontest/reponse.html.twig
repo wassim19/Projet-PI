@@ -9,9 +9,12 @@
     </style>
 
     <div class="example-wrapper">
-        <h1><li><a href="{{ path('p')}}" class="text-primary" data-toggle="tooltip" title="view"><i class="dropdown-item"></i>UPLOAD TEST</a></li>
+        <h1> <li><a href="{{ path('p')}}" class="text-primary" data-toggle="tooltip" title="view"><i class="dropdown-item"></i>UPLOAD TEST</a></li>
             {{ form(form) }}
-            </h1>
+            {% for t in correction%}
+            <li><a href="{{ path('nn',{'id':t.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="dropdown-item"></i>Envoyer</a></li>
+        {% endfor %}
+        </h1>
 
         This friendly message is coming from:
         <ul>
