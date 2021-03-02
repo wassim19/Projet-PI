@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {{ dump(participation) }}
-    {{ dump(participant) }}
     <!--=================================
     candidate post-box list -->
     <section class="space-ptb">
@@ -19,11 +18,9 @@
                         <hr>
                     </div>
                 </div>
-
                 <div class="col-lg-9">
                     <div class="row">
                         {% for f in participation %}
-                            {% for e in  participant%}
                                 <div class="col-md-6 mb-3">
                                     <div class="candidate-list candidate-grid">
                                         <div class="candidate-list-image">
@@ -32,11 +29,11 @@
                                         <div class="candidate-list-details">
                                             <div class="candidate-list-info">
                                                 <div class="candidate-list-title">
-                                                    <h5><a href="candidate-detail.html">{{e.nom}}</a></h5>
+                                                    <h5><a href="candidate-detail.html">{{f.id}}</a></h5>
                                                 </div>
                                                 <div class="candidate-list-option">
                                                     <ul class="list-unstyled">
-                                                        <li><i class="fas fa-filter pr-1"></i>{{e.mail}}</li>
+                                                        <li><i class="fas fa-filter pr-1"></i>efef</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -46,7 +43,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
                         {% endfor %}
                     </div>
                 </div>

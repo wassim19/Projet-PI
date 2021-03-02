@@ -25,12 +25,10 @@ class AdminController extends AbstractController
         $participation = $rep->findBy(array('id_evenement' => $id));
         dump($participation);
 
-        $rep1 = $this->getDoctrine()->getRepository(ParticipantE::class);
-        $participant = $rep1->findAll();
 
 
         return $this->render('evenement_societe/gestionparticipantsoc.html.twig', [
-            'participant' => $participant,'participation'=>$participation
+            'participation'=>$participation
         ]);
     }
 
@@ -59,12 +57,10 @@ class AdminController extends AbstractController
         $participation = $rep->findBy(array('id_evenement' => $id));
 
 
-        $rep1 = $this->getDoctrine()->getRepository(ParticipantE::class);
-        $participant = $rep1->findAll();
-        dump($participant);
+
 
         return $this->render('admin/gestiondesparticipant.html.twig', [
-            'participant' => $participant,'participation'=>$participation
+            'participation'=>$participation
         ]);
     }
 
