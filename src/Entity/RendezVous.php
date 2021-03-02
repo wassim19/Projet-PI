@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RendezVousRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=RendezVousRepository::class)
  */
@@ -19,6 +19,10 @@ class RendezVous
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Range(
+     *      min = "now",
+     *      max = "+1 month"
+     * )
      */
     private $date;
 
@@ -34,6 +38,7 @@ class RendezVous
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 

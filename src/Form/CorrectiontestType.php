@@ -6,33 +6,115 @@ use App\Entity\Correctiontest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CorrectiontestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reponseQ1')
-            ->add('reponseQ2')
-            ->add('reponseQ3')
-            ->add('reponseQ4')
-            ->add('reponseQ5')
-            ->add('reponseQ6')
-            ->add('reponseQ7')
-            ->add('reponseQ8')
-            ->add('reponseQ9')
-            ->add('reponseQ10')
-            ->add('reponseQ11')
-            ->add('reponseQ12')
-            ->add('reponseQ13')
-            ->add('reponseQ14')
-            ->add('reponseQ15')
-            ->add('reponseQ16')
-            ->add('reponseQ17')
-            ->add('reponseQ18')
-            ->add('reponseQ19')
-            ->add('reponseQ20')
-            ->add('note')
+            ->add('email')
+            ->add('reponseQ1',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ2',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ3',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ4',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ5',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ6',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ7',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ8',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ9',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ10',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ11',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ12',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ13',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ14',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ15',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ16',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ17',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ18',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ19',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+            ->add('reponseQ20',TextType::class, [
+                'attr' => [
+                    'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"
+                ]
+            ])
+
         ;
     }
 

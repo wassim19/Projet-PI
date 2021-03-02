@@ -71,7 +71,7 @@ class TestController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $em->persist($test);
             $em->flush();
-            return $this->redirectToRoute('test');
+            return $this->redirectToRoute('nn');
         }
         return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 
