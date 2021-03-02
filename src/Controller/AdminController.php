@@ -23,12 +23,12 @@ class AdminController extends AbstractController
 
         $rep = $this->getDoctrine()->getRepository(ParticipationE::class);
         $participation = $rep->findBy(array('id_evenement' => $id));
+        dump($participation);
 
-        $rep1 = $this->getDoctrine()->getRepository(ParticipantE::class);
-        $paticipant = $rep1->findBy(array('id' => $participation));
+
 
         return $this->render('evenement_societe/gestionparticipantsoc.html.twig', [
-            'paticipant' => $paticipant,'participation'=>$participation
+            'participation'=>$participation
         ]);
     }
 
@@ -39,7 +39,8 @@ class AdminController extends AbstractController
     {
 
         $entityManager = $this->getDoctrine()->getManager();
-        $participation = $entityManager->getRepository(ParticipationE::class)->find($id);
+        $participation = $entityManager->getRepository(ParticipationE::class)->findOneBy(['id_participant' => $id]);
+
         $entityManager->remove($participation);
         $entityManager->flush();
 
@@ -51,15 +52,14 @@ class AdminController extends AbstractController
      */
     public function gestionpar($id): Response
     {
+        $rep = $this->getDoctrine()->getRepository(ParticipationE::class);
+        $participation = $rep->findBy(array('id_evenement' => $id));
 
-            $rep = $this->getDoctrine()->getRepository(ParticipationE::class);
-            $participation = $rep->findBy(array('id_evenement' => $id));
 
-            $rep1 = $this->getDoctrine()->getRepository(ParticipantE::class);
-            $paticipant = $rep1->findBy(array('id' => $participation));
+
 
         return $this->render('admin/gestiondesparticipant.html.twig', [
-            'paticipant' => $paticipant,'participation'=>$participation
+            'participation'=>$participation
         ]);
     }
 
@@ -70,7 +70,7 @@ class AdminController extends AbstractController
     {
 
         $entityManager = $this->getDoctrine()->getManager();
-        $participation = $entityManager->getRepository(ParticipationE::class)->find($id);
+        $participation = $entityManager->getRepository(ParticipationE::class)->findOneBy(['id_participant' => $id]);
         $entityManager->remove($participation);
         $entityManager->flush();
 

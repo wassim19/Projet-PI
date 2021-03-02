@@ -78,8 +78,9 @@ class OffreController extends AbstractController
 
     }
 
+
     /**
-     * @Route("/affichagebacksociete", name="affichagebacksociete")
+     * @Route("/affichagebacksociete", name="affichagebacksociete"")
      */
     public function manager(): Response
     {
@@ -87,21 +88,29 @@ class OffreController extends AbstractController
         $rep=$this->getDoctrine()->getRepository(Offre::class);
         $offre=$rep->findAll();
 
-
-        return $this->render('evenement_societe/evenementmanager.html.twig', [
-            'evenement' => $offre,
+        return $this->render('offre/offresociete.html.twig', [
+            'offre' => $offre,
         ]);
+    }
+
+    /**
+     * @Route("/socdeletoffre{id}", name="socdeoffre")
+     */
+    public function deleteoffreback (int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $offre= $entityManager->getRepository(Offre::class)->find($id);
+        $entityManager->remove($offre);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("manager");
     }
 
 
 
-
-
-
-
-
     /**
-     * @Route("/addoffree", name="addoffree")
+     * @Route("/addoffreeback", name="addoffree")
      */
     public function Addoffree(Request $request)
     {
