@@ -78,9 +78,8 @@ class OffreController extends AbstractController
 
     }
 
-
     /**
-     * @Route("/affichagebacksociete", name="affichagebacksociete"")
+     * @Route("/affichagebacksociete", name="affichagebacksociete")
      */
     public function manager(): Response
     {
@@ -88,24 +87,16 @@ class OffreController extends AbstractController
         $rep=$this->getDoctrine()->getRepository(Offre::class);
         $offre=$rep->findAll();
 
-        return $this->render('offre/offresociete.html.twig', [
-            'offre' => $offre,
+
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $offre,
         ]);
     }
 
-    /**
-     * @Route("/socdeletoffre{id}", name="socdeoffre")
-     */
-    public function deleteoffre(int $id): Response
-    {
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $offre= $entityManager->getRepository(Offre::class)->find($id);
-        $entityManager->remove($offre);
-        $entityManager->flush();
 
-        return $this->redirectToRoute("manager");
-    }
+
+
 
 
 
@@ -115,7 +106,7 @@ class OffreController extends AbstractController
     public function Addoffree(Request $request)
     {
         $offre= new offre();
-        $form=$this->createForm($offre::class,$offre);
+        $form=$this->createForm(OffreType::class,$offre);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
