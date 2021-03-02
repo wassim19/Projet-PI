@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
-{%  dump(paticipant) %}
 {% block body %}
+    {{ dump(participation) }}
+    {{ dump(paticipant) }}
     <!--=================================
     candidate post-box list -->
     <section class="space-ptb">
@@ -21,6 +22,7 @@
 
                 <div class="col-lg-9">
                     <div class="row">
+                        {% for f in participation %}
                         {% for e in paticipant %}
                         <div class="col-md-6 mb-3">
                             <div class="candidate-list candidate-grid">
@@ -40,10 +42,11 @@
                                     </div>
                                 </div>
                                 <div class="candidate-list-favourite-time">
-                                    <a class="candidate-list-favourite order-2" href="#"><i class="far fa-trash-alt"></i></a>
+                                    <a class="candidate-list-favourite order-2" href="{{ path('deleteparticipant',{'id':f.id})}}"><i class="far fa-trash-alt"></i></a>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                         {% endfor %}
                     </div>
                 </div>
