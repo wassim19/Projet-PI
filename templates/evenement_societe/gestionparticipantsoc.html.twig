@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {{ dump(participation) }}
     <!--=================================
     candidate post-box list -->
     <section class="space-ptb">
@@ -33,13 +32,13 @@
                                                 </div>
                                                 <div class="candidate-list-option">
                                                     <ul class="list-unstyled">
-                                                        <li><i class="fas fa-filter pr-1"></i>efef</li>
+                                                        <li><i class="fas fa-filter pr-1"></i>{{f.IdParticipant}}</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="candidate-list-favourite-time">
-                                            <a class="candidate-list-favourite order-2" href="{{ path('deleteparticipantsoc',{'id':f.id})}}"><i class="far fa-trash-alt"></i></a>
+                                            <a class="candidate-list-favourite order-2" href="{{ path('deleteparticipantsoc',{'id':f.IdParticipant})}}"><i class="far fa-trash-alt"></i></a>
                                         </div>
                                     </div>
                                 </div>

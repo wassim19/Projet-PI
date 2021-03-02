@@ -39,7 +39,8 @@ class AdminController extends AbstractController
     {
 
         $entityManager = $this->getDoctrine()->getManager();
-        $participation = $entityManager->getRepository(ParticipationE::class)->find($id);
+        $participation = $entityManager->getRepository(ParticipationE::class)->findOneBy(['id_participant' => $id]);
+
         $entityManager->remove($participation);
         $entityManager->flush();
 
@@ -51,8 +52,6 @@ class AdminController extends AbstractController
      */
     public function gestionpar($id): Response
     {
-
-
         $rep = $this->getDoctrine()->getRepository(ParticipationE::class);
         $participation = $rep->findBy(array('id_evenement' => $id));
 
@@ -71,7 +70,7 @@ class AdminController extends AbstractController
     {
 
         $entityManager = $this->getDoctrine()->getManager();
-        $participation = $entityManager->getRepository(ParticipationE::class)->find($id);
+        $participation = $entityManager->getRepository(ParticipationE::class)->findOneBy(['id_participant' => $id]);
         $entityManager->remove($participation);
         $entityManager->flush();
 
