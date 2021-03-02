@@ -5,6 +5,8 @@ namespace App\Controller;
 
 
 use App\Entity\Evenement;
+use App\Entity\ParticipantE;
+use App\Entity\ParticipationE;
 use App\Form\EventType;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -20,7 +22,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
 {
-
 
     /**
      * @Route("/eventinfo{id}", name="eventinfo")
@@ -114,7 +115,7 @@ class EvenementSocieteController extends AbstractController
         {
 
             $entityManager->flush();
-            return $this->redirectToRoute("evenementsociete"); 
+            return $this->redirectToRoute("manager");
         }
 
         return $this->render('evenement_societe/updateevent.html.twig', [

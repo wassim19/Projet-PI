@@ -27,6 +27,7 @@ class ParticipantE
      */
     private $nom;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,4 +56,5 @@ class ParticipantE
 
         return $this;
     }
+
 }

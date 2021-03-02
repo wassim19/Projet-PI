@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-{%  dump(paticipant) %}
 {% block body %}
     <!--=================================
     candidate post-box list -->
@@ -21,7 +20,7 @@
 
                 <div class="col-lg-9">
                     <div class="row">
-                        {% for e in paticipant %}
+                        {% for f in participation %}
                         <div class="col-md-6 mb-3">
                             <div class="candidate-list candidate-grid">
                                 <div class="candidate-list-image">
@@ -30,17 +29,17 @@
                                 <div class="candidate-list-details">
                                     <div class="candidate-list-info">
                                         <div class="candidate-list-title">
-                                            <h5><a href="candidate-detail.html">{{e.nom}}</a></h5>
+                                            <h5><a href="candidate-detail.html">{{f.id}}</a></h5>
                                         </div>
                                         <div class="candidate-list-option">
                                             <ul class="list-unstyled">
-                                                <li><i class="fas fa-filter pr-1"></i>{{e.mail}}</li>
+                                                <li><i class="fas fa-filter pr-1"></i>gg</li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="candidate-list-favourite-time">
-                                    <a class="candidate-list-favourite order-2" href="#"><i class="far fa-trash-alt"></i></a>
+                                    <a class="candidate-list-favourite order-2" href="{{ path('deleteparticipant',{'id':f.IdParticipant})}}"><i class="far fa-trash-alt"></i></a>
                                 </div>
                             </div>
                         </div>

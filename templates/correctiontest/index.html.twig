@@ -1,20 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CorrectiontestController!{% endblock %}
+{% block title %}Hello RendezVousController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="example-wrapper">
+        <h1><h1>Tests list</h1>
+            <table border="2">
+                <tr>
+                    <td>ID</td>
+                    <td>NOTE</td>
+                    <td>reponseQ1</td>
+                    <td>reponseQ2</td>
+                    <td>reponseQ3</td>
+                    <td>reponseQ4</td>
+                    <td>reponseQ5</td>
+                    <td>reponseQ6</td>
+                    <td>reponseQ7</td>
+                    <td>reponseQ8</td>
+                    <td>reponseQ9</td>
+                    <td>reponseQ10</td>
+                    <td>reponseQ11</td>
+                    <td>reponseQ12</td>
+                    <td>reponseQ13</td>
+                    <td>reponseQ14</td>
+                    <td>reponseQ15</td>
+                    <td>reponseQ16</td>
+                    <td>reponseQ17</td>
+                    <td>reponseQ18</td>
+                    <td>reponseQ19</td>
+                    <td>reponseQ20</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/CorrectiontestController.php'|file_link(0) }}">src/Controller/CorrectiontestController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/correctiontest/index.html.twig'|file_link(0) }}">templates/correctiontest/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+
+
+
+
+                </tr>
+                {% for t in correction %}
+                    <tr>
+                        <td> {{ t.id }}</td>
+                        <td><a href="{{ path ('note',{ 'id':t.id}) }}">View note</a></td>
+                        <td> {{ t.reponseQ1 }}</td>
+                        <td> {{ t.reponseQ2 }}</td>
+                        <td> {{ t.reponseQ3 }}</td>
+                        <td> {{ t.reponseQ4 }}</td>
+                        <td> {{ t.reponseQ5 }}</td>
+                        <td> {{ t.reponseQ6 }}</td>
+                        <td> {{ t.reponseQ7 }}</td>
+                        <td> {{ t.reponseQ8 }}</td>
+                        <td> {{ t.reponseQ9 }}</td>
+                        <td> {{ t.reponseQ10 }}</td>
+                        <td> {{ t.reponseQ11 }}</td>
+                        <td> {{ t.reponseQ12 }}</td>
+                        <td> {{ t.reponseQ13 }}</td>
+                        <td> {{ t.reponseQ14 }}</td>
+                        <td> {{ t.reponseQ15 }}</td>
+                        <td> {{ t.reponseQ16 }}</td>
+                        <td> {{ t.reponseQ17 }}</td>
+                        <td> {{ t.reponseQ18 }}</td>
+                        <td> {{ t.reponseQ19 }}</td>
+                        <td> {{ t.reponseQ20 }}</td>
+
+
+                    </tr>
+                {% endfor %}
+            </table> </h1>
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/RendezVousController.php'|file_link(0) }}">src/Controller/RendezVousController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
+        </ul>
+    </div>
 {% endblock %}
