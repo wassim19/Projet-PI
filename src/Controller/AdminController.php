@@ -27,7 +27,7 @@ class AdminController extends AbstractController
         $rep1 = $this->getDoctrine()->getRepository(ParticipantE::class);
         $paticipant = $rep1->findBy(array('id' => $participation));
 
-        return $this->render('admin/gestiondesparticipant.html.twig', [
+        return $this->render('evenement_societe/gestionparticipantsoc.html.twig', [
             'paticipant' => $paticipant,'participation'=>$participation
         ]);
     }
