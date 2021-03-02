@@ -3,24 +3,35 @@
 {% block title %}Reclamation index{% endblock %}
 
 {% block body %}
-    <h1>les reclamations </h1>
+    <!--=================================
+inner banner -->
+    <div class="header-inner bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-primary"> reclamation</h2>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div align="left"> <a  href="{{ path('reclamation_trier') }}"><button type="submit" class="btn btn-primary btn-md" >trier</button></a></div> -->
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Message</th>
-                <th>Motif</th>
-                <th>gsm</th>
+                <th> <a  href="{{ path('reclamation_trier') }}"><button type="submit"  >Id</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >motif</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reclamation in reclamations %}
             <tr>
-                <td>{{ reclamation.id }}</td>
-                <td>{{ reclamation.message }}</td>
+                <td><b>{{ reclamation.id }}</b></td>
                 <td>{{ reclamation.motif }}</td>
+                <td>{{ reclamation.message }}</td>
                 <td>{{ reclamation.gsm }}</td>
                 <td>
                     <button ><a href="{{ path('reclamation_delete', {'id': reclamation.id}) }}">delete</a>
@@ -38,5 +49,5 @@
         </tbody>
     </table>
 
-    <div align="center"><a  href="{{ path('reclamation_new') }}">Create new</a></div>
+    <div align="center"> <a  href="{{ path('reclamation_new') }}"><button type="submit" class="btn btn-primary btn-md" >ajouter</button></a></div>
 {% endblock %}

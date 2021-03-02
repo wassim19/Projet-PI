@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
 use App\Entity\ParticipantE;
+use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Component\HttpFoundation\Request;
@@ -12,10 +14,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ParticipantController extends AbstractController
 {
+
     /**
-     * @Route("/participant_e", name="participant_e")
+     * @Route("/evenementsociete", name="evenementsociete")
      */
-    public function index(Request $request): Response
+    public function evenement(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->findAll();
+        return $this->render('evenement_societe/evenement.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/participant_e{id}", name="participant_e")
+     */
+    public function index(Request $request,$id): Response
     {
         $event= new ParticipantE();
         $form=$this->createForm(ParticipantEType::class,$event);
@@ -26,6 +41,12 @@ class ParticipantController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
+            $participation= new ParticipationE();
+            $participation->setIdEvenement($id)
+                ->setIdParticipant($event->getId());
+            $entityManager->persist($participation);
+            $entityManager->flush();
+
             return $this->redirectToRoute("evenementsociete");
         }
 
@@ -34,4 +55,6 @@ class ParticipantController extends AbstractController
         ]);
 
     }
+
+
 }

@@ -5,18 +5,38 @@ namespace App\Entity;
 use App\Repository\OffreRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * @ORM\Entity(repositoryClass=OffreRepository::class)
  */
 class Offre
 {
     /**
+     * @ORM\ManyToOne(targetEntity="CategorieOffre", inversedBy="type")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $typecategorie;
+
+    public function getTypecategorie(): ?string
+    {
+        return $this->typecategorie;
+    }
+
+    public function setTypecategorie(?string $typecategorie): self
+    {
+        $this->typecategorie = $typecategorie;
+
+        return $this;
+    }
+
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -36,6 +56,10 @@ class Offre
      * @ORM\Column(type="string", length=255)
      */
     private $description;
+
+
+
+
 
     public function getId(): ?int
     {
@@ -89,4 +113,8 @@ class Offre
 
         return $this;
     }
+
+
+
+
 }

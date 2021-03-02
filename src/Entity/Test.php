@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TestRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,10 +18,7 @@ class Test
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $test;
+
 
     /**
      * @ORM\Column(type="time")
@@ -29,25 +27,17 @@ class Test
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\Email()
      */
     private $email;
+
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTest(): ?string
-    {
-        return $this->test;
-    }
-
-    public function setTest(string $test): self
-    {
-        $this->test = $test;
-
-        return $this;
-    }
 
     public function getChronometre(): ?\DateTimeInterface
     {
@@ -72,4 +62,6 @@ class Test
 
         return $this;
     }
+
+
 }

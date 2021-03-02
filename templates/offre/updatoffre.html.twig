@@ -1,4 +1,4 @@
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block body %}
 
     <!--=================================
@@ -7,10 +7,10 @@ inner banner -->
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-primary">Update Event</h2>
+                    <h2 class="text-primary">Update offre</h2>
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Event</span></li>
+                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Offre</span></li>
                     </ol>
                 </div>
             </div>
@@ -23,13 +23,10 @@ inner banner -->
             <section class="space-ptb">
                 <div class="container">
                     {{ form_start(form) }}
-                    {{ form_row(form.title,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
-                    {{ form_row(form.type,{ 'attr':{ 'placeholder':"Type",'class':"form-control"}}) }}
+                    {{ form_row(form.specialite,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
                     {{ form_row(form.description,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
-                    {{ form_row(form.dateAt) }}
+                    {{ form_row(form.bn_dem) }}
                     {{ form_row(form.localitation,{ 'attr':{ 'placeholder':"Localisation",'class':"form-control"}}) }}
-                    {{ form_row(form.id_societe,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
-                    {{ form_row(form.Update,{ 'attr':{ 'class':"btn btn-primary"}}) }}
                     {{ form_end(form) }}
                 </div>
             </section>

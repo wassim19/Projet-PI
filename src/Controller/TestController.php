@@ -53,7 +53,7 @@ class TestController extends AbstractController
         // Render the HTML as PDF
         $dompdf->render();
         $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
+            "Attachment" => true
         ]);
     }
 
@@ -71,7 +71,7 @@ class TestController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $em->persist($test);
             $em->flush();
-            return $this->redirectToRoute('test/index.html.twig');
+            return $this->redirectToRoute('nn');
         }
         return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 

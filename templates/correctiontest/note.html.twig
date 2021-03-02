@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RendezVousController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {%  set i=0 %}
+
+
+{%  if correction.reponseq1=="d" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq2=="b" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq3=="b" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq4=="a" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq5=="c" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq6=="a" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq7=="b" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq8=="d" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq9=="a" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq10=="c" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq11=="c" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq12=="a" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq13=="d" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq14=="c" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq15=="c" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq16=="a" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq17=="a" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq18=="c" %} {% set i=i+1 %}{% endif %}
+    {%  if correction.reponseq19=="b" %} {% set i=i+1 %}{% endif %}
+        {%  if correction.reponseq20=="c" %} {% set i=i+1 %}{% endif %}
+
+
+
+    <h1>Your note is : {{ i }}<br>
+    {% if i>15 %}  PASSED ✅!{% endif %}
+    {% if i<15 %}  REFUSED!! {% endif %}</h1>
+
+
+
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/RendezVousController.php'|file_link(0) }}">src/Controller/RendezVousController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

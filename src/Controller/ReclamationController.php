@@ -121,4 +121,71 @@ class ReclamationController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('reclamation_index');
     }
+
+    /**
+     * @Route ("/reclamationtrier",name="reclamation_trier")
+     * @return RedirectResponse
+     */
+    public function trierParId(): Response
+    {
+       $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+       $result= $rep->findBy([],['id'=>'ASC']);
+       dump($result);
+
+        return $this->render('reclamation/trier.html.twig', [
+            'result'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/reclamationtrierparmotif",name="reclamation_trierparmotif")
+     * @return RedirectResponse
+     */
+    public function trierParMotif(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->findBy([],['motif'=>'ASC']);
+        dump($result);
+
+        return $this->render('reclamation/trier.html.twig', [
+            'result'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/reclamationtrierparmessage",name="reclamation_trierparmessage")
+     * @return RedirectResponse
+     */
+    public function trierParMessage(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->findBy([],['message'=>'ASC']);
+        dump($result);
+
+        return $this->render('reclamation/trier.html.twig', [
+            'result'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/reclamationtrierpargsm",name="reclamation_trierpargsm")
+     * @return RedirectResponse
+     */
+    public function trierParGsm(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->findBy([],['GSM'=>'ASC']);
+        dump($result);
+
+        return $this->render('reclamation/trier.html.twig', [
+            'result'=>$result
+        ]);
+
+
+    }
+
+
 }
