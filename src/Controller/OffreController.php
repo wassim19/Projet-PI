@@ -76,13 +76,13 @@ class OffreController extends AbstractController
             'offre' => $offre,
         ]);
 
-    }}
+    }
 
 
     /**
      * @Route("/affichagebacksociete", name="affichagebacksociete"")
      */
-   /* public function manager(): Response
+    public function manager(): Response
     {
 
         $rep=$this->getDoctrine()->getRepository(Offre::class);
@@ -96,7 +96,7 @@ class OffreController extends AbstractController
     /**
      * @Route("/socdeletoffre{id}", name="socdeoffre")
      */
-    /*public function deleteoffre(int $id): Response
+    public function deleteoffreback (int $id): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -110,12 +110,12 @@ class OffreController extends AbstractController
 
 
     /**
-     * @Route("/addoffree", name="addoffree")
+     * @Route("/addoffreeback", name="addoffree")
      */
-    /*public function Addoffree(Request $request)
+    public function Addoffree(Request $request)
     {
         $offre= new offre();
-        $form=$this->createForm($offre::class,$offre);
+        $form=$this->createForm(OffreType::class,$offre);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
@@ -138,11 +138,11 @@ class OffreController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-*/
+
     /**
      * @Route("/updateevent{id}", name="updateevent")
      */
-   /* public function UpdateEvent(Request $request,$id)
+    public function UpdateEvent(Request $request,$id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
