@@ -15,6 +15,8 @@ class CompanyType extends AbstractType
             ->add('name_company')
             ->add('description')
             ->add('tax_registration_number')
+            ->add('localisation')
+            ->add('numero')
         ;
     }
 

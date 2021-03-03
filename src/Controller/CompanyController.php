@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/", name="company_index")
+     * @Route("/company_index", name="company_index")
 
      */
     public function index(CompanyRepository $companyRepository): Response
@@ -80,7 +80,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="company_delete", methods={"DELETE"})
+     * @Route("/company_detele{id}", name="company_delete")
      */
     public function delete(Request $request, Company $company): Response
     {
