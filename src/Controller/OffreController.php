@@ -6,7 +6,6 @@ use App\Entity\Evenement;
 use App\Entity\Offre;
 use App\Form\EventType;
 use App\Form\OffreType;
-use App\Repository\OffreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,19 +78,7 @@ class OffreController extends AbstractController
     }
 
 
-    /**
-     * @Route("/affichagebacksociete", name="affichagebacksociete"")
-     */
-    public function manager(): Response
-    {
 
-        $rep=$this->getDoctrine()->getRepository(Offre::class);
-        $offre=$rep->findAll();
-
-        return $this->render('offre/offresociete.html.twig', [
-            'offre' => $offre,
-        ]);
-    }
 
     /**
      * @Route("/socdeletoffre{id}", name="socdeoffre")

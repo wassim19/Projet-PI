@@ -2,32 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Evenement;
+use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventType extends AbstractType
+class CompanyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateAt')
-            ->add('title')
-            ->add('type')
+            ->add('name_company')
             ->add('description')
-            ->add('localitation')
-            ->add('id_societe')
-            ->add('my_picture',FileType::class,[
-                'mapped'=>false,
-            ]);
+            ->add('tax_registration_number')
+            ->add('localisation')
+            ->add('numero')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Evenement::class,
+            'data_class' => Company::class,
         ]);
     }
 }

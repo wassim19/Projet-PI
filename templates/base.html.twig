@@ -21,7 +21,7 @@
     {% block css%}
 
         <!-- CSS Global Compulsory (Do not remove)-->
-        <link rel="stylesheet" href="css/font-awesome/all.min.css" />
+        <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}" />
         <link rel="stylesheet" href="css/flaticon/flaticon.css" />
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 
@@ -101,13 +101,21 @@ Header -->
             <div class="navbar-collapse collapse justify-content-start">
                 <ul class="nav navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
+                        <a class="nav-link" href="yahala" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
 
                     </li>
-                    <li class="dropdown nav-item ">
-                        <a href="properties.html" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Pages</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <B><FONT face="Helvetica"> Companies</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <ul class="dropdown-menu">
 
+                        <li><a class="dropdown-item" href="company">subscribe</a></li>
+                        <li><a class="dropdown-item" href="company_index">see our partners</a></li>
+                        <li><a class="dropdown-item" href="yahala ">back to home</a></li>
+                    </li>
 
+                    </ul>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -190,6 +198,10 @@ Easiest Way to Use -->
 
 
 {% block body %}
+
+{% endblock %}
+
+{% block body1 %}
 
 {% endblock %}
 
