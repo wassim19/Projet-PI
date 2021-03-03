@@ -17,6 +17,8 @@
                         <td> {{ I.description }}</td>
                         <td> {{ I.dateAt|date('Y-m-d H:i:s') }}</td>
                         <td> {{ I.localisation }}</td>
+                        <td><a class="btn btn-warning" value="modifier" href="{{ path('updateformation',{'id' : I.id }) }}">modifier</a></td>
+                        <td><a class="btn btn-danger" value="supprimer" href="{{ path('delformation',{'id' : I.id }) }}">supprimer</a></td>
                     </tr>
                 {% endfor %}
             </table>

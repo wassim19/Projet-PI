@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ParticipantFRepository;
+use App\Repository\ParticipantfRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ParticipantFRepository::class)
+ * @ORM\Entity(repositoryClass=ParticipantfRepository::class)
  */
-class ParticipantF
+class Participantf
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class ParticipantF
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $mdp;
+    private $nom;
 
     public function getId(): ?int
     {
@@ -44,14 +44,14 @@ class ParticipantF
         return $this;
     }
 
-    public function getMdp(): ?string
+    public function getNom(): ?string
     {
-        return $this->mdp;
+        return $this->nom;
     }
 
-    public function setMdp(string $mdp): self
+    public function setNom(string $nom): self
     {
-        $this->mdp = $mdp;
+        $this->nom = $nom;
 
         return $this;
     }
