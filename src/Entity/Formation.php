@@ -37,6 +37,16 @@ class Formation
      */
     private $localisation;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_soc;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imagef;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Formation
     public function setLocalisation(string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    public function getIdSoc(): ?int
+    {
+        return $this->id_soc;
+    }
+
+    public function setIdSoc(int $id_soc): self
+    {
+        $this->id_soc = $id_soc;
+
+        return $this;
+    }
+
+    public function getImagef(): ?string
+    {
+        return $this->imagef;
+    }
+
+    public function setImagef(string $imagef): self
+    {
+        $this->imagef = $imagef;
 
         return $this;
     }
