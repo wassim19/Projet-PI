@@ -21,9 +21,13 @@ class AdminController extends AbstractController
     public function gestionparticipant($id): Response
     {
 
+
+
         $rep = $this->getDoctrine()->getRepository(ParticipationE::class);
         $participation = $rep->findBy(array('id_evenement' => $id));
         dump($participation);
+
+
 
 
 

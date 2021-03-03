@@ -2,28 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Company;
+use App\Entity\Participantf;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompanyType extends AbstractType
+class ParticipantfType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name_company')
-            ->add('description')
-            ->add('tax_registration_number')
-            ->add('localisation')
-            ->add('numero')
+            ->add('mail')
+            ->add('nom')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Company::class,
+            'data_class' => Participantf::class,
         ]);
     }
 }

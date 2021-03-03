@@ -33,6 +33,16 @@ class Company
      */
     private $tax_registration_number;
 
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     */
+    private $localisation;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $numero;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +80,30 @@ class Company
     public function setTaxRegistrationNumber(?int $tax_registration_number): self
     {
         $this->tax_registration_number = $tax_registration_number;
+
+        return $this;
+    }
+
+    public function getLocalisation(): ?string
+    {
+        return $this->localisation;
+    }
+
+    public function setLocalisation(?string $localisation): self
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(?int $numero): self
+    {
+        $this->numero = $numero;
 
         return $this;
     }

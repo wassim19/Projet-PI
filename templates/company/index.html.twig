@@ -1,22 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Company index{% endblock %}
+
 
 {% block body%}
-    <h1>Company index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: black;
+            font-family: cursive;
+        }
 
-    <table class="table">
+        .glow {
+            font-size: 80px;
+            color: #fff;
+            text-align: center;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @-webkit-keyframes glow {
+            from {
+                text-shadow: 0 0 10px orange, 0 0 20px orange, 0 0 30px #1974EE, 0 0 40px #1974EE, 0 0 50px #1974EE, 0 0 60px #1974EE, 0 0 70px #1974EE;
+            }
+
+            to {
+                text-shadow: 0 0 20px darkorange, 0 0 30px #F57B3F, 0 0 40px #F57B3F, 0 0 50px #F57B3F, 0 0 60px #F57B3F, 0 0 70px #F57B3F, 0 0 80px #F57B3F;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="glow">Companies table</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 16px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+</body>
+</html>
+<html>
+<head>
+
+    <style>
+        table, th, td {
+            border: 1px solid orange;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            text-align:middle;
+        }
+        <h2>Left-align Headings</h2>
+                                 <p>To left-align the table headings, use the CSS text-align property.</p>
+    </style>
+</head>
+<body>
+
+
+
+<table class="centre",style="width:100%">
+
+
         <thead>
 
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
-                        <section class="spac-ptb">e
+                        <section class="spac-ptb">
                             <div class="container">
-                                <th>Id</th>
-                                <th>Name_company</th>
-                                  <th>Description</th>
-                                 <th>Tax_registration_number</th>
+
+                                <th>Name Company</th>
+                                  <th>Description of company</th>
+                                <th>location</th>
+                                <th>phone number</th>
+
                                     <th>actions</th>
 
                             </div>
@@ -27,14 +103,40 @@
         <tbody>
         {% for company in companies %}
             <tr>
-                <td>{{ company.id }}</td>
+
                 <td>{{ company.nameCompany }}</td>
                 <td>{{ company.description }}</td>
-                <td>{{ company.taxRegistrationNumber }}</td>
-                <td>
-                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+                <td>{{ company.localisation }}</td>
+                <td>{{ company.numero}}</td>
+                <td><!DOCTYPE html>
+                    <html>
+                    <body>
+
+
+
+                    <label for="myCheck">Checkbox:</label>
+                    <input type="checkbox" id="myCheck" onclick="myFunction()">
+
+                    <p id="text" style="display:none">company is CHECKED!</p>
+
+                    <script>
+                        function myFunction() {
+                            var checkBox = document.getElementById("myCheck");
+                            var text = document.getElementById("text");
+                            if (checkBox.checked == true){
+                                text.style.display = "block";
+                            } else {
+                                text.style.display = "none";
+                            }
+                        }
+                    </script>
+
+                    </body>
+                    </html>
                 </td>
+
+
+
             </tr>
         {% else %}
             <tr>

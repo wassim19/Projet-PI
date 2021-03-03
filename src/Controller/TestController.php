@@ -65,7 +65,7 @@ class TestController extends AbstractController
     function add(Request $request){
         $test=new Test();
         $form=$this->createForm(TestType::class,$test);
-        $form->add('Ajouter',SubmitType::class);
+        $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();

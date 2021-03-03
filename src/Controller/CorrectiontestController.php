@@ -45,7 +45,7 @@ class CorrectiontestController extends AbstractController
     function add(Request $request){
         $correction=new Correctiontest();
         $form=$this->createForm(CorrectiontestType::class,$correction);
-        $form->add('Envoyer',SubmitType::class);
+        $form->add('Sent',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
