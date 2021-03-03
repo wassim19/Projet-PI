@@ -76,9 +76,9 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("rendezvous/Update/{id}",name="update")
+     * @Route("/updateformation{id}",name="updateformation")
      */
-    function Update(formationrepository $repository,$id,Request $request){
+    function Update(FormationRepository $repository,$id,Request $request){
         $formation=$repository->find($id);
         $form=$this->createForm(FormationType::class,$formation);
         $form->add('Update',SubmitType::class);
@@ -86,10 +86,21 @@ class FormationController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute('afficheformation');
+            return $this->redirectToRoute('formation');
         }
-        return $this->render("formation/update.html.twig",array('f'=>$form->createView()));
+        return $this->render("formation/updateformation.html.twig",array('f'=>$form->createView()));
 
+    }
+    /**
+     * @Route("/listformation", name="listformation")
+     */
+    public function listf(): Response
+    {
+
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $forma=$repo->findAll();
+
+        return $this->render('formation/listformation.html.twig', ['formation' => $forma,]);
     }
 
 }

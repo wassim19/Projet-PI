@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ParticipantF;
+use App\Entity\Participantf;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ParticipantF|null find($id, $lockMode = null, $lockVersion = null)
- * @method ParticipantF|null findOneBy(array $criteria, array $orderBy = null)
- * @method ParticipantF[]    findAll()
- * @method ParticipantF[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Participantf|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Participantf|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Participantf[]    findAll()
+ * @method Participantf[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ParticipantFRepository extends ServiceEntityRepository
+class ParticipantfRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ParticipantF::class);
+        parent::__construct($registry, Participantf::class);
     }
 
     // /**
-    //  * @return ParticipantF[] Returns an array of ParticipantF objects
+    //  * @return Participantf[] Returns an array of Participantf objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ParticipantFRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ParticipantF
+    public function findOneBySomeField($value): ?Participantf
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
