@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+
+{% block content %}
+
+{% endblock %}
+
+
+{% block body %}
+
+    <!--=================================
+inner banner -->
+    <div  class="header-inner bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-primary">offre gere par admin </h2>
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>offre</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=================================
+    inner banner -->
+    <!--=================================
+    Manage Events -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="user-dashboard-info-box mb-0">
+                        <div class="row mb-4">
+                            <div class="col-md-7 col-sm-5 d-flex align-items-center">
+                                <div class="section-title-02 mb-0 ">
+                                    <a class="btn btn-primary btn-block" href="{{ path('lescategories')}}">Consulter</a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
+                                <div class="search">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" class="form-control" placeholder="Search....">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-dashboard-table table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="bg-light">
+                                <tr >
+                                    <th scope="col">ID Localisation</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Nb Demande</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for e in offre %}
+                                    <tr>
+                                        <th scope="row">{{ e.id }}
+                                            <p class="mb-0">{{ e.localisation }}</p>
+                                        </th>
+                                        <td>{{ e.Typecategorie  }}</td>
+                                        <td>{{ e.NbDem  }}</td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0 d-flex">
+                                                <li><a href="{{ path('updateoffreadmin',{'id':e.id})}}" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+                                                <li><a href="{{ path('deleteoffreadmin',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    offre gere par la societe  -->
+{% endblock %}
+

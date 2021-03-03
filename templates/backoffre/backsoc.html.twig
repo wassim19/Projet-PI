@@ -35,7 +35,8 @@ inner banner -->
                         <div class="row mb-4">
                             <div class="col-md-7 col-sm-5 d-flex align-items-center">
                                 <div class="section-title-02 mb-0 ">
-                                    <h4 class="mb-0">Manage Jobs</h4>
+                                    <a class="btn btn-primary btn-block" href="{{ path('lescategories')}}">Consulter</a>
+
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
@@ -49,26 +50,24 @@ inner banner -->
                             <table class="table table-bordered">
                                 <thead class="bg-light">
                                 <tr >
-                                    <th scope="col">Job Title</th>
-                                    <th scope="col">Applications</th>
-                                    <th scope="col">Featured</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">ID Localisation</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Nb Demande</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for e in offre %}
                                     <tr>
                                         <th scope="row">{{ e.id }}
-                                            <p class="mb-1 mt-2">{{ e.dateAt|date('Y-m-d H:i:s') }}</p>
-                                            <p class="mb-0">Address: Wellesley Rd, London</p>
+                                            <p class="mb-0">{{ e.localisation }}</p>
                                         </th>
-                                        <td>Applications</td>
-                                        <td><i class="far fa-star"></i></td>
+                                        <td>{{ e.Typecategorie  }}</td>
+                                        <td>{{ e.NbDem  }}</td>
                                         <td>
                                             <ul class="list-unstyled mb-0 d-flex">
-                                                <li><a href="{{ path('eventinfo',{'id':e.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
-                                                <li><a href="{{ path('updateevent',{'id':e.id})}}" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                                                <li><a href="{{ path('socdeleteevenement',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                                                <li><a href="{{ path('updateoffresoc',{'id':e.id})}}" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+                                                <li><a href="{{ path('deleteoffresoc',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>

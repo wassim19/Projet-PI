@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Entity\Offre;
+use App\Entity\OffreEmploye;
 use App\Form\EventType;
+use App\Form\OffreEmployeType;
 use App\Form\OffreType;
+use App\Repository\OffreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OffreController extends AbstractController
 {
-    /**
-     * @Route("/offre", name="offre")
-     */
-    public function index(): Response
-    {
-        return $this->render('offre/index.html.twig', [
-            'controller_name' => 'OffreController',
-        ]);
-    }
+
     /**
      * @Route("/addoffre", name="addoffre")
      */
@@ -47,105 +42,149 @@ class OffreController extends AbstractController
     }
 
     /**
-     * @Route("/deleteoffre{id}", name="deleteoffre")
+     * @Route("/addemployer", name="addemployer")
      */
-    public function deleteoffre(int $id): Response
+    public function Addoffremploye(Request $request)
     {
+        $offremployer= new OffreEmploye();
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $offre = $entityManager->getRepository(Offre::class)->find($id);
-        $entityManager->remove($offre);
-        $entityManager->flush();
+        $form=$this->createForm(OffreEmployeType::class,$offremployer);
+        $form->add('Add',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offremployer);
+            $entityManager->flush();
 
-        return $this->redirectToRoute("adminoffrebackaffiche");
+            return $this->redirectToRoute("socoffrebackaffiche");
+
+        }
+
+        return $this->render('offre/offre_employe.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 
     /**
-     * @Route("/adminoffrebackaffiche", name="adminoffrebackaffiche")
+     * @Route("/deleteoffresoc{id}", name="deleteoffresoc")
      */
-    public function AdmiNoffre(): Response
+    public function deleteoffresoc(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $offre = $entityManager->getRepository(Offre::class)->findOneBy(['id' => $id]);
+
+        $entityManager->remove($offre);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("socoffrebackaffiche");
+    }
+
+
+
+
+    /**
+     * @Route("/socoffrebackaffiche", name="socoffrebackaffiche")
+     */
+    public function Socoffre(): Response
     {
 
         $rep=$this->getDoctrine()->getRepository(Offre::class);
         $offre=$rep->findAll();
 
 
-        return $this->render('offre/offreadmine.html.twig', [
+
+        return $this->render('backoffre/backsoc.html.twig', [
             'offre' => $offre,
         ]);
 
     }
 
-
-
-
     /**
-     * @Route("/socdeletoffre{id}", name="socdeoffre")
+     * @Route("/updateoffresoc{id}", name="updateoffresoc")
      */
-    public function deleteoffreback (int $id): Response
+    public function Updateoffresoc(Request $request,$id)
     {
-
         $entityManager = $this->getDoctrine()->getManager();
-        $offre= $entityManager->getRepository(Offre::class)->find($id);
-        $entityManager->remove($offre);
-        $entityManager->flush();
+        $offre = $entityManager->getRepository(Offre::class)->find($id);
 
-        return $this->redirectToRoute("manager");
-    }
-
-
-
-    /**
-     * @Route("/addoffreeback", name="addoffree")
-     */
-    public function Addoffree(Request $request)
-    {
-        $offre= new offre();
         $form=$this->createForm(OffreType::class,$offre);
-        $form->add('Add',SubmitType::class);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $file = $request->files->get('offre')['my_picture'];
-            $upload_directory = $this->getParameter('upload_directory');
-            $filename = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $upload_directory,
-                $filename
-            );
-            $offre->setPicture($filename);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($offre);
-            $entityManager->flush();
-            return $this->redirectToRoute("manager");
-        }
-
-        return $this->render('evenement_societe/addevent.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/updateevent{id}", name="updateevent")
-     */
-    public function UpdateEvent(Request $request,$id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $event = $entityManager->getRepository(Evenement::class)->find($id);
-
-        $form=$this->createForm(EventType::class,$event);
         $form->add('Update',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-
             $entityManager->flush();
-            return $this->redirectToRoute("offre");
+            return $this->redirectToRoute("socoffrebackaffiche");
         }
 
-        return $this->render('offre/update.html.twig', [
+        return $this->render('backoffre/updatebacksoc.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/deleteoffreadmin{id}", name="deleteoffreadmin")
+     */
+    public function deleteoffreadmin(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $offre = $entityManager->getRepository(Offre::class)->findOneBy(['id' => $id]);
+
+        $entityManager->remove($offre);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("socoffrebackafficheadmin");
+    }
+
+
+
+
+    /**
+     * @Route("/socoffrebackafficheadmin", name="socoffrebackafficheadmin")
+     */
+    public function Adminoffre(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Offre::class);
+        $offre=$rep->findAll();
+
+
+
+        return $this->render('backoffre/backadmin.html.twig', [
+            'offre' => $offre,
+        ]);
+
+    }
+
+    /**
+     * @Route("/updateoffreadmin{id}", name="updateoffreadmin")
+     */
+    public function Updateoffreadmin(Request $request,$id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $offre = $entityManager->getRepository(Offre::class)->find($id);
+
+        $form=$this->createForm(OffreType::class,$offre);
+        $form->add('Update',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->flush();
+            return $this->redirectToRoute("socoffrebackafficheadmin");
+        }
+
+        return $this->render('backoffre/updatebackadmin.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
+
+
+
 }

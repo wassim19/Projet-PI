@@ -4,24 +4,15 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
+
     <div class="form-group col-md-3 mb-md-0 select-border">
-
+        {% for e in categories %}
         <select class="form-control basic-select">
-            <option value="value 01" selected="selected">type offre</option>
-            <option value="value 02">ingénierie</option>
-            <option value="value 03">sante </option>
-            <option value="value 04">gestion/l'economie </option>
-            <option value="value 05">droit</option>
-            <option value="value 06">mode</option>
-
+            <option value="value 02">{{ e.type }}</option>
         </select>
+        <a class="btn btn-primary btn-block" href="{{ path('afficheCategorieOffer',{'type':e.type})}}"><i class="far fa-paper-plane"></i>Participate</a>
+        {% endfor %}
     </div>
-
-
-
-
-
 {% endblock %}
 
 

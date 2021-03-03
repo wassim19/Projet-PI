@@ -2,28 +2,26 @@
 
 namespace App\Form;
 
+use App\Entity\OffreEmploye;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OffreType extends AbstractType
+class OffreEmployeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('specialite')
-            ->add('nb_dem')
-            ->add('description')
-            ->add('localisation')
-            ->add('typecategorie')
-
+            ->add('nom')
+            ->add('prenom')
+            ->add('mail')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => OffreEmploye::class,
         ]);
     }
 }

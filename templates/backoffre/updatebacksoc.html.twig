@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
-{% block content %}
-{% endblock %}
-
 {% block body %}
 
+    <!--=================================
+inner banner -->
+    <div class="header-inner bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-primary">Update offre</h2>
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Offre</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=================================
+    inner banner -->
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
             <section class="space-ptb">
@@ -19,25 +33,4 @@
             </section>
         </div>
     </div>
-{% endblock %}
-{% block js %}
-    <!--=================================
-    Javascript -->
-
-    <!-- JS Global Compulsory (Do not remove)-->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper/popper.min.js"></script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
-    <script src="js/select2/select2.full.js"></script>
-
-    <!-- Template Scripts (Do not remove)-->
-    <script src="js/custom.js"></script>
-    <script src="js/datetimepicker/moment.min.js"></script>
-    <script src="js/datetimepicker/datetimepicker.min.js"></script>
-
-
-
-
 {% endblock %}
