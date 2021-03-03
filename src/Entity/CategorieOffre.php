@@ -17,7 +17,9 @@ class CategorieOffre
      */
     private $id;
 
+
     /**
+     * @ORM\OneToMany(targetEntity="Offre", mappedBy="typecategorie")
      * @ORM\Column(type="string", length=255)
      */
     private $type;

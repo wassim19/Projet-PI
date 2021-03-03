@@ -46,8 +46,9 @@
             <section class="space-ptb">
                 <div class="container">
                     {{ form_start(form) }}
-                    {{ form_row(form.message,{ 'attr':{ 'placeholder':"message",'class':"form-control"}}) }}
                     {{ form_row(form.motif,{ 'attr':{ 'placeholder':"motif",'class':"form-control"}}) }}
+                    {{ form_row(form.message,{ 'attr':{ 'placeholder':"message",'class':"form-control"}}) }}
+
                     {{ form_row(form.gsm,{ 'attr':{ 'placeholder':"gsm",'class':"form-control"}}) }}
                     {{ form_row(form.accepter) }}
                     <div align="center"><button type="submit" class="btn btn-primary btn-md">modifier</button></div>

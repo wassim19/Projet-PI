@@ -15,21 +15,21 @@ inner banner -->
             </div>
         </div>
     </div>
-
+    <!--<div align="left"> <a  href="{{ path('reclamation_trier') }}"><button type="submit" class="btn btn-primary btn-md" >trier</button></a></div> -->
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Motif</th>
-                <th>Message</th>
-                <th>gsm</th>
+                <th> <a  href="{{ path('reclamation_trier') }}"><button type="submit"  >Id</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >motif</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reclamation in reclamations %}
             <tr>
-                <td>{{ reclamation.id }}</td>
+                <td><b>{{ reclamation.id }}</b></td>
                 <td>{{ reclamation.motif }}</td>
                 <td>{{ reclamation.message }}</td>
                 <td>{{ reclamation.gsm }}</td>

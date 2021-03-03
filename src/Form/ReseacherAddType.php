@@ -2,28 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Test;
+use App\Entity\WorkReseacher;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
-class TestType extends AbstractType
+class ReseacherAddType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-            ->add('chronometre',TimeType::class, [
-                'widget' => 'single_text'])
-            ->add('email')
+            ->add('name_reseacher')
+            ->add('first_name_reseacher')
+            ->add('cin')
+            ->add('date_of_birth')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Test::class,
+            'data_class' => WorkReseacher::class,
         ]);
     }
 }
