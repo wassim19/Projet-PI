@@ -132,6 +132,7 @@ p {
   font-weight: normal;
   line-height: 1.7; }
 
+
 *::-moz-selection {
   background: #ff8a00;
   color: #ffffff;
@@ -5974,4 +5975,8 @@ iframe {
   .border-sm-bottom {
     border-bottom: 1px solid #eeeeee !important; }
   .border-sm-left {
-    border-left: 1px solid #eeeeee !important; } }
+    border-left: 1px solid #eeeeee !important; }
+  .center {
+    margin-left: auto;
+    margin-right: +100px;
+  }}
