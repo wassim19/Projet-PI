@@ -2,28 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Test;
+use App\Entity\Surfer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
-class TestType extends AbstractType
+class SurferAddType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-            ->add('chronometre',TimeType::class, [
-                'widget' => 'single_text'])
-            ->add('email')
+            ->add('name')
+            ->add('first_name')
+            ->add('cin')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Test::class,
+            'data_class' => Surfer::class,
         ]);
     }
 }

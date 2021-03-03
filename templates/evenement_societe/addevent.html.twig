@@ -29,15 +29,21 @@ inner banner -->
                     {{ form_row(form.title,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
                     {{ form_row(form.type,{ 'attr':{ 'placeholder':"Type",'class':"form-control"}}) }}
                     {{ form_row(form.description,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
-                    {{ form_row(form.dateAt) }}
+                    {{ form_row(form.dateAt,{ 'attr':{ 'class':"form-control input-group date"}}) }}
+
+                    <hr>
                     {{ form_row(form.localitation,{ 'attr':{ 'placeholder':"Localisation",'class':"form-control"}}) }}
                     {{ form_row(form.id_societe,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
+                    <hr>
+                    {{ form_row(form.my_picture,{ 'attr':{ 'class':"upload-file"}}) }}
+                    <hr>
                     {{ form_row(form.Add,{ 'attr':{ 'class':"btn btn-primary"}}) }}
                     {{ form_end(form) }}
                 </div>
             </section>
         </div>
     </div>
+
 
 
 

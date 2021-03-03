@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Company index{% endblock %}
+
+{% block body%}
+    <h1>Company index</h1>
+
+    <table class="table">
+        <thead>
+
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
+                        <section class="spac-ptb">e
+                            <div class="container">
+                                <th>Id</th>
+                                <th>Name_company</th>
+                                  <th>Description</th>
+                                 <th>Tax_registration_number</th>
+                                    <th>actions</th>
+
+                            </div>
+            </section>
+            </div>
+            </div>
+        </thead>
+        <tbody>
+        {% for company in companies %}
+            <tr>
+                <td>{{ company.id }}</td>
+                <td>{{ company.nameCompany }}</td>
+                <td>{{ company.description }}</td>
+                <td>{{ company.taxRegistrationNumber }}</td>
+                <td>
+                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
+                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('company') }}">Create new</a>
+{% endblock %}
+
+
