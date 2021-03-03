@@ -9,10 +9,10 @@ inner banner -->
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-primary">Add Event</h2>
+                    <h2 class="text-primary">Participate</h2>
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Event</span></li>
+                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Events</span></li>
                     </ol>
                 </div>
             </div>
@@ -26,18 +26,15 @@ inner banner -->
             <section class="space-ptb">
                 <div class="container">
                     {{ form_start(form) }}
+                    {{ form_row(form.mail,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
+                    <hr>
+                    {{ form_row(form.nom,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
 
+
+                    <hr>
                     {{ form_row(form.Add,{ 'attr':{ 'class':"btn btn-primary"}}) }}
-                    {{ form_end(form) }}
                 </div>
             </section>
         </div>
     </div>
-
-
-
-
-
-
-
 {% endblock %}
