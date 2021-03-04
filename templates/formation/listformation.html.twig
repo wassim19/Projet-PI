@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <!--=================================
+    banner -->
+
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/event.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>Formation Title</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="Title"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>Localisation</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="town or country"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-2 col-md-4">
+                                    <div class="mt-0">
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Events</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for f in formation %}
+                        <div class="blog-post text-center mt-4">
+                            <div class="blog-post-image">
+                                <img class="img-fluid" src="images/{{ f.imagef }}" alt="">
+                            </div>
+                            <div class="blog-post-content">
+                                <div class="blog-post-details">
+
+                                    <div class="blog-post-title">
+                                        <p class="mb-0">{{ f.title }}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <p class="mb-0">{{ f.title }}</p>
+                                    </div>
+
+                                </div>
+                                <div class="blog-post-footer">
+                                    <div class="blog-post-time">
+                                        <a href="#"><i class="far fa-clock"></i>{{ f.dateAt|date('Y-m-d H:i:s') }}</a>
+                                    </div>
+                                    <div class="blog-post-author">
+                                        <span>By<a href="#"><img src="images/{{ f.imagef }}" alt="">Company</a></span>
+                                    </div>
+
+                                    <div class="blog-post-share">
+                                        <div class="share-box">
+                                            <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                            <ul class="list-unstyled share-box-social">
+                                                <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="blog-sidebar">
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>About formation</h5>
+                            </div>
+                            <p>The concept of corporate event encompasses company dinners, meetings, conferences, symposiums and even recreational activities </p>
+                            <ol class="pl-3">
+                                <li class="mb-2">Events, meetings and other activities are very effective communication tools both at an internal and external level.</li>
+                                <li class="mb-2">They enable and foster interpersonal relationships</li>
+                                <li class="mb-2">They reward achievements and recognize success</li>
+                                <li class="mb-2">They improve motivation and working mood.</li>
+                                <li class="mb-2">They promote business and sales</li>
+                            </ol>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Recent Events</h5>
+                            </div>{% set i =0 %}
+                            {% for f in formation %}
+                                {% if i<3 %}
+                                    {% set i = i +1 %}
+                                    <div class="d-flex mb-3 align-items-start">
+                                        <div class="avatar avatar-xl">
+                                            <img class="img-fluid" src="images/{{ f.imagef }}" alt="">
+                                        </div>
+
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Subscribe & Follow</h5>
+                            </div>
+                            <div class="social">
+                                <ul class="list-unstyled">
+                                    <li class="facebook">
+                                        <a class="text-uppercase" href="https://www.facebook.com/hand.calsp"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
+                                        <a class="follow ml-auto" href="https://www.facebook.com/hand.calsp">Like </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a class="text-uppercase" href="https://www.instagram.com/hand_clasp/?hl=en"> <i class="fab fa-instagram mr-3"></i>instagram</a>
+                                        <a class="follow ml-auto" href="https://www.instagram.com/hand_clasp/?hl=en">Follow </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Popular Tags</h5>
+                            </div>
+                            <div class="popular-tag">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">Bootstrap</a></li>
+                                    <li><a href="#">HTML5</a></li>
+                                    <li><a href="#">Wordpress</a></li>
+                                    <li><a href="#">CSS3</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                    <li><a href="#">Multipurpose</a></li>
+                                    <li><a href="#">Fashion</a></li>
+                                    <li><a href="#">Color</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=================================
+    blog -->
+
+{% endblock %}
+
