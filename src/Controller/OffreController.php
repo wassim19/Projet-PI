@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CategorieOffre;
 use App\Entity\Evenement;
 use App\Entity\Offre;
 use App\Entity\OffreEmploye;
@@ -15,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
 class OffreController extends AbstractController
 {
 
@@ -25,11 +28,25 @@ class OffreController extends AbstractController
     {
         $offre= new Offre();
 
+        $rep=$this->getDoctrine()->getRepository(CategorieOffre::class);
+        $typecategories=$rep->findAll();
+
+
+
         $form=$this->createForm(OffreType::class,$offre);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $file = $request->files->get('offre')['imagesoffre'];
+            $upload_directory = $this->getParameter('upload_directory');
+            $filename = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $upload_directory,
+                $filename
+            );
+            $offre->setImagesoffre($filename);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offre);
             $entityManager->flush();
@@ -37,7 +54,7 @@ class OffreController extends AbstractController
         }
 
         return $this->render('offre/addoffre.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView(),'typecategories' => $typecategories
         ]);
     }
 
@@ -48,6 +65,7 @@ class OffreController extends AbstractController
     {
         $offremployer= new OffreEmploye();
 
+
         $form=$this->createForm(OffreEmployeType::class,$offremployer);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
@@ -57,7 +75,7 @@ class OffreController extends AbstractController
             $entityManager->persist($offremployer);
             $entityManager->flush();
 
-            return $this->redirectToRoute("socoffrebackaffiche");
+            return $this->redirectToRoute("afficheCategorieOffer");
 
         }
 

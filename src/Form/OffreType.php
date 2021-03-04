@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\CategorieOffre;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +18,13 @@ class OffreType extends AbstractType
             ->add('nb_dem')
             ->add('description')
             ->add('localisation')
-            ->add('typecategorie')
+            ->add('typecategorie',EntityType::class, [
+                'choice_label'=>'type',
+                'class'=>CategorieOffre::class
+            ])
+            ->add('imagesoffre',FileType::class,[
+                'mapped'=>false,
+            ]);
 
         ;
     }
