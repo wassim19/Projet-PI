@@ -9,8 +9,9 @@
         {% for e in categories %}
         <select class="form-control basic-select">
             <option value="value 02">{{ e.type }}</option>
+
         </select>
-        <a class="btn btn-primary btn-block" href="{{ path('afficheCategorieOffer',{'type':e.type})}}"><i class="far fa-paper-plane"></i>Participate</a>
+        <a class="btn btn-primary btn-block" href="{{ path('afficheCategorieOffer',{'type':e.type})}}"><i class="far fa-paper-plane"></i>voir les offres </a>
         {% endfor %}
     </div>
 {% endblock %}
