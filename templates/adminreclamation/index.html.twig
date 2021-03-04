@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}complaints{% endblock %}
+{% block title %}complaints {% endblock %}
 
 {% block body %}
     <!--=================================
@@ -9,7 +9,7 @@ inner banner -->
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-primary"> complaints</h2>
+                    <h2 class="text-primary"> complaint</h2>
 
                 </div>
             </div>
@@ -18,13 +18,14 @@ inner banner -->
     <!--<div align="left"> <a  href="{{ path('reclamation_trier') }}"><button type="submit" class="btn btn-primary btn-md" >trier</button></a></div> -->
     <table class="table">
         <thead>
-            <tr>
-                <th> <a  href="{{ path('reclamation_trier') }}"><button type="submit"  >Id</button></a></th>
-                <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
-                <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
-                <th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th> <a  href="{{ path('adminreclamation_trier') }}"><button type="submit"  >Id</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
+            <th>actions</th>
+            <!--  -->
+        </tr>
         </thead>
         <tbody>
         {% for reclamation in reclamations %}
@@ -34,11 +35,12 @@ inner banner -->
                 <td>{{ reclamation.message }}</td>
                 <td>{{ reclamation.gsm }}</td>
                 <td>
-                    <button ><a href="{{ path('reclamation_delete', {'id': reclamation.id}) }}">delete</a>
+                    <button ><a href=" {{ path('adminreclamation_delete', {'id': reclamation.id}) }}">delete</a>
                     </button>
-                    <button>
-                    <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">update</a>
+                   <!-- <button>
+                        <a href="{#{{ path('reclamation_edit', {'id': reclamation.id}) }}#}">edit</a>
                     </button>
+                    -->
                 </td>
             </tr>
         {% else %}
@@ -49,5 +51,5 @@ inner banner -->
         </tbody>
     </table>
 
-    <div align="center"> <a  href="{{ path('reclamation_new') }}"><button type="submit" class="btn btn-primary btn-md" >add</button></a></div>
+    <div align="center"> <a  href="{{ path('adminreclamation_new') }}"><button type="submit" class="btn btn-primary btn-md" >add</button></a></div>
 {% endblock %}

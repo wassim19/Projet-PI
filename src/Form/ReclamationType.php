@@ -18,17 +18,22 @@ class ReclamationType extends AbstractType
             ->add('message')
             ->add('motif',ChoiceType::class,[
 
-                'required'=> false,
+                'required'=> true,
+                'expanded' => false,
+                'multiple' => false,
                 'choices'=>[
-                    'problémes de connexion'=>'problémes de connexion',
-                    'retard'=>'retard',
-                    'annulation de l"entretien'=>'annulation de l"entretien',
-                    ''=>'',
+                    'bullying'=>'bullying',
+                    'racism'=>'racism',
+                    'network problems'=>'network problems',
+                    'canceling the interview'=>'canceling the interview',
+                    'being late'=>'being late',
+                    'being rude'=>'being rude',
                 ],
-                'label'=>'votre motif'
+                'data'=>'being late',
+                'label'=>'your reason'
             ])
             ->add('gsm')
-            ->add('accepter',
+            ->add('accept',
                 CheckboxType::class,['mapped'=>false])
         ;
     }
