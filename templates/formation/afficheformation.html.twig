@@ -59,13 +59,16 @@ blog -->
                                     <div class="blog-post-time">
                                         <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
                                         <div class="blog-post-footer">
-                                            <div class="row">
-                                                <div class="col-6">
+                                            <div class="col">
+                                                <div class="col-15">
                                                     <a class="btn btn-warning" value="update" href="{{ path('updateformation',{'id' : I.id }) }}">update</a>
+
+                                                    <a class="btn btn-danger" value="delete" href="{{ path('delformation',{'id' : I.id }) }}">delete</a>
                                                 </div>
-                                                 <div class="col-6">
-                                                     <a class="btn btn-danger" value="delete" href="{{ path('delformation',{'id' : I.id }) }}">delete</a>
-                                                 </div>
+                                                <br>
+                                                <div class="col-11">
+                                                    <a class="btn btn-success" value="participant" href="{{ path('participants',{'id' : I.id }) }}">participants</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

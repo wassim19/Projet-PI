@@ -70,17 +70,17 @@ class ParticipantfController extends AbstractController
         ]);
     }
     /**
-     * @Route("/deleteparticipantf{id}", name="deleteparticipantf")
+     * @Route("/delpf{id}", name="delpf")
      */
-    public function deleteparticipant(int $id): Response
+    public function deleteparticipantformation(int $id): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
         $participation = $entityManager->getRepository(ParticipationF::class)->findOneBy(['id_participant' => $id]);
-
         $entityManager->remove($participation);
         $entityManager->flush();
 
-        return $this->redirectToRoute("participants");
+        return $this->redirectToRoute("afficheformationadmin");
     }
+
 }
