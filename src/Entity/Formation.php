@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FormationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formation
 {
+
+    /**
+     * Many Users have Many Groups.
+     * @@ORM\ManyToMany(targetEntity="ParticipantF")
+     * @ORM\JoinTable(name="ParticipationF",
+     *      joinColumns={@ORM\JoinColumn(name="id_formation", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_participant", referencedColumnName="id")}
+     *      )
+     */
+    private $formations;
+
+    // ...
+
+    public function __construct() {
+        $this->events = new ArrayCollection();
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -36,6 +53,16 @@ class Formation
      * @ORM\Column(type="string", length=255)
      */
     private $localisation;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_soc;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imagef;
 
     public function getId(): ?int
     {
@@ -86,6 +113,30 @@ class Formation
     public function setLocalisation(string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    public function getIdSoc(): ?int
+    {
+        return $this->id_soc;
+    }
+
+    public function setIdSoc(int $id_soc): self
+    {
+        $this->id_soc = $id_soc;
+
+        return $this;
+    }
+
+    public function getImagef(): ?string
+    {
+        return $this->imagef;
+    }
+
+    public function setImagef(string $imagef): self
+    {
+        $this->imagef = $imagef;
 
         return $this;
     }

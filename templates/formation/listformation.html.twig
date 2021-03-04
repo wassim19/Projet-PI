@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <!--=================================
+    banner -->
+
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/formation.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>FORMATION</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="Title"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-2 col-md-4">
+                                    <div class="mt-0">
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Events</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for I in formation %}
+                    <div class="blog-post text-center mt-4">
+                        <div class="blog-post-image">
+                            <img class="img-fluid" src="images/{{ I.imagef }}" alt="">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="blog-post-details">
+
+                                <div class="blog-post-title">
+                                    <p class="mb-0">{{ I.title }}</p>
+                                </div>
+                                <div class="blog-post-description">
+                                    <p class="mb-0">{{ I.description }}</p>
+                                </div>
+                                <div class="blog-post-time">
+                                    <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
+
+                                </div>
+
+
+
+
+                                <div class="blog-post-share">
+                                    <div class="share-box">
+                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                        <ul class="list-unstyled share-box-social">
+                                            <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!--=================================
+    blog -->
+
+{% endblock %}
+

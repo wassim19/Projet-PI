@@ -57,10 +57,13 @@ blog -->
                             <div class="blog-post-details">
 
                                 <div class="blog-post-title">
-                                    <h4><a href="{{ path('eventinfo',{'id':e.id})}}">{{ e.title }}</a></h4>
+                                    <p class="mb-0">{{ e.title }}</p>
                                 </div>
                                 <div class="blog-post-description">
-                                    <p class="mb-0">{{ e.title }}</p>
+                                    <p class="mb-0">{{ e.type }}</p>
+                                </div>
+                                <div class="blog-post-description">
+                                    <h4><a href="{{ path('eventinfo',{'id':e.id})}}">More Details</a></h4>
                                 </div>
                             </div>
                             <div class="blog-post-footer">
@@ -68,7 +71,7 @@ blog -->
                                     <a href="#"><i class="far fa-clock"></i>{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
                                 </div>
                                 <div class="blog-post-author">
-                                    <span>By<a href="#"><img src="images/{{ e.picture }}" alt="">John Doe</a></span>
+                                    <span>By<a href="#"><img src="images/{{ e.picture }}" alt="">Company</a></span>
                                 </div>
 
                                 <div class="blog-post-share">

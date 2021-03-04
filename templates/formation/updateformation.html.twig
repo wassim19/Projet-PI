@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+       <h1>formation update</h1>
+    {{ form_start(f) }}
+    {{ form_row(f.title,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
+    {{ form_row(f.description,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
+    {{ form_row(f.dateAt,{ 'attr':{ 'class':"form-control input-group date"}}) }}
+    <hr>
+    {{ form_row(f.localisation,{ 'attr':{ 'placeholder':"Localisation",'class':"form-control"}}) }}
+    <hr>
+    {{ form_row(f.my_picture,{ 'attr':{ 'class':"upload-file"}}) }}
+    <hr>
+    {{ form_row(f.Id_Soc,{ 'attr':{ 'placeholder':"idsoc",'class':"form-control"}}) }}
+    <hr>
+    {{ form_row(f.Update,{ 'attr':{ 'class':"btn btn-primary"}}) }}
+    {{ form_end(f) }}
+
+
+
+{% endblock %}

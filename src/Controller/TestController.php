@@ -65,13 +65,13 @@ class TestController extends AbstractController
     function add(Request $request){
         $test=new Test();
         $form=$this->createForm(TestType::class,$test);
-        $form->add('Ajouter',SubmitType::class);
+        $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
             $em->persist($test);
             $em->flush();
-            return $this->redirectToRoute('test');
+            return $this->redirectToRoute('nn');
         }
         return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basebackadmin.html.twig' %}
 
 
 {% block content %}
@@ -15,7 +15,7 @@ inner banner -->
             <div class="col-12">
                 <h2 class="text-primary">Manage The Events</h2>
                 <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="evenementsociete">Home</a></li>
                     <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Events</span></li>
                 </ol>
             </div>
@@ -32,6 +32,19 @@ inner banner -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="user-dashboard-info-box table-responsive pb-4 mb-0">
+                        <div class="row mb-4">
+                            <div class="col-md-7 col-sm-5 d-flex align-items-center">
+                                <div class="section-title-02 mb-0 ">
+                                    <h4 class="mb-0">Manage Events</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
+                                <div class="search">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" class="form-control" placeholder="Search....">
+                                </div>
+                            </div>
+                        </div>
                         <table class="table manage-candidates-top mb-0">
                             <thead>
                             <tr>
@@ -43,7 +56,7 @@ inner banner -->
                             <tr class="candidates-list">
                                 <td class="title">
                                     <div class="thumb">
-                                        <img class="img-fluid" src="images/avatar/04.jpg" alt="">
+                                        <img class="img-fluid" src="images/{{ e.picture }}" alt="">
                                     </div>
                                     <div class="candidate-list-details">
                                         <div class="candidate-list-info">
@@ -52,15 +65,13 @@ inner banner -->
                                             </div>
                                             <div class="candidate-list-option">
                                                 <ul class="list-unstyled">
-                                                    <li><i class="fas fa-filter pr-1"></i>Construction &amp; Property</li>
-                                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Botchergate, Carlisle</li>
+                                                    <li><i class="fas fa-map-marker-alt pr-1"></i>{{ e.localitation }}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="candidate-list-favourite-time text-center">
-                                    <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
                                     <span class="candidate-list-time order-1">{{ e.type }}</span>
                                 </td>
                                 <td>

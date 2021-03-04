@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <!--=================================
+inner banner -->
+    <div class="header-inner bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-primary">Formation</h2>
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Formation</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=================================
+    inner banner -->
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
+            <section class="space-ptb">
+                <div class="container">
+                    {{ form_start(form) }}
+
+                    {{ form_row(form.Add,{ 'attr':{ 'class':"btn btn-primary"}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

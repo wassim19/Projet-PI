@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Feb 2021 19:27:55 GMT -->
@@ -21,7 +21,7 @@
     {% block css%}
 
         <!-- CSS Global Compulsory (Do not remove)-->
-        <link rel="stylesheet" href="css/font-awesome/all.min.css" />
+        <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}" />
         <link rel="stylesheet" href="css/flaticon/flaticon.css" />
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 
@@ -101,13 +101,21 @@ Header -->
             <div class="navbar-collapse collapse justify-content-start">
                 <ul class="nav navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
+                        <a class="nav-link" href="yahala" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
 
                     </li>
-                    <li class="dropdown nav-item ">
-                        <a href="properties.html" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Pages</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <B><FONT face="Helvetica"> Companies</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <ul class="dropdown-menu">
 
+                        <li><a class="dropdown-item" href="company">subscribe</a></li>
+                        <li><a class="dropdown-item" href="company_index">see our partners</a></li>
+                        <li><a class="dropdown-item" href="yahala ">back to home</a></li>
+                    </li>
 
+                    </ul>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,16 +125,26 @@ Header -->
                     </li>
                     <li class="dropdown nav-item mega-menu active">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Trainning</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
-                        <ul class="dropdown-menu megamenu">
-                            <li>
+                        <ul class="dropdown-menu">
+
+
+
+
+
+
+<<<<<<< HEAD
+=======
 
                             </li>
+>>>>>>> d2e0f018ddf88580fe1ecbaead344106b746e008
                         </ul>
+
                     </li>
                     <li class="dropdown nav-item mega-menu active">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Event</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
                         <ul class="dropdown-menu megamenu">
                             <li>
+                            <li><a class="dropdown-item" href="evenementsociete">Events</a></li>
 
                             </li>
                         </ul>
@@ -140,7 +158,7 @@ Header -->
                         </a>
                         <ul class="dropdown-menu">
 
-                                <li><a class="dropdown-item" href="addr">Add a meet</a></li>
+                            <li><a class="dropdown-item" href="addrdv">Add a meet</a></li>
                             <li><a class="dropdown-item" href="afficher">Meeting  list</a></li>
                             <li><a class="dropdown-item" href="addr">Add a test</a></li>
                             <li><a class="dropdown-item" href="ajout">Pass a test</a></li>
@@ -170,6 +188,16 @@ Header -->
                             <li><a href="{{ path('reclamation_new') }}">add a complaint</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <B><FONT face="Helvetica"> offres</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+
+
+                            <li><a href="{{ path('addemployer') }}">form of employees</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             {% block content %}
@@ -187,6 +215,10 @@ Easiest Way to Use -->
 
 
 {% block body %}
+
+{% endblock %}
+
+{% block body1 %}
 
 {% endblock %}
 
@@ -299,6 +331,17 @@ Back To Top-->
 
 
 {% block js %}
+    <!-- JS Global Compulsory (Do not remove)-->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper/popper.min.js"></script>
+
+    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
+    <script src="js/select2/select2.full.js"></script>
+    <script src="js/datetimepicker/moment.min.js"></script>
+    <script src="js/datetimepicker/datetimepicker.min.js"></script>
+
+    <!-- Template Scripts (Do not remove)-->
+    <script src="js/custom.js"></script>
 
 {% endblock %}
 

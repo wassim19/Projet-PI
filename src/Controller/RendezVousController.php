@@ -40,7 +40,7 @@ class RendezVousController extends AbstractController
     function add(Request $request){
         $rendezvous=new RendezVous();
         $form=$this->createForm(RendezVousType::class,$rendezvous);
-        $form->add('Ajouter',SubmitType::class);
+        $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();

@@ -21,7 +21,6 @@ class EventType extends AbstractType
             ->add('id_societe')
             ->add('my_picture',FileType::class,[
                 'mapped'=>false,
-                'label'=> 'Upload Picture'
             ]);
     }
 

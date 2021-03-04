@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <!--=================================
+    banner -->
+
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/imageoffre.png);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+
+                                <div class="form-group col-lg-2 col-md-4">
+                                    <div class="mt-0">
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Offre</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+
+
+
+                            <!--=================================
+blog -->
+
+                            <section class="space-ptb">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            {% for o in offre %}
+                                                <div class="blog-post text-center mt-4">
+
+                                                    <div class="blog-post-content">
+                                                        <div class="blog-post-image">
+                                                            <img class="img-fluid" src="images/{{ o.imagesoffre  }}" alt="">
+                                                        </div>
+
+                                                        <div class="blog-post-title">
+                                                            <p class="mb-0">{{ o.specialite }}</p>
+                                                        </div>
+                                                        <div class="blog-post-title">
+                                                            <p class="mb-0">{{ o.description }}</p>
+                                                        </div>
+                                                        <div class="blog-post-description">
+                                                            <p class="mb-0">{{ o.localisation }}</p>
+                                                        </div>
+                                                        <div class="blog-post-description">
+                                                            <p class="mb-0">{{ o.typecategorie }}</p>
+                                                        </div>
+
+                                                        <div class="blog-post-footer">
+                                                            <h4><a href="{{ path('addemployer',{'id':o.id})}}">Participer</a></h4>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                        <div class="col-lg-4 mt-4 mt-lg-0">
+                                            <div class="blog-sidebar">
+
+                                                <div class="widget">
+                                                    <div class="widget-title">
+                                                        <h5>About The Offres</h5>
+                                                    </div>
+                                                    <p>The concept of corporate event encompasses company dinners, meetings, conferences, symposiums and even recreational activities </p>
+
+                                                </div>
+
+
+                                                <div class="widget">
+                                                    <div class="widget-title">
+                                                        <h5>Subscribe & Follow</h5>
+                                                    </div>
+                                                    <div class="social">
+                                                        <ul class="list-unstyled">
+                                                            <li class="facebook">
+                                                                <a class="text-uppercase" href="https://www.facebook.com/hand.calsp"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
+                                                                <a class="follow ml-auto" href="https://www.facebook.com/hand.calsp">Like </a>
+                                                            </li>
+                                                            <li class="instagram">
+                                                                <a class="text-uppercase" href="https://www.instagram.com/hand_clasp/?hl=en"> <i class="fab fa-instagram mr-3"></i>instagram</a>
+                                                                <a class="follow ml-auto" href="https://www.instagram.com/hand_clasp/?hl=en">Follow </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+{% endblock %}
+

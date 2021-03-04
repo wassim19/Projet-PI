@@ -6,6 +6,7 @@ use App\Entity\Test;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class TestType extends AbstractType
 {
@@ -13,7 +14,8 @@ class TestType extends AbstractType
     {
         $builder
 
-            ->add('chronometre')
+            ->add('chronometre',TimeType::class, [
+                'widget' => 'single_text'])
             ->add('email')
         ;
     }

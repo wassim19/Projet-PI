@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CorrectiontestRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CorrectiontestRepository::class)
@@ -19,101 +20,121 @@ class Correctiontest
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ2;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ3;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ4;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ5;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ6;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ7;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ8;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ9;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ10;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ11;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ12;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ13;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ14;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ15;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ16;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ17;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ18;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ19;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ20;
 
@@ -121,6 +142,17 @@ class Correctiontest
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $note;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $chronometre;
 
     public function getId(): ?int
     {
@@ -375,6 +407,30 @@ class Correctiontest
     public function setNote(?string $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getChronometre(): ?\DateTimeInterface
+    {
+        return $this->chronometre;
+    }
+
+    public function setChronometre(?\DateTimeInterface $chronometre): self
+    {
+        $this->chronometre = $chronometre;
 
         return $this;
     }

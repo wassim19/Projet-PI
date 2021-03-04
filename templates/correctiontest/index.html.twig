@@ -13,6 +13,7 @@
             <table border="2">
                 <tr>
                     <td>ID</td>
+                    <td>EMAIL</td>
                     <td>NOTE</td>
                     <td>reponseQ1</td>
                     <td>reponseQ2</td>
@@ -44,6 +45,7 @@
                 {% for t in correction %}
                     <tr>
                         <td> {{ t.id }}</td>
+                        <td> {{ t.email }}</td>
                         <td><a href="{{ path ('note',{ 'id':t.id}) }}">View note</a></td>
                         <td> {{ t.reponseQ1 }}</td>
                         <td> {{ t.reponseQ2 }}</td>
