@@ -4,20 +4,19 @@
 
 {% block body %}
 
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
+            <section class="space-ptb">
+                <div class="container">
+                    {{ form_start(form) }}
+                    {{ form_row(form.type,{ 'attr':{ 'placeholder':"Event Title",'class':"form-control"}}) }}
 
-    <div class="form-group col-md-3 mb-md-0 select-border">
-        {% for e in categories %}
-        <select class="form-control basic-select">
-            <option value="value 02">{{ e.type }}</option>
-        </select>
-        <a class="btn btn-primary btn-block" href="{{ path('afficheCategorieOffer',{'type':e.type})}}"><i class="far fa-paper-plane"></i>Participate</a>
-        {% endfor %}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
     </div>
 {% endblock %}
-
-
-
-
 {% block js %}
     <!--=================================
     Javascript -->
@@ -39,4 +38,3 @@
 
 
 {% endblock %}
-

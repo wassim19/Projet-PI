@@ -57,6 +57,11 @@ class Offre
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imagesoffre;
+
 
 
 
@@ -110,6 +115,18 @@ class Offre
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImagesoffre(): ?string
+    {
+        return $this->imagesoffre;
+    }
+
+    public function setImagesoffre(string $imagesoffre): self
+    {
+        $this->imagesoffre = $imagesoffre;
 
         return $this;
     }
