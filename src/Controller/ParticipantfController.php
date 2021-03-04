@@ -49,4 +49,38 @@ class ParticipantfController extends AbstractController
         return $this->render('participantf/index.html.twig', ['form' => $form->createView(),]);
 
     }
+    /**
+     * @Route("/participants{id}", name="participants")
+     */
+    public function gestionparticipant($id): Response
+    {
+
+
+
+        $rep = $this->getDoctrine()->getRepository(ParticipationF::class);
+        $participation = $rep->findBy(array('id_formation' => $id));
+        dump($participation);
+
+
+
+
+
+        return $this->render('participantf/paticipantformation.html.twig', [
+            'participation'=>$participation
+        ]);
+    }
+    /**
+     * @Route("/deleteparticipantf{id}", name="deleteparticipantf")
+     */
+    public function deleteparticipant(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $participation = $entityManager->getRepository(ParticipationF::class)->findOneBy(['id_participant' => $id]);
+
+        $entityManager->remove($participation);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("participants");
+    }
 }
