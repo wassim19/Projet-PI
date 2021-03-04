@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantfRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantfRepository::class)
  */
-class Participantf
+class ParticipantF
 {
     /**
      * @ORM\Id
@@ -19,6 +20,9 @@ class Participantf
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     * message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $mail;
 
@@ -55,4 +59,6 @@ class Participantf
 
         return $this;
     }
+
+
 }

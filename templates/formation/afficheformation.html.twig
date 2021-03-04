@@ -1,15 +1,45 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
+    <section >
+        <div class="fill" >
+        <div class="container">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+                                <div class="form-group col-lg col-md-6" style="background-image:url('{{asset('images/bg-slider/formation.jpg')}}" >
+                                    <div class="form-group-search" style="background-image:url('{{asset('images\bg-slider\03.jpg')}}')">
+                                        <label>search formation...</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="search formation..."></div>
+                                    </div>
+                                </div>
 
-    <div>
+                                <div class="form-group col-lg-2 col-md-4">
+                                    <div class="mt-0">
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Formations</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+ <div class="fill" >
+
+
+
         <h1 align="center">formations list </h1>
-            <table border="4" align="center">
+            <table  align="center">
                 <tr>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>DATE</td>
-                    <td>LOCALISATION</td>
+                    <th>TITLE</th>
+                    <th>DESCRIPTION</th>
+                    <th>DATE</th>
+                    <th>LOCALISATION</th>
                 </tr>
                 {% for I in formations %}
                     <tr>
@@ -18,13 +48,13 @@
                         <td> {{ I.dateAt|date('Y-m-d H:i:s') }}</td>
                         <td> {{ I.localisation }}</td>
                         <td><img class="img-fluid" src="images/{{ I.imagef }}" alt=""></td>
-
-                        <td><a class="btn btn-warning" value="modifier" href="{{ path('updateformation',{'id' : I.id }) }}">modifier</a></td>
-                        <td><a class="btn btn-danger" value="supprimer" href="{{ path('delformation',{'id' : I.id }) }}">supprimer</a></td>
+                        <td><a class="btn btn-warning" value="modifier" href="{{ path('updateformation',{'id' : I.id }) }}">modifier</a>
+                            <br>
+                        <a class="btn btn-danger" value="supprimer" href="{{ path('delformation',{'id' : I.id }) }}">supprimer</a></td>
                     </tr>
                 {% endfor %}
             </table>
-    </div>
+   </div>
 {% endblock %}
 {% block js %}
     <!-- JS Global Compulsory (Do not remove)-->

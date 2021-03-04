@@ -47,6 +47,17 @@ class FormationController extends AbstractController
 
         return $this->render('formation/afficheformationadmin.html.twig', ['formations' => $formations ]);
     }
+    /**
+     * @Route("/afficheformationcandidat", name="afficheformationcandidat")
+     */
+    public function indexcandidat(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Formation::class);
+        $formations=$rep->findAll();
+
+        return $this->render('formation/afficheformationcandidat.html.twig', ['formations' => $formations ]);
+    }
 
     /**
      * @Route("/addformation", name="addformation")
