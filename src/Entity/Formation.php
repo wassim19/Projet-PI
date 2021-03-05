@@ -25,7 +25,7 @@ class Formation
     // ...
 
     public function __construct() {
-        $this->events = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
     /**
      * @ORM\Id
