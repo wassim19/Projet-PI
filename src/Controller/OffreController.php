@@ -50,6 +50,7 @@ class OffreController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offre);
             $entityManager->flush();
+            return $this->redirectToRoute("afficheCategorieOffer");
 
         }
 

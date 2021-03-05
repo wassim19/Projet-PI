@@ -1,286 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Feb 2021 19:27:55 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Hand clasp - Job Board HTML5 Template" />
-    <meta name="author" content="potenzaglobalsolutions.com" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hand Clasp </title>
-
-    <!-- Favicon -->
-    <link href="images/favicon.ico" rel="shortcut icon" />
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
-
-
-
-    {% block css%}
-
-        <!-- CSS Global Compulsory (Do not remove)-->
-        <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}" />
-        <link rel="stylesheet" href="css/flaticon/flaticon.css" />
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-
-        <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
-        <link rel="stylesheet" href="css/datetimepicker/datetimepicker.min.css" />
-        <link rel="stylesheet" href="css/select2/select2.css" />
-
-        <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
-        <link rel="stylesheet" href="css/owl-carousel/owl.carousel.min.css" />
-        <link rel="stylesheet" href="css/magnific-popup/magnific-popup.css" />
-
-        <!-- Template Style -->
-        <link rel="stylesheet" href="css/style.css" />
-
-        <style>
-
-            .name {
-                position: relative;
-                font-family: Impact, sans-serif;
-                font-size: 45px;
-                letter-spacing: 2px;
-                background: linear-gradient(90deg, #F1801D, #fff3cd, #e0a800);
-                background-repeat: no-repeat;
-                background-size: 80%;
-                animation: animate 5s infinite;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: rgba(255, 255, 255, 0);
-            }
-            @keyframes animate {0% {
-                background-position: -500%;
-            }
-                100% {
-                    background-position: 500%;
-                }
-            }
-
-            .datepicker-input {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                opacity: 0;
-                cursor: pointer;
-                box-sizing: border-box;
-            }
-            .datepicker-input::-webkit-calendar-picker-indicator {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                cursor: pointer;
-            }
-        </style>
-    {% endblock %}
-
-
+    {%  block css %}
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="styleBack/css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    {%  endblock %}
 </head>
-<body>
-
-<!--=================================
-Header -->
-<header class="header bg-dark">
-    <nav class="navbar navbar-static-top navbar-expand-lg header-sticky">
-        <div class="container-fluid">
-            <button id="nav-icon4" type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <p class="name"><B><FONT face="Helvetica">Hand Clasp</FONT></B></p>
-
-            <div class="navbar-collapse collapse justify-content-start">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="yahala" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
-
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <B><FONT face="Helvetica"> Companies</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+{% block side%}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="index.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
                         </a>
-                        <ul class="dropdown-menu">
-
-                            <li><a class="dropdown-item" href="company">subscribe</a></li>
-                            <li><a class="dropdown-item" href="company_index">see our partners</a></li>
-                            <li><a class="dropdown-item" href="yahala ">back to home</a></li>
-                            </li>
-
-                        </ul>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <B><FONT face="Helvetica">Opportunities</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                        <div class="sb-sidenav-menu-heading">Interface</div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Layouts
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-
-                    </li>
-                    <li class="dropdown nav-item mega-menu active">
-                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Trainning</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
-                        <ul class="dropdown-menu megamenu">
-                            <li>
-
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown nav-item mega-menu active">
-                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><B><FONT face="Helvetica">Event</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
-                        <ul class="dropdown-menu megamenu">
-                            <li>
-                            <li><a class="dropdown-item" href="evenementsociete">Events</a></li>
-                            <li><a class="dropdown-item" href="adminmanege">Manage The Events</a></li>
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <B><FONT face="Helvetica">Complaints </FONT></B><i class="fas fa-chevron-down fa-xs"></i>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Pages
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <B><FONT face="Helvetica"> Meeting</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Authentication
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="login.html">Login</a>
+                                        <a class="nav-link" href="register.html">Register</a>
+                                        <a class="nav-link" href="password.html">Forgot Password</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                    Error
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="401.html">401 Page</a>
+                                        <a class="nav-link" href="404.html">404 Page</a>
+                                        <a class="nav-link" href="500.html">500 Page</a>
+                                    </nav>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Charts
                         </a>
-                        <ul class="dropdown-menu">
-
-                            <li><a class="dropdown-item" href="addrdv">Add a meet</a></li>
-                            <li><a class="dropdown-item" href="afficher">Meeting  list</a></li>
-                            <li><a class="dropdown-item" href="addr">Add a test</a></li>
-                            <li><a class="dropdown-item" href="ajout">Pass a test</a></li>
-                            <li><a class="dropdown-item" href="nn">Passed tests</a></li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">Dashboard <i class="fas fa-chevron-right fa-xs"></i></a>
-                                <ul class="dropdown-menu left-side">
-                                    <li><a class="dropdown-item" href="dashboard-candidates.html">Dashboard</a></li>
-                                    <li><a class="dropdown-item" href="dashboard-candidates-my-profile.html">Profile</a></li>
-                                    <li><a class="dropdown-item" href="dashboard-candidates-change-password.html">Change Password </a></li>
-                                    <li><a class="dropdown-item" href="dashboard-candidates-my-resume.html">My Resume</a></li>
-                                    <li><a class="dropdown-item" href="dashboard-candidates-manage-jobs.html">Manage Jobs</a></li>
-                                    <li><a class="dropdown-item" href="dashboard-candidates-saved-jobs.html">Saved Jobs</a></li>
-                                    <li><a class="dropdown-item" href="dashboard-candidates-pricing.html">Pricing</a></li>
-                                </ul>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <B><FONT face="Helvetica"> reclamation</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                        <a class="nav-link" href="tables.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Tables
                         </a>
-                        <ul class="dropdown-menu">
-
-                            <li><a href="{{ path('reclamation_index') }}">reclamation</a></li>
-                            <li><a href="{{ path('reclamation_new') }}">ajouter reclamation</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            {% block content %}
-
-            {% endblock %}
-        </div>
-    </nav>
-</header>
-
-
-<!--=================================
-Header -->
-<!--=================================
-Easiest Way to Use -->
-
-
-{% block body %}
-
-{% endblock %}
-
-{% block body1 %}
-
-{% endblock %}
-
-
-<!--=================================
-Action box & Counter -->
-<section class="bg-light py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7 mb-4 mb-sm-5 mb-lg-0">
-
-            </div>
-
-        </div>
-    </div>
-    </div>
-    </div>
-</section>
-<!--=================================
-Action box & Counter -->
-<!--=================================
-footer -->
-
-<div class="footer-bottom bg-dark mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 ">
-                <div class="d-flex justify-content-md-start justify-content-center">
-                    <ul class="list-unstyled d-flex mb-0">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="contact-us.html">Contact</a></li>
-                    </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-                class="mb-0"> &copy;Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="#"> Jobber </a> All Rights Reserved
-            </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+
+                    {%  block body %}
+                    {%  endblock %}
+
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
-</div>
-<!--=================================
-footer-->
+{%  endblock %}
 
-
-<!--=================================
-Back To Top-->
-<div id="back-to-top" class="back-to-top">
-    <i class="fas fa-angle-up"></i>
-</div>
-<!--=================================
-Back To Top-->
-
-
-
-{% block js %}
-    <!-- JS Global Compulsory (Do not remove)-->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper/popper.min.js"></script>
-
-    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
-    <script src="js/select2/select2.full.js"></script>
-    <script src="js/datetimepicker/moment.min.js"></script>
-    <script src="js/datetimepicker/datetimepicker.min.js"></script>
-
-    <!-- Template Scripts (Do not remove)-->
-    <script src="js/custom.js"></script>
-
-{% endblock %}
-
+<body class="sb-nav-fixed">
 
 </body>
 
-
 </html>
 
-
+{%  block js %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
+{%  endblock %}
 

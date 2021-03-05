@@ -15,6 +15,7 @@ class SurferAddType extends AbstractType
             ->add('name')
             ->add('first_name')
             ->add('cin')
+
         ;
     }
 

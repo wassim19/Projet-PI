@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basebackadmin.html.twig' %}
 
 {% block title %}complaints{% endblock %}
 
@@ -50,5 +50,5 @@ inner banner -->
         </tbody>
     </table>
 
-    <div align="center"> <a  href="{{ path('reclamation_new') }}"><button type="submit" class="btn btn-primary btn-md" >add</button></a></div>
+    <div align="center"> <a  href="{{ path('adminreclamation_new') }}"><button type="submit" class="btn btn-primary btn-md" >add</button></a></div>
 {% endblock %}
