@@ -21,7 +21,7 @@ class Company
      * @ORM\Column(type="string", length=240, nullable=true)
      * * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="Company")
      */
-    private $name_company;
+   public $name_company;
 
     /**
      * @ORM\Column(type="string", length=240)
@@ -31,7 +31,7 @@ class Company
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $tax_registration_number;
+  public  $tax_registration_number;
 
     /**
      * @ORM\Column(type="string", length=240, nullable=true)
@@ -42,6 +42,11 @@ class Company
      * @ORM\Column(type="integer", nullable=true)
      */
     private $numero;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $images;
 
     public function getId(): ?int
     {
@@ -104,6 +109,18 @@ class Company
     public function setNumero(?int $numero): self
     {
         $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getImages(): ?string
+    {
+        return $this->images;
+    }
+
+    public function setImages(?string $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }

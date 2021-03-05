@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
-
 {% block body %}
     <section class="banner bg-holder bg-overlay-black-30 text-white" style="background-image: url(images/bg/banner-01.jpg);">
         <div class="container">
@@ -9,42 +7,51 @@
                 <div class="col-12 text-center">
                     <h1 class="text-white mb-3">Drop <span class="text-primary"> Resume & Get </span> Your Desired Job</h1>
                     <p class="lead mb-4 mb-lg-5 font-weight-normal">Find Jobs, Employment & Career Opportunities</p>
+
+                    <section class="feature-info-section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 mb-lg-0 mb-4">
+                                    <div class="feature-info feature-info-02 p-4 p-lg-5 bg-primary">
+                                        <div class="feature-info-icon mb-3 mb-sm-0 text-dark">
+                                            <i class="flaticon-team"></i>
+                                        </div>
+                                        <div class="feature-info-content text-white pl-sm-4 pl-0">
+                                            <p>Jobseeker</p>
+                                            <h5 class="text-white">Looking For Job?</h5>
+                                        </div>
+                                        <a class="ml-auto align-self-center" href="new1">Apply now<i class="fas fa-long-arrow-alt-right"></i> </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="feature-info feature-info-02 p-4 p-lg-5 bg-dark">
+                                        <div class="feature-info-icon mb-3 mb-sm-0 text-primary">
+                                            <i class="flaticon-job-3"></i>
+                                        </div>
+                                        <div class="feature-info-content text-white pl-sm-4 pl-0">
+                                            <p>Recruiter</p>
+                                            <h5 class="text-white">Are You Recruiting?</h5>
+                                        </div>
+                                        <a class="ml-auto align-self-center" href="company">Post a job<i class="fas fa-long-arrow-alt-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="job-search-field">
                         <div class="job-search-item">
                             <form class="form row">
                                 <div class="col-lg-5">
-                                    <div class="form-group">
-                                        <div class="d-flex">
-                                            <label>What</label>
-                                            <span class="ml-auto">e.g. job, company, title</span>
-                                        </div>
-                                        <div class="position-relative left-icon">
-                                            <input type="text" class="form-control" name="job_title" placeholder="Job title, skill or company">
-                                            <i class="fas fa-search"></i>
-                                        </div>
+
                                     </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="form-group">
-                                        <div class="d-flex">
-                                            <label>Where</label>
-                                            <span class="ml-auto">e.g. city, county or postcode</span>
-                                        </div>
-                                        <div class="position-relative left-icon">
-                                            <input type="text" class="form-control location-input" name="job_title" placeholder="Town, city or postcode">
-                                            <i class="far fa-compass"></i>
-                                            <a href="#">
-                                                <div class="detect">
-                                                    <span class="d-none d-sm-block">Detect</span>
-                                                    <i class="fas fa-crosshairs"></i>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+
+
+
+
                                 <div class="col-lg-2 col-sm-12">
                                     <div class="form-group form-action">
-                                        <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-search"></i> Find Jobs</button>
+
                                     </div>
                                 </div>
                             </form>
@@ -63,7 +70,8 @@
             </div>
         </div>
     </section>
-    section class="space-pb">
+
+    <section class="space-pb">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">

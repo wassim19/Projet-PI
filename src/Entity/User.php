@@ -17,17 +17,7 @@ class User
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=240, nullable=true)
-     * /**
-     * @ORM\OneToMany(targetEntity="App\Entity\surfer", mappedBy="user")
-     */
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\WorkReseacher", mappedBy="user")
-     */
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\user", mappedBy="category")
-     */
+
 
     private $password;
 

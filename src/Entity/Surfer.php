@@ -14,9 +14,6 @@ class Surfer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-    **
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="surfer")
-
      */
     private $id;
 
@@ -35,6 +32,7 @@ class Surfer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $cin;
+
 
     public function getId(): ?int
     {
@@ -79,4 +77,5 @@ class Surfer
 
         return $this;
     }
+
 }
