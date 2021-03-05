@@ -1,152 +1,104 @@
 {% extends 'base.html.twig' %}
+{% block body %}
 
 
 
-{% block body%}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background-color: black;
-            font-family: cursive;
-        }
+    <!--=================================
+blog -->
+    <a class="btn btn-primary" href="{{ path('company') }}">Create new</a>
 
-        .glow {
-            font-size: 80px;
-            color: #fff;
-            text-align: center;
-            animation: glow 1s ease-in-out infinite alternate;
-        }
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for e in companies %}
+                        <div class="blog-post text-center mt-4">
+                            <div class="blog-post-image">
+                                <img src="images/{{ e.images }}" alt="">
+                            </div>
+                            <div class="blog-post-content">
+                                <div class="blog-post-details">
 
-        @-webkit-keyframes glow {
-            from {
-                text-shadow: 0 0 10px orange, 0 0 20px orange, 0 0 30px #1974EE, 0 0 40px #1974EE, 0 0 50px #1974EE, 0 0 60px #1974EE, 0 0 70px #1974EE;
-            }
+                                    <div class="blog-post-title">
+                                        <p class="mb-0">{{ e.name_company }}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <p class="mb-0">{{ e.localisation }}</p>
+                                    </div>
 
-            to {
-                text-shadow: 0 0 20px darkorange, 0 0 30px #F57B3F, 0 0 40px #F57B3F, 0 0 50px #F57B3F, 0 0 60px #F57B3F, 0 0 70px #F57B3F, 0 0 80px #F57B3F;
-            }
-        }
-    </style>
-</head>
-<body>
+                                </div>
+                                <div class="blog-post-footer">
+                                    <div class="blog-post-time">
+                                        <a href="#"><i class="far fa-clock"></i>{{ e.numero }}</a>
+                                    </div>
 
-<h1 class="glow">Companies table</h1>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 100%;
-        border: 1px solid #ddd;
-    }
 
-    th, td {
-        text-align: left;
-        padding: 16px;
-    }
+                                    <div class="blog-post-share">
+                                        <div class="share-box">
+                                            <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                            <ul class="list-unstyled share-box-social">
+                                                <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-</style>
+                                </div>
+                            </div>
 
-</body>
-</html>
-<html>
-<head>
+                        </div>
+                    {% endfor %}
 
-    <style>
-        table, th, td {
-            border: 1px solid orange;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-        }
-        th {
-            text-align:middle;
-        }
-        <h2>Left-align Headings</h2>
-                                 <p>To left-align the table headings, use the CSS text-align property.</p>
-    </style>
-</head>
-<body>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="blog-sidebar">
 
 
 
-<table class="centre",style="width:100%">
 
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Subscribe & Follow</h5>
+                            </div>
+                            <div class="social">
+                                <ul class="list-unstyled">
+                                    <li class="facebook">
+                                        <a class="text-uppercase" href="https://www.facebook.com/hand.calsp"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
+                                        <a class="follow ml-auto" href="https://www.facebook.com/hand.calsp">Like </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a class="text-uppercase" href="https://www.instagram.com/hand_clasp/?hl=en"> <i class="fab fa-instagram mr-3"></i>instagram</a>
+                                        <a class="follow ml-auto" href="https://www.instagram.com/hand_clasp/?hl=en">Follow </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-        <thead>
-
-
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
-                        <section class="spac-ptb">
-                            <div class="container">
-
-                                <th>Name Company</th>
-                                  <th>Description of company</th>
-                                <th>location</th>
-                                <th>phone number</th>
-
-                                    <th>actions</th>
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Popular Tags</h5>
+                            </div>
+                            <div class="popular-tag">
 
                             </div>
-            </section>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-        </thead>
-        <tbody>
-        {% for company in companies %}
-            <tr>
-
-                <td>{{ company.nameCompany }}</td>
-                <td>{{ company.description }}</td>
-                <td>{{ company.localisation }}</td>
-                <td>{{ company.numero}}</td>
-                <td><!DOCTYPE html>
-                    <html>
-                    <body>
+        </div>
+    </section>
 
 
 
-                    <label for="myCheck">Checkbox:</label>
-                    <input type="checkbox" id="myCheck" onclick="myFunction()">
 
-                    <p id="text" style="display:none">company is CHECKED!</p>
+    <!--=================================
+    blog -->
 
-                    <script>
-                        function myFunction() {
-                            var checkBox = document.getElementById("myCheck");
-                            var text = document.getElementById("text");
-                            if (checkBox.checked == true){
-                                text.style.display = "block";
-                            } else {
-                                text.style.display = "none";
-                            }
-                        }
-                    </script>
-
-                    </body>
-                    </html>
-                </td>
-
-
-
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('company') }}">Create new</a>
 {% endblock %}
+
+
 
 

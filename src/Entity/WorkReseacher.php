@@ -14,7 +14,7 @@ class WorkReseacher
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="WorkReseacher")
+
      */
     private $id;
 

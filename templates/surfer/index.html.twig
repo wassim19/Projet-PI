@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+  {% block body %}
+<!--=================================
+inner banner -->
+<div class="header-inner bg-light text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-primary">Job Seekers</h2>
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+                    <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Job seekers</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=================================
+inner banner -->
+<!--=================================
+Manage Events -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="user-dashboard-info-box mb-0">
+                    <div class="row mb-4">
+                        <div class="col-md-7 col-sm-5 d-flex align-items-center">
+                            <div class="section-title-02 mb-0 ">
+                                <h4 class="mb-0">Manage job seekers</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
+                            <div class="search">
+                                <i class="fas fa-search"></i>
+                                <input type="text" class="form-control" placeholder="Search....">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-dashboard-table table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="bg-light">
+                            <tr >
+
+
+
+    <h1>Admin</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>First_name</th>
+                <th>Cin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for surfer in surfers %}
+            <tr>
+                <td>{{ surfer.id }}</td>
+                <td>{{ surfer.name }}</td>
+                <td>{{ surfer.firstName }}</td>
+                <td>{{ surfer.cin }}</td>
+                <td>
+                    <a href="{{ path('show', {'id': surfer.id}) }}">show</a>
+                    <a href="{{ path('surferedit', {'id': surfer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('new') }}">Create new</a>
+{% endblock %}
