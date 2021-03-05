@@ -22,7 +22,7 @@ class Formation
      */
     private $formations;
 
-    // ...
+    
 
     public function __construct() {
         $this->formations = new ArrayCollection();
