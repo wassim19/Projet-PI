@@ -2,39 +2,104 @@
 {% block body %}
 
 
-    <div>
-        <h1 align="center">formations list </h1>
-        <table border="4" align="center">
-            <tr>
-                <td>TITLE</td>
-                <td>DESCRIPTION</td>
-                <td>DATE</td>
-                <td>LOCALISATION</td>
-            </tr>
-            {% for I in formations %}
-                <tr>
-                    <td> {{ I.title }}</td>
-                    <td> {{ I.description }}</td>
-                    <td> {{ I.dateAt|date('Y-m-d H:i:s') }}</td>
-                    <td> {{ I.localisation }}</td>
-                    <td><img class="img-fluid" src="images/{{ I.imagef }}" alt=""></td>
-                    <td><a class="btn btn-danger" value="supprimer" href="{{ path('delformationadmin',{'id' : I.id }) }}">supprimer</a></td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
+    <!--=================================
+    banner -->
+
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/formation.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>FORMATION</label>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="Title"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-2 col-md-4">
+                                    <div class="mt-0">
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find formation</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for I in formations %}
+                    <div class="blog-post text-center mt-4">
+                        <div class="blog-post-image">
+                            <img class="img-fluid" src="images/{{ I.imagef }}" alt="">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="blog-post-details">
+
+                                <div class="blog-post-title">
+                                    <p class="mb-0">{{ I.title }}</p>
+                                </div>
+                                <div class="blog-post-description">
+                                    <p class="mb-0">{{ I.description }}</p>
+                                </div>
+                                <div class="blog-post-time">
+                                    <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
+                                    <div class="blog-post-footer">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a class="btn btn-danger" value="delete" href="{{ path('delformationadmin',{'id' : I.id }) }}">delete</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a class="btn btn-success" value="participant" href="{{ path('participants',{'id' : I.id }) }}">participants</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="blog-post-share">
+                                    <div class="share-box">
+                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                        <ul class="list-unstyled share-box-social">
+                                            <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                            <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!--=================================
+    blog -->
+
 {% endblock %}
-{% block js %}
-    <!-- JS Global Compulsory (Do not remove)-->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper/popper.min.js"></script>
 
-    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
-    <script src="js/select2/select2.full.js"></script>
-    <script src="js/datetimepicker/moment.min.js"></script>
-    <script src="js/datetimepicker/datetimepicker.min.js"></script>
-
-    <!-- Template Scripts (Do not remove)-->
-    <script src="js/custom.js"></script>
-
-{% endblock %}

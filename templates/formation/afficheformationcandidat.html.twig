@@ -20,7 +20,7 @@
 
                                 <div class="form-group col-lg-2 col-md-4">
                                     <div class="mt-0">
-                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Events</button>
+                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>add formation</button>
                                     </div>
                                 </div>
 
@@ -42,7 +42,7 @@ blog -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    {% for I in formation %}
+                    {% for I in formations %}
                     <div class="blog-post text-center mt-4">
                         <div class="blog-post-image">
                             <img class="img-fluid" src="images/{{ I.imagef }}" alt="">
@@ -58,7 +58,14 @@ blog -->
                                 </div>
                                 <div class="blog-post-time">
                                     <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
+                                    <div class="blog-post-footer">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a class="btn btn-success" value="inscription" href="{{ path('participantf',{'id' : I.id }) }}">inscription</a></td>
+                                            </div>
 
+                                        </div>
+                                    </div>
                                 </div>
 
 

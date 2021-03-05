@@ -19,28 +19,28 @@ inner banner -->
     <table class="table">
         <thead>
         <tr>
-            <th> <a  href="{{ path('reclamation_trier') }}"><button type="submit"  >Id</button></a></th>
-            <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
-            <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
-            <th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trier') }}"><button type="submit"  >Id</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
+            <th> <a  href="{{ path('adminreclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
 
-            <th>actions</th>
+            <!--<th>actions</th> -->
         </tr>
         </thead>
         <tbody>
         {% for result in result %}
             <tr>
-              <td><b>{{ result.id }}</b></td>
+                <td><b>{{ result.id }}</b></td>
                 <td>{{ result.motif }}</td>
                 <td>{{ result.message }}</td>
                 <td>{{ result.gsm }}</td>
-                <td>
-                    <button ><a href="{{ path('reclamation_delete', {'id': result.id}) }}">delete</a>
+               <td>
+                    <button ><a href=" {{ path('adminreclamation_delete', {'id': result.id}) }}">delete</a>
                     </button>
-                    <button>
-                        <a href="{{ path('reclamation_edit', {'id': result.id}) }}">update</a>
+                  <!--   <button>
+                        <a href="{#{{ path('reclamation_edit', {'id': result.id}) }} #}">edit</a>
                     </button>
-                </td>
+                </td>-->
             </tr>
         {% else %}
             <tr>

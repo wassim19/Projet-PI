@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ParticipantF;
+use App\Entity\ParticipationF;
 use App\Form\ParticipantfType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ParticipantfController extends AbstractController
 {
     /**
-     * @Route("/formation", name="formation")
+     * @Route("/afficheformation", name="formation")
      */
     public function participant(): Response
     {
@@ -27,8 +28,8 @@ class ParticipantfController extends AbstractController
      */
     public function index(Request $request,$id): Response
     {
-        $formation= new Participantf();
-        $form=$this->createForm(ParticipantfType::class , $formation);
+        $formation= new ParticipantF();
+        $form=$this->createForm(ParticipantfType::class, $formation);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
@@ -37,15 +38,49 @@ class ParticipantfController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($formation);
             $em->flush();
-            $participf= new Participantf();
-            $participf->setIdFormation($id)
-                ->setIdParticipantf($formation->getId());
+            $participf = new ParticipationF();
+            $participf ->setIdFormation($id)
+                ->setIdParticipant($formation->getId());
             $em->persist($participf);
             $em->flush();
-            return $this->redirectToRoute("afficheformation");
+            return $this->redirectToRoute("afficheformationcandidat");
         }
 
         return $this->render('participantf/index.html.twig', ['form' => $form->createView(),]);
 
     }
+    /**
+     * @Route("/participants{id}", name="participants")
+     */
+    public function gestionparticipant($id): Response
+    {
+
+
+
+        $rep = $this->getDoctrine()->getRepository(ParticipationF::class);
+        $participation = $rep->findBy(array('id_formation' => $id));
+        dump($participation);
+
+
+
+
+
+        return $this->render('participantf/paticipantformation.html.twig', [
+            'participation'=>$participation
+        ]);
+    }
+    /**
+     * @Route("/delpf{id}", name="delpf")
+     */
+    public function deleteparticipantformation(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $participation = $entityManager->getRepository(ParticipationF::class)->findOneBy(['id_participant' => $id]);
+        $entityManager->remove($participation);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("afficheformationadmin");
+    }
+
 }

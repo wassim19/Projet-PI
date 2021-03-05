@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReclamationRepository::class)
@@ -37,16 +38,29 @@ class Reclamation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 255
+     *     )
+     *
      */
     private $message;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (
+     *     min= 5,
+     * )
      */
     private $motif;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (
+     *     min = 5,
+     *     max = 20,
+     * )
+     *
      */
     private $GSM;
 

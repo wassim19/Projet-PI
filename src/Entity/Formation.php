@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FormationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formation
 {
+
+    /**
+     * Many Users have Many Groups.
+     * @@ORM\ManyToMany(targetEntity="ParticipantF")
+     * @ORM\JoinTable(name="ParticipationF",
+     *      joinColumns={@ORM\JoinColumn(name="id_formation", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_participant", referencedColumnName="id")}
+     *      )
+     */
+    private $formations;
+
+    // ...
+
+    public function __construct() {
+        $this->events = new ArrayCollection();
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
