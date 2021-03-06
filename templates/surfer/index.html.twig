@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basebackadmin.html.twig' %}
   {% block body %}
 <!--=================================
 inner banner -->
@@ -53,6 +53,9 @@ Manage Events -->
                 <th>Name</th>
                 <th>First_name</th>
                 <th>Cin</th>
+                <th>Email Adress</th>
+                <th>Password</th>
+
                 <th>actions</th>
             </tr>
         </thead>
@@ -63,6 +66,8 @@ Manage Events -->
                 <td>{{ surfer.name }}</td>
                 <td>{{ surfer.firstName }}</td>
                 <td>{{ surfer.cin }}</td>
+                <td>{{ surfer.emailadress}}</td>
+                <td>{{ surfer.password }}</td>
                 <td>
                     <a href="{{ path('show', {'id': surfer.id}) }}">show</a>
                     <a href="{{ path('surferedit', {'id': surfer.id}) }}">edit</a>

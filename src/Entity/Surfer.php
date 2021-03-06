@@ -33,6 +33,16 @@ class Surfer
      */
     private $cin;
 
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     */
+    private $emailadress;
+
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     */
+    private $password;
+
 
     public function getId(): ?int
     {
@@ -74,6 +84,30 @@ class Surfer
     public function setCin(?int $cin): self
     {
         $this->cin = $cin;
+
+        return $this;
+    }
+
+    public function getEmailadress(): ?string
+    {
+        return $this->emailadress;
+    }
+
+    public function setEmailadress(?string $emailadress): self
+    {
+        $this->emailadress = $emailadress;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

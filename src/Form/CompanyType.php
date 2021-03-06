@@ -19,9 +19,12 @@ class CompanyType extends AbstractType
             ->add('tax_registration_number')
             ->add('localisation')
             ->add('numero')
+
             ->add('images',FileType::class,[
                 'mapped'=>false,
             ])
+            ->add('emailadresse')
+            ->add('pass')
         ;
     }
 

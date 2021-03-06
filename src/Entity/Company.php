@@ -48,6 +48,16 @@ class Company
      */
     private $images;
 
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     */
+    private $pass;
+
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     */
+    private $emailadresse;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +131,30 @@ class Company
     public function setImages(?string $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getPass(): ?string
+    {
+        return $this->pass;
+    }
+
+    public function setPass(?string $pass): self
+    {
+        $this->pass = $pass;
+
+        return $this;
+    }
+
+    public function getEmailadresse(): ?string
+    {
+        return $this->emailadresse;
+    }
+
+    public function setEmailadresse(?string $emailadresse): self
+    {
+        $this->emailadresse = $emailadresse;
 
         return $this;
     }
