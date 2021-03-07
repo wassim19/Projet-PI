@@ -67,6 +67,9 @@ blog -->
                                                         <div class="blog-post-description">
                                                             <p class="mb-0">{{ o.localisation }}</p>
                                                         </div>
+                                                        <div class="blog-post-description">
+                                                            <p class="mb-0">{{ o.typecategorie.type }}</p>
+                                                        </div>
 
                                                         <div class="active">
                                                             <h4><a href="{{ path('addemployer',{'id':o.id})}}">Participer</a></h4>
