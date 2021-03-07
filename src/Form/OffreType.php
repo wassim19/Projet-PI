@@ -18,7 +18,7 @@ class OffreType extends AbstractType
             ->add('nb_dem')
             ->add('description')
             ->add('localisation')
-            ->add('typecategorie')
+            ->add('typecategorie',EntityType::class,['class'=>CategorieOffre::class,'choice_label'=>'type'])
             ->add('imagesoffre',FileType::class,[
                 'mapped'=>false,
             ]);
