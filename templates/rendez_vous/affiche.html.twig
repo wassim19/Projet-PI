@@ -90,8 +90,8 @@
                         <td> {{ r.meet }}</td>
                         <td> {{ r.description }}</td>
                         <td> {{ r.email }}</td>
-                        <td><a href="{{ path ('update',{ 'id':r.id}) }}">Update</a></td>
-                        <td><a href="{{ path ('d',{ 'id':r.id}) }}">Delete</a></td>
+                        <td><a href="{{ path ('update',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{ path ('d',{ 'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                 {% endfor %}
             </table> </h1>

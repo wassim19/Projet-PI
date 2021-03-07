@@ -44,9 +44,12 @@ class AdminrendezvousController extends AbstractController
         $test=$repository->findAll();
         return $this->render('test/affichetest.html.twig',array("test"=>$test));
     }
+
     /**
-     * @Route ("/d {id}",name="d")
      * @param $id
+     * @param TestRepository $repository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route ("/deletet {id}",name="deletet")
      */
     public function Deletetest( $id , TestRepository $repository)
     {
@@ -56,8 +59,46 @@ class AdminrendezvousController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('testadmin');
     }
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route ("/addtadmin",name="addtadmin")
+     */
+    function addt(Request $request){
+        $test=new Test();
+        $form=$this->createForm(TestType::class,$test);
+        $form->add('Add',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($test);
+            $em->flush();
+            return $this->redirectToRoute('testadmin');
+        }
+        return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 
+    }
 
+    /**
+     * @param TestRepository $repository
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route ("Updatet {id}",name="updatet")
+     */
+    function Updatet(TestRepository $repository,$id,Request $request){
+        $test=$repository->find($id);
+        $form=$this->createForm(TestType::class,$test);
+        $form->add('Update',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('testadmin');
+        }
+        return $this->render("test/add.html.twig",array('form'=>$form->createView()));
+
+    }
 
 
     /**

@@ -1,5 +1,4 @@
-
-{% extends 'basebackadmin.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Test list {% endblock %}
 
@@ -24,8 +23,8 @@
                         <td> {{ r.id }}</td>
                         <td align="right"> {{ r.chronometre|date}}</td>
                         <td> {{ r.email }}</td>
-                        <td><a href="{{ path ('updatet',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{{ path('deletet',{'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
+                        <td><a href="{{ path ('updatetest',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ path('deletetest',{'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
 
                     </tr>
                 {% endfor %}
