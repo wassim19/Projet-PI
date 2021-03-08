@@ -52,5 +52,9 @@ class RendezVousRepository extends ServiceEntityRepository
         $query=$em->createQuery('select r from App\Entity\RendezVous r order by r.mail ASC ');
         return $query->getResult();
     }
+    public function listrendezvousparsurfer($id){
+        return $this->createQueryBuilder('r')->join('r.mail','s')->addSelect('s')
+            ->where('s.id=:id')->setParameter('id',$id)->getQuery()->getResult();
+    }
 
 }

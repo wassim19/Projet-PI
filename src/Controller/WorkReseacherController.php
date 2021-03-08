@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Surfer;
 use App\Form\SurferType;
+use App\Repository\RendezVousRepository;
 use App\Repository\SurferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -61,10 +62,11 @@ class WorkReseacherController extends AbstractController
     /**
      * @Route("/show{id}", name="show", methods={"GET"})
      */
-    public function show(Surfer $surfer): Response
-    {
+    public function show(SurferRepository $rep,$id,RendezVousRepository $repo): Response
+    {$surfer=$rep->find($id);
+        $rendezvous=$repo->listrendezvousparsurfer($surfer->getId());
         return $this->render('surfer/show.html.twig', [
-            'surfer' => $surfer,
+            'surfer' => $surfer,'r'=>$rendezvous
         ]);
     }
 

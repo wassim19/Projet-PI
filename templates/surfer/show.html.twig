@@ -31,6 +31,21 @@
                 <th>Password</th>
                 <td>{{ surfer.password }}</td>
             </tr>
+            {% for r in r %}
+            <tr>
+                <th>Meet</th>
+                <td>{{ r.meet }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ r.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ r.description }}</td>
+                </tr>
+            {% endfor %}
+
             </tr>
         </tbody>
     </table>
