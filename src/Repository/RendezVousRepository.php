@@ -47,4 +47,10 @@ class RendezVousRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function orderbymail(){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select r from App\Entity\RendezVous r order by r.mail ASC ');
+        return $query->getResult();
+    }
+
 }

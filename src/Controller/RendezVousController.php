@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\RendezVo;
 use App\Entity\RendezVous;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
@@ -86,5 +85,25 @@ class RendezVousController extends AbstractController
         }
         return $this->render("rendez_vous/update.html.twig",array('f'=>$form->createView()));
 
+    }
+
+    /**
+     * @Route ("/recherche",name="recherche")
+     */
+    public function recherche(RendezVousRepository $repository,Request $request){
+    $data=$request->get('search');
+    $rendezvous=$repository->findBy(['mail'=>$data]);
+        return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
+
+    }
+
+    /**
+     * @param RendezVousRepository $repository
+     * @return Response
+     * @Route ("/order",name="order")
+     */
+    public function orderbymail(RendezVousRepository $repository){
+        $rendezvous=$repository->orderbymail();
+        return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
     }
 }

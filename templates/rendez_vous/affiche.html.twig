@@ -73,6 +73,12 @@
 
     <div class="example-wrapper">
         <h1><h1>Meeting list</h1>
+            <form method="post" action="{{ path('order') }}">
+                <input type="submit" value="Trier">
+            </form>
+            <form method="post" action="{{ path('recherche') }}">
+                <input type="text" placeholder="enter the mail" name="search"><input type="submit" value="Search">
+            </form>
             <table border="2">
                 <tr>
                     <td>ID</td>
@@ -89,7 +95,7 @@
                         <td align="right"> {{ r.date|date('Y-m-d H:i:s') }}</td>
                         <td> {{ r.meet }}</td>
                         <td> {{ r.description }}</td>
-                        <td> {{ r.email }}</td>
+                        <td> {{ r.mail.emailadress|default('undefined') }}</td>
                         <td><a href="{{ path ('update',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></td>
                         <td><a href="{{ path ('d',{ 'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
                     </tr>

@@ -23,7 +23,7 @@
                     <tr>
                         <td> {{ r.id }}</td>
                         <td align="right"> {{ r.chronometre|date}}</td>
-                        <td> {{ r.email }}</td>
+                        <td> {{ r.mail.emailadress|default('undefined') }}</td>
                         <td><a href="{{ path ('updatet',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                             <a href="{{ path('deletet',{'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
 

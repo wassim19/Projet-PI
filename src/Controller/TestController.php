@@ -120,6 +120,15 @@ class TestController extends AbstractController
         return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 
     }
+    /**
+     * @Route ("/recherchet",name="recherchet")
+     */
+    public function recherche(TestRepository $repository,Request $request){
+        $data=$request->get('search');
+        $test=$repository->findBy(['mail'=>$data]);
+        return $this->render('test/affichetests.html.twig',array("test"=>$test));
+
+    }
 
 
 }

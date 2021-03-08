@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Surfer;
 use App\Entity\Test;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +18,7 @@ class TestType extends AbstractType
 
             ->add('chronometre',TimeType::class, [
                 'widget' => 'single_text'])
-            ->add('email')
+            ->add('mail',EntityType::class,['class'=>Surfer::class,'choice_label'=>'emailadress'])
         ;
     }
 

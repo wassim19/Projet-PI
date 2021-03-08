@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\RendezVous;
+use App\Entity\Surfer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -21,7 +23,7 @@ class RendezVousType extends AbstractType
     ])
             ->add('meet')
             ->add('description')
-            ->add('email')
+            ->add('mail',EntityType::class,['class'=>Surfer::class,'choice_label'=>'emailadress'])
         ;
     }
 
