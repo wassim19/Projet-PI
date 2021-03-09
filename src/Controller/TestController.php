@@ -7,6 +7,7 @@ use App\Entity\Test;
 use App\Form\RendezVousType;
 use App\Form\TestType;
 use App\Repository\RendezVousRepository;
+use App\Repository\TestRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,6 +57,49 @@ class TestController extends AbstractController
             "Attachment" => true
         ]);
     }
+    /**
+     * @param testRepository $repository
+     * @return Response
+     * @Route ("/testlist",name="testlist")
+     */
+    public function listtest(TestRepository $repository){
+        $test=$repository->findAll();
+        return $this->render('test/affichetests.html.twig',array("test"=>$test));
+    }
+    /**
+     * @param $id
+     * @param TestRepository $repository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route ("/deletetest {id}",name="deletetest")
+     */
+    public function Deletet( $id , TestRepository $repository)
+    {
+        $test = $repository-> find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($test);
+        $em->flush();
+        return $this->redirectToRoute('testlist');
+    }
+    /**
+     * @param TestRepository $repository
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route ("Updatetest {id}",name="updatetest")
+     */
+    function Updatetest(TestRepository $repository,$id,Request $request){
+        $test=$repository->find($id);
+        $form=$this->createForm(TestType::class,$test);
+        $form->add('Update',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('testlist');
+        }
+        return $this->render("test/add.html.twig",array('form'=>$form->createView()));
+
+    }
 
     /**
      * @param Request $request
@@ -71,10 +115,20 @@ class TestController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $em->persist($test);
             $em->flush();
-            return $this->redirectToRoute('nn');
+            return $this->redirectToRoute('testlist');
         }
         return $this->render("test/add.html.twig",array('form'=>$form->createView()));
 
     }
+    /**
+     * @Route ("/recherchet",name="recherchet")
+     */
+    public function recherche(TestRepository $repository,Request $request){
+        $data=$request->get('search');
+        $test=$repository->findBy(['mail'=>$data]);
+        return $this->render('test/affichetests.html.twig',array("test"=>$test));
+
+    }
+
 
 }

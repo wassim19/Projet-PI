@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 
 class CompanyController extends AbstractController
@@ -42,7 +44,7 @@ class CompanyController extends AbstractController
     /**
      * @Route("/company", name="company")
      */
-    public function new(Request $request)
+    public function new(Request $request,UserPasswordEncoderInterface $encoder )
     {
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
@@ -51,6 +53,8 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           /* $hash=$encoder->encodePassword($company,$company->getPass());
+            $company->setPass($hash);*/
             $file = $request->files->get('company')['images'];
             $upload_directory = $this->getParameter('upload_directory');
             $filename = md5(uniqid()) . '.' . $file->guessExtension();
@@ -60,6 +64,7 @@ class CompanyController extends AbstractController
             );
             $company->setImages($filename);
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($company);
             $entityManager->flush();
 

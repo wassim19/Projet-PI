@@ -24,14 +24,14 @@ inner banner -->
 </div>
 <!--=================================
 inner banner -->
-
+<hr>
     <!--=================================
     Manage Candidates -->
     <section>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="user-dashboard-info-box table-responsive pb-4 mb-0">
+                    <div class="user-dashboard-info-box mb-0">
                         <div class="row mb-4">
                             <div class="col-md-7 col-sm-5 d-flex align-items-center">
                                 <div class="section-title-02 mb-0 ">
@@ -45,45 +45,35 @@ inner banner -->
                                 </div>
                             </div>
                         </div>
-                        <table class="table manage-candidates-top mb-0">
-                            <thead>
-                            <tr>
-                                <th>Event</th>
-                                <th class="text-center">Type</th>
-                                <th class="action text-right">Action</th>
-                            </tr>
-                            {% for e in evenement %}
-                            <tr class="candidates-list">
-                                <td class="title">
-                                    <div class="thumb">
-                                        <img class="img-fluid" src="images/{{ e.picture }}" alt="">
-                                    </div>
-                                    <div class="candidate-list-details">
-                                        <div class="candidate-list-info">
-                                            <div class="candidate-list-title">
-                                                <h5 class="mb-0"><a href="#">{{ e.title }}</a></h5>
-                                            </div>
-                                            <div class="candidate-list-option">
-                                                <ul class="list-unstyled">
-                                                    <li><i class="fas fa-map-marker-alt pr-1"></i>{{ e.localitation }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="candidate-list-favourite-time text-center">
-                                    <span class="candidate-list-time order-1">{{ e.type }}</span>
-                                </td>
-                                <td>
-                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                        <li><a href="{{ path('gestiondesparticipant',{'id':e.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
-                                        <li><a href="{{ path('adminevenement',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        <div class="user-dashboard-table table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="bg-light">
+                                <tr >
+                                    <th scope="col">Events</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for e in evenement %}
+                                    <tr>
+                                        <th scope="row">{{ e.title }}
+                                            <p class="mb-1 mt-2">{{ e.dateAt|date('Y-m-d H:i:s') }}</p>
+                                            <p class="mb-0">{{ e.localitation }}</p>
+                                        </th>
+                                        <td>{{ e.type }}</td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0 d-flex">
+                                                <li><a href="{{ path('gestiondesparticipant',{'id':e.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
+                                                <li><a href="{{ path('socdeleteevenement',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>
@@ -91,5 +81,5 @@ inner banner -->
         </div>
     </section>
     <!--=================================
-    Manage Candidates -->
+    Manage Events -->
 {% endblock %}

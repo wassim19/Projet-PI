@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ * @UniqueEntity(fields={"emailadresse"},
+ * message="Already used")
  */
 class Company
 {
@@ -47,6 +52,30 @@ class Company
      * @ORM\Column(type="string", nullable=true)
      */
     private $images;
+
+    /**
+     * @ORM\Column(type="string", length=300, nullable=true)
+     * @Assert\Length(min="8",minMessage="your password must be at least 8 characters long")
+     * @Assert\EqualTo(propertyPath="confirm_password",message="
+    you did not type the same password")
+     */
+    private $pass;
+    /**
+
+     * @Assert\EqualTo(propertyPath="pass",message="
+    you did not type the same password")
+     */
+    public $confirm_password;
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     * @Assert\Email (
+     *     message = "The emailadresse '{{ value }}' is not a valid emailadresse."
+     * )
+     */
+
+
+    private $emailadresse;
+
 
     public function getId(): ?int
     {
@@ -124,4 +153,32 @@ class Company
 
         return $this;
     }
+
+    public function getPass(): ?string
+    {
+        return $this->pass;
+    }
+
+    public function setPass(?string $pass): self
+    {
+        $this->pass = $pass;
+
+        return $this;
+    }
+
+    public function getEmailadresse(): ?string
+    {
+        return $this->emailadresse;
+    }
+
+    public function setEmailadresse(?string $emailadresse): self
+    {
+        $this->emailadresse = $emailadresse;
+
+        return $this;
+    }/*
+    public function eraseCredentials(){
+    }
+    public function getSalt(){}
+    public function getRoles(){return['Role_company'];}*/
 }

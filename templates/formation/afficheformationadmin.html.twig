@@ -5,7 +5,7 @@
     <!--=================================
     banner -->
 
-    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/formation.jpg);">
+    <section class="banner bg-holder bg-overlay-black-50" style="background-image: url(images/formation.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -19,7 +19,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-lg-2 col-md-4">
+                                <div class="form-group col-lg-2 col-md-6">
                                     <div class="mt-0">
                                         <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find formation</button>
                                     </div>
@@ -61,10 +61,10 @@ blog -->
                                     <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
                                     <div class="blog-post-footer">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-9">
                                                 <a class="btn btn-danger" value="delete" href="{{ path('delformationadmin',{'id' : I.id }) }}">delete</a>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-9">
                                                 <a class="btn btn-success" value="participant" href="{{ path('participants',{'id' : I.id }) }}">participants</a>
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@ blog -->
 
                                 <div class="blog-post-share">
                                     <div class="share-box">
-                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-9">Share</span></a>
                                         <ul class="list-unstyled share-box-social">
                                             <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
                                             <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>

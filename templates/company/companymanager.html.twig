@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basebackadmin.html.twig' %}
 
 
 
@@ -12,7 +12,7 @@ inner banner -->
                     <h2 class="text-primary">Manage The companies</h2>
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span>Companies</span></li>
+                        <li class="breadcrumb-item active"> <i class="fas fa-chevron-right"></i> <span> Companies </span></li>
                     </ol>
                 </div>
             </div>
@@ -51,6 +51,8 @@ inner banner -->
                                     <th scope="col">localisation</th>
                                     <th scope="col">number</th>
                                     <th scope="col">logo</th>
+                                    <th scope="col">Email Adress</th>
+                                    <th scope="col">Password</th>
 
 
                                     <th scope="col">Action</th>
@@ -67,6 +69,8 @@ inner banner -->
                                        <td>{{ c.localisation}}</td>
                                       <td>{{ c.numero}}</td>
                                         <td>{{ c.images}}</td>
+                                        <td>{{ c.emailadresse}}</td>
+                                        <td>{{ c.pass}}</td>
                                         <td>
                                             <ul class="list-unstyled mb-0 d-flex">
                                                 <li><a href="{{ path('company_show',{'id':c.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
@@ -79,7 +83,7 @@ inner banner -->
 
                                 </tbody>
                             </table>
-                            <a class="btn btn-primary" href="{{ path('company') }}">Create new</a>
+                            <a class="btn btn-primary" href="{{ path('companym') }}">Create new</a>
                         </div>
 
                     </div>

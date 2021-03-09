@@ -25,11 +25,11 @@ class Test
      */
     private $chronometre;
 
+
     /**
-     * @ORM\Column(type="string", length=255)
-     *  @Assert\Email()
+     * @ORM\ManyToOne(targetEntity=Surfer::class, inversedBy="tests")
      */
-    private $email;
+    private $mail;
 
 
 
@@ -51,14 +51,14 @@ class Test
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getMail(): ?Surfer
     {
-        return $this->email;
+        return $this->mail;
     }
 
-    public function setEmail(string $email): self
+    public function setMail(?Surfer $mail): self
     {
-        $this->email = $email;
+        $this->mail = $mail;
 
         return $this;
     }

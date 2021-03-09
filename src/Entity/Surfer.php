@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SurferRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,32 @@ class Surfer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $cin;
+
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     */
+    private $emailadress;
+
+    /**
+     * @ORM\Column(type="string", length=240, nullable=true)
+     */
+    private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RendezVous::class, mappedBy="mail",cascade={"all"},orphanRemoval=true)
+     */
+    private $rendezVouses;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Test::class, mappedBy="mail",cascade={"all"},orphanRemoval=true)
+     */
+    private $tests;
+
+    public function __construct()
+    {
+        $this->rendezVouses = new ArrayCollection();
+        $this->tests = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -74,6 +102,90 @@ class Surfer
     public function setCin(?int $cin): self
     {
         $this->cin = $cin;
+
+        return $this;
+    }
+
+    public function getEmailadress(): ?string
+    {
+        return $this->emailadress;
+    }
+
+    public function setEmailadress(?string $emailadress): self
+    {
+        $this->emailadress = $emailadress;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RendezVous[]
+     */
+    public function getRendezVouses(): Collection
+    {
+        return $this->rendezVouses;
+    }
+
+    public function addRendezVouse(RendezVous $rendezVouse): self
+    {
+        if (!$this->rendezVouses->contains($rendezVouse)) {
+            $this->rendezVouses[] = $rendezVouse;
+            $rendezVouse->setMail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRendezVouse(RendezVous $rendezVouse): self
+    {
+        if ($this->rendezVouses->removeElement($rendezVouse)) {
+            // set the owning side to null (unless already changed)
+            if ($rendezVouse->getMail() === $this) {
+                $rendezVouse->setMail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Test[]
+     */
+    public function getTests(): Collection
+    {
+        return $this->tests;
+    }
+
+    public function addTest(Test $test): self
+    {
+        if (!$this->tests->contains($test)) {
+            $this->tests[] = $test;
+            $test->setMail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTest(Test $test): self
+    {
+        if ($this->tests->removeElement($test)) {
+            // set the owning side to null (unless already changed)
+            if ($test->getMail() === $this) {
+                $test->setMail(null);
+            }
+        }
 
         return $this;
     }

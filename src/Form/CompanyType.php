@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class CompanyType extends AbstractType
 {
@@ -19,9 +20,14 @@ class CompanyType extends AbstractType
             ->add('tax_registration_number')
             ->add('localisation')
             ->add('numero')
+
+
             ->add('images',FileType::class,[
                 'mapped'=>false,
             ])
+            ->add('emailadresse')
+            ->add('pass',PasswordType::class)
+            ->add('confirm_password',PasswordType::class)
         ;
     }
 
