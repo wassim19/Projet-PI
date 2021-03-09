@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\RendezVo;
 use App\Entity\RendezVous;
+use App\Entity\Surfer;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
+use App\Repository\SurferRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -87,4 +88,26 @@ class RendezVousController extends AbstractController
         return $this->render("rendez_vous/update.html.twig",array('f'=>$form->createView()));
 
     }
+
+    /**
+     * @Route ("/recherche",name="recherche")
+     */
+    public function recherche(SurferRepository $repository,Request $request){
+    $data=$request->get('search');
+    $rendezvous=$repository->findBy(['emailadress'=>$data]);
+        return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
+
+    }
+
+    /**
+     * @param RendezVousRepository $repository
+     * @return Response
+     * @Route ("/order",name="order")
+     */
+    public function orderbymail(RendezVousRepository $repository){
+        $rendezvous=$repository->orderbymail();
+        return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
+    }
+
+
 }

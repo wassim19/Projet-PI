@@ -12,23 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Offre
 {
-    /**
-     * @ORM\ManyToOne(targetEntity="CategorieOffre", inversedBy="type")
-     * @ORM\Column(type="string", length=255)
-     */
-    private $typecategorie;
 
-    public function getTypecategorie(): ?string
-    {
-        return $this->typecategorie;
-    }
-
-    public function setTypecategorie(?string $typecategorie): self
-    {
-        $this->typecategorie = $typecategorie;
-
-        return $this;
-    }
 
 
     /**
@@ -62,7 +46,10 @@ class Offre
      */
     private $imagesoffre;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity=CategorieOffre::class, inversedBy="types")
+     */
+    private $typecategorie;
 
 
 
@@ -127,6 +114,18 @@ class Offre
     public function setImagesoffre(string $imagesoffre): self
     {
         $this->imagesoffre = $imagesoffre;
+
+        return $this;
+    }
+
+    public function getTypecategorie(): ?CategorieOffre
+    {
+        return $this->typecategorie;
+    }
+
+    public function setTypecategorie(?CategorieOffre $typecategorie): self
+    {
+        $this->typecategorie = $typecategorie;
 
         return $this;
     }

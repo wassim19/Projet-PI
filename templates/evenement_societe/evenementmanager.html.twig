@@ -22,6 +22,7 @@ inner banner -->
     inner banner -->
 <!--=================================
 Manage Events -->
+    <hr>
 <section>
     <div class="container">
         <div class="row">
@@ -54,7 +55,7 @@ Manage Events -->
                             <tr>
                                 <th scope="row">{{ e.title }}
                                     <p class="mb-1 mt-2">{{ e.dateAt|date('Y-m-d H:i:s') }}</p>
-                                    <p class="mb-0">Address: Wellesley Rd, London</p>
+                                    <p class="mb-0">{{ e.localitation }}</p>
                                 </th>
                                 <td>{{ e.type }}</td>
                                 <td>

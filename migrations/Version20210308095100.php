@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210306213554 extends AbstractMigration
+final class Version20210308095100 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,12 +20,12 @@ final class Version20210306213554 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE surfer ADD emailadress VARCHAR(240) DEFAULT NULL');
+        $this->addSql('ALTER TABLE surfer ADD emailadress VARCHAR(240) DEFAULT NULL, DROP mail');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE surfer DROP emailadress');
+        $this->addSql('ALTER TABLE surfer ADD mail VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, DROP emailadress');
     }
 }

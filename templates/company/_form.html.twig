@@ -30,17 +30,18 @@ Register -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="candidate" role="tabpanel">
                             {{ form_start(form) }}
-                            {{ form_row(form.name_company,{ 'attr':{ 'placeholder':"name of company",'class':"form-control"}}) }}
+                            {{ form_row(form.name_company,{ 'label':'name company','attr':{ 'placeholder':"name of company",'class':"form-control"}}) }}
                             {{ form_row(form.description,{ 'attr':{ 'placeholder':"describe the function of the company",'class':"form-control"}}) }}
                             {{ form_row(form.tax_registration_number,{ 'attr':{ 'placeholder':"your tax number please for the security",'class':"form-control"}}) }}
 
 
 
                             {{ form_row(form.localisation,{ 'attr':{ 'placeholder':"where is your company?",'class':"form-control"}}) }}
-                            {{ form_row(form.numero,{ 'attr':{ 'placeholder':"your phone number please",'class':"form-control"}}) }}
-                            {{ form_row(form.images,{ 'attr':{ 'class':"upload-file"}}) }}
-                            {{ form_row(form.emailadresse,{ 'attr':{ 'placeholder':"your email adress please",'class':"form-control"}})}}
-                            {{ form_row(form.pass,{ 'attr':{ 'placeholder':"choose your password",'class':"form-control"}})}}
+                            {{ form_row(form.numero,{ 'label':'phone number','attr':{ 'placeholder':"your phone number please",'class':"form-control"}}) }}
+                            {{ form_row(form.images,{ 'label':'your logo','attr':{ 'class':"upload-file"}}) }}
+                            {{ form_row(form.emailadresse,{ 'label':'email adress','attr':{ 'placeholder':"your email adress please",'class':"form-control"}})}}
+                            {{ form_row(form.pass,{ 'label':'password','attr':{ 'placeholder':"choose your password",'class':"form-control"}})}}
+                            {{ form_row(form.confirm_password,{ 'attr':{ 'placeholder':"confirm your password",'class':"form-control"}})}}
                             {{ form_row(form.save,{ 'attr':{ 'class':"btn btn-primary"}}) }}
                             {{ form_end(form) }}
                         </div>
