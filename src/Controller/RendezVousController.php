@@ -108,6 +108,15 @@ class RendezVousController extends AbstractController
         $rendezvous=$repository->orderbymail();
         return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
     }
-
+    /**
+     * @Route("/shows{id}", name="shows", methods={"GET"})
+     */
+    public function shows(SurferRepository $rep,$id,RendezVousRepository $repo): Response
+    {$surfer=$rep->find($id);
+        $rendezvous=$repo->listrendezvousparsurfer($surfer->getId());
+        return $this->render('surfer/shows.html.twig', [
+            'surfer' => $surfer,'r'=>$rendezvous
+        ]);
+    }
 
 }
