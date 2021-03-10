@@ -14,13 +14,7 @@
                                 <div class="form-group col-lg col-md-6">
                                     <div class="form-group-search">
                                         <label>Event Title</label>
-                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="Title"></div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg col-md-6">
-                                    <div class="form-group-search">
-                                        <label>Location</label>
-                                        <div class="d-flex align-items-center"><input class="form-control" type="search" placeholder="town or country"></div>
+                                        <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Title"></div>
                                     </div>
                                 </div>
 
@@ -47,53 +41,54 @@ blog -->
     <section class="space-ptb">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-    {% for e in evenement %}
-                    <div class="blog-post text-center mt-4">
-                        <div class="blog-post-image">
-                            <img class="img-fluid" src="images/{{ e.picture }}" alt="">
-                        </div>
-                        <div class="blog-post-content">
-                            <div class="blog-post-details">
-
-                                <div class="blog-post-title">
-                                    <p class="mb-0">{{ e.title }}</p>
-                                </div>
-                                <div class="blog-post-description">
-                                    <p class="mb-0">{{ e.type }}</p>
-                                </div>
-                                <div class="blog-post-description">
-                                    <h4><a href="{{ path('eventinfo',{'id':e.id})}}">More Details</a></h4>
-                                </div>
+                <div class="col-lg-8" id="all">
+                    {% for e in evenement %}
+                        <div class="blog-post text-center mt-4">
+                            <div class="blog-post-image">
+                                <img class="img-fluid" src="images/{{ e.picture }}" alt="">
                             </div>
-                            <div class="blog-post-footer">
-                                <div class="blog-post-time">
-                                    <a href="#"><i class="far fa-clock"></i>{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
-                                </div>
-                                <div class="blog-post-author">
-                                    <span>By<a href="#"><img src="images/{{ e.picture }}" alt="">Company</a></span>
-                                </div>
+                            <div class="blog-post-content">
+                                <div class="blog-post-details">
 
-                                <div class="blog-post-share">
-                                    <div class="share-box">
-                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
-                                        <ul class="list-unstyled share-box-social">
-                                            <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
-                                            <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
-                                            <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
-                                            <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
-                                            <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
-                                        </ul>
+                                    <div class="blog-post-title">
+                                        <p class="mb-0">{{ e.title }}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <p class="mb-0">{{ e.type }}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <h4><a href="{{ path('eventinfo',{'id':e.id})}}">More Details</a></h4>
                                     </div>
                                 </div>
+                                <div class="blog-post-footer">
+                                    <div class="blog-post-time">
+                                        <a href="#"><i class="far fa-clock"></i>{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
+                                    </div>
+                                    <div class="blog-post-author">
+                                        <span>By<a href="#"><img src="images/{{ e.picture }}" alt="">Company</a></span>
+                                    </div>
 
+                                    <div class="blog-post-share">
+                                        <div class="share-box">
+                                            <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                            <ul class="list-unstyled share-box-social">
+                                                <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-    {% endfor %}
+                        </div>
+                    {% endfor %}
 
                 </div>
+                <div class="col-lg-8" id="search"></div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
                     <div class="blog-sidebar">
 
@@ -117,16 +112,16 @@ blog -->
                             {% for e in evenement %}
                                 {% if i<3 %}
                                     {% set i = i +1 %}
-                            <div class="d-flex mb-3 align-items-start">
-                                <div class="avatar avatar-xl">
-                                    <img class="img-fluid" src="images/{{ e.picture }}" alt="">
-                                </div>
-                                <div class="ml-3 recent-posts">
-                                    <a href="{{ path('eventinfo',{'id':e.id})}}">{{ e.title }}</a>
-                                    <a class="d-block font-sm mt-1 text-light" href="#">{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
-                                </div>
-                            </div>
-                            {% endif %}
+                                    <div class="d-flex mb-3 align-items-start">
+                                        <div class="avatar avatar-xl">
+                                            <img class="img-fluid" src="images/{{ e.picture }}" alt="">
+                                        </div>
+                                        <div class="ml-3 recent-posts">
+                                            <a href="{{ path('eventinfo',{'id':e.id})}}">{{ e.title }}</a>
+                                            <a class="d-block font-sm mt-1 text-light" href="#">{{ e.dateAt|date('Y-m-d H:i:s') }}</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
 
                         </div>
@@ -176,5 +171,52 @@ blog -->
     <!--=================================
     blog -->
 
+{% endblock %}
+{% block search %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#search").keyup(function(e){
+        var value = $(this).val();
+        $.ajax({
+            url : "{{ path('searchevenement') }}",
+            data: {
+                'searchValue' : value
+            },
+            type: "POST",
+            success : function(response)
+            {
+                if(response){
+
+                    $(' div#search').empty();
+
+                    $.each(response, function(index, value) {
+                        $('div#search').append(
+                            '<option >'+ value.title +'</option>'
+
+
+
+                        );
+                    });
+                    $('div#all').hide();
+                }else
+                {
+                    $('div#all').show();
+                    $('div#search').empty();
+                    $('div#search').fadeIn('fast');
+                }
+
+
+            }
+
+
+        });
+
+    });
+
+
+
+
+</script>
+</script>
 {% endblock %}
 

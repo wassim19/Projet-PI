@@ -10,7 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Email;
 
 class ParticipantController extends AbstractController
 {
@@ -30,14 +32,18 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/participant_e{id}", name="participant_e")
      */
-    public function index(Request $request,$id): Response
+    public function index(Request $request,$id, MailerInterface $mailer): Response
     {
         $event= new ParticipantE();
         $form=$this->createForm(ParticipantEType::class,$event);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
+        $data = $form->getData();
         if($form->isSubmitted() && $form->isValid())
         {
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
