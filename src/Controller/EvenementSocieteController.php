@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\ParticipantE;
 use App\Entity\ParticipationE;
@@ -15,9 +15,15 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
@@ -121,5 +127,31 @@ class EvenementSocieteController extends AbstractController
         return $this->render('evenement_societe/updateevent.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    /**
+     * @Route("/searchevenement ", name="searchevenement")
+     */
+    public function searchevenement(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Evenement::class);
+        $requestString=$request->get('searchValue');
+
+        $evenement = $repository->findEvenementByTitle($requestString);
+
+        dump($evenement);
+
+        $response = new Response();
+
+        $encoders = array(new XmlEncoder(), new JsonEncode());
+        $normalizers = array(new GetSetMethodNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($evenement, 'json');
+
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        dump($jsonContent);
+
+        return $response;
     }
 }
