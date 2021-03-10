@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
 
 class FormationController extends AbstractController
 {
@@ -153,5 +155,17 @@ class FormationController extends AbstractController
 
         return $this->render('formation/listformation.html.twig', ['formation' => $forma,]);
     }
+    /**
+     * @Route("/rechercheformation ", name="rechercheformation")
+     */
+    public function searchFormation(Request $request,NormalizableInterface $Normalizer)
+{
+    $repository = $this->getDoctrine()->getRepository(Formation::class);
+    $requestString=$request->get('searchValue');
+    $formations = $repository->findFormationBytitle($requestString);
+    $jsonContent = $Normalizer->normalize($formations, 'json',['groups'=>'formations']);
+    $retour=json_encode($jsonContent);
+    return new Response($retour);
+}
 
 }

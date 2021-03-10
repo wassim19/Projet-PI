@@ -47,4 +47,11 @@ class FormationRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findFormationBytitle($title){
+        return $this->createQueryBuilder('Formation')
+            ->where('Formation.title LIKE :title')
+            ->setParameter('title', '%'.$title.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }
