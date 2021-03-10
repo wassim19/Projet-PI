@@ -32,7 +32,7 @@ class RendezVousController extends AbstractController
      */
     public function api(?RendezVous $calender,Request $request){
         $donnes=json_decode($request->getContent());
-
+var_dump($donnes);
         if(
             isset($donnes->meet)&&!empty($donnes->meet)&&
             isset($donnes->mail)&&!empty($donnes->mail)&&
