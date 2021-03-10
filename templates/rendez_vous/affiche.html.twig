@@ -73,10 +73,13 @@
 
 
         <h1><h1>Meeting list</h1>
+            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Title"></div>
+
             <form method="post" action="{{ path('order') }}">
                 <input type="submit" value="Trier">
             </form>
-            <table border="2">
+            <table border="2" id="all">
+
                 <tr>
                     <td>ID</td>
                     <td>Date</td>
@@ -97,7 +100,8 @@
                         <td><a href="{{ path ('d',{ 'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                 {% endfor %}
-            </table> </h1>
+            </table>
+            <div class="col-lg-8" id="search"></div></h1>
 
         This friendly message is coming from:
         <ul>
@@ -105,4 +109,51 @@
             <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
         </ul>
     </div>
+{% endblock %}
+{% block search %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#search").keyup(function(r){
+        var value = $(this).val();
+        $.ajax({
+            url : "{{ path('searchrdv') }}",
+            data: {
+                'searchValue' : value
+            },
+            type: "POST",
+            success : function(response)
+            {
+                if(response){
+console.log(response);
+                    $(' div#search').empty();
+
+                    $.each(response, function(index, value) {
+                        $('div#search').append(
+                            '<option >'+ value.meet +'</option>'
+
+
+
+                        );
+                    });
+                    $('table#all').hide();
+                }else
+                {
+                    $('table#all').show();
+                    $('div#search').empty();
+                    $('div#search').fadeIn('fast');
+                }
+
+
+            }
+
+
+        });
+
+    });
+
+
+
+
+</script>
+</script>
 {% endblock %}
