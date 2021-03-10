@@ -24,6 +24,66 @@ class RendezVousController extends AbstractController
     }
 
     /**
+     * @param RendezVous|null $calender
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     * @Route ("/api/{id}/edit",name="api",methods={"PUT"})
+     */
+    public function api(?RendezVous $calender,Request $request){
+        $donnes=json_decode($request->getContent());
+
+        if(
+            isset($donnes->meet)&&!empty($donnes->meet)&&
+            isset($donnes->mail)&&!empty($donnes->mail)&&
+            isset($donnes->date)&&!empty($donnes->date)&&
+            isset($donnes->description)&&!empty($donnes->description)
+        ){
+            $code=200;
+            if(!$calender){
+                $calender= new RendezVous();
+                $code=201;
+            }
+            $calender->setMail($donnes->mail);
+            $calender->setMeet($donnes->meet);
+            $calender->setDescription($donnes->description);
+            $calender->setDate(new \DateTime($donnes->date));
+
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($calender);
+            $em->flush();
+            return new Response('ok',$code);
+        }else{
+            return new Response('Data missed',404);
+        }
+        return $this->render('rendez_vous/calender.html.twig', [
+            'controller_name' => 'RendezVousController',
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @Route ("/calender",name="calender")
+     */
+    public function calender(RendezVousRepository $repository){
+        $events=$repository->findAll();
+        $rdvs=[];
+        foreach ($events as $event){
+            $rdvs[]=[
+                'id'=>$event->getId(),
+                'mail'=>$event->getMail(),
+                'meet'=>$event->getMeet(),
+                'date'=>$event->getDate()->format('Y-m-d H:i:s'),
+                'description'=>$event->getDate()
+
+            ];
+        }
+
+        $data= json_encode($rdvs);
+        return $this->render('rendez_vous/calender.html.twig',compact('data'));
+    }
+
+    /**
      * @param RendezVousRepository $repository
      * @return Response
      * @Route("/rdvafficher",name="rendezvous")
@@ -38,16 +98,25 @@ class RendezVousController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    function add(Request $request){
+    function add(Request $request,\Swift_Mailer $mailer){
         $rendezvous=new RendezVous();
         $form=$this->createForm(RendezVousType::class,$rendezvous);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+
             $em=$this->getDoctrine()->getManager();
             $em->persist($rendezvous);
             $em->flush();
-            return $this->redirectToRoute('rendezvous');
+
+            $contact=$form->getData();
+            $message=(new \Swift_Message('nouveau msg'))
+                ->setFrom(['expediteur@email.com'])
+                ->setTo(['destinataire@email.com'])
+            ->setBody($this->renderView('rendez_vous/contact.html.twig',compact('contact')),'text/html');
+            $mailer->send($message);
+            $this->addFlash('message','the email has been sent');
+            return $this->redirectToRoute('calender');
         }
         return $this->render("rendez_vous/index.html.twig",array('form'=>$form->createView()));
 
