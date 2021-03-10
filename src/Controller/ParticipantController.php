@@ -31,16 +31,25 @@ class ParticipantController extends AbstractController
 
     /**
      * @Route("/participant_e{id}", name="participant_e")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function index(Request $request,$id, MailerInterface $mailer): Response
+    public function index(Request $request,$id,\Swift_Mailer $mailer): Response
     {
         $event= new ParticipantE();
         $form=$this->createForm(ParticipantEType::class,$event);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
-        $data = $form->getData();
+
         if($form->isSubmitted() && $form->isValid())
         {
+            $data = $form->getData();
+            $message=(new \Swift_Message('nouveau msg'))
+                ->setFrom(['faroukgasaraa@gmail.com'])
+                ->setTo(['faroukgasaraa@gmail.com'])
+                ->setBody($this->renderView('evenement_societe/eventmail.html.twig',compact('data')),'text/html');
+            $mailer->send($message);
+            $this->addFlash('message','the email has been sent');
 
 
 
@@ -53,7 +62,7 @@ class ParticipantController extends AbstractController
             $entityManager->persist($participation);
             $entityManager->flush();
 
-            return $this->redirectToRoute("evenementsociete");
+            //return $this->redirectToRoute("evenementsociete");
         }
 
         return $this->render('participant_e/index.html.twig', [
