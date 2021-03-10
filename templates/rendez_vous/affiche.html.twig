@@ -72,6 +72,11 @@
     </style>
 
     <div class="example-wrapper">
+        {% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
         <h1><h1>Meeting list</h1>
             <form method="post" action="{{ path('order') }}">
                 <input type="submit" value="Trier">

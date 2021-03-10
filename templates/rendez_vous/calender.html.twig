@@ -1,0 +1,48 @@
+{% extends 'basecalender.html.twig' %}
+
+{% block title %}Calender{% endblock %}
+
+{% block stylesheets %}
+<style>
+    #calendrier{
+        width:80%;
+        margin: auto;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+<div id="calendrier"></div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    window.onload=()=>{
+        let calendarElt=document.querySelector("#calendrier")
+        let calendar=new FullCalendar.Calendar(calendarElt,{
+            initialView: 'timeGridWeek',
+            headerToolbar:{
+                start:'prev,next today',
+                center:'title',
+                end:'dayGridMonth,timeGridWeek'
+            },
+            events:{{ data|raw }},
+            editable: true,
+            eventResizableFromStart: true
+        })
+        calendar.on('eventChange',(e)=>{
+            console.log(e)
+            let url=`/api/${e.event.id}/edit`
+            let donnes={
+                "meet":e.event.extendedProps.meet,
+                "date":e.event.extendedProps.date,
+                "mail":e.event.extendedProps.mail,
+                "description":e.event.extendedProps.description
+            }
+            let xhr= new XMLHttpRequest()
+            xhr.open("PUT",url)
+            xhr.send(JSON.stringify(donnes))
+        })
+        calendar.render()
+    }
+</script>
+{% endblock %}

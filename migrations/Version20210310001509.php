@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210308102604 extends AbstractMigration
+final class Version20210310001509 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,6 +20,9 @@ final class Version20210308102604 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE rendez_vous ADD mail_id INT DEFAULT NULL, DROP email');
+        $this->addSql('ALTER TABLE rendez_vous ADD CONSTRAINT FK_65E8AA0AC8776F01 FOREIGN KEY (mail_id) REFERENCES surfer (id)');
+        $this->addSql('CREATE INDEX IDX_65E8AA0AC8776F01 ON rendez_vous (mail_id)');
         $this->addSql('ALTER TABLE test ADD mail_id INT DEFAULT NULL, DROP email');
         $this->addSql('ALTER TABLE test ADD CONSTRAINT FK_D87F7E0CC8776F01 FOREIGN KEY (mail_id) REFERENCES surfer (id)');
         $this->addSql('CREATE INDEX IDX_D87F7E0CC8776F01 ON test (mail_id)');
@@ -28,6 +31,9 @@ final class Version20210308102604 extends AbstractMigration
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE rendez_vous DROP FOREIGN KEY FK_65E8AA0AC8776F01');
+        $this->addSql('DROP INDEX IDX_65E8AA0AC8776F01 ON rendez_vous');
+        $this->addSql('ALTER TABLE rendez_vous ADD email VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, DROP mail_id');
         $this->addSql('ALTER TABLE test DROP FOREIGN KEY FK_D87F7E0CC8776F01');
         $this->addSql('DROP INDEX IDX_D87F7E0CC8776F01 ON test');
         $this->addSql('ALTER TABLE test ADD email VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, DROP mail_id');
