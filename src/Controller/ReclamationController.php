@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
@@ -22,6 +23,7 @@ class ReclamationController extends AbstractController
      */
     public function index(ReclamationRepository $reclamationRepository): Response
     {
+
         return $this->render('reclamation/index.html.twig', [
             'reclamations' => $reclamationRepository->findAll(),
         ]);
@@ -30,18 +32,35 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/reclamationnew", name="reclamation_new", methods={"GET","POST"})
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,\Swift_Mailer $mailer): Response
     {
         $reclamation = new Reclamation();
+        $date=$reclamation->setCreatedAt(new \DateTime('now'));
+        $reclamation->setStatus(false);
+
+        $rep=$this->getDoctrine()->getRepository(Company::class);
+        $company_name=$rep->findAll();
+
+
         $form = $this->createForm(ReclamationType::class, $reclamation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reclamation);
             $entityManager->flush();
+
+            $contact=$form->getData();
+            $message=(new \Swift_Message('nouveau msg'))
+                ->setFrom(['expediteur@email.com'])
+                ->setTo(['destinataire@email.com'])
+                ->setBody($this->renderView('company_comlplaint/notification.html.twig',compact('contact')),'text/html');
+            $mailer->send($message);
+            $this->addFlash('message','the email has been sent');
 
             return $this->redirectToRoute('reclamation_index');
         }
@@ -49,6 +68,7 @@ class ReclamationController extends AbstractController
         return $this->render('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),
+            'company_name'=>$company_name
         ]);
     }
 
