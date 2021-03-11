@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OffreController extends AbstractController
 {
 
+
     /**
      * @Route("/addoffre", name="addoffre")
      */
@@ -62,7 +63,7 @@ class OffreController extends AbstractController
     /**
      * @Route("/addemployer", name="addemployer")
      */
-    public function Addoffremploye(Request $request)
+    public function Addoffremploye(Request $request,\Swift_Mailer $mailer)
     {
         $offremployer= new OffreEmploye();
 
@@ -72,11 +73,21 @@ class OffreController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $data = $form->getData();
+            $message=(new \Swift_Message('nouveau msg'))
+                ->setFrom(['marwa.hadidan@esprit.tn'])
+                ->setTo(['marwa.hadidan@esprit.tn'])
+                ->setBody($this->renderView('offre/offremail.html.twig',compact('data')),'text/html');
+            $mailer->send($message);
+            $this->addFlash('message','the email has been sent');
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offremployer);
             $entityManager->flush();
 
-            return $this->redirectToRoute("afficheCategorieOffer");
+            return $this->redirectToRoute("addemployer");
 
         }
 
