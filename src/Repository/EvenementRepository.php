@@ -34,6 +34,30 @@ class EvenementRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Evenement[] Returns an array of Evenement objects
+     */
+
+    public function sortByTitleASC()
+    {
+        $evenement = $this->createQueryBuilder('e')
+            ->orderBy('e.title', 'ASC');
+        $query = $evenement->getQuery();
+        return $query->execute();
+    }
+
+    /**
+     * @return Evenement[] Returns an array of Evenement objects
+     */
+
+    public function sortByTitleDESC()
+    {
+        $evenement = $this->createQueryBuilder('e')
+            ->orderBy('e.title', 'DESC');
+        $query = $evenement->getQuery();
+        return $query->execute();
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Evenement

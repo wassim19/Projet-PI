@@ -103,6 +103,33 @@ class EvenementSocieteController extends AbstractController
     }
 
     /**
+     * @Route("/sortbytitleasc", name="sortbytitleasc")
+     */
+    public function sortByTitleASC(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleASC();
+
+
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/sortbytitledesc", name="sortbytitledesc")
+     */
+    public function sortByTitleDESC(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleDESC();
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
      * @Route("/socdeleteevenement{id}", name="socdeleteevenement")
      */
     public function deleteevent(int $id): Response
