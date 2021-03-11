@@ -10,6 +10,8 @@ use App\Entity\ParticipationE;
 use App\Form\EventType;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ObjectManager;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,6 +30,40 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
 {
+
+    /**
+     * @Route("/pdf{id}", name="pdf")
+     */
+    public function pdf(int $id): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->find($id);
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->renderView('evenement_societe/eventmail.html.twig', [
+            'title' => "Welcome to our PDF Test",'evenement' => $evenement
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        $dompdf->stream("mmypdf.pdf", [
+            "Attachment" => false
+        ]);
+
+        // Send some text response
+        return new Response("sd");
+    }
 
     /**
      * @Route("/eventinfo{id}", name="eventinfo")
