@@ -15,19 +15,18 @@ inner banner -->
             </div>
         </div>
     </div>
-    <!--<div align="left"> <a  href="{{ path('reclamation_trier') }}"><button type="submit" class="btn btn-primary btn-md" >trier</button></a></div> -->
     <table class="table">
         <thead>
-            <tr>
-                <th> <a  href="{{ path('reclamation_trier') }}"><button type="submit"  >Id</button></a></th>
-                <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
-                <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
-                <th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
-                <th>created at</th>
-                <th>company</th>
-                <th>status</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th> Id</th>
+            <th> reason</th>
+            <th>message</th>
+            <th>gsm</th>
+            <th>created at</th>
+            <th>company</th>
+            <th>status</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for reclamation in reclamations %}
@@ -39,17 +38,15 @@ inner banner -->
                 <td>{{ reclamation.createdAt|date('Y-m-d H:i:s') }}</td>
                 <td>{{ reclamation.company.name_company }}</td>
                 <td>{% if reclamation.status==false %}
-                    <p> in progress </p>
-                    {% else %}
-                        <p> studied </p>
+                        <p> in progress </p>
+                        {% else %}
+                            <p> studied </p>
                     {% endif %}
                 </td>
                 <td>
-                    <button ><a href="{{ path('reclamation_delete', {'id': reclamation.id}) }}">delete</a>
+                    <button ><a href="{{ path('company_comlplaint_Validatee', {'id': reclamation.id}) }}">validate</a>
                     </button>
-                    <button>
-                    <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">update</a>
-                    </button>
+
                 </td>
             </tr>
         {% else %}

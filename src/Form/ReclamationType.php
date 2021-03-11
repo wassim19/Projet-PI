@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Company;
 use App\Entity\Reclamation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -16,6 +17,7 @@ class ReclamationType extends AbstractType
     {
         $builder
             ->add('message')
+            ->add('company',EntityType::class,['class'=>Company::class,'choice_label'=>'name_company'])
             ->add('motif',ChoiceType::class,[
 
                 'required'=> true,
