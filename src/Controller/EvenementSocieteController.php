@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\NotifEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\ParticipantE;
@@ -71,8 +72,13 @@ class EvenementSocieteController extends AbstractController
     public function show(int $id): Response
     {
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $entityManager = $this->getDoctrine()->getManager();
+
         $evenement=$rep->find($id);
         dump($evenement);
+        $evenement->setViewed($evenement->getViewed()+1);
+        $entityManager->persist($evenement);
+        $entityManager->flush();
 
         return $this->render('evenement_societe/eventinfo.html.twig', [
             'evenement' => $evenement,
@@ -105,6 +111,12 @@ class EvenementSocieteController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
         $entityManager->remove($event);
+        $title = $event->getTitle();
+
+        $notif = new NotifEvent();
+        $notif->setNotif('Event '.$title.' Deleted');
+        $entityManager->persist($notif);
+        $entityManager->flush();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        $entityManager->flush();
 
         return $this->redirectToRoute("manager");

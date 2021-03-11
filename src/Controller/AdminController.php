@@ -48,7 +48,7 @@ class AdminController extends AbstractController
         $entityManager->remove($participation);
         $entityManager->flush();
 
-        return $this->redirectToRoute("manager");
+        return $this->redirectToRoute("adminmanege");
     }
 
     /**
