@@ -142,11 +142,11 @@ class ReclamationController extends AbstractController
     public function trierParId(): Response
     {
        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
-       $result= $rep->findBy([],['id'=>'ASC']);
+       $result= $rep->sortById();
        dump($result);
 
-        return $this->render('reclamation/trier.html.twig', [
-            'result'=>$result
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
         ]);
 
 
@@ -155,14 +155,14 @@ class ReclamationController extends AbstractController
      * @Route ("/reclamationtrierparmotif",name="reclamation_trierparmotif")
      * @return RedirectResponse
      */
-    public function trierParMotif(): Response
+    public function sortByMotif(): Response
     {
         $rep=$this->getDoctrine()->getRepository(Reclamation::class);
-        $result= $rep->findBy([],['motif'=>'ASC']);
+        $result= $rep->sortByMotif();
         dump($result);
 
-        return $this->render('reclamation/trier.html.twig', [
-            'result'=>$result
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
         ]);
 
 
@@ -171,14 +171,14 @@ class ReclamationController extends AbstractController
      * @Route ("/reclamationtrierparmessage",name="reclamation_trierparmessage")
      * @return RedirectResponse
      */
-    public function trierParMessage(): Response
+    public function sortByMessage(): Response
     {
         $rep=$this->getDoctrine()->getRepository(Reclamation::class);
-        $result= $rep->findBy([],['message'=>'ASC']);
+        $result= $rep->sortByMessage();
         dump($result);
 
-        return $this->render('reclamation/trier.html.twig', [
-            'result'=>$result
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
         ]);
 
 
@@ -187,14 +187,62 @@ class ReclamationController extends AbstractController
      * @Route ("/reclamationtrierpargsm",name="reclamation_trierpargsm")
      * @return RedirectResponse
      */
-    public function trierParGsm(): Response
+    public function sortByGsm(): Response
     {
         $rep=$this->getDoctrine()->getRepository(Reclamation::class);
-        $result= $rep->findBy([],['GSM'=>'ASC']);
+        $result= $rep->sortByGsm();
         dump($result);
 
-        return $this->render('reclamation/trier.html.twig', [
-            'result'=>$result
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/reclamationtrierparDate",name="reclamation_trierparDate")
+     * @return RedirectResponse
+     */
+    public function sortByDate(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->sortByDate();
+        dump($result);
+
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/reclamationtrierparCompany",name="reclamation_trierparCompany")
+     * @return RedirectResponse
+     */
+    public function sortByCompany(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->sortByCompany();
+        dump($result);
+
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/reclamationtrierparStatus",name="reclamation_trierparStatus")
+     * @return RedirectResponse
+     */
+    public function sortByStatus(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->sortByStatus();
+        dump($result);
+
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations'=>$result
         ]);
 
 
