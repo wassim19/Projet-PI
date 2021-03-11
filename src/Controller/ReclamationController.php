@@ -54,13 +54,6 @@ class ReclamationController extends AbstractController
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
-            $contact=$form->getData();
-            $message=(new \Swift_Message('nouveau msg'))
-                ->setFrom(['expediteur@email.com'])
-                ->setTo(['destinataire@email.com'])
-                ->setBody($this->renderView('company_comlplaint/notification.html.twig',compact('contact')),'text/html');
-            $mailer->send($message);
-            $this->addFlash('message','the email has been sent');
 
             return $this->redirectToRoute('reclamation_index');
         }
