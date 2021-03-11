@@ -105,7 +105,7 @@ class AdminController extends AbstractController
     {
 
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
-        $evenement=$rep->findBy(array(), array('title' => 'ASC'));
+        $evenement=$rep->findAll();
 
 
         return $this->render('evenement_societe/adminevent.html.twig', [
@@ -113,6 +113,35 @@ class AdminController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/sortbytitleascadmin", name="sortbytitleascadmin")
+     */
+    public function sortByTitleASC(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleASC();
+
+
+        return $this->render('evenement_societe/adminevent.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/sortbytitledescadmin", name="sortbytitledescadmin")
+     */
+    public function sortByTitleDESC(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleDESC();
+        return $this->render('evenement_societe/adminevent.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+
 
     /**
      * @Route("/notification", name="notification")
