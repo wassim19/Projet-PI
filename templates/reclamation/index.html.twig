@@ -23,6 +23,9 @@ inner banner -->
                 <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
                 <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
                 <th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparDate') }}"><button type="submit"  >created at</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparCompany') }}"><button type="submit"  >company</button></a></th>
+                <th> <a  href="{{ path('reclamation_trierparStatus') }}"><button type="submit"  >status</button></a></th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -33,6 +36,14 @@ inner banner -->
                 <td>{{ reclamation.motif }}</td>
                 <td>{{ reclamation.message }}</td>
                 <td>{{ reclamation.gsm }}</td>
+                <td>{{ reclamation.createdAt|date('Y-m-d H:i:s') }}</td>
+                <td>{{ reclamation.company.name_company }}</td>
+                <td>{% if reclamation.status==false %}
+                    <p> in progress <i class="fas fa-sync-alt"></i></p>
+                    {% else %}
+                        <p> studied<i class="fas fa-check"></i> </p>
+                    {% endif %}
+                </td>
                 <td>
                     <button ><a href="{{ path('reclamation_delete', {'id': reclamation.id}) }}">delete</a>
                     </button>

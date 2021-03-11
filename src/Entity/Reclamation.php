@@ -47,12 +47,37 @@ class Reclamation
     private $message;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length (
-     *     min= 5,
-     * )
-     */
+ * @ORM\Column(type="string", length=255)
+ * @Assert\Length (
+ *     min= 5,
+ * )
+ */
     private $motif;
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param mixed $company
+     */
+    public function setCompany($company): void
+    {
+        $this->company = $company;
+    }
+    /**
+     * @ORM\ManyToOne (targetEntity="App\Entity\Company")
+     * @ORM\JoinColumn(name="company_id",referencedColumnName="id")
+     */
+    private $company;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -63,6 +88,18 @@ class Reclamation
      *
      */
     private $GSM;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status;
+
+
 
 
 
@@ -101,4 +138,30 @@ class Reclamation
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+
 }

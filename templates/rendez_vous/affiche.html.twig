@@ -71,17 +71,15 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-    <div class="example-wrapper">
-        {% for message in app.flashes('message') %}
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-        </div>
-        {% endfor %}
+
         <h1><h1>Meeting list</h1>
+            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Date"></div>
+
             <form method="post" action="{{ path('order') }}">
                 <input type="submit" value="Trier">
             </form>
-            <table border="2">
+            <table border="2" id="all">
+
                 <tr>
                     <td>ID</td>
                     <td>Date</td>
@@ -102,12 +100,79 @@
                         <td><a href="{{ path ('d',{ 'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                 {% endfor %}
-            </table> </h1>
+            </table>
+            <div class="col-lg-8" id="search"></div></h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/RendezVousController.php'|file_link(0) }}">src/Controller/RendezVousController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
-        </ul>
+
     </div>
+{% endblock %}
+{% block search %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#search").keyup(function(r){
+        var value = $(this).val();
+
+        $.ajax({
+            url : "{{ path('searchrdv') }}",
+            data: {
+                'searchValue' : value
+            },
+            type: "POST",
+            success : function(response)
+            {
+                if(response){
+console.log(response);
+                    $(' div#search').empty();
+
+                    $.each(response, function(index, value) {
+                        $('div#search').append(
+
+                            ' <h0>'+'<table border="1">'+
+                            '<tr>'+'<td>'+'id' +'</td>'+
+                            '<td>'+'date'+'</td>'+
+                            '<td>'+'meet'+'</td>'+
+                            '<td>'+'description'+'</td>'+
+                            '<td>'+'mail'+'</td>'+
+                            '<td>'+'Update'+'</td>'+
+                            '<td>'+'Delete'+'</td>'+
+                            '</tr>'+
+
+
+                            '<tr>'+'<td>'+ value.id +'</td>'+
+                            '<td>'+value.date+'</td>'+
+                            '<td>'+value.meet+'</td>'+
+                            '<td>'+value.description+'</td>'+
+                            '<td>'+value.mail+'</td>'+
+                            '<td>'+
+                            '<a href="update'+value.id+'"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>'+
+                            '</td>'+
+                            '<td>'+
+                            '<a href="supprdv'+value.id+'"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a>'+
+                            '</td>'+
+                            '</tr>'+
+                            '</table>'+' </h0>'
+
+                        );
+                    });
+                    $('table#all').hide();
+                }else
+                {
+                    $('table#all').show();
+                    $('div#search').empty();
+                    $('div#search').fadeIn('fast');
+                }
+
+
+            }
+
+
+        });
+
+    });
+
+
+
+
+</script>
+</script>
 {% endblock %}

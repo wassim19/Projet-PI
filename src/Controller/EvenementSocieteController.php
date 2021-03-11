@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\NotifEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\ParticipantE;
@@ -10,6 +11,8 @@ use App\Entity\ParticipationE;
 use App\Form\EventType;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ObjectManager;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -30,13 +33,52 @@ class EvenementSocieteController extends AbstractController
 {
 
     /**
+     * @Route("/pdf{id}", name="pdf")
+     */
+    public function pdf(int $id): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->find($id);
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->renderView('evenement_societe/eventmail.html.twig', [
+            'title' => "Welcome to our PDF Test",'evenement' => $evenement
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        $dompdf->stream("mmypdf.pdf", [
+            "Attachment" => false
+        ]);
+
+        // Send some text response
+        return new Response("sd");
+    }
+
+    /**
      * @Route("/eventinfo{id}", name="eventinfo")
      */
     public function show(int $id): Response
     {
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $entityManager = $this->getDoctrine()->getManager();
+
         $evenement=$rep->find($id);
         dump($evenement);
+        $evenement->setViewed($evenement->getViewed()+1);
+        $entityManager->persist($evenement);
+        $entityManager->flush();
 
         return $this->render('evenement_societe/eventinfo.html.twig', [
             'evenement' => $evenement,
@@ -61,6 +103,33 @@ class EvenementSocieteController extends AbstractController
     }
 
     /**
+     * @Route("/sortbytitleasc", name="sortbytitleasc")
+     */
+    public function sortByTitleASC(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleASC();
+
+
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/sortbytitledesc", name="sortbytitledesc")
+     */
+    public function sortByTitleDESC(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleDESC();
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
      * @Route("/socdeleteevenement{id}", name="socdeleteevenement")
      */
     public function deleteevent(int $id): Response
@@ -69,6 +138,12 @@ class EvenementSocieteController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
         $entityManager->remove($event);
+        $title = $event->getTitle();
+
+        $notif = new NotifEvent();
+        $notif->setNotif('Event '.$title.' Deleted');
+        $entityManager->persist($notif);
+        $entityManager->flush();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        $entityManager->flush();
 
         return $this->redirectToRoute("manager");
@@ -94,8 +169,13 @@ class EvenementSocieteController extends AbstractController
                 $upload_directory,
                 $filename
             );
-            $event->setPicture($filename);
             $entityManager = $this->getDoctrine()->getManager();
+            $notif = new NotifEvent();
+            $notif->setNotif('New Event Is Here');
+            $entityManager->persist($notif);
+
+            $event->setPicture($filename);
+
             $entityManager->persist($event);
             $entityManager->flush();
             return $this->redirectToRoute("manager");
@@ -119,6 +199,12 @@ class EvenementSocieteController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $title = $event->getTitle();
+
+            $notif = new NotifEvent();
+            $notif->setNotif('Event '.$title.' Updated');
+            $entityManager->persist($notif);
+            //$entityManager->flush();
 
             $entityManager->flush();
             return $this->redirectToRoute("manager");
@@ -153,5 +239,22 @@ class EvenementSocieteController extends AbstractController
         dump($jsonContent);
 
         return $response;
+    }
+
+    /**
+     * @Route("/notificationuser", name="notificationuser")
+     */
+    public function notificationuser(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(NotifEvent::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('evenement_societe/notifuser.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
     }
 }

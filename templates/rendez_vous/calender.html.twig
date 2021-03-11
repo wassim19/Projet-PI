@@ -1,4 +1,5 @@
-{% extends 'basecalender.html.twig' %}
+{% extends 'basecalender.html.twig'%}
+
 
 {% block title %}Calender{% endblock %}
 
@@ -11,11 +12,19 @@
 </style>
 
 {% endblock %}
-{% block body %}
+{% block calender %}
+    <div class="example-wrapper">
+        {% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    <a href="{{ path('rendezvous') }}">show in table</a>
 <div id="calendrier"></div>
 {% endblock %}
 {% block javascripts %}
 <script>
+
     window.onload=()=>{
         let calendarElt=document.querySelector("#calendrier")
         let calendar=new FullCalendar.Calendar(calendarElt,{

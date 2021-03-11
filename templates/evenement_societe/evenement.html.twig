@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
+{% block content %}
+    <div class="add-listing">
+
+        <a class="btn btn-white btn-md" href="notificationuser"> <i class="fas fa-plus-circle"></i>Get Notifications</a>
+    </div>
+{% endblock %}
 {% block body %}
+
 
     <!--=================================
     banner -->
@@ -17,14 +24,6 @@
                                         <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Title"></div>
                                     </div>
                                 </div>
-
-                                <div class="form-group col-lg-2 col-md-4">
-                                    <div class="mt-0">
-                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Events</button>
-                                    </div>
-                                </div>
-
-
                             </form>
                         </div>
                     </div>
@@ -73,11 +72,8 @@ blog -->
                                         <div class="share-box">
                                             <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
                                             <ul class="list-unstyled share-box-social">
-                                                <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
-                                                <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
-                                                <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
-                                                <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
-                                                <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                                <li> <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/hand.calsp"><i class="fab fa-facebook-f"></i></a> </li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -145,24 +141,7 @@ blog -->
                             </div>
                         </div>
 
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5>Popular Tags</h5>
-                            </div>
-                            <div class="popular-tag">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#">Bootstrap</a></li>
-                                    <li><a href="#">HTML5</a></li>
-                                    <li><a href="#">Wordpress</a></li>
-                                    <li><a href="#">CSS3</a></li>
-                                    <li><a href="#">Creative</a></li>
-                                    <li><a href="#">Multipurpose</a></li>
-                                    <li><a href="#">Fashion</a></li>
-                                    <li><a href="#">Color</a></li>
-                                    <li><a href="#">Lifestyle</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -192,7 +171,29 @@ blog -->
 
                     $.each(response, function(index, value) {
                         $('div#search').append(
-                            '<option >'+ value.title +'</option>'
+                            ' <div class="blog-post text-center mt-4">'+
+                                '<div class="blog-post-image">'+
+                                    '<img class="img-fluid" src="images/'+ value.picture +'" alt="">'+
+                                '</div>'+
+                            '<div class="blog-post-content">'+
+                                '<div class="blog-post-details">'+
+
+                                    '<div class="blog-post-title">'+
+                                        '<p class="mb-0">'+value.title +'</p>'+
+                                    '</div>'+
+                                    '<div class="blog-post-description">'+
+                                        '<p class="mb-0">'+value.type +'</p>'+
+                                    '</div>'+
+
+                                '</div>'+
+                            '</div>'+
+
+                            '<div class="blog-post-description">'+
+                                '<a href="eventinfo'+value.id+'">More Details</a>'+
+                            '</div>'+
+
+
+                            '</div>'
 
 
 

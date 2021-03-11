@@ -72,6 +72,11 @@ class Evenement
      */
     private $id_societe;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $Viewed;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,6 +162,18 @@ class Evenement
     public function setIdSociete(int $id_societe): self
     {
         $this->id_societe = $id_societe;
+
+        return $this;
+    }
+
+    public function getViewed(): ?int
+    {
+        return $this->Viewed;
+    }
+
+    public function setViewed(?int $Viewed): self
+    {
+        $this->Viewed = $Viewed;
 
         return $this;
     }

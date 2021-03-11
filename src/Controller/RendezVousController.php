@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+
 use App\Entity\RendezVous;
+use phpDocumentor\Reflection\Types\String_;
+use Symfony\Component\Validator\Constraints\DateTime;
 use App\Entity\Surfer;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
@@ -12,6 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class RendezVousController extends AbstractController
 {
@@ -34,24 +42,24 @@ class RendezVousController extends AbstractController
         $donnes=json_decode($request->getContent());
 
         if(
-            isset($donnes->meet)&&!empty($donnes->meet)&&
-            isset($donnes->mail)&&!empty($donnes->mail)&&
-            isset($donnes->date)&&!empty($donnes->date)&&
-            isset($donnes->description)&&!empty($donnes->description)
+            isset($donnes->meet) && isset($donnes->description) && isset($donnes->mail)&& isset($donnes->date)
         ){
             $code=200;
             if(!$calender){
                 $calender= new RendezVous();
                 $code=201;
             }
-            $calender->setMail($donnes->mail);
+            $calender->setDate(new DateTime($donnes->date));
             $calender->setMeet($donnes->meet);
             $calender->setDescription($donnes->description);
-            $calender->setDate(new \DateTime($donnes->date));
+            $calender->setMail($donnes->mail);
+
 
             $em=$this->getDoctrine()->getManager();
             $em->persist($calender);
             $em->flush();
+            dump($donnes);
+
             return new Response('ok',$code);
         }else{
             return new Response('Data missed',404);
@@ -123,7 +131,7 @@ class RendezVousController extends AbstractController
     }
 
     /**
-     * @Route ("/supprdv {id}",name="d")
+     * @Route ("/supprdv{id}",name="d")
      * @param $id
      * @param RendezVousRepository $repository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -138,7 +146,7 @@ class RendezVousController extends AbstractController
     }
 
     /**
-     * @Route("Updaterdv {id}",name="update")
+     * @Route("update{id}",name="update")
      * @param RendezVousRepository $repository
      * @param $id
      * @param Request $request
@@ -158,15 +166,7 @@ class RendezVousController extends AbstractController
 
     }
 
-    /**
-     * @Route ("/recherche",name="recherche")
-     */
-    public function recherche(SurferRepository $repository,Request $request){
-    $data=$request->get('search');
-    $rendezvous=$repository->findBy(['emailadress'=>$data]);
-        return $this->render('rendez_vous/affiche.html.twig',array("rendezvous"=>$rendezvous));
 
-    }
 
     /**
      * @param RendezVousRepository $repository
@@ -186,6 +186,39 @@ class RendezVousController extends AbstractController
         return $this->render('surfer/shows.html.twig', [
             'surfer' => $surfer,'r'=>$rendezvous
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route ("/searchrdv",name="searchrdv")
+     */
+    public function searchrdv(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(RendezVous::class);
+        $requestString=$request->get('searchValue');
+
+        $evenement = $repository->findrdvBydate($requestString);
+
+        dump($evenement);
+
+        $response = new Response();
+
+        $encoders = array(new XmlEncoder(), new JsonEncode());
+        $normalizers = array(new GetSetMethodNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($evenement, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }]);
+
+
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        dump($jsonContent);
+
+        return $response;
     }
 
 }
