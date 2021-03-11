@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <!--=================================
+    banner -->
+
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/formation.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-15">
+                    <a class="btn btn-success" value="tri" href="{{ path('triformationtitle') }}">tri title</a>
+                    <a class="btn btn-success" value="tri" href="{{ path('triformationdate') }}">tri date</a>
+                </div>
+                <div class="col-lg-8">
+                    {% for f in formation %}
+                    <div class="blog-post text-center mt-4">
+                        <div class="blog-post-image">
+                            <img class="img-fluid" src="images/{{ f.imagef }}" alt="">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="blog-post-details">
+
+                                <div class="blog-post-title">
+                                    <p class="mb-0">{{ f.title }}</p>
+                                </div>
+                                <div class="blog-post-description">
+                                    <p class="mb-0">{{ f.description }}</p>
+                                </div>
+                                <div class="blog-post-time">
+                                    <a href="#"><i class="far fa-clock"></i>{{ f.dateAt|date('Y-m-d H:i:s') }}</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!--=================================
+    blog -->
+
+{% endblock %}
+
