@@ -19,8 +19,8 @@
                                 </div>
                             </form>
                             <div class="col-15">
-                                <a class="btn btn-success" value="tri" href="{{ path('triformationtitlecandidat') }}">tri title</a>
-                                <a class="btn btn-success" value="tri" href="{{ path('triformationdatecandidat') }}">tri date</a>
+                                <a class="btn btn-primary" value="tri" href="{{ path('triformationtitlecandidat') }}"><i class="fa fa-sort"></i>by title</a>
+                                <a class="btn btn-primary" value="tri" href="{{ path('triformationdatecandidat') }}"><i class="fa fa-sort"></i>by date</a>
                             </div>
                         </div>
                     </div>
@@ -113,6 +113,9 @@ blog -->
                                 '<div >'+ value.description +'</div>'+
                                 '<div class="blog-post-image">'+
                                 '<img class="img-fluid" src="images/'+ value.imagef +'" alt="">'+
+                                '</div>'+
+                                '<div class="btn btn-success">'+
+                                '<a href="participantf'+value.id+'">inscription</a>'+
                                 '</div>'
 
 

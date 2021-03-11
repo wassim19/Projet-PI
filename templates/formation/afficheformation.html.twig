@@ -19,8 +19,8 @@
                                 </div>
                             </form>
                             <div class="col-15">
-                                <a class="btn btn-primary" value="tri" href="{{ path('triformationtitle') }}">tri title</a>
-                                <a class="btn btn-primary" value="tri" href="{{ path('triformationdate') }}">tri date</a>
+                                <a class="btn btn-primary" value="tri" href="{{ path('triformationtitle') }}"><i class="fa fa-sort"></i>by title</a>
+                                <a class="btn btn-primary" value="tri" href="{{ path('triformationdate') }}"><i class="fa fa-sort"></i>by date</a>
                             </div>
                         </div>
                     </div>
@@ -52,6 +52,9 @@ blog -->
                                     </div>
                                     <div class="blog-post-description">
                                         <p class="mb-0">{{ I.description }}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <p class="mb-0">{{ I.localisation }}</p>
                                     </div>
                                     <div class="blog-post-time">
                                         <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
@@ -120,10 +123,20 @@ blog -->
 
                         $.each(response, function(index, value) {
                             $('div#search').append(
-                                '<div >'+ value.title +'</div>' +
-                                '<div >'+ value.description +'</div>'+
                                 '<div class="blog-post-image">'+
                                 '<img class="img-fluid" src="images/'+ value.imagef +'" alt="">'+
+                                '</div>'+
+                                '<div >'+ value.title +'</div>' +
+                                '<div >'+ value.description +'</div>'+
+                                '<div >'+ value.localisation +'</div>'+
+                                '<div class="btn btn-warning">'+
+                                '<a href="updateformation'+value.id+'">UPdate</a>'+
+                                '</div>'+
+                                '<div class="btn btn-danger">'+
+                                '<a href="delformation'+value.id+'">delete</a>'+
+                                '</div>'+
+                                '<div class="btn btn-success">'+
+                                '<a href="participants'+value.id+'">participant</a>'+
                                 '</div>'
 
 
