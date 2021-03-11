@@ -49,12 +49,26 @@ class RendezVousRepository extends ServiceEntityRepository
     */
     public function orderbymail(){
         $em=$this->getEntityManager();
-        $query=$em->createQuery('select r from App\Entity\RendezVous r order by r.mail ASC ');
+        $query=$em->createQuery('select r from App\Entity\RendezVous r order by r.date ASC ');
         return $query->getResult();
     }
     public function listrendezvousparsurfer($id){
         return $this->createQueryBuilder('r')->join('r.mail','s')->addSelect('s')
             ->where('s.id=:id')->setParameter('id',$id)->getQuery()->getResult();
+    }
+
+    /**
+     * @param $meet
+     * @return int|mixed|string
+     */
+    public function findrdvBydate($meet)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.meet Like :meet')
+            ->setParameter('meet', '%'.$meet.'%')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
 }
