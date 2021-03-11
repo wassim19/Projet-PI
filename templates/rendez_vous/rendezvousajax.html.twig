@@ -1,0 +1,11 @@
+{% for r in rendezvous %}
+    <tr>
+        <td> {{ r.id }}</td>
+        <td align="right"> {{ r.date|date('Y-m-d H:i:s') }}</td>
+        <td> {{ r.meet }}</td>
+        <td> {{ r.description }}</td>
+        <td> {{ r.mail.emailadress|default('undefined') }}</td>
+        <td><a href="{{ path ('update',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></td>
+        <td><a href="{{ path ('d',{ 'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
+    </tr>
+{% endfor %}
