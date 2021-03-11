@@ -1,9 +1,7 @@
 {% extends 'basebackadmin.html.twig' %}
 
 
-{% block content %}
 
-{% endblock %}
 
 
 {% block body %}
@@ -38,13 +36,20 @@ inner banner -->
                                     <h4 class="mb-0">Manage Events</h4>
                                 </div>
                             </div>
-                            <div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
-                                <div class="search">
-                                    <i class="fas fa-search"></i>
-                                    <input type="text" class="form-control" placeholder="Search....">
-                                </div>
-                            </div>
+
                         </div>
+                        <div class="section-title-02 mb-0 ">
+                            <a class="btn btn-primary btn-block" href="{{ path('notification')}}">Manage Notifications</a>
+                        </div>
+                        <hr>
+                        <div class="section-title-02 mb-0 ">
+                            <a class="btn btn-primary btn-block" href="{{ path('sortbytitleascadmin')}}">Sort By Title ASC</a>
+                        </div>
+                        <br>
+                        <div class="section-title-02 mb-0 ">
+                            <a class="btn btn-primary btn-block" href="{{ path('sortbytitledescadmin')}}">Sort By Title DESC</a>
+                        </div>
+                        <hr>
                         <div class="user-dashboard-table table-responsive">
                             <table class="table table-bordered">
                                 <thead class="bg-light">
@@ -65,7 +70,7 @@ inner banner -->
                                         <td>
                                             <ul class="list-unstyled mb-0 d-flex">
                                                 <li><a href="{{ path('gestiondesparticipant',{'id':e.id})}}" class="text-primary" data-toggle="tooltip" title="view"><i class="far fa-eye"></i></a></li>
-                                                <li><a href="{{ path('socdeleteevenement',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                                                <li><a href="{{ path('adminevenement',{'id':e.id})}}" class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>

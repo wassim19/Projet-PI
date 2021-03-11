@@ -18,13 +18,13 @@ inner banner -->
     <table class="table">
         <thead>
         <tr>
-            <th> Id</th>
-            <th> reason</th>
-            <th>message</th>
-            <th>gsm</th>
-            <th>created at</th>
-            <th>company</th>
-            <th>status</th>
+            <th> <a  href="{{ path('companyreclamation_trier') }}"><button type="submit"  >Id</button></a></th>
+            <th> <a  href="{{ path('companyreclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>
+            <th> <a  href="{{ path('companyreclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>
+            <th> <a  href="{{ path('companyreclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>
+            <th> <a  href="{{ path('companyreclamation_trierparDate') }}"><button type="submit"  >created at</button></a></th>
+            <th> <a  href="{{ path('companyreclamation_trierparCompany') }}"><button type="submit"  >company</button></a></th>
+            <th> <a  href="{{ path('companyreclamation_trierparStatus') }}"><button type="submit"  >status</button></a></th>
             <th>actions</th>
         </tr>
         </thead>
@@ -38,9 +38,9 @@ inner banner -->
                 <td>{{ reclamation.createdAt|date('Y-m-d H:i:s') }}</td>
                 <td>{{ reclamation.company.name_company }}</td>
                 <td>{% if reclamation.status==false %}
-                        <p> in progress </p>
+                        <p> in progress <i class="fas fa-sync-alt"></i></p>
                         {% else %}
-                            <p> studied </p>
+                            <p> studied<i class="fas fa-check"></i> </p>
                     {% endif %}
                 </td>
                 <td>

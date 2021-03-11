@@ -103,6 +103,33 @@ class EvenementSocieteController extends AbstractController
     }
 
     /**
+     * @Route("/sortbytitleasc", name="sortbytitleasc")
+     */
+    public function sortByTitleASC(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleASC();
+
+
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/sortbytitledesc", name="sortbytitledesc")
+     */
+    public function sortByTitleDESC(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleDESC();
+        return $this->render('evenement_societe/evenementmanager.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
      * @Route("/socdeleteevenement{id}", name="socdeleteevenement")
      */
     public function deleteevent(int $id): Response
@@ -142,8 +169,13 @@ class EvenementSocieteController extends AbstractController
                 $upload_directory,
                 $filename
             );
-            $event->setPicture($filename);
             $entityManager = $this->getDoctrine()->getManager();
+            $notif = new NotifEvent();
+            $notif->setNotif('New Event Is Here');
+            $entityManager->persist($notif);
+
+            $event->setPicture($filename);
+
             $entityManager->persist($event);
             $entityManager->flush();
             return $this->redirectToRoute("manager");
@@ -167,6 +199,12 @@ class EvenementSocieteController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $title = $event->getTitle();
+
+            $notif = new NotifEvent();
+            $notif->setNotif('Event '.$title.' Updated');
+            $entityManager->persist($notif);
+            //$entityManager->flush();
 
             $entityManager->flush();
             return $this->redirectToRoute("manager");
@@ -201,5 +239,22 @@ class EvenementSocieteController extends AbstractController
         dump($jsonContent);
 
         return $response;
+    }
+
+    /**
+     * @Route("/notificationuser", name="notificationuser")
+     */
+    public function notificationuser(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(NotifEvent::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('evenement_societe/notifuser.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
     }
 }

@@ -64,8 +64,8 @@ class RendezVousRepository extends ServiceEntityRepository
     public function findrdvBydate($meet)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.meet Like :meet')
-            ->setParameter('meet', '%'.$meet.'%')
+            ->andWhere('r.date Like :date')
+            ->setParameter('date', '%'.$meet.'%')
             ->getQuery()
             ->getResult()
             ;

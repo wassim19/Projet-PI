@@ -73,7 +73,7 @@
 
 
         <h1><h1>Meeting list</h1>
-            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Title"></div>
+            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Date"></div>
 
             <form method="post" action="{{ path('order') }}">
                 <input type="submit" value="Trier">
@@ -103,11 +103,7 @@
             </table>
             <div class="col-lg-8" id="search"></div></h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/RendezVousController.php'|file_link(0) }}">src/Controller/RendezVousController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
-        </ul>
+
     </div>
 {% endblock %}
 {% block search %}
@@ -115,6 +111,7 @@
 <script>
     $("#search").keyup(function(r){
         var value = $(this).val();
+
         $.ajax({
             url : "{{ path('searchrdv') }}",
             data: {
@@ -129,9 +126,31 @@ console.log(response);
 
                     $.each(response, function(index, value) {
                         $('div#search').append(
-                            '<option >'+ value.meet +'</option>'
+
+                            ' <h0>'+'<table border="1">'+
+                            '<tr>'+'<td>'+'id' +'</td>'+
+                            '<td>'+'date'+'</td>'+
+                            '<td>'+'meet'+'</td>'+
+                            '<td>'+'description'+'</td>'+
+                            '<td>'+'mail'+'</td>'+
+                            '<td>'+'Update'+'</td>'+
+                            '<td>'+'Delete'+'</td>'+
+                            '</tr>'+
 
 
+                            '<tr>'+'<td>'+ value.id +'</td>'+
+                            '<td>'+value.date+'</td>'+
+                            '<td>'+value.meet+'</td>'+
+                            '<td>'+value.description+'</td>'+
+                            '<td>'+value.mail+'</td>'+
+                            '<td>'+
+                            '<a href="update'+value.id+'"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>'+
+                            '</td>'+
+                            '<td>'+
+                            '<a href="supprdv'+value.id+'"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a>'+
+                            '</td>'+
+                            '</tr>'+
+                            '</table>'+' </h0>'
 
                         );
                     });

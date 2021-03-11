@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\NotifEvent;
 use App\Entity\ParticipantE;
 use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
@@ -21,14 +22,8 @@ class AdminController extends AbstractController
     public function gestionparticipant($id): Response
     {
 
-
-
         $rep = $this->getDoctrine()->getRepository(ParticipationE::class);
         $participation = $rep->findBy(array('id_evenement' => $id));
-        dump($participation);
-
-
-
 
 
         return $this->render('evenement_societe/gestionparticipantsoc.html.twig', [
@@ -60,8 +55,6 @@ class AdminController extends AbstractController
         $participation = $rep->findBy(array('id_evenement' => $id));
 
 
-
-
         return $this->render('admin/gestiondesparticipant.html.twig', [
             'participation'=>$participation
         ]);
@@ -89,6 +82,14 @@ class AdminController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
+
+        $title = $event->getTitle();
+
+        $notif = new NotifEvent();
+        $notif->setNotif('Event '.$title.' Deleted');
+        $entityManager->persist($notif);
+
+
         $entityManager->remove($event);
         $entityManager->flush();
 
@@ -112,4 +113,70 @@ class AdminController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/sortbytitleascadmin", name="sortbytitleascadmin")
+     */
+    public function sortByTitleASC(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleASC();
+
+
+        return $this->render('evenement_societe/adminevent.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+    /**
+     * @Route("/sortbytitledescadmin", name="sortbytitledescadmin")
+     */
+    public function sortByTitleDESC(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$rep->sortByTitleDESC();
+        return $this->render('evenement_societe/adminevent.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/notification", name="notification")
+     */
+    public function notification(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(NotifEvent::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('admin/notifadmin.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
+    }
+
+
+
+    /**
+     * @Route("/deletenotification{id}", name="deletenotification")
+     */
+    public function deletenotification(int $id): Response
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $notif = $entityManager->getRepository(NotifEvent::class)->find($id);
+
+
+        $entityManager->remove($notif);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("notification");
+
+    }
+
 }

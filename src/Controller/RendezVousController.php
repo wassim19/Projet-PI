@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -41,7 +42,7 @@ class RendezVousController extends AbstractController
         $donnes=json_decode($request->getContent());
 
         if(
-            isset($donnes->meet) && isset($donnes->description) && isset($donnes->mail)
+            isset($donnes->meet) && isset($donnes->description) && isset($donnes->mail)&& isset($donnes->date)
         ){
             $code=200;
             if(!$calender){
@@ -50,8 +51,8 @@ class RendezVousController extends AbstractController
             }
             $calender->setDate(new DateTime($donnes->date));
             $calender->setMeet($donnes->meet);
-            $calender->setDescription(($donnes->description));
-            //$calender->setMail($donnes->mail);
+            $calender->setDescription($donnes->description);
+            $calender->setMail($donnes->mail);
 
 
             $em=$this->getDoctrine()->getManager();
@@ -130,7 +131,7 @@ class RendezVousController extends AbstractController
     }
 
     /**
-     * @Route ("/supprdv {id}",name="d")
+     * @Route ("/supprdv{id}",name="d")
      * @param $id
      * @param RendezVousRepository $repository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -145,7 +146,7 @@ class RendezVousController extends AbstractController
     }
 
     /**
-     * @Route("Updaterdv {id}",name="update")
+     * @Route("update{id}",name="update")
      * @param RendezVousRepository $repository
      * @param $id
      * @param Request $request
@@ -207,7 +208,11 @@ class RendezVousController extends AbstractController
         $normalizers = array(new GetSetMethodNormalizer());
 
         $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($evenement, 'json');
+        $jsonContent = $serializer->serialize($evenement, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }]);
+
 
         $response->headers->set('Content-Type', 'application/json');
         $response->setContent($jsonContent);
