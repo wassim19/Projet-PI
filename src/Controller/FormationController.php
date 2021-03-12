@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
+use App\Entity\Notificationf;
 use App\Form\FormationType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\FormationRepository;
@@ -12,7 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class FormationController extends AbstractController
 {
@@ -83,6 +91,9 @@ class FormationController extends AbstractController
             );
             $formation->setImagef($filename);
             $em= $this->getDoctrine()->getManager();
+            $notif = new Notificationf();
+            $notif->setNotif('New Formation');
+            $em->persist($notif);
             $em->persist($formation);
             $em->flush();
 
@@ -103,6 +114,10 @@ class FormationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $formation = $em->getRepository(Formation::class)->find($id);
         $em->remove($formation);
+        $title = $formation->getTitle();
+        $notif= new Notificationf();
+        $notif->setNotif('formation '.$title.'Deleted');
+        $em->persist($notif);
         $em->flush();
 
 
@@ -119,6 +134,10 @@ class FormationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $formation = $em->getRepository(Formation::class)->find($id);
         $em->remove($formation);
+        $title = $formation->getTitle();
+        $notif= new Notificationf();
+        $notif->setNotif('formation '.$title.'Deleted');
+        $em->persist($notif);
         $em->flush();
 
 
@@ -156,16 +175,130 @@ class FormationController extends AbstractController
         return $this->render('formation/listformation.html.twig', ['formation' => $forma,]);
     }
     /**
-     * @Route("/rechercheformation ", name="rechercheformation")
+     * @Route ("/triformation",name="triformationtitle")
+     * @return RedirectResponse
      */
-    public function searchFormation(Request $request,NormalizableInterface $Normalizer)
-{
-    $repository = $this->getDoctrine()->getRepository(Formation::class);
-    $requestString=$request->get('searchValue');
-    $formations = $repository->findFormationBytitle($requestString);
-    $jsonContent = $Normalizer->normalize($formations, 'json',['groups'=>'formations']);
-    $retour=json_encode($jsonContent);
-    return new Response($retour);
-}
+    public function triformation(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $formations= $repo->findBy([],['title'=>'ASC']);
+        dump($formations);
+        return $this->render('formation/afficheformation.html.twig', ['formations'=>$formations]);
+
+
+    }
+
+    /**
+     * @Route ("/triformationadmin",name="triformationtitleadmin")
+     * @return RedirectResponse
+     */
+    public function triformationadmin(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $formations= $repo->findBy([],['title'=>'ASC']);
+        dump($formations);
+        return $this->render('formation/afficheformationadmin.html.twig', ['formations'=>$formations]);
+
+
+    }
+
+    /**
+     * @Route ("/triformationtitlecandidat",name="triformationtitlecandidat")
+     * @return RedirectResponse
+     */
+    public function triformationcandidat(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $formations= $repo->findBy([],['title'=>'ASC']);
+        dump($formations);
+        return $this->render('formation/afficheformationcandidat.html.twig', ['formations'=>$formations]);
+
+
+    }
+
+
+    /**
+     * @Route ("/triformationdate",name="triformationdate")
+     * @return RedirectResponse
+     */
+    public function triforma(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $formations= $repo->findBy([],['dateAt'=>'DESC']);
+        dump($formations);
+        return $this->render('formation/afficheformation.html.twig', ['formations'=>$formations]);
+
+
+    }
+
+    /**
+     * @Route ("/triformationdateadmin",name="triformationdateadmin")
+     * @return RedirectResponse
+     */
+    public function triformaadmin(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $formations= $repo->findBy([],['dateAt'=>'DESC']);
+        dump($formations);
+        return $this->render('formation/afficheformationadmin.html.twig', ['formations'=>$formations]);
+
+
+    }
+
+    /**
+     * @Route ("/triformationdatecandidat",name="triformationdatecandidat")
+     * @return RedirectResponse
+     */
+    public function triformacandidat(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Formation::class);
+        $formations= $repo->findBy([],['dateAt'=>'ASC']);
+        dump($formations);
+        return $this->render('formation/afficheformationcandidat.html.twig', ['formations'=>$formations]);
+
+
+    }
+
+    /**
+     * @Route("/rechercheformation", name="rechercheformation")
+     */
+    public function recherchformation(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Formation::class);
+        $requestString=$request->get('searchValue');
+
+        $formations = $repository->findFormationByTitle($requestString);
+
+        dump($formations);
+
+        $response = new Response();
+
+        $encoders = array(new XmlEncoder(), new JsonEncode());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $Serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $Serializer->serialize($formations, 'json');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        dump($jsonContent);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/notificationformation", name="notificationformation")
+     */
+    public function notificationformation(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Notificationf::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('formation/notificationf.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
+    }
 
 }

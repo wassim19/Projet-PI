@@ -38,9 +38,9 @@ inner banner -->
                 <td>{{ reclamation.createdAt|date('Y-m-d H:i:s') }}</td>
                 <td>{{ reclamation.company.name_company }}</td>
                 <td>{% if reclamation.status==false %}
-                        <p> in progress </p>
+                        <p> in progress <i class="fas fa-sync-alt"></i></p>
                         {% else %}
-                            <p> studied </p>
+                            <p> studied<i class="fas fa-check"></i> </p>
                     {% endif %}
                 </td>
                 <td>

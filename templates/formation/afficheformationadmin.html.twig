@@ -1,90 +1,152 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    /* Cette partie correspond à l’affichage de la liste des étudiants en
-    listant leurs informations dans un tableau */
-    <img width="200px;" src="assets/img/esprit.png" alt="Mon logo">
-    <h1 id="dd1"> Liste des étudiants</h1>
-    </br>
 
-    <input type="text" id="search" class="form-control"
-           placeholder="Search">
-    <div>
-        <table border ="1" id="t" class="table table-hover table-dark">
-            <thead class="thead-dark">
-            <tr>
-                <td >ID</td>
-                <td >title</td>
-                <td >description</td>
 
-            </tr>
-            </thead>
-            <tbody id="all">
-            {% for f in formations %}
-                <tr>
-                    <td>
-                        {{ f.id }}
-                    </td>
-                    <td>
-                        {{ f.title }}
-                    </td>
-                    <td>
-                        {{ f.description }}
-                    </td>
-                    <td>
+    <!--=================================
+    banner -->
 
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tbody id="search">
-            </tbody>
-        </table>
-    </div>
+    <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/formation.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="job-search-field job-search-field-02 search-under-banner">
+                        <div class="job-search-item">
+                            <form class="form-row basic-select-wrapper">
+                                <div class="form-group col-lg col-md-6">
+                                    <div class="form-group-search">
+                                        <label>FORMATION</label>
+                                        <div class="d-flex align-items-center"><input id="search" class="form-control" type="search" placeholder="Title"></div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-15">
+                                <a class="btn btn-primary" value="tri" href="{{ path('triformationtitleadmin') }}"><i class="fa fa-sort"></i>by title</a>
+                                <a class="btn btn-primary" value="tri" href="{{ path('triformationdateadmin') }}"><i class="fa fa-sort"></i>by date</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    banner -->
+
+    <!--=================================
+blog -->
+
+    <section class="space-ptb">
+        <div class="container">
+            <div class="col-lg-8" id="search"> </div>
+            <div class="row" id="all">
+
+                <div class="col-lg-8" >
+                    {% for I in formations %}
+                    <div class="blog-post text-center mt-4">
+                        <div class="blog-post-image">
+                            <img class="img-fluid" src="images/{{ I.imagef }}" alt="">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="blog-post-details">
+
+                                <div class="blog-post-title">
+                                    <p class="mb-0">{{ I.title }}</p>
+                                </div>
+                                <div class="blog-post-description">
+                                    <p class="mb-0">{{ I.description }}</p>
+                                </div>
+                                <div class="blog-post-time">
+                                    <a href="#"><i class="far fa-clock"></i>{{ I.dateAt|date('Y-m-d H:i:s') }}</a>
+                                    <div class="blog-post-footer">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <a class="btn btn-danger" value="delete" href="{{ path('delformationadmin',{'id' : I.id }) }}">delete</a>
+                                            </div>
+                                            <div class="col-9">
+                                                <a class="btn btn-success" value="participant" href="{{ path('participants',{'id' : I.id }) }}">participants</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="blog-post-share">
+                                    <div class="share-box">
+                                        <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-9">Share</span></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+        </div>
+    </section>
+
 {% endblock %}
 {% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#search").keyup(function(e){
+        var value = $(this).val();
+        $.ajax({
+            url : "{{ path('rechercheformation') }}",
+            data: {
+                'searchValue' : value
+            },
+            type: "POST",
+            success : function(response)
+            {
+                if(response){
 
-<script>
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
-<script>
-    $( document ).ready(function() {
-        $("#search").keyup(function(i){
-            /* La variable value va prendre la valeur insérer dans le champ de texte
-            afin d’effectuer la recherche */
-            var value = $(this).val();
-    /* Ajax est lancé lors du remplissage du champ texte dont l’id est
-    « search » pour faire la recherche */
-            $.ajax({
-                /* l’url est une chaine de caractères contenant l’adresse où la requête est
-                envoyée */
-                url : "{{ path('rechercheformation') }}",
-                /* La méthode utilisée pour transférer les données est GET */
-                type : 'GET',
-                /*Ici search value va prendre la chaine entrée par un utilisateur dans la
-                zone de recherche et sera placée après l’url */
-                data: {
-                    'searchValue' : value
-                },
-                /*Cette fonction permet de vider le contenu du tableau pour recevoir le
-                nouveau contenu*/
-                success : function(retour){
-                    if(retour){
-                        $('#t tbody#search').empty();
-                        $.each(JSON.parse(retour), function(i, obj) {
-                            $('#t tbody#all').hide();
-                            $('#t tbody#search').append('<tr><td> '+obj.id+' </td><td> '+obj.title+' </td><td>'+obj.description+' </td><td>');
-                        });
-                    }
-                    else
-                    {
-                        $('#t tbody#all').show();
-                        $('#t tbody#search').empty();
-                        $('#t tbody#search').fadeIn('fast');
-                    }
-                },
-            });
-            return false;
+                    $(' div#search').empty();
+
+                    $.each(response, function(index, value) {
+                        $('div#search').append(
+                            '<div >'+ value.title +'</div>' +
+                        '<div >'+ value.description +'</div>'+
+                        '<div class="blog-post-image">'+
+                            '<img class="img-fluid" src="images/'+ value.imagef +'" alt="">'+
+                            '</div>'+
+                            '<div class="btn btn-success">'+
+                            '<a href="participants'+value.id+'">participants</a>'+
+                            '</div>'+
+                            '<div class="btn btn-danger">'+
+                            '<a href="delformationadmin'+value.id+'">delete</a>'+
+                            '</div>'
+
+
+
+
+
+                        );
+                    });
+                    $('div#all').hide();
+                }else
+                {
+                    $('div#all').show();
+                    $('div#search').empty();
+                    $('div#search').fadeIn('fast');
+                }
+
+
+            }
+
+
         });
+
     });
+
+
+
+
 </script>
 {% endblock %}

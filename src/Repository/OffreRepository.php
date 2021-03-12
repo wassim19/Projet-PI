@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Evenement;
 use App\Entity\Offre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Offre|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,7 +20,19 @@ class OffreRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offre::class);
     }
+    /**
+     * @return Offre[] Returns an array of Offre objects
+     */
 
+    public function findoffreBySpecialite($specialite)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.specialite Like :specialite')
+            ->setParameter('specialite', '%'.$specialite.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Offre[] Returns an array of Offre objects
     //  */

@@ -19,39 +19,17 @@ class FormationRepository extends ServiceEntityRepository
         parent::__construct($registry, Formation::class);
     }
 
-    // /**
-    //  * @return Formation[] Returns an array of Formation objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    /**
+      * @return Formation[]
+      */
 
-    /*
-    public function findOneBySomeField($value): ?Formation
+    public function findFormationByTitle($title)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-    public function findFormationBytitle($title){
-        return $this->createQueryBuilder('Formation')
-            ->where('Formation.title LIKE :title')
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.title Like :title')
             ->setParameter('title', '%'.$title.'%')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+            ;
     }
 }

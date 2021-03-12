@@ -197,28 +197,10 @@ class RendezVousController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(RendezVous::class);
         $requestString=$request->get('searchValue');
-
-        $evenement = $repository->findrdvBydate($requestString);
-
-        dump($evenement);
-
-        $response = new Response();
-
-        $encoders = array(new XmlEncoder(), new JsonEncode());
-        $normalizers = array(new GetSetMethodNormalizer());
-
-        $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($evenement, 'json', [
-            'circular_reference_handler' => function ($object) {
-                return $object->getId();
-            }]);
-
-
-        $response->headers->set('Content-Type', 'application/json');
-        $response->setContent($jsonContent);
-        dump($jsonContent);
-
-        return $response;
+        $rdv = $repository->findrdvBydate($requestString);
+        return $this->render('rendez_vous/rendezvousajax.html.twig' ,[
+            "rendezvous"=>$rdv
+        ]);
     }
 
 }
