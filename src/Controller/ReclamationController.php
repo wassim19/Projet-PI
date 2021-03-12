@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Entity\Evenement;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
@@ -11,11 +12,42 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class ReclamationController extends AbstractController
 {
+
+    /**
+     * @Route("/searchreclamation ", name="searchreclamation")
+     */
+    public function searchevenement(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Reclamation::class);
+        $requestString=$request->get('searchValue');
+
+        $reclamation = $repository->findReclamationbymotif($requestString);
+
+        dump($reclamation);
+
+        $response = new Response();
+
+        $encoders = array(new XmlEncoder(), new JsonEncode());
+        $normalizers = array(new GetSetMethodNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($reclamation, 'json');
+
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        dump($jsonContent);
+
+        return $response;
+    }
+
     /**
      * @Route("/reclamation", name="reclamation_index", methods={"GET"})
      * @param ReclamationRepository $reclamationRepository
@@ -141,9 +173,9 @@ class ReclamationController extends AbstractController
      */
     public function trierParId(): Response
     {
-       $rep=$this->getDoctrine()->getRepository(Reclamation::class);
-       $result= $rep->sortById();
-       dump($result);
+        $rep=$this->getDoctrine()->getRepository(Reclamation::class);
+        $result= $rep->sortById();
+        dump($result);
 
         return $this->render('reclamation/index.html.twig', [
             'reclamations'=>$result

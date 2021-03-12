@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
+use App\Entity\Notificationf;
 use App\Form\FormationType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Serializer\Serializer;
@@ -90,6 +91,9 @@ class FormationController extends AbstractController
             );
             $formation->setImagef($filename);
             $em= $this->getDoctrine()->getManager();
+            $notif = new Notificationf();
+            $notif->setNotif('New Formation');
+            $em->persist($notif);
             $em->persist($formation);
             $em->flush();
 
@@ -110,6 +114,10 @@ class FormationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $formation = $em->getRepository(Formation::class)->find($id);
         $em->remove($formation);
+        $title = $formation->getTitle();
+        $notif= new Notificationf();
+        $notif->setNotif('formation '.$title.'Deleted');
+        $em->persist($notif);
         $em->flush();
 
 
@@ -126,6 +134,10 @@ class FormationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $formation = $em->getRepository(Formation::class)->find($id);
         $em->remove($formation);
+        $title = $formation->getTitle();
+        $notif= new Notificationf();
+        $notif->setNotif('formation '.$title.'Deleted');
+        $em->persist($notif);
         $em->flush();
 
 
@@ -270,6 +282,23 @@ class FormationController extends AbstractController
         dump($jsonContent);
 
         return $response;
+    }
+
+    /**
+     * @Route("/notificationformation", name="notificationformation")
+     */
+    public function notificationformation(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Notificationf::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('formation/notificationf.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
     }
 
 }
