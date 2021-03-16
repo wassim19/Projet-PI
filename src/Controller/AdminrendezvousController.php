@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Correctiontest;
 use App\Entity\RendezVous;
 use App\Form\RendezVousType;
 use App\Entity\Test;
 use App\Form\TestType;
 use App\Repository\TestRepository;
+use App\Repository\CorrectiontestRepository;
 use App\Repository\RendezVousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -43,6 +45,16 @@ class AdminrendezvousController extends AbstractController
     public function listtest(TestRepository $repository){
         $test=$repository->findAll();
         return $this->render('test/affichetest.html.twig',array("test"=>$test));
+    }
+
+    /**
+     * @param CorrectiontestRepository $repository
+     * @return Response
+     * @Route ("/testpadmin",name="testpadmin")
+     */
+    public function listtestp(CorrectiontestRepository $repository){
+        $test=$repository->findAll();
+        return $this->render('correctiontest/index.html.twig',array("correction"=>$test));
     }
 
     /**
@@ -156,7 +168,29 @@ class AdminrendezvousController extends AbstractController
         return $this->render("rendez_vous/update.html.twig",array('f'=>$form->createView()));
 
     }
-
+    /**
+     * @param RendezVousRepository $repository
+     * @return Response
+     * @Route ("/ordera",name="ordera")
+     */
+    public function orderbymail(RendezVousRepository $repository){
+        $rendezvous=$repository->orderbymail();
+        return $this->render('adminrendezvous/afficherdvadmin.html.twig',array("rendezvous"=>$rendezvous));
+    }
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route ("/searchrdva",name="searchrdva")
+     */
+    public function searchrdv(Request $request,RendezVousRepository $rep)
+    {
+        $repository = $this->getDoctrine()->getRepository(RendezVous::class);
+        $requestString=$request->get('searchValue');
+        $rdv = $repository->findrdvBydate($requestString);
+        return $this->render('rendez_vous/rendezvousajax.html.twig' ,[
+            "rendezvous"=>$rdv
+        ]);
+    }
 
 
 }

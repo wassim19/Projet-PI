@@ -143,16 +143,13 @@ class Correctiontest
      */
     private $note;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
-     */
-    private $email;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\ManyToOne(targetEntity=Surfer::class, inversedBy="correctiontests")
      */
-    private $chronometre;
+    private $mail;
+
+
 
     public function getId(): ?int
     {
@@ -411,27 +408,19 @@ class Correctiontest
         return $this;
     }
 
-    public function getEmail(): ?string
+
+
+    public function getMail(): ?Surfer
     {
-        return $this->email;
+        return $this->mail;
     }
 
-    public function setEmail(string $email): self
+    public function setMail(?Surfer $mail): self
     {
-        $this->email = $email;
+        $this->mail = $mail;
 
         return $this;
     }
 
-    public function getChronometre(): ?\DateTimeInterface
-    {
-        return $this->chronometre;
-    }
 
-    public function setChronometre(?\DateTimeInterface $chronometre): self
-    {
-        $this->chronometre = $chronometre;
-
-        return $this;
-    }
 }

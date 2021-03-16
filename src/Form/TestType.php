@@ -16,8 +16,7 @@ class TestType extends AbstractType
     {
         $builder
 
-            ->add('chronometre',TimeType::class, [
-                'widget' => 'single_text'])
+
             ->add('mail',EntityType::class,['class'=>Surfer::class,'choice_label'=>'emailadress'])
         ;
     }

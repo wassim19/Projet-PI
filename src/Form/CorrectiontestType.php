@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Correctiontest;
+use App\Entity\Surfer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,9 +16,8 @@ class CorrectiontestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('chronometre',TimeType::class, [
-                'widget' => 'single_text'])
-            ->add('email')
+
+            ->add('mail',EntityType::class,['class'=>Surfer::class,'choice_label'=>'emailadress'])
             ->add('reponseQ1',TextType::class, [
                 'attr' => [
                     'placeholder' => "Write 'a' or 'b' or 'c' or 'd'"

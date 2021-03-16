@@ -11,13 +11,11 @@
 
     <div class="example-wrapper">
         <h1><h1>Tests list</h1>
-            <form method="post" action="{{ path('order') }}">
-                <input type="submit" value="Trier">
-            </form>
+
             <table border="2">
                 <tr>
                     <td>ID</td>
-                    <td>CHRONO</td>
+
                     <td>MAIL</td>
                     <td>ACTIONS</td>
 
@@ -25,7 +23,7 @@
                 {% for r in test %}
                     <tr>
                         <td> {{ r.id }}</td>
-                        <td align="right"> {{ r.chronometre|date}}</td>
+
                         <td> {{ r.mail.emailadress|default('undefined') }}</td>
                         <td><a href="{{ path ('updatet',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                             <a href="{{ path('deletet',{'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>

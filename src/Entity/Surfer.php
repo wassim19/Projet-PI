@@ -55,10 +55,16 @@ class Surfer
      */
     private $tests;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Correctiontest::class, mappedBy="mail",cascade={"all"},orphanRemoval=true)
+     */
+    private $correctiontests;
+
     public function __construct()
     {
         $this->rendezVouses = new ArrayCollection();
         $this->tests = new ArrayCollection();
+        $this->correctiontests = new ArrayCollection();
     }
 
 
@@ -184,6 +190,36 @@ class Surfer
             // set the owning side to null (unless already changed)
             if ($test->getMail() === $this) {
                 $test->setMail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Correctiontest[]
+     */
+    public function getCorrectiontests(): Collection
+    {
+        return $this->correctiontests;
+    }
+
+    public function addCorrectiontest(Correctiontest $correctiontest): self
+    {
+        if (!$this->correctiontests->contains($correctiontest)) {
+            $this->correctiontests[] = $correctiontest;
+            $correctiontest->setMail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCorrectiontest(Correctiontest $correctiontest): self
+    {
+        if ($this->correctiontests->removeElement($correctiontest)) {
+            // set the owning side to null (unless already changed)
+            if ($correctiontest->getMail() === $this) {
+                $correctiontest->setMail(null);
             }
         }
 
