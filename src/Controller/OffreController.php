@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\CategorieOffre;
 use App\Entity\Evenement;
+use App\Entity\Formation;
+use App\Entity\NotifEvent;
+use App\Entity\NotifOffre;
 use App\Entity\Offre;
 use App\Entity\OffreEmploye;
 use App\Form\EventType;
@@ -15,11 +18,31 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class OffreController extends AbstractController
 {
+
+    /**
+     * @Route("/notificationoffre", name="notificationoffre")
+     */
+    public function notificationoffre(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(NotifOffre::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('offre/notifoffre.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
+    }
 
 
     /**
@@ -46,6 +69,11 @@ class OffreController extends AbstractController
                 $upload_directory,
                 $filename
             );
+            $entityManager = $this->getDoctrine()->getManager();
+            $notif = new NotifOffre();
+            $notif->setNotifoffre('New offre Is Here');
+            $entityManager->persist($notif);
+
             $offre->setImagesoffre($filename);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -109,6 +137,11 @@ class OffreController extends AbstractController
         $entityManager->remove($offre);
         $entityManager->flush();
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $notif = new NotiftOffre();
+        $notif->setNotif('New offre Is Here');
+        $entityManager->persist($notif);
+
         return $this->redirectToRoute("socoffrebackaffiche");
     }
 
@@ -145,6 +178,11 @@ class OffreController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $entityManager = $this->getDoctrine()->getManager();
+            $notif = new NotifOffre();
+            $notif->setNotif('New offre Is Here');
+            $entityManager->persist($notif);
+
             $entityManager->flush();
             return $this->redirectToRoute("socoffrebackaffiche");
         }
@@ -188,6 +226,31 @@ class OffreController extends AbstractController
         ]);
 
     }
+    /**
+     * @Route("/rechercheoffre", name="rechercheoffre")
+     */
+    public function recherchoffre(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(offre::class);
+        $requestString=$request->get('searchValue');
+
+        $offre = $repository->findoffreBySpecialite($requestString);
+         dump($offre);
+
+
+        $response = new Response();
+
+        $encoders = array(new XmlEncoder(), new JsonEncode());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $Serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $Serializer->serialize($offre, 'json');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        dump($jsonContent);
+
+        return $response;
+    }
+
 
     /**
      * @Route("/updateoffreadmin{id}", name="updateoffreadmin")

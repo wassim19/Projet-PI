@@ -1,14 +1,27 @@
 {% extends 'base.html.twig' %}
+{% block content %}
+<div class="row-12">
+    <a class="btn btn-primary" value="notif" href="{{ path('notificationformation') }}"><i class="fa fa-bell"></i></a>
+</div>
+{% endblock %}
 {% block body %}
+
+
 
     <!--=================================
     banner -->
 
     <section class="banner bg-holder bg-overlay-black-30" style="background-image: url(images/formation.jpg);">
+
         <div class="container">
             <div class="row">
+
                 <div class="col-12">
+
+
+
                     <div class="job-search-field job-search-field-02 search-under-banner">
+
                         <div class="job-search-item">
                             <form class="form-row basic-select-wrapper">
                                 <div class="form-group col-lg col-md-6">
@@ -22,6 +35,8 @@
                                 <a class="btn btn-primary" value="tri" href="{{ path('triformationtitlecandidat') }}"><i class="fa fa-sort"></i>by title</a>
                                 <a class="btn btn-primary" value="tri" href="{{ path('triformationdatecandidat') }}"><i class="fa fa-sort"></i>by date</a>
                             </div>
+
+
                         </div>
                     </div>
                 </div>

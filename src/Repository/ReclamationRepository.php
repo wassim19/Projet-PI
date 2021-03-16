@@ -48,6 +48,21 @@ class ReclamationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    /**
+     * @return Reclamation[] Returns an array of Evenement objects
+     */
+
+    public function findReclamationbymotif($motif)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.motif Like :motif')
+            ->setParameter('motif', '%'.$motif.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     public function sortById()
     {
         // automatically knows to select Products
