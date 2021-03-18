@@ -19,6 +19,8 @@
 
 
     {% block css%}
+        <link type="text/css" rel="stylesheet" href="css/resume.css"/>
+        <link rel="stylesheet" href="cv.css"/>
 
         <!-- CSS Global Compulsory (Do not remove)-->
         <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}" />
@@ -210,7 +212,8 @@ Header -->
 <!--=================================
 Easiest Way to Use -->
 
-
+{% block head %}
+{% endblock %}
 {% block body %}
 
 {% endblock %}
