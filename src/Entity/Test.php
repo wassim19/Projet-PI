@@ -20,10 +20,6 @@ class Test
 
 
 
-    /**
-     * @ORM\Column(type="time")
-     */
-    private $chronometre;
 
 
     /**
@@ -39,17 +35,7 @@ class Test
     }
 
 
-    public function getChronometre(): ?\DateTimeInterface
-    {
-        return $this->chronometre;
-    }
 
-    public function setChronometre(\DateTimeInterface $chronometre): self
-    {
-        $this->chronometre = $chronometre;
-
-        return $this;
-    }
 
     public function getMail(): ?Surfer
     {

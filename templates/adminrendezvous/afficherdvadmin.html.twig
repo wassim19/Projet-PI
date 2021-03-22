@@ -9,39 +9,61 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-    <div class="example-wrapper">
-        <h1><h1>Meeting list</h1>
-            <form method="post" action="{{ path('order') }}">
-                <input type="submit" value="Trier">
-            </form>
+
+        <h1>Meeting list</h1>
+            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="Search by Date">
+                <a class="btn btn-primary" value="tri" href="{{ path('ordera') }}"><i class="fa fa-sort"></i></a>
+            </div>
             <table border="2">
+                <thead>
                 <tr>
                     <td>ID</td>
                     <td>Date</td>
                     <td>Meet</td>
                     <td>Description</td>
                     <td>Email</td>
-                    <td>ACTIONS</td>
+                    <td>UPDATE</td>
+                    <td>DELETE</td>
 
                 </tr>
-                {% for r in rendezvous %}
-                    <tr>
-                        <td> {{ r.id }}</td>
-                        <td align="right"> {{ r.date|date('Y-m-d H:i:s') }}</td>
-                        <td> {{ r.meet }}</td>
-                        <td> {{ r.description }}</td>
-                        <td> {{ r.mail.emailadress }}</td>
-                        <td><a href="{{ path ('update',{ 'id':r.id}) }}"class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{{ path ('d',{ 'id':r.id}) }}"class="text-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a></td>
+                </thead>
+                <tbody id="all">
+                {% include 'rendez_vous/rendezvousajax.html.twig' %}
+                </tbody>
+                <tbody  border="2" id="search">
+                </tbody>
+            </table>
 
-                    </tr>
-                {% endfor %}
-            </table> </h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/src/Controller/RendezVousController.php'|file_link(0) }}">src/Controller/RendezVousController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'C:/Users/wassim/Documents/GitHub/Projet-PI/templates/rendez_vous/index.html.twig'|file_link(0) }}">templates/rendez_vous/index.html.twig</a></code></li>
-        </ul>
-    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+                $( document ).ready(function() {
+                    var currentRequest = null;
+                    $("#search").keyup(function(e){
+
+                        var value = $(this).val();
+                        if(currentRequest != null) {
+                            currentRequest.abort();
+                        }
+
+                        currentRequest = $.ajax({
+
+                            url : "{{ path('searchrdva') }}",
+                            type : 'GET',
+                            data: {
+                                'searchValue' : value
+                            },
+
+                            success : function(retour)
+                            {
+                                $('#all').html(retour);
+
+                            },
+                        });
+                        return false;
+                    });
+                });
+</script>
+</script>
 {% endblock %}
+
