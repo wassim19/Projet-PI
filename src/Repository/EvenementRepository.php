@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Type;
 
 /**
  * @method Evenement|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +20,22 @@ class EvenementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Evenement::class);
     }
+
+    /**
+     * @return Evenement[] Returns an array of Evenement objects
+     */
+
+    public function findSearch($type)
+    {
+
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.type Like :type')
+            ->setParameter('type', '%'.$type.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
 
      /**
