@@ -1,228 +1,47 @@
 {% extends 'base.html.twig' %}
-{% block head %}
-    <title>CV </title>
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="css/cv.css">
-{% endblock %}
+
+{% block title %}Cv index{% endblock %}
+
 {% block body %}
-<header>
-    <h1>CV of </h1>
-</header>
+    <h1>Cv index</h1>
 
-<section>
-    <div class="photo">
-        <img src="" alt="Ma photo de profil">
-    </div>
-    <div class="prez">
-        <h2>who am i ?</h2>
-        <p>taarif</p>
-        <a href="#" download>download</a>
-    </div>
-    <div class="contact">
-        <h2>contact</h2>
-        <div class="contact-flex">
-            <p>Name : </p>
-            <p>*****</p>
-        </div>
-        <div class="contact-flex">
-            <p>Address : </p>
-            <p>*****</p>
-        </div>
-        <div class="contact-flex">
-            <p>phone number :</p>
-            <p>0******</p>
-        </div>
-        <div class="contact-flex">
-            <p>Mail : </p>
-            <p>****</p>
-        </div>
-        <div class="contact-flex">
-            <p>*** :</p>
-            <p>***</p>
-        </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Photo</th>
+                <th>Description</th>
+                <th>Name</th>
+                <th>Adresse</th>
+                <th>Phone</th>
+                <th>Mail</th>
 
-    </div>
-</section>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cv in cvs %}
+            <tr>
+                <td>{{ cv.id }}</td>
+                <td>{{ cv.photo }}</td>
+                <td>{{ cv.description }}</td>
+                <td>{{ cv.name }}</td>
+                <td>{{ cv.adresse }}</td>
+                <td>{{ cv.phone }}</td>
 
-<section>
-    <h2>Professional Experience</h2>
-    <div class="exp">
-        <div class="exp-logo">
-            <a href="#"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/pierre.png" alt="Logo de Pierre Giraud"></a>
-        </div>
-        <div class="exp-info">
-            <h3>titre</h3>
-            <h4>entreprise</h4>
-            <h4>date de profession,</h4>
-        </div>
-        <div class="exp-desc">
-            <p>descripticccccccccccccccccccccccccccccccccccccccccccccon</p>
-        </div>
-    </div>
-    <div class="exp">
-        <div class="exp-logo">
-            <a href="#"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/pierre.png" alt="Logo de Pierre Giraud"></a>
-        </div>
-        <div class="exp-info">
-            <h3>titre</h3>
-            <h4>entreprise</h4>
-            <h4>date de profession,</h4>
-        </div>
-        <div class="exp-desc">
-            <p>descripticccccccccccccccccccccccccccccccccccccccccccccon</p>
-        </div>
-    </div>
-    <div class="exp">
-        <div class="exp-logo">
-        </div>
-        <div class="exp-info">
-            <h3> </h3>
-            <h4></h4>
-            <h4> </h4>
-        </div>
-        <div class="exp-desc">
-            <p></p>
-        </div>
-    </div>
-    <div class="exp">
-        <div class="exp-logo">
-        </div>
-        <div class="exp-info">
-            <h3> </h3>
-            <h4></h4>
-            <h4> </h4>
-        </div>
-        <div class="exp-desc">
-            <p></p>
-        </div>
-    </div>
 
-</section>
+                <td>
+                    <a href="{{ path('cv_show', {'id': cv.id}) }}">show</a>
+                    <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="68">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-<section>
-    <h2>training</h2>
-    <div class="exp">
-        <div class="exp-logo">
-            <a href="#"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/edhec.png" alt="Logo EDHEC"></a>
-        </div>
-        <div class="exp-info">
-            <h3>fac</h3>
-            <h4>2011 - 2015</h4>
-        </div>
-        <div class="exp-desc">
-            <p>descr</p>
-        </div>
-    </div>
-    <div class="exp">
-        <div class="exp-logo">
-            <a href="#"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/dd.png" alt="Logo Dumont"></a>
-        </div>
-        <div class="exp-info">
-            <h3>fac</h3>
-            <h4>2009 - 2011</h4>
-        </div>
-        <div class="exp-desc">
-            <p>des</p>
-        </div>
-    </div>
-    <div class="exp">
-        <div class="exp-logo">
-            <a href=""><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/dd.png" alt=""></a>
-        </div>
-        <div class="exp-info">
-            <h3>lycee</h3>
-            <h4>2005 - 2009</h4>
-        </div>
-        <div class="exp-desc">
-            <p>blablabla</p>
-        </div>
-    </div>
-</section>
-
-<section>
-    <h2>Skills</h2>
-    <h3 class="h3gauche">Professionals</h3>
-    <div class="comp">
-        <p>skill1</p>
-        <div class="conteneur-barre"><span class="barre c100"></span></div>
-    </div>
-    <div class="comp">
-        <p>skill2</p>
-        <div class="conteneur-barre"><span class="barre c95"></span></div>
-    </div>
-    <div class="comp">
-        <p>skill3</p>
-        <div class="conteneur-barre"><span class="barre c90"></span></div>
-    </div>
-    <div class="comp">
-        <p>skill4</p>
-        <div class="conteneur-barre"><span class="barre c100"></span></div>
-    </div>
-    <h3 class="h3gauche">Personnel</h3>
-    <div class="comp2">
-        <p>skill1</p>
-        <p>90%</p>
-        <div class="conteneur-barre2"><span class="barre c90"></span></div>
-    </div>
-    <div class="comp2">
-        <p>skill2</p>
-        <p>85%</p>
-        <div class="conteneur-barre2"><span class="barre c85"></span></div>
-    </div>
-    <div class="comp2">
-        <p>skill3</p>
-        <p>95%</p>
-        <div class="conteneur-barre2"><span class="barre c95"></span></div>
-    </div>
-    <div class="comp2">
-        <p>skill4</p>
-        <p>95%</p>
-        <div class="conteneur-barre2"><span class="barre c95"></span></div>
-    </div>
-</section>
-
-<section>
-    <h2>interested by</h2>
-    <figure class="interet">
-        <img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/trail.png" alt="Trail">
-        <figcaption>interest1</figcaption>
-    </figure>
-    <figure class="interet">
-        <img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/cuisine.jpg" alt="Cuisine">
-        <figcaption>interest2</figcaption>
-    </figure>
-    <figure class="interet">
-        <img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/gaming.jpg" alt="Gaming">
-        <figcaption> interest3</figcaption>
-    </figure>
-    <figure class="interet">
-        <img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/livre.jpg" alt="Littérature">
-        <figcaption>interest4</figcaption>
-    </figure>
-</section>
-
-    <section>
-        <h2>languages</h2>
-
-        <div class="comp">
-            <p>lang1</p>
-            <div class="conteneur-barre"><span class="barre c100"></span></div>
-        </div>
-        <div class="comp">
-            <p>lang2</p>
-            <div class="conteneur-barre"><span class="barre c95"></span></div>
-        </div>
-        <div class="comp">
-            <p>lang3</p>
-            <div class="conteneur-barre"><span class="barre c90"></span></div>
-        </div>
-        <div class="comp">
-            <p>lang4</p>
-            <div class="conteneur-barre"><span class="barre c100"></span></div>
-        </div>
-
-        </section
-
+    <a href="{{ path('cv_new') }}">Create new</a>
 {% endblock %}
