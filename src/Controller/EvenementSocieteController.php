@@ -224,7 +224,7 @@ class EvenementSocieteController extends AbstractController
 
         $evenement = $repository->findEvenementByTitle($requestString);
 
-        dump($evenement);
+
 
         $response = new Response();
 
@@ -236,7 +236,7 @@ class EvenementSocieteController extends AbstractController
 
         $response->headers->set('Content-Type', 'application/json');
         $response->setContent($jsonContent);
-        dump($jsonContent);
+
 
         return $response;
     }

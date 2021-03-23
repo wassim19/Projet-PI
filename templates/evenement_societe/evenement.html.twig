@@ -103,6 +103,19 @@ blog -->
                             </ol>
                         </div>
                         <div class="widget">
+                            <div class="widget-title widget-collapse">
+                                <h1>Fiter By</h1>
+                                <a class="ml-auto" data-toggle="collapse" href="#dateposted" role="button" aria-expanded="false" aria-controls="dateposted"> <i class="fas fa-chevron-down"></i> </a>
+                            </div>
+                            <div class="collapse show" id="dateposted">
+                                {{ form_start(form) }}
+                                <h4> Types </h4>
+                                {{ form_row(form.type) }}
+                                <button type="submit" class="btn btn-primary" >Filtrer</button>>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                        <div class="widget">
                             <div class="widget-title">
                                 <h5>Recent Events</h5>
                             </div>{% set i =0 %}

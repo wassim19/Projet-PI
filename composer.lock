@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7f8bd7dba0b99cfe0d2a06d61d1a1bd",
+    "content-hash": "eb6feb3c8e0409715ae5c678a2eaed88",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1399,6 +1399,41 @@
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
             "time": "2021-01-08T14:18:52+00:00"
+        },
+        {
+            "name": "easybook/slugger",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/easybook/slugger.git",
+                "reference": "40609cd6b6019c5f194affe01f88c049f428e04e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/easybook/slugger/zipball/40609cd6b6019c5f194affe01f88c049f428e04e",
+                "reference": "40609cd6b6019c5f194affe01f88c049f428e04e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Easybook": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A fast and easy to use slugger with full UTF-8 support.",
+            "support": {
+                "issues": "https://github.com/easybook/slugger/issues",
+                "source": "https://github.com/easybook/slugger/tree/1.0.0"
+            },
+            "abandoned": "javiereguiluz/slugger",
+            "time": "2014-04-08T20:29:46+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -8032,8 +8067,9 @@
     "platform": {
         "php": ">=7.2.18",
         "ext-ctype": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
