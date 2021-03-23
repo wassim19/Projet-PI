@@ -166,7 +166,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/listformation", name="listformation")
+     * @Route("/listformation", name="listf")
      */
     public function listf(): Response
     {
@@ -195,7 +195,7 @@ class FormationController extends AbstractController
         $dompdf->stream("formations.pdf", [
             "Attachment" => true
         ]);
-        return new Response("sd");
+
     }
 
 
