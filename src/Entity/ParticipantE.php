@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantERepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,6 +33,16 @@ class ParticipantE
      */
     private $nom;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="user")
+     */
+    private $eventlikes;
+
+    public function __construct()
+    {
+        $this->eventlikes = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -57,6 +69,36 @@ class ParticipantE
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Eventlikes[]
+     */
+    public function getEventlikes(): Collection
+    {
+        return $this->eventlikes;
+    }
+
+    public function addEventlike(Eventlikes $eventlike): self
+    {
+        if (!$this->eventlikes->contains($eventlike)) {
+            $this->eventlikes[] = $eventlike;
+            $eventlike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventlike(Eventlikes $eventlike): self
+    {
+        if ($this->eventlikes->removeElement($eventlike)) {
+            // set the owning side to null (unless already changed)
+            if ($eventlike->getUser() === $this) {
+                $eventlike->setUser(null);
+            }
+        }
 
         return $this;
     }

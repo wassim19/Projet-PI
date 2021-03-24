@@ -29,6 +29,7 @@ class EvenementRepository extends ServiceEntityRepository
     {
 
         return $this->createQueryBuilder('e')
+
             ->andWhere('e.type Like :type')
             ->setParameter('type', '%'.$type.'%')
             ->getQuery()
@@ -45,6 +46,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findEvenementByTitle($title)
     {
         return $this->createQueryBuilder('e')
+            ->select('e.id','e.type','e.dateAt','e.description','e.Viewed','e.title','e.localitation','e.id_societe','e.picture')
             ->andWhere('e.title Like :title')
             ->setParameter('title', '%'.$title.'%')
             ->getQuery()
