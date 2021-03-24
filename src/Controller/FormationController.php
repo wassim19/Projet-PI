@@ -166,9 +166,9 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/listformation", name="listformation")
+     * @Route("/printformation", name="printformation")
      */
-    public function listf(): Response
+    public function printformation(): Response
     {
         $repo=$this->getDoctrine()->getRepository(Formation::class);
         $forma=$repo->findAll();
@@ -195,7 +195,17 @@ class FormationController extends AbstractController
         $dompdf->stream("formations.pdf", [
             "Attachment" => true
         ]);
-        return new Response("sd");
+
+    }
+    /**
+     * @Route("/listformation", name="listf")
+     */
+    public function listf(): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Formation::class);
+        $forma = $repo->findAll();
+
+        return $this->render('formation/listformation.html.twig', ['formation' => $forma,]);
     }
 
 
