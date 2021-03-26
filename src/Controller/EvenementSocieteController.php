@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Eventlikes;
 use App\Entity\NotifEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
@@ -31,6 +32,52 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class EvenementSocieteController extends AbstractController
 {
+    /**
+     * @param $uid
+     * @param $eid
+     * @return Response
+     * @Route ("/like{uid}/{eid}" , name="like")
+     */
+    public function like($uid,$eid):Response{
+
+
+        $rep=$this->getDoctrine()->getRepository(Eventlikes::class);
+        $repu=$this->getDoctrine()->getRepository(ParticipantE::class);
+        $repe=$this->getDoctrine()->getRepository(Evenement::class);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $user = $repu->find($uid);
+        $event = $repe->find($eid);
+
+        $like = $rep->findOneBy([
+                'user' => $uid ,
+                'event' => $eid
+        ]);
+
+        if(!empty($like)){
+            $entityManager->remove($like);
+            $entityManager->flush();
+
+            return $this->json([
+                'code' => 200 ,
+                'message' => 'like bien supprimer',
+                'likes' => $rep->count(['event' => $event])
+            ],200);
+
+        }else{
+            $like = new Eventlikes();
+            $like->setUser($user)
+                ->setEvent($event);
+
+            $entityManager->persist($like);
+            $entityManager->flush();
+            return $this->json([
+                'code' => 200 ,
+                'message' => 'like bien ajouter',
+                'likes' => $rep->count(['event' => $event])
+            ],200);
+        }
+    }
 
     /**
      * @Route("/pdf{id}", name="pdf")
@@ -225,7 +272,6 @@ class EvenementSocieteController extends AbstractController
         $evenement = $repository->findEvenementByTitle($requestString);
 
 
-
         $response = new Response();
 
         $encoders = array(new XmlEncoder(), new JsonEncode());
@@ -233,6 +279,7 @@ class EvenementSocieteController extends AbstractController
 
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($evenement, 'json');
+        dump($jsonContent);
 
         $response->headers->set('Content-Type', 'application/json');
         $response->setContent($jsonContent);
