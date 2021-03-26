@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Entity\RendezVous;
 use phpDocumentor\Reflection\Types\String_;
-use Symfony\Component\Validator\Constraints\DateTime;
+use DateTime;
 use App\Entity\Surfer;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
@@ -41,8 +41,9 @@ class RendezVousController extends AbstractController
     public function api(?RendezVous $calender,Request $request){
         $donnes=json_decode($request->getContent());
 
+
         if(
-            isset($donnes->meet) && isset($donnes->description) && isset($donnes->mail)&& isset($donnes->date)
+            isset($donnes->meet) && isset($donnes->description) && isset($donnes->date)
         ){
             $code=200;
             if(!$calender){
@@ -52,13 +53,14 @@ class RendezVousController extends AbstractController
             $calender->setDate(new DateTime($donnes->date));
             $calender->setMeet($donnes->meet);
             $calender->setDescription($donnes->description);
-            $calender->setMail($donnes->mail);
+
+           // $calender->setMail($donnes->mail);
 
 
             $em=$this->getDoctrine()->getManager();
             $em->persist($calender);
             $em->flush();
-            dump($donnes);
+
 
             return new Response('ok',$code);
         }else{
@@ -79,10 +81,10 @@ class RendezVousController extends AbstractController
         foreach ($events as $event){
             $rdvs[]=[
                 'id'=>$event->getId(),
-                'mail'=>$event->getMail(),
+                //'mail'=>$event->getMail()->getEmailadress(),
                 'meet'=>$event->getMeet(),
                 'date'=>$event->getDate()->format('Y-m-d H:i:s'),
-                'description'=>$event->getDate()
+                'description'=>$event->getDescription()
 
             ];
         }
