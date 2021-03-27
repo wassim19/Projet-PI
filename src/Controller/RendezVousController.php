@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
-
+use App\Form\SurferType;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 use App\Entity\RendezVous;
 use phpDocumentor\Reflection\Types\String_;
 use DateTime;
@@ -104,11 +107,11 @@ class RendezVousController extends AbstractController
     }
 
     /**
-     * @Route ("/addrdv",name="addrendez-vous")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route ("/addrdv",name="addrendez-vous")
      */
-    function add(Request $request,\Swift_Mailer $mailer){
+    function add(Request $request){
         $rendezvous=new RendezVous();
         $form=$this->createForm(RendezVousType::class,$rendezvous);
         $form->add('Add',SubmitType::class);
@@ -119,13 +122,43 @@ class RendezVousController extends AbstractController
             $em->persist($rendezvous);
             $em->flush();
 
-            $contact=$form->getData();
-            $message=(new \Swift_Message('nouveau msg'))
-                ->setFrom(['expediteur@email.com'])
-                ->setTo(['destinataire@email.com'])
-            ->setBody($this->renderView('rendez_vous/contact.html.twig',compact('contact')),'text/html');
-            $mailer->send($message);
-            $this->addFlash('message','the email has been sent');
+            //mailing
+            $mail = new PHPMailer(true);
+
+            try {
+
+                $meet= $form->get('meet')->getData();
+                $description = $form->get('description')->getData();
+                $date = $form->get('date')->getData();
+                $email = $form->get('mail')->getData()->getEmailadress();
+
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'eya.souissi@esprit.tn';             // SMTP username
+                $mail->Password   = 'eyaeyaeya';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
+                // Content
+                $corps="Bonjour Monsieur/Madame  voici votre lien meet pour passer l'entretien en ligne: ".$meet. "  la date ".$date->format('Y-m-d H:i:s')." votre description est comme suit: " .$description ;
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'Sois le Bienvenue pour votre entretien en ligne!';
+                $mail->Body    = $corps;
+
+                $mail->send();
+                $this->addFlash('message','the email has been sent');
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
+            //end mailing
             return $this->redirectToRoute('calender');
         }
         return $this->render("rendez_vous/index.html.twig",array('form'=>$form->createView()));
