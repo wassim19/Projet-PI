@@ -7,14 +7,42 @@ use App\Entity\NotifEvent;
 use App\Entity\ParticipantE;
 use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
+use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class AdminController extends AbstractController
 {
+    /**
+     * @Route("/stat" ,name="stat")
+     */
+    public function stat(EvenementRepository $evenementRepository){
+        $events = $evenementRepository->nbr();
+
+        $response = new Response();
+
+        $encoders = array(new XmlEncoder(), new JsonEncode());
+        $normalizers = array(new GetSetMethodNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($events, 'json');
+        dump($jsonContent);
+
+
+
+        return $this->render('admin/index.html.twig',[
+            "events" => $events
+        ]);
+
+    }
+
 
     /**
      * @Route("/gestiondesparticipantsoc{id}", name="gestiondesparticipantsoc")

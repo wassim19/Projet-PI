@@ -19,11 +19,13 @@ class Eventlikes
 
     /**
      * @ORM\ManyToOne(targetEntity=ParticipantE::class, inversedBy="eventlikes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="eventlikes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $event;
 

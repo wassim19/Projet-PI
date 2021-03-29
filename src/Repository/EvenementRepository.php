@@ -7,6 +7,7 @@ use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Type;
+use Symfony\Component\Validator\Constraints\Count;
 
 /**
  * @method Evenement|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,6 +26,20 @@ class EvenementRepository extends ServiceEntityRepository
      * @return Evenement[] Returns an array of Evenement objects
      */
 
+    public function nbr()
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e.type,COUNT(e.type) as Nb')
+            ->groupBy('e.type')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Evenement[] Returns an array of Evenement objects
+     */
+
     public function findSearch($type)
     {
 
@@ -36,6 +51,7 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
 
 
 

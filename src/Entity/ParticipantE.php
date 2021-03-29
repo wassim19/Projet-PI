@@ -35,6 +35,7 @@ class ParticipantE
 
     /**
      * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="user")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $eventlikes;
 
