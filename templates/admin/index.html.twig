@@ -5,8 +5,6 @@
 
 {% block body %}
 
-
-
     <canvas id="myChart" width="400" height="100"></canvas>
 
 {% endblock %}
@@ -14,23 +12,25 @@
 {% block search %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
     <script>
-        {% set tab=[] %}
-        {% set tab1=[] %}
+        {% set tab="" %}
+        {% set tab1="" %}
         {% set i=0 %}
         {% for e in events %}
         {% set i=i+1 %}
-        {%  set tab = tab|merge([e.type]) %}
-        {%  set tab1 = tab1|merge([e.Nb]) %}
+        {%  set tab = tab ~ "," ~'"'   ~ e.type  ~'"' %}
+        {%  set tab1 = tab1 ~ ','  ~e.Nb %}
         {% endfor %}
+        {% set tab = tab|slice(1) %}
+        {% set tab1 = tab1|slice(1) %}
 
         var ctx = document.getElementById('myChart');
         var myChart  = new Chart(ctx,{
             type : "bar",
             data : {
-                labels : ["{{tab[0]}}","{{tab[1]}}"],
+                labels : [{{ tab|raw }}],
                 datasets : [{
                     label:"repatition des types",
-                    data: [{{tab1[0]}},{{tab1[1]}}],
+                    data: [{{ tab1 }}],
                     backgroundColor:["red","green","bleu"]
                 }
 

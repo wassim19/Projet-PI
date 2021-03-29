@@ -26,15 +26,6 @@ class AdminController extends AbstractController
     public function stat(EvenementRepository $evenementRepository){
         $events = $evenementRepository->nbr();
 
-        $response = new Response();
-
-        $encoders = array(new XmlEncoder(), new JsonEncode());
-        $normalizers = array(new GetSetMethodNormalizer());
-
-        $serializer = new Serializer($normalizers, $encoders);
-        $jsonContent = $serializer->serialize($events, 'json');
-        dump($jsonContent);
-
 
 
         return $this->render('admin/index.html.twig',[
