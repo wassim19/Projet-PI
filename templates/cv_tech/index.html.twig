@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CvTech index{% endblock %}
+
+{% block body %}
+    <h1>CvTech index</h1>
+    <div class="col-12">
+        <div class="job-search-field job-search-field-02 search-under-banner">
+            <div class="job-search-item">
+                <form class="form-row basic-select-wrapper">
+                    <div class="form-group col-lg col-md-6">
+                        <div class="form-group-search">
+                            <label>Search</label>
+                            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="your reason for the search"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Category</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cv_tech in cvs %}
+            <tr>
+                <td>{{ cv_tech.id }}</td>
+                <td>{{ cv_tech.categoryType }}</td>
+                <td>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+{% block search %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#search").keyup(function(e){
+            var value = $(this).val();
+            $.ajax({
+                url : "{{ path('searchcv') }}",
+                data: {
+                    'searchValue' : value
+                },
+                type: "POST",
+                success : function(response)
+                {
+                    if(response){
+
+                        $(' tbody#search').empty();
+
+                        $.each(response, function(index, value) {
+                            console.log(response)
+                            $('tbody#search').append(
+                                '<table class="table">'+
+                                '<thead>'+
+                                '<tr>'+
+                                '<th> <a  href="{{ path('reclamation_trier') }}">result</a></th>'+
+
+                                ' <th> <a  href="{{ path('reclamation_trierparmotif') }}"><button type="submit"  >reason</button></a></th>'+
+                                '<th> <a  href="{{ path('reclamation_trier') }}"><button type="submit"  >Id</button></a></th>'+
+
+                                ' <th> <a  href="{{ path('reclamation_trierparmessage') }}"><button type="submit"  >message</button></a></th>'+
+
+                                '<th> <a  href="{{ path('reclamation_trierpargsm') }}"><button type="submit"  >gsm</button></a></th>'+
+                                '<th> <a  href="{{ path('reclamation_trierparDate') }}"><button type="submit"  >created at</button></a></th>'+
+                                ' <th> <a  href="{{ path('reclamation_trierparCompany') }}"><button type="submit"  >company</button></a></th>'+
+                                '<th > <a  href="{{ path('reclamation_trierparStatus') }}"><button type="submit"  >status</button></a></th>'+
+                                '<th >actions</th>'+
+                                '</tr>'+
+                                '</thead>'+
+                                '<tr>'+
+                                '<td><div ><td>'+
+                                '<p class="mb-0">'+value.motif +'</p>'+
+                                '</div></p>'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-1">'+value.id +'</p>'+
+                                '</td></div>'+
+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.message +'</p>'+
+                                '</td></div>'+
+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.gsm +'</p>'+
+                                '</td></div>'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.dates +'</p>'+
+                                '</td></div>'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.company.name_company +'</p>'+
+                                '</td></div>'+
+
+                                '<td><div class="blog-post-title">'+
+                                ' <p> studied<i class="fas fa-check"></i> </p>'+
+                                '</td></div>'+
+                                '<td> '+
+                                '  <button >delete '+
+                                ' </button> '+
+                                '  <button> update'+
+
+                                ' </button> '+
+                                ' </td> '+
+                                '</tr>'+
+                                '</table>'
+
+
+
+                            );
+                        });
+                        $('th#non').hide();
+                        $('tbody#all').hide();
+                    }else
+                    {
+                        $('table#all').show();
+                        $('tbody#search').empty();
+                        $('tbody#search').fadeIn('fast');
+                    }
+
+
+                }
+
+
+            });
+
+        });
+
+
+
+
+    </script>
+    </script>
+{% endblock %}

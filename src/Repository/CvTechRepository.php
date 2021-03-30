@@ -2,39 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Cv;
+use App\Entity\CvTech;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Cv|null find($id, $lockMode = null, $lockVersion = null)
- * @method Cv|null findOneBy(array $criteria, array $orderBy = null)
- * @method Cv[]    findAll()
- * @method Cv[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CvTech|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CvTech|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CvTech[]    findAll()
+ * @method CvTech[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CvRepository extends ServiceEntityRepository
+class CvTechRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Cv::class);
-    }
-    /**
-     * @return Cv[] Returns an array of Evenement objects
-     */
-
-    public function findCategory($id)
-    {
-
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.id Like :id')
-            ->setParameter('id', '%'.$id.'%')
-            ->getQuery()
-            ->getResult()
-            ;
+        parent::__construct($registry, CvTech::class);
     }
 
     // /**
-    //  * @return Cv[] Returns an array of Cv objects
+    //  * @return Correctiontest[] Returns an array of Correctiontest objects
     //  */
     /*
     public function findByExampleField($value)
@@ -51,7 +37,7 @@ class CvRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Cv
+    public function findOneBySomeField($value): ?Correctiontest
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
@@ -62,3 +48,4 @@ class CvRepository extends ServiceEntityRepository
     }
     */
 }
+

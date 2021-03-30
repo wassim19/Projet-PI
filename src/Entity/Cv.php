@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CvRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CvRepository::class)
@@ -21,6 +23,12 @@ class Cv
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (
+     *     min = 10,
+     *     max = 255,
+     *     minMessage = "Your description  must be at least {{ limit }} characters long",
+     *     minMessage = "Your description  cannot be longer than {{ limit }} characters",
+     * )
      */
     private $description;
 
@@ -41,6 +49,9 @@ class Cv
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email (
+     *     message ="The email '{{value}}' is not a valid email"
+     * )
      */
     private $mail;
 
@@ -55,12 +66,15 @@ class Cv
     private $pro1_socie;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $pro1_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     *  @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="pro1_date_debut"
+     * )
      */
     private $pro1_date_fin;
 
@@ -75,12 +89,15 @@ class Cv
     private $etabl_type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $etab_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="etab_date_debut"
+     * )
      */
     private $etab_date_fin;
 
@@ -122,12 +139,15 @@ class Cv
     private $pro2_socie;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $pro2_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="pro2_date_debut"
+     * )
      */
     private $pro2_date_fin;
 
@@ -142,12 +162,15 @@ class Cv
     private $etabl2_type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $etab2_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="etab2_date_debut"
+     * )
      */
     private $etab2_date_fin;
 
@@ -189,12 +212,15 @@ class Cv
     private $pro3_socie;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $pro3_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="pro3_date_debut"
+     * )
      */
     private $pro3_date_fin;
 
@@ -209,12 +235,15 @@ class Cv
     private $etabl3_type;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $etab3_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="etab3_date_debut"
+     * )
      */
     private $etab3_date_fin;
 
@@ -255,12 +284,15 @@ class Cv
     private $pro4_socie;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $pro4_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="pro4_date_debut"
+     * )
      */
     private $pro4_date_fin;
 
@@ -275,12 +307,15 @@ class Cv
     private $etabl4_type;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $etab4_date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="integer",nullable=true)
+     * @Assert\GreaterThanOrEqual(
+     *     propertyPath="etab4_date_debut"
+     * )
      */
     private $etab4_date_fin;
 
@@ -372,6 +407,32 @@ class Cv
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
+
+
+
+    /**
+     * @ORM\ManyToOne (targetEntity="App\Entity\CvTech")
+     * @ORM\JoinColumn(name="categoryType_id",referencedColumnName="id")
+     */
+
+    private   $categoryType;
+    /**
+     * @return mixed
+     */
+    public function getCategoryType()
+    {
+        return $this->categoryType;
+    }
+    /**
+     * @param mixed $categoryType
+     */
+    public function setCategoryType($categoryType): void
+    {
+        $this->categoryType = $categoryType;
+    }
+
+
+
 
 
     /**
@@ -1354,4 +1415,20 @@ class Cv
 
         return $this;
     }
+    public function  compaire(String $a,String $b):Bool
+    {
+
+        if (strcmp($a,$b)<=0){
+
+            return  true;
+        }else{
+            return false;
+        }
+
+    }
+
+
+
+
+
 }
