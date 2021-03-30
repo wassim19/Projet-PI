@@ -1,8 +1,5 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-
-    <h4 align="center"> list formations </h4>
-    <table border="0">
+ <h4 align="center"> list formations </h4>
+    <table border="2">
         <thead>
         <tr>
             <th> image </th>
@@ -16,7 +13,7 @@
         <tbody>
         {% for I in formation %}
         <tr>
-            <td> <img class="img-fluid" src="images/{{ I.imagef }}" alt=""></td>
+            <td> <img class="img-fluid" src="images/laravel.png"></td>
             <td> {{ I.title }} </td>
             <td>  {{ I.description }} </td>
             <td>  {{ I.dateAt|date('Y-m-d H:i:s') }} </td>
@@ -33,6 +30,4 @@
     </table>
     <a class="btn btn-primary" value="download" href="{{ path('printformation') }}"><i class="fa fa-print"></i></a>
 
-
-{% endblock %}
 
