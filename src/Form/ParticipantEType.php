@@ -14,6 +14,7 @@ class ParticipantEType extends AbstractType
         $builder
             ->add('mail')
             ->add('nom')
+            ->add('age')
         ;
     }
 

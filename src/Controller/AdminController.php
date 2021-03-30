@@ -8,6 +8,7 @@ use App\Entity\ParticipantE;
 use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
 use App\Repository\EvenementRepository;
+use App\Repository\ParticipantERepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,13 @@ class AdminController extends AbstractController
     /**
      * @Route("/stat" ,name="stat")
      */
-    public function stat(EvenementRepository $evenementRepository){
+    public function stat(EvenementRepository $evenementRepository,ParticipantERepository $participantERepository){
         $events = $evenementRepository->nbr();
-
-
+        $age = $participantERepository->age();
+        dump($age);
 
         return $this->render('admin/index.html.twig',[
-            "events" => $events
+            "events" => $events,"age"=>$age
         ]);
 
     }

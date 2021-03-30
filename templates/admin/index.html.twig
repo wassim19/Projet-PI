@@ -4,13 +4,50 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" /> {% endblock %}
 
 {% block body %}
-
     <canvas id="myChart" width="400" height="100"></canvas>
+    <br>
+    <canvas id="age" width="400" height="100"></canvas>
 
 {% endblock %}
 
 {% block search %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    <script>
+        {% set tab="" %}
+        {% set tab1="" %}
+        {% set i=0 %}
+        {% for e in age %}
+        {% set i=i+1 %}
+        {%  set tab = tab ~ "," ~'"'   ~ e.age  ~'"' %}
+        {%  set tab1 = tab1 ~ ','  ~e.Nb %}
+        {% endfor %}
+        {% set tab = tab|slice(1) %}
+        {% set tab1 = tab1|slice(1) %}
+
+        var ctx = document.getElementById('age');
+        var myChart  = new Chart(ctx,{
+            type : "pie",
+            data : {
+                labels : [{{ tab|raw }}],
+                datasets : [{
+                    label:"repatition des types",
+                    data: [{{ tab1 }}],
+                    backgroundColor:["red","green","bleu"]
+                }
+
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+    </script>
     <script>
         {% set tab="" %}
         {% set tab1="" %}
