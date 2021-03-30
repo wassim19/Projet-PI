@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cv index{% endblock %}
+
+{% block body %}
+    <h1>Cv index</h1>
+    <div class="col-12">
+        <div class="job-search-field job-search-field-02 search-under-banner">
+            <div class="job-search-item">
+                <form class="form-row basic-select-wrapper">
+                    <div class="form-group col-lg col-md-6">
+                        <div class="form-group-search">
+                            <label>Search</label>
+                            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="your reason for the search"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table id="non" class="table">
+        <thead>
+        <tr>
+            <th id="non">Id</th>
+
+            <th id="non">category</th>
+
+
+        </tr>
+        </thead>
+        <tbody id="all">
+        {% for cv in cvs %}
+            <tr>
+                <td>{{ cv.id }}</td>
+
+                <td>{{ cv.categoryType.category }}</td>
+
+
+                <td>
+                    <a href="{{ path('cv_show', {'id': cv.id}) }}">show</a>
+                    <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
+                    <a href="{{ path('cv_delete', {'id': cv.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="68">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody id="search"></tbody>
+    </table>
+
+    <a href="{{ path('cv_new') }}">Create new</a>
+{% endblock %}
+
+{% block search %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#search").keyup(function(e){
+            var value = $(this).val();
+            $.ajax({
+                url : "{{ path('searchcv') }}",
+                data: {
+                    'searchValue' : value
+                },
+                type: "POST",
+                success : function(response)
+                {
+                    if(response){
+
+                        $(' tbody#search').empty();
+
+                        $.each(response, function(index, value) {
+                            console.log(response)
+                            $('tbody#search').append(
+                                '<table class="table">'+
+                                '<thead>'+
+                                '<tr>'+
+                                '<th> id</th>'+
+
+
+
+                                '<th >category</th>'+
+                                '</tr>'+
+                                '</thead>'+
+                                '<tr>'+
+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-1">'+value.id +'</p>'+
+                                '</td></div>'+
+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.categoryType.category +'</p>'+
+                                '</td></div>'+
+                                '<td>'+
+                                '<div class="blog-post-description">'+
+                                '<a href="Cvshow'+value.id+'">More Details</a>'+
+                                '</div>'+
+                                '</td>'+
+
+
+
+
+                                '</tr>'+
+                                '</table>'
+
+
+
+                            );
+                        });
+                        $('th#non').hide();
+                        $('tbody#all').hide();
+                    }else
+                    {
+                        $('table#all').show();
+                        $('tbody#search').empty();
+                        $('tbody#search').fadeIn('fast');
+                    }
+
+
+                }
+
+
+            });
+
+        });
+
+
+
+
+    </script>
+    </script>
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <title>CV </title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/cv.css">
+{% endblock %}
+{% block body %}
+    {{ form_start(form) }}
+
+
+    {{ form_errors(form) }}
+    <script>
+        function errorLoad() {
+            alert("errorLoad has run!");
+        }
+    </script>
+
+    <section>
+        <div class="photo">
+
+           {{ form_row(form.photo,{ 'attr':{ 'class':"upload-file"}}) }}
+        </div>
+        <div class="prez">
+            <h2>who am i ?</h2>
+            <p>{{ form_row(form.description,{ 'attr':{ 'placeholder':"describe yourself ",'class':"form-control"}}) }}</p>
+            <h2>Category?</h2>
+            <p>{{ form_row(form.categoryType,{ 'attr':{ 'class':"form-control"}}) }}</p>
+
+
+        </div>
+        <div class="contact">
+            <h2>contact</h2>
+
+
+                <p>{{ form_row(form.name,{ 'attr':{ 'placeholder':"your name",'class':"form-control"}}) }}</p>
+
+
+                <p>{{ form_row(form.adresse,{ 'attr':{ 'placeholder':"your Address",'class':"form-control"}}) }}</p>
+
+
+                <p>{{ form_row(form.phone,{ 'attr':{ 'placeholder':"type your phone number",'class':"form-control"}}) }}</p>
+
+
+                <p>{{ form_row(form.mail,{ 'attr':{ 'placeholder':"your mail",'class':"form-control"}}) }}</p>
+
+
+
+        </div>
+    </section>
+
+    <section>
+        <h2>Professional Experience</h2>
+        <div class="exp">
+
+            <div class="exp-info">
+                <h3> {{ form_row(form.pro1_titre,{ 'attr':{ 'placeholder':"your pro experience title",'class':"form-control"}}) }}</h3>
+                <h4>{{ form_row(form.pro1_socie,{ 'attr':{ 'placeholder':"the name of the company",'class':"form-control"}}) }}</h4>
+                <h4>{{ form_row(form.pro1_date_debut) }} {{ form_row(form.pro1_date_fin) }}</h4>
+            </div>
+
+        </div>
+        <div class="exp">
+
+            <div class="exp-info">
+                <h3> {{ form_row(form.pro2_titre,{ 'attr':{ 'placeholder':"your pro experience title",'class':"form-control"}}) }}</h3>
+                <h4>{{ form_row(form.pro2_socie,{ 'attr':{ 'placeholder':"the name of the company",'class':"form-control"}}) }}</h4>
+                <h4>{{ form_row(form.pro2_date_debut) }} {{ form_row(form.pro2_date_fin) }}</h4>
+            </div>
+
+        </div>
+        <div class="exp">
+            <label >[optional]</label>
+            <div class="exp-info">
+                <h3> {{ form_row(form.pro3_titre,{ 'attr':{ 'placeholder':"your pro experience title"}}) }}</h3>
+                <h4>{{ form_row(form.pro3_socie,{ 'attr':{ 'placeholder':"the name of the company"}}) }}</h4>
+                <h4>{{ form_row(form.pro3_date_debut) }} {{ form_row(form.pro3_date_fin) }}</h4>
+            </div>
+
+        </div>
+        <div class="exp">
+            <label >[optional]</label>
+            <div class="exp-info">
+                <h3> {{ form_row(form.pro4_titre,{ 'attr':{ 'placeholder':"your pro experience title"}}) }}</h3>
+                <h4>{{ form_row(form.pro4_socie,{ 'attr':{ 'placeholder':"the name of the company"}}) }}</h4>
+                <h4>{{ form_row(form.pro4_date_debut) }} {{ form_row(form.pro4_date_fin) }}</h4>
+            </div>
+
+        </div>
+
+
+
+
+    </section>
+
+    <section>
+        <h2>training</h2>
+        <div class="exp">
+
+            <div class="exp-info">
+                <h3> {{ form_row(form.etabl,{ 'attr':{ 'placeholder':"where did you study?",'class':"form-control"}}) }}</h3>
+                <h4>{{ form_row(form.etabl_type,{ 'attr':{ 'placeholder':"type of the study",'class':"form-control"}}) }}</h4>
+                <h4>{{ form_row(form.etab_date_debut) }} {{ form_row(form.etab_date_fin) }}</h4>
+            </div>
+
+        </div>
+
+        <div class="exp">
+
+            <div class="exp-info">
+                <h3> {{ form_row(form.etabl2,{ 'attr':{ 'placeholder':"where did you study?",'class':"form-control"}}) }}</h3>
+                <h4>{{ form_row(form.etabl2_type,{ 'attr':{ 'placeholder':"type of the study",'class':"form-control"}}) }}</h4>
+                <h4>{{ form_row(form.etab2_date_debut) }} {{ form_row(form.etab2_date_fin) }}</h4>
+            </div>
+
+        </div>
+
+        <div class="exp">
+            <label >[optional]</label>
+            <div class="exp-info">
+                <h3> {{ form_row(form.etabl3,{ 'attr':{ 'placeholder':"where did you study?"}}) }}</h3>
+                <h4>{{ form_row(form.etabl3_type,{ 'attr':{ 'placeholder':"type of the study"}}) }}</h4>
+                <h4>{{ form_row(form.etab3_date_debut) }} {{ form_row(form.etab3_date_fin) }}</h4>
+            </div>
+
+        </div>
+        <div class="exp">
+            <label >[optional]</label>
+            <div class="exp-info">
+                <h3> {{ form_row(form.etabl4,{ 'attr':{ 'placeholder':"where did you study?"}}) }}</h3>
+                <h4>{{ form_row(form.etabl4_type,{ 'attr':{ 'placeholder':"type of the study"}}) }}</h4>
+                <h4>{{ form_row(form.etab4_date_debut) }} {{ form_row(form.etab4_date_fin) }}</h4>
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <h3 class="h3gauche">Professionals</h3>
+
+        <div class="comp">
+            <p>{{ form_row(form.skill_pro1,{ 'attr':{ 'placeholder':"any professional skill?",'class':"form-control"}}) }}{{ form_row(form.skill_pro1_data) }}</p>
+        </div>
+
+        <div class="comp">
+            <p>{{ form_row(form.skill_pro2,{ 'attr':{ 'placeholder':" any professional skill?",'class':"form-control"}}) }}{{ form_row(form.skill_pro2_data) }}</p>
+        </div>
+
+        <div class="comp">
+
+            <p>   <label >[optional]</label>{{ form_row(form.skill_pro3,{ 'attr':{ 'placeholder':"do you have more ?"}}) }}{{ form_row(form.skill_pro3_data) }}</p>
+        </div>
+
+        <div class="comp">
+            <p> <label >[optional]</label>{{ form_row(form.skill_pro4,{ 'attr':{ 'placeholder':"do you have more ?"}}) }}{{ form_row(form.skill_pro4_data) }}</p>
+        </div>
+
+
+        <h3 class="h3gauche">Personnel</h3>
+        <div class="comp2">
+            <p>{{ form_row(form.skill_perso1,{ 'attr':{ 'placeholder':" any personnel skill ?",'class':"form-control"}}) }}{{ form_row(form.skill_perso1_data) }}</p>
+
+        </div>
+        <div class="comp2">
+            <p>{{ form_row(form.skill_perso2,{ 'attr':{ 'placeholder':" any personnel skill ?",'class':"form-control"}}) }}{{ form_row(form.skill_perso2_data) }}</p>
+
+        </div>
+        <div class="comp2">
+            <p> <label >[optional]</label>{{ form_row(form.skill_perso3,{ 'attr':{ 'placeholder':"do you have more ?"}}) }}{{ form_row(form.skill_perso3_data) }}</p>
+
+        </div>
+        <div class="comp2">
+            <p> <label >[optional]</label>{{ form_row(form.skill_perso4,{ 'attr':{ 'placeholder':"do you have more ?"}}) }}{{ form_row(form.skill_perso4_data) }}</p>
+
+        </div>
+    </section>
+
+    <section>
+        <h2>interested by</h2>
+        <figure class="interet">
+
+            <figcaption>{{ form_row(form.interest1,{ 'attr':{ 'placeholder':"are you interested in any thing",'class':"form-control"}}) }}</figcaption>
+        </figure>
+        <figure class="interet">
+            <figcaption>{{ form_row(form.interest2,{ 'attr':{ 'placeholder':"are you interested in any thing",'class':"form-control"}}) }}</figcaption>
+        </figure>
+        <figure class="interet">
+            <figcaption>  <label >[optional]</label>{{ form_row(form.interest3,{ 'attr':{ 'placeholder':"are you interested in any thing"}}) }}</figcaption>
+        </figure>
+        <figure class="interet">
+            <figcaption> <label >[optional]</label>{{ form_row(form.interest4,{ 'attr':{ 'placeholder':"are you interested in any thing"}}) }}</figcaption>
+        </figure>
+    </section>
+
+    <section>
+        <h2>languages</h2>
+
+        <div class="comp">
+            <p>{{ form_row(form.lang1,{ 'attr':{ 'placeholder':"language u know?",'class':"form-control"}}) }}{{ form_row(form.lang1_data) }}</p>
+
+        </div>
+        <div class="comp">
+            <p>{{ form_row(form.lang2,{ 'attr':{ 'placeholder':"language u know?",'class':"form-control"}}) }}{{ form_row(form.lang2_data) }}</p>
+        </div>
+        <div class="comp">
+
+            <p> <label >[optional]</label>{{ form_row(form.lang3,{ 'attr':{ 'placeholder':"language u know?"}}) }}{{ form_row(form.lang3_data) }}</p>
+        </div>
+        <div class="comp">
+            <p> <label >[optional]</label>{{ form_row(form.lang4,{ 'attr':{ 'placeholder':"language u know?"}}) }}{{ form_row(form.lang4_data) }}</p>
+        </div>
+
+    </section>
+    <div align="center"><button  onclick="function_alert()" type="submit" class="btn btn-primary btn-md">save</button></div>
+    {{ form_end(form) }}
+
+
+{% endblock %}

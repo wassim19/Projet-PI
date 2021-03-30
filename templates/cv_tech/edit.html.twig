@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CvTech{% endblock %}
+
+{% block body %}
+    <h1>Edit CvTech</h1>
+
+    {{ include('cv_tech/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cv_tech_index') }}">back to list</a>
+
+    {{ include('cv_tech/_delete_form.html.twig') }}
+{% endblock %}

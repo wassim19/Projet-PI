@@ -9,25 +9,34 @@
     </style>
 
     <div class="example-wrapper">
-        <h1> <li><a href="{{ path('p')}}" class="text-primary" data-toggle="tooltip" title="view"><i class="dropdown-item"></i>UPLOAD TEST</a></li>
+        <h1 id="click"> <li ><a href="{{ path('p')}}" class="text-primary" data-toggle="tooltip" ><i class="dropdown-item"></i>UPLOAD TEST</a></li></h1>
             <h1>You can write your answers before :</h1>
             <h1 id="countdown"></h1>
+            {{ form(form, {'attr': {'class': 'form'}}) }}
             <script>
-                const startingMinutes =10;
+                let span=document.querySelector("div h1");
+                span.addEventListener("click", function (){setInterval(click,1000);});
+                
+
+                const startingMinutes =1;
                 let time=startingMinutes*60;
                 const countdownEl= document.getElementById('countdown');
-                setInterval(updateCountdown,1000);
-                function updateCountdown(){
-                    const minutes=Math.floor(time/60);
-                    let seconds=time % 60;
-                    seconds=seconds<10? '0'+seconds:seconds;
-                    countdownEl.innerHTML=`${minutes}:${seconds}`;
-                    time--;
+
+                function click(){
+                    const minutes = Math.floor(time / 60);
+                    let seconds = time % 60;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+                    countdownEl.innerHTML = `${minutes}:${seconds}`;
+
+                       if(time==0){
+                           let billingItems = document.querySelector(".form");
+                           for (let i = 1; i < 21; i++) {
+                               billingItems[i].disabled =true;
+                           }
+                       }
+                       else {time--;}
                 }
             </script>
-            {{ form(form) }}
 
-        </h1>
-
-    </div>
+</div>
 {% endblock %}

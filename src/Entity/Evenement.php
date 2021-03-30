@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EvenementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +27,7 @@ class Evenement
 
     public function __construct() {
         $this->events = new ArrayCollection();
+        $this->eventlikes = new ArrayCollection();
     }
 
     /**
@@ -76,6 +78,12 @@ class Evenement
      * @ORM\Column(type="integer", nullable=true)
      */
     private $Viewed;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="event" )
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $eventlikes;
 
     public function getId(): ?int
     {
@@ -177,4 +185,53 @@ class Evenement
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return Collection|Eventlikes[]
+     */
+    public function getEventlikes(): Collection
+    {
+        return $this->eventlikes;
+    }
+
+    public function addEventlike(Eventlikes $eventlike): self
+    {
+        if (!$this->eventlikes->contains($eventlike)) {
+            $this->eventlikes[] = $eventlike;
+            $eventlike->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventlike(Eventlikes $eventlike): self
+    {
+        if ($this->eventlikes->removeElement($eventlike)) {
+            // set the owning side to null (unless already changed)
+            if ($eventlike->getEvent() === $this) {
+                $eventlike->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ParticipantE $participantE
+     * @return bool
+     */
+    public function  isLikedByUser(ParticipantE $participantE) : bool{
+        foreach ($this->eventlikes as $eventlike){
+            if($eventlike->getUser() == $participantE) return false;
+        }
+        return false;
+
+    }
+
+
 }
