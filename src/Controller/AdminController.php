@@ -28,6 +28,7 @@ class AdminController extends AbstractController
         $events = $evenementRepository->nbr();
         $age = $participantERepository->age();
         dump($age);
+        
 
         return $this->render('admin/index.html.twig',[
             "events" => $events,"age"=>$age

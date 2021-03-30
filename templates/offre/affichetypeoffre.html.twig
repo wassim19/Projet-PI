@@ -19,21 +19,14 @@
                             <form class="form-row basic-select-wrapper">
 
 
-                                <div class="form-group col-lg col-md-6">
-
-                                        <select class="form-control basic-select">
-                                            {%for e in categories %}
-                                            <option value="value 01">{{ e.type }}</option>
-                                            {% endfor %}
-                                        </select>
-
+                                <div class="collapse show" id="dateposted">
+                                    {{ form_start(form) }}
+                                    <h4> Types </h4>
+                                    {{ form_row(form.specialite) }}
+                                    <button type="submit" class="btn btn-primary" >Filtrer</button>>
+                                    {{ form_end(form) }}
                                 </div>
 
-                                <div class="form-group col-lg-2 col-md-4">
-                                    <div class="mt-0">
-                                        <button class="btn btn-primary align-items-center" type="submit"><i class="fas fa-search mr-1"></i>Find Offres</button>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>
