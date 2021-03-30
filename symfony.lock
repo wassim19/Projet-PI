@@ -115,7 +115,7 @@
         "version": "v0.3.3"
     },
     "php": {
-        "version": "7.4"
+        "version": "7.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -125,6 +125,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
+    },
+    "phpmailer/phpmailer": {
+        "version": "v6.3.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -493,6 +496,9 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/ux-chartjs": {
+        "version": "v1.2.0"
     },
     "symfony/validator": {
         "version": "4.3",

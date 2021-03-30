@@ -1,0 +1,10 @@
+{
+  "name": "Projet-PI",
+  "version": "1.0.0",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets"
+  }
+}

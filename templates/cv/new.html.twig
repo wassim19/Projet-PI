@@ -9,7 +9,13 @@
 {% block body %}
     {{ form_start(form) }}
 
+
     {{ form_errors(form) }}
+    <script>
+        function errorLoad() {
+            alert("errorLoad has run!");
+        }
+    </script>
 
     <section>
         <div class="photo">
@@ -19,6 +25,9 @@
         <div class="prez">
             <h2>who am i ?</h2>
             <p>{{ form_row(form.description,{ 'attr':{ 'placeholder':"describe yourself ",'class':"form-control"}}) }}</p>
+            <h2>Category?</h2>
+            <p>{{ form_row(form.categoryType,{ 'attr':{ 'class':"form-control"}}) }}</p>
+
 
         </div>
         <div class="contact">
@@ -206,7 +215,8 @@
         </div>
 
     </section>
-    <div align="center"><button type="submit" class="btn btn-primary btn-md">save</button></div>
+    <div align="center"><button  onclick="function_alert()" type="submit" class="btn btn-primary btn-md">save</button></div>
     {{ form_end(form) }}
+
 
 {% endblock %}
