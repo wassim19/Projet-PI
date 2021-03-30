@@ -51,6 +51,7 @@ footer a{
 
 /*SECTIONS*/
 section{
+    background: linear-gradient(#ff8a00,#fff0d1) no-repeat;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -58,7 +59,7 @@ section{
     padding-bottom: 20px;
     margin: 20px auto;
     box-shadow: 0px 0px 10px #bbb;
-    background-color: #fff;
+
 }
 
 section h2{
@@ -170,23 +171,47 @@ section > div{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-.c85{
-    width: 85%;
+.c10{
+    width: 10%;
+    background-color: #d41a2a;
+}
+.c20{
+    width: 20%;
+    background-color: #d44a3a;
+}
+.c30{
+    width: 30%;
+    background-color: #e0a800;
+}
+.c40{
+    width: 40%;
+    background-color: #ffe80f ;
+}
+.c50{
+    width: 50%;
+    background-color: #d2efff ;
+}
+.c60{
+    width: 60%;
+    background-color: #2e006c;
+}
+.c70{
+    width: 70%;
+    background-color: #c7816b;
+}
+.c80{
+    width: 74%;
     background-color: #8B8;
 }
 .c90{
-    width: 90%;
+    width: 88%;
     background-color: #4B8;
 }
 .c95{
     width: 95%;
-    background-color: #4B8;
+    background-color: #5f82d3;
 }
-.c100{
-    width: 100%;
-    background-color: #4B8;
-    border-radius: 5px;
-}
+
 .comp2{
     display: flex;
     flex-flow: row wrap;

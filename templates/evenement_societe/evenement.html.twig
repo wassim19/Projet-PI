@@ -78,12 +78,16 @@ blog -->
                                         </div>
                                     </div>
 
+                                    <a class="js-like" href="{{path('like',{'uid':67,'eid':e.id})}}">
+                                        <i class="fas fa-thumbs-up"></i>
+                                        <span class="js-label">Likes : </span>
+
+                                        <span class="js-like">{{ e.eventlikes | length }}</span>
+                                    </a>
                                 </div>
                             </div>
-
                         </div>
                     {% endfor %}
-
                 </div>
 
                 <div class="col-lg-4 mt-4 mt-lg-0">
@@ -101,6 +105,19 @@ blog -->
                                 <li class="mb-2">They improve motivation and working mood.</li>
                                 <li class="mb-2">They promote business and sales</li>
                             </ol>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-title widget-collapse">
+                                <h1>Fiter By</h1>
+                                <a class="ml-auto" data-toggle="collapse" href="#dateposted" role="button" aria-expanded="false" aria-controls="dateposted"> <i class="fas fa-chevron-down"></i> </a>
+                            </div>
+                            <div class="collapse show" id="dateposted">
+                                {{ form_start(form) }}
+                                <h4> Types </h4>
+                                {{ form_row(form.type) }}
+                                <button type="submit" class="btn btn-primary" >Filtrer</button>>
+                                {{ form_end(form) }}
+                            </div>
                         </div>
                         <div class="widget">
                             <div class="widget-title">
@@ -154,6 +171,24 @@ blog -->
 {% endblock %}
 {% block search %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        function onClickBtnLike(event){
+            event.preventDefault();
+            const  url = this.href;
+            const  spanCount = this.querySelectorAll('span.js-like');
+            axios.get(url).then(function (response){
+                $("span.js-like").text(response.data.likes);
+                console.log(response);
+            })
+        }
+        document.querySelectorAll('a.js-like').forEach(function (link){
+            link.addEventListener('click',onClickBtnLike);
+        })
+    </script>
+
 <script>
     $("#search").keyup(function(e){
         var value = $(this).val();
@@ -217,7 +252,6 @@ blog -->
 
 
 
-</script>
 </script>
 {% endblock %}
 
