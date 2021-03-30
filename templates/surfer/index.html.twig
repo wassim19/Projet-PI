@@ -19,7 +19,7 @@ inner banner -->
 inner banner -->
 <!--=================================
 Manage Events -->
-
+<section>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -29,125 +29,58 @@ Manage Events -->
                             <div class="section-title-02 mb-0 ">
                                 <h4 class="mb-0">Manage job seekers</h4>
                             </div>
-                            </div></div></div>
                         </div>
-                         </div> </div>
-                        <div class="section-title-02 mb-0 ">
-                            <a class="btn btn-primary" href="{{ path('sortBynameeASC')}}">Sort By Title ASC</a>
-                            <div class="section-title-02 mb-0 ">
                         <div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
                             <div class="search">
                                 <i class="fas fa-search"></i>
-                                <input type="text" id="search" class="form-control" placeholder="Search....">
+                                <input type="text" class="form-control" placeholder="Search....">
                             </div>
                         </div>
-                         </div></div>
-
-
-                    <div class="col-lg-8" id=="search"></div>
-                    <div class="user-dashboard-table table-responsive " id="all"></div>
-                        <a href="{{ path('listu') }}">Create pdf</a>
+                    </div>
+                    <div class="user-dashboard-table table-responsive">
                         <table class="table table-bordered">
                             <thead class="bg-light">
-                            <tr>
+                            <tr >
+
+
+
+    <h1>Admin</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>First_name</th>
-                <th>photo</th>
                 <th>Cin</th>
-                <th>location</th>
                 <th>Email Adress</th>
-
-                <th>role</th>
+                <th>Password</th>
 
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for surfer in surfers %}
-            {% if surfer.role == 'job seeker'%}
             <tr>
                 <td>{{ surfer.id }}</td>
                 <td>{{ surfer.name }}</td>
                 <td>{{ surfer.firstName }}</td>
-                <td>{{ surfer.images }}</td>
                 <td>{{ surfer.cin }}</td>
-                <td>{{ surfer.localisation }}</td>
-                <td>{{ surfer.emailadresse}}</td>
-
-
-                <td>{{ surfer.role }}</td>
+                <td>{{ surfer.emailadress}}</td>
+                <td>{{ surfer.password }}</td>
                 <td>
-                    <ul class="list-unstyled mb-0 d-flex">
-
-                        <li><a href="{{ path('surferedit',{'id':surfer.id})}}" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                    </ul>
+                    <a href="{{ path('show', {'id': surfer.id}) }}">show</a>
+                    <a href="{{ path('surferedit', {'id': surfer.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
-            {% endif %}
-        {% endfor%}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
 
         </tbody>
     </table>
 
     <a href="{{ path('new') }}">Create new</a>
-{% endblock %}
-{% block search %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $("#search").keyup(function(e){
-            var value = $(this).val();
-            $.ajax({
-                url : "{{ path('findsurferByfirst') }}",
-                data: {
-                    'searchValue' : value
-                },
-                type: "POST",
-                success : function(response)
-                {
-                    if(response){
-
-                        $(' div#search').empty();
-
-                        $.each(response, function(index, value) {
-                            $('div#search').append(
-
-
-                                '<div class="blog-post-content">'+
-                                '<div class="blog-post-details">'+
-
-                                '<div class="blog-post-title">'+
-                                '<p class="mb-0">'+value.nameCompany +'</p>'+
-                                '</div>'+
-                                '<div class="blog-post-description">'+
-                                '<p class="mb-0">'+value.description +'</p>'+
-                                '</div>'+
-
-                                '</div>'+
-                                '</div>'+
-                                '</div>'
-                            );
-                        });
-                        $('div#all').hide();
-                    }else
-                    {
-                        $('div#all').show();
-                        $('div#search').empty();
-                        $('div#search').fadeIn('fast');
-                    }
-
-
-                }
-
-
-            });
-
-        });
-
-
-
-
-    </script>
-    </script>
 {% endblock %}

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Feb 2021 19:27:55 GMT -->
 <head>
-
     <meta charset="utf-8">
     <meta name="keywords" content="HTML5 Template" />
     <meta name="description" content="Hand clasp - Job Board HTML5 Template" />
@@ -103,24 +102,22 @@ Header -->
 
             <div class="navbar-collapse collapse justify-content-start">
                 <ul class="nav navbar-nav">
-
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="yahala" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
 
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <B><FONT face="Helvetica"> Companies</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
-                        </a>
-                        <ul class="dropdown-menu">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <B><FONT face="Helvetica"> Companies</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <ul class="dropdown-menu">
 
-                            <li><a class="dropdown-item" href="userfront">subscribe</a></li>
-                            <li><a class="dropdown-item" href="company_index">see our partners</a></li>
-                            <li><a class="dropdown-item" href="yahala ">back to home</a></li>
-                            </li>
+                        <li><a class="dropdown-item" href="company">subscribe</a></li>
+                        <li><a class="dropdown-item" href="company_index">see our partners</a></li>
+                        <li><a class="dropdown-item" href="yahala ">back to home</a></li>
+                    </li>
 
-                        </ul>
+                    </ul>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <B><FONT face="Helvetica"> Job Seekers</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
@@ -158,12 +155,19 @@ Header -->
                     </li>
 
 
-
+                      
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <B><FONT face="Helvetica"> Meeting</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
                         </a>
                         <ul class="dropdown-menu">
+
+                            <li><a class="dropdown-item" href="addrdv">Add a meet</a></li>
+                            <li><a class="dropdown-item" href="rdvafficher">Meeting list</a></li>
+                            <li><a class="dropdown-item" href="addr">Add a test</a></li>
+                            <li><a class="dropdown-item" href="ajout">Pass a test</a></li>
+                            <li><a class="dropdown-item" href="testlist">Tests list</a></li>
+                            <li><a class="dropdown-item" href="nn">Passed tests list</a></li>
 
 
                         </ul>
@@ -174,24 +178,26 @@ Header -->
                         </a>
                         <ul class="dropdown-menu">
 
-
+                            <li><a href="{{ path('reclamation_index') }}">complaints</a></li>
+                            <li><a href="{{ path('reclamation_new') }}">add a complaint</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <B><FONT face="Helvetica"> offres</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
                         </a>
+                        <ul class="dropdown-menu">
 
+                            <li><a href="{{ path('afficheCategorieOffer') }}">base</a></li>
+                            <li><a href="{{ path('addemployer') }}">form of employees</a></li>
+                            <li><a href="{{ path('addoffre') }}">form of society</a></li>
+                            <li><a href="{{ path('socoffrebackafficheadmin') }}">back admin </a></li>
+                            <li><a href="{{ path('socoffrebackaffiche') }}">back society </a></li>
+
+
+                        </ul>
                     </li>
-                    {% if not app.user %}
-                        <li class="nav-item">
-                            <a href="{{ path('security_login') }}" class="nav-link">Connexion</a>
-
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a href="{{ path('security_logout') }}" class="nav-link">Disconnexion</a></li>
-                    {% endif %}
+                </ul>
             </div>
             {% block content %}
 
@@ -230,9 +236,9 @@ Action box & Counter -->
 
             </div>
 
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
 </section>
 <!--=================================
@@ -306,12 +312,11 @@ footer -->
                         </ul>
                     </div>
                 </div>
-                <script type="text/javascript" async defer src={{asset("https://maps.googleapis.com/maps/api/js?key=AIzaSyBgp02J8a6migVDssay3cvaD8C68UvDVP8&callback=initMap")}}>
-                    <div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-                        class="mb-0"> &copy;Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="#"> Jobber </a> All Rights Reserved
+                <div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
+                    class="mb-0"> &copy;Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="#"> Jobber </a> All Rights Reserved
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
 </footer>
@@ -326,19 +331,7 @@ Back To Top-->
 </div>
 <!--=================================
 Back To Top-->
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/605bc8b6f7ce18270933a039/1f1j8g2id';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-    })();
-</script>
-<!--End of Tawk.to Script-->
+
 
 
 {% block js %}

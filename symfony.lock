@@ -102,12 +102,6 @@
     "monolog/monolog": {
         "version": "1.26.0"
     },
-    "mpdf/mpdf": {
-        "version": "v8.0.10"
-    },
-    "myclabs/deep-copy": {
-        "version": "1.10.2"
-    },
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
@@ -128,9 +122,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
-    },
-    "phpmailer/phpmailer": {
-        "version": "v6.3.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -158,9 +149,6 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
-    },
-    "setasign/fpdi": {
-        "version": "v2.3.6"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.7"
@@ -568,18 +556,6 @@
     },
     "symfony/yaml": {
         "version": "v4.4.19"
-    },
-    "symfonycasts/reset-password-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
-        },
-        "files": [
-            "./config/packages/reset_password.yaml"
-        ]
     },
     "tecnickcom/tcpdf": {
         "version": "6.3.5"
