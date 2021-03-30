@@ -21,22 +21,6 @@ class OffreRepository extends ServiceEntityRepository
         parent::__construct($registry, Offre::class);
     }
     /**
-     * @return Offre[] Returns an array of Evenement objects
-     */
-
-    public function findSearchOffre($specialite)
-    {
-
-        return $this->createQueryBuilder('e')
-
-            ->andWhere('e.specialite Like :specialite')
-            ->setParameter('specialite', '%'.$specialite.'%')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    /**
      * @return Offre[] Returns an array of Offre objects
      */
 

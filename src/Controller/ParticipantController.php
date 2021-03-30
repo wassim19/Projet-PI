@@ -2,24 +2,17 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
 use App\Entity\Evenement;
 use App\Entity\ParticipantE;
 use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
-use App\Form\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ParticipantController extends AbstractController
 {
@@ -27,19 +20,12 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/evenementsociete", name="evenementsociete")
      */
-    public function evenement(Request $request): Response
+    public function evenement(): Response
     {
         $rep=$this->getDoctrine()->getRepository(Evenement::class);
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $data = new SearchData();
-        $form = $this->createForm(SearchType::class,$data);
-        $form->handleRequest($request);
-        $var = $form->get('type')->getData();
-
-        $evenement=$rep->findSearch($var);
-        dump($evenement);
+        $evenement=$rep->findAll();
         return $this->render('evenement_societe/evenement.html.twig', [
-            'evenement' => $evenement,'form' => $form->createView()
+            'evenement' => $evenement,
         ]);
     }
 

@@ -43,8 +43,8 @@
             let url=`/api/${e.event.id}/edit`
             let donnes={
                 "meet":e.event.extendedProps.meet,
-                "date":e.event.start,
-               // "mail":e.event.extendedProps.mail,
+                "date":e.event.extendedProps.date,
+                "mail":e.event.extendedProps.mail,
                 "description":e.event.extendedProps.description
             }
             let xhr= new XMLHttpRequest()

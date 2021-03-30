@@ -33,10 +33,6 @@ class CategorieOffre
     {
         return $this->type;
     }
-    public function __toString()
-    {
-        return $this->type;
-    }
 
     public function setType(string $type): self
     {

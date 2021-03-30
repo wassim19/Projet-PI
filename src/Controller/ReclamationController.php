@@ -73,7 +73,8 @@ class ReclamationController extends AbstractController
         $date=$reclamation->setCreatedAt(new \DateTime('now'));
         $reclamation->setStatus(false);
 
-
+        $rep=$this->getDoctrine()->getRepository(Company::class);
+        $company_name=$rep->findAll();
 
 
         $form = $this->createForm(ReclamationType::class, $reclamation);
@@ -92,7 +93,7 @@ class ReclamationController extends AbstractController
         return $this->render('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),
-
+            'company_name'=>$company_name
         ]);
     }
 

@@ -20,7 +20,6 @@ class ReclamationType extends AbstractType
             ->add('company',EntityType::class,['class'=>Company::class,'choice_label'=>'name_company'])
             ->add('motif',ChoiceType::class,[
 
-
                 'required'=> true,
                 'expanded' => false,
                 'multiple' => false,
@@ -32,7 +31,7 @@ class ReclamationType extends AbstractType
                     'being late'=>'being late',
                     'being rude'=>'being rude',
                 ],
-
+                'data'=>'being late',
                 'label'=>'your reason'
             ])
             ->add('gsm')

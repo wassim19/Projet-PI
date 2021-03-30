@@ -2,13 +2,10 @@
 
 namespace App\Controller;
 
-use App\Form\SurferType;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+
 use App\Entity\RendezVous;
 use phpDocumentor\Reflection\Types\String_;
-use DateTime;
+use Symfony\Component\Validator\Constraints\DateTime;
 use App\Entity\Surfer;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
@@ -44,9 +41,8 @@ class RendezVousController extends AbstractController
     public function api(?RendezVous $calender,Request $request){
         $donnes=json_decode($request->getContent());
 
-
         if(
-            isset($donnes->meet) && isset($donnes->description) && isset($donnes->date)
+            isset($donnes->meet) && isset($donnes->description) && isset($donnes->mail)&& isset($donnes->date)
         ){
             $code=200;
             if(!$calender){
@@ -56,14 +52,13 @@ class RendezVousController extends AbstractController
             $calender->setDate(new DateTime($donnes->date));
             $calender->setMeet($donnes->meet);
             $calender->setDescription($donnes->description);
-
-           // $calender->setMail($donnes->mail);
+            $calender->setMail($donnes->mail);
 
 
             $em=$this->getDoctrine()->getManager();
             $em->persist($calender);
             $em->flush();
-
+            dump($donnes);
 
             return new Response('ok',$code);
         }else{
@@ -84,10 +79,10 @@ class RendezVousController extends AbstractController
         foreach ($events as $event){
             $rdvs[]=[
                 'id'=>$event->getId(),
-                //'mail'=>$event->getMail()->getEmailadress(),
+                'mail'=>$event->getMail(),
                 'meet'=>$event->getMeet(),
                 'date'=>$event->getDate()->format('Y-m-d H:i:s'),
-                'description'=>$event->getDescription()
+                'description'=>$event->getDate()
 
             ];
         }
@@ -107,11 +102,11 @@ class RendezVousController extends AbstractController
     }
 
     /**
+     * @Route ("/addrdv",name="addrendez-vous")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @Route ("/addrdv",name="addrendez-vous")
      */
-    function add(Request $request){
+    function add(Request $request,\Swift_Mailer $mailer){
         $rendezvous=new RendezVous();
         $form=$this->createForm(RendezVousType::class,$rendezvous);
         $form->add('Add',SubmitType::class);
@@ -122,43 +117,13 @@ class RendezVousController extends AbstractController
             $em->persist($rendezvous);
             $em->flush();
 
-            //mailing
-            $mail = new PHPMailer(true);
-
-            try {
-
-                $meet= $form->get('meet')->getData();
-                $description = $form->get('description')->getData();
-                $date = $form->get('date')->getData();
-                $email = $form->get('mail')->getData()->getEmailadress();
-
-                //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
-                $mail->SMTPAuth   = true;
-                $mail->Username   = 'eya.souissi@esprit.tn';             // SMTP username
-                $mail->Password   = 'eyaeyaeya';                               // SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port       = 587;
-
-                //Recipients
-                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
-                $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
-                // Content
-                $corps="Bonjour Monsieur/Madame  voici votre lien meet pour passer l'entretien en ligne: ".$meet. "  la date ".$date->format('Y-m-d H:i:s')." votre description est comme suit: " .$description ;
-                $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Sois le Bienvenue pour votre entretien en ligne!';
-                $mail->Body    = $corps;
-
-                $mail->send();
-                $this->addFlash('message','the email has been sent');
-
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-
-            //end mailing
+            $contact=$form->getData();
+            $message=(new \Swift_Message('nouveau msg'))
+                ->setFrom(['expediteur@email.com'])
+                ->setTo(['destinataire@email.com'])
+            ->setBody($this->renderView('rendez_vous/contact.html.twig',compact('contact')),'text/html');
+            $mailer->send($message);
+            $this->addFlash('message','the email has been sent');
             return $this->redirectToRoute('calender');
         }
         return $this->render("rendez_vous/index.html.twig",array('form'=>$form->createView()));

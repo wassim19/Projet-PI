@@ -26,10 +26,6 @@ class Offre
      */
     private $specialite;
 
-    public function __toString()
-    {
-        return $this->specialite;
-    }
     /**
      * @ORM\Column(type="string", length=255)
      */
