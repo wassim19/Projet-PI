@@ -25,30 +25,48 @@ class ParticipantfController extends AbstractController
 
     /**
      * @Route("/participantf{id}", name="participantf")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function index(Request $request,$id): Response
+    public function index(Request $request,$id,\Swift_Mailer $mailer): Response
     {
-        $formation= new ParticipantF();
-        $form=$this->createForm(ParticipantfType::class, $formation);
+        $formations= new ParticipantF();
+        $form=$this->createForm(ParticipantfType::class,$formations);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid())
         {
+            $data = $form->getData();
+            $message=(new \Swift_Message('nouveau msg'))
+                ->setFrom(['fedi.benammar@esprit.tn'])
+                ->setTo(['fedi.benammar@esprit.tn'])
+                ->setBody($this->renderView('formation/afficheformationcandidat.html.twig',compact('formations')),'text/html');
+            $mailer->send($message);
+            $this->addFlash('message','the email has been sent');
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($formation);
-            $em->flush();
-            $participf = new ParticipationF();
-            $participf ->setIdFormation($id)
-                ->setIdParticipant($formation->getId());
-            $em->persist($participf);
-            $em->flush();
-            return $this->redirectToRoute("afficheformationcandidat");
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($formations);
+            $entityManager->flush();
+            $participformation= new ParticipationF();
+            $participformation->setIdFormation($id)
+                ->setIdParticipant($formations->getId());
+            $entityManager->persist($participformation);
+            $entityManager->flush();
+
+            //return $this->redirectToRoute("evenementsociete");
         }
 
-        return $this->render('participantf/index.html.twig', ['form' => $form->createView(),]);
+        return $this->render('participantf/index.html.twig', [
+            'form' => $form->createView(),
+            'formations'=>$formations
+        ]);
 
     }
+
+
     /**
      * @Route("/participants{id}", name="participants")
      */
