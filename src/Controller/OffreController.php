@@ -22,7 +22,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class OffreController extends AbstractController
 {
@@ -272,6 +273,40 @@ class OffreController extends AbstractController
         return $this->render('backoffre/updatebackadmin.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    /**
+     * @Route("/list", name="offre_pdf", methods={"GET"})
+     */
+    public function pdf(OffreRepository $offreRepository): Response
+    {
+
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $Offre = $offreRepository->findAll();
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('offre/Listepdfoffre.html.twig', [
+            'offre' => $Offre ,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Listepdfpub.pdf", [
+            "Attachment" => true
+        ]);
+
     }
 
 

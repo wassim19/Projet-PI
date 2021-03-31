@@ -1,0 +1,24 @@
+{% block content %}
+    <center><h1>Listes des offres</h1></center>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>localisation</th>
+            <th>Specialite</th>
+            <th>Description</th>
+            <!--<th>nb Deb</th>-->
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for offre in offre %}
+            <tr>
+                <td>{{ offre.localisation }}</td>
+                <td>{{ offre.Specialite}}</td>
+                <th>{{ offre.description }}</th>
+                <!--<th>{ offre.nb }</th>-->
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
