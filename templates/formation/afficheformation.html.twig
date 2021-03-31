@@ -42,7 +42,7 @@ blog -->
                     {% for I in formations %}
                         <div class="blog-post text-center mt-4">
                             <div class="blog-post-image">
-                                <img class="img-fluid" src="images/{{ I.imagef }}">
+                                <img width="200px" class="img-fluid" src="images/{{ I.imagef }}">
                             </div>
                             <div class="blog-post-content">
                                 <div class="blog-post-details">
@@ -124,7 +124,7 @@ blog -->
                         $.each(response, function(index, value) {
                             $('div#search').append(
                                 '<div class="blog-post-image">'+
-                                '<img class="img-fluid" src="images/'+ value.imagef +'" alt="">'+
+                                '<img width="200px" class="img-fluid" src="images/'+ value.imagef +'" alt="">'+
                                 '</div>'+
                                 '<div >'+ value.title +'</div>' +
                                 '<div >'+ value.description +'</div>'+

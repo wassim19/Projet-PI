@@ -4,15 +4,79 @@ namespace App\Controller;
 
 use App\Entity\ParticipantF;
 use App\Entity\ParticipationF;
+use App\Form\FormationType;
 use App\Form\ParticipantfType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class ParticipantfController extends AbstractController
 {
+    /**
+     * @Route("/participantf{id}", name="participantf")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function index(Request $request,$id): Response
+    {
+        $formations= new ParticipantF();
+        $form=$this->createForm(ParticipantfType::class,$formations);
+        $form->add('Add',SubmitType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($formations);
+            $em->flush();
+
+            //mailing
+            $mail = new PHPMailer(true);
+
+            try {
+
+                $nom = $form->get('nom')->getData();
+                $email = $form->get('mail')->getData();
+
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'eya.souissi@esprit.tn';             // SMTP username
+                $mail->Password   = 'eyaeyaeya';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
+                // Content
+                $corps="Bonjour Monsieur/Madame ".$nom. " votre particpation est bien rcu " ;
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'participation';
+                $mail->Body    = $corps;
+
+                $mail->send();
+                $this->addFlash('message','the email has been sent');
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
+            //end mailing
+            return $this->redirectToRoute('afficheformationcandidat');
+        }
+        return $this->render("participantf/index.html.twig",array('form'=>$form->createView()));
+
+    }
+
     /**
      * @Route("/afficheformation", name="formation")
      */
@@ -23,48 +87,6 @@ class ParticipantfController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/participantf{id}", name="participantf")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-    public function index(Request $request,$id,\Swift_Mailer $mailer): Response
-    {
-        $formations= new ParticipantF();
-        $form=$this->createForm(ParticipantfType::class,$formations);
-        $form->add('Add',SubmitType::class);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $data = $form->getData();
-            $message=(new \Swift_Message('nouveau msg'))
-                ->setFrom(['fedi.benammar@esprit.tn'])
-                ->setTo(['fedi.benammar@esprit.tn'])
-                ->setBody($this->renderView('formation/afficheformationcandidat.html.twig',compact('formations')),'text/html');
-            $mailer->send($message);
-            $this->addFlash('message','the email has been sent');
-
-
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formations);
-            $entityManager->flush();
-            $participformation= new ParticipationF();
-            $participformation->setIdFormation($id)
-                ->setIdParticipant($formations->getId());
-            $entityManager->persist($participformation);
-            $entityManager->flush();
-
-            //return $this->redirectToRoute("evenementsociete");
-        }
-
-        return $this->render('participantf/index.html.twig', [
-            'form' => $form->createView(),
-            'formations'=>$formations
-        ]);
-
-    }
 
 
     /**
@@ -100,5 +122,6 @@ class ParticipantfController extends AbstractController
 
         return $this->redirectToRoute("afficheformationadmin");
     }
+
 
 }
