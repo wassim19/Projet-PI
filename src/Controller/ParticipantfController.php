@@ -19,16 +19,13 @@ class ParticipantfController extends AbstractController
 {
     /**
      * @Route("/participantf{id}", name="participantf")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function index(Request $request,$id): Response
     {
-        $formations= new ParticipantF();
-        $form=$this->createForm(ParticipantfType::class,$formations);
+        $formation= new ParticipantF();
+        $form=$this->createForm(ParticipantfType::class, $formation);
         $form->add('Add',SubmitType::class);
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid())
         {
 
@@ -72,8 +69,18 @@ class ParticipantfController extends AbstractController
 
             //end mailing
             return $this->redirectToRoute('afficheformationcandidat');
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($formation);
+            $em->flush();
+            $participf = new ParticipationF();
+            $participf ->setIdFormation($id)
+                ->setIdParticipant($formation->getId());
+            $em->persist($participf);
+            $em->flush();
+            return $this->redirectToRoute("afficheformationcandidat");
         }
         return $this->render("participantf/index.html.twig",array('form'=>$form->createView()));
+
 
     }
 
@@ -86,9 +93,9 @@ class ParticipantfController extends AbstractController
             'controller_name' => 'ParticipantfController',
         ]);
     }
+        return $this->render('participantf/index.html.twig', ['form' => $form->createView(),]);
 
-
-
+    }
     /**
      * @Route("/participants{id}", name="participants")
      */

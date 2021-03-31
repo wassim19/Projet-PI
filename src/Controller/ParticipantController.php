@@ -60,7 +60,7 @@ class ParticipantController extends AbstractController
             $data = $form->getData();
             $message=(new \Swift_Message('nouveau msg'))
                 ->setFrom(['faroukgasaraa@gmail.com'])
-                ->setTo(['fedi.benammar@esprit.tn'])
+                ->setTo(['faroukgasaraa@gmail.com'])
                 ->setBody($this->renderView('evenement_societe/participationmail.html.twig',compact('data')),'text/html');
             $mailer->send($message);
             $this->addFlash('message','the email has been sent');

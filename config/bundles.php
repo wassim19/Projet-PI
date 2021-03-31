@@ -15,5 +15,4 @@ return [
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Adamski\Symfony\PDFBundle\PDFBundle::class => ['all' => true],
-    Symfony\UX\Chartjs\ChartjsBundle::class => ['all' => true],
 ];
