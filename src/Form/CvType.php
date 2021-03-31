@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\Cv;
 
+use App\Entity\CvTech;
+use Doctrine\DBAL\Types\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -12,28 +15,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormTypeInterface;
 
+
 class CvType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('photo',FileType::class,[
-                    'data_class' => null,
+                    'mapped'=>false,
                     'required'=>false
+            ])
 
-
-            ]
-
-            )
+            ->add('categoryType',EntityType::class,['class'=>CvTech::class,'choice_label'=>'category'])
             ->add('description')
             ->add('name')
             ->add('adresse')
             ->add('phone')
             ->add('mail')
-            ->add('pro1_titre')
-            ->add('pro1_socie')
+            ->add('pro1_titre',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"professional title1"
+            ])
+            ->add('pro1_socie',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"Company"
+            ])
             ->add('pro1_date_debut',ChoiceType::class,[
 
+
+                'label'=>"starts",
 
         'required'=> true,
 
@@ -79,7 +88,7 @@ class CvType extends AbstractType
     ])
             ->add('pro1_date_fin',ChoiceType::class,[
 
-
+                'label'=>"ends",
                 'required'=> true,
 
                 'choices'=>[
@@ -122,8 +131,11 @@ class CvType extends AbstractType
 
 
             ])
-            ->add('etabl')
+            ->add('etabl',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"educational institution"
+            ])
             ->add('etabl_type',ChoiceType::class,[
+                'label'=>"educational institution type",
                 'choices'=>[
                     'select your degree'=>null,
                     'high school'=>'high school',
@@ -132,7 +144,7 @@ class CvType extends AbstractType
             ])
             ->add('etab_date_debut',ChoiceType::class,[
 
-
+                'label'=>"starts",
                 'required'=> true,
 
                 'choices'=>[
@@ -179,7 +191,7 @@ class CvType extends AbstractType
             ])
             ->add('etab_date_fin',ChoiceType::class,[
 
-
+                'label'=>"ends",
                 'required'=> true,
 
                 'choices'=>[
@@ -223,10 +235,12 @@ class CvType extends AbstractType
 
 
             ])
-            ->add('skill_pro1')
+            ->add('skill_pro1',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"professional skill"
+            ])
             ->add('skill_pro1_data',ChoiceType::class,[
                  'required'=> true,
-
+                'label'=>"professional skill level",
                 'choices'=>[
                     'select your level'=>'',
                     'Introductory level'=>'Introductory level',
@@ -238,8 +252,11 @@ class CvType extends AbstractType
                 ],
 
             ])
-            ->add('skill_perso1')
+            ->add('skill_perso1',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"personnel skill"
+            ])
             ->add('skill_perso1_data',ChoiceType::class,[
+                'label'=>"personnel skill level",
                 'choices'=>[
                     'your level'=>'',
                     '10%'=>'10',
@@ -256,10 +273,12 @@ class CvType extends AbstractType
 
             ])
             ->add('interest1')
-            ->add('lang1')
+            ->add('lang1',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"language1"
+            ])
             ->add('lang1_data',ChoiceType::class,[
                 'required'=> true,
-
+                'label'=>"language1 level",
                 'choices'=>[
                     'select your level'=>'',
                     'A1 - Introductory level'=>'A1 - Introductory level',
@@ -271,11 +290,15 @@ class CvType extends AbstractType
                 ],
 
             ])
-            ->add('pro2_titre')
-            ->add('pro2_socie')
+            ->add('pro2_titre',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"professional title2"
+            ])
+            ->add('pro2_socie',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"Company"
+            ])
             ->add('pro2_date_debut',ChoiceType::class,[
 
-
+                'label'=>"starts",
                 'required'=> true,
 
                 'choices'=>[
@@ -322,7 +345,7 @@ class CvType extends AbstractType
             ])
             ->add('pro2_date_fin',ChoiceType::class,[
 
-
+                'label'=>"ends",
                 'required'=> true,
 
                 'choices'=>[
@@ -367,8 +390,11 @@ class CvType extends AbstractType
 
 
             ])
-            ->add('etabl2')
+            ->add('etabl2',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"educational institution"
+            ])
             ->add('etabl2_type',ChoiceType::class,[
+                'label'=>"educational institution",
                 'choices'=>[
                     'select your degree'=>null,
                     'high school'=>'high school',
@@ -377,7 +403,7 @@ class CvType extends AbstractType
             ])
             ->add('etab2_date_debut',ChoiceType::class,[
 
-
+                'label'=>"starts",
                 'required'=> true,
 
                 'choices'=>[
@@ -423,7 +449,7 @@ class CvType extends AbstractType
 
             ])
             ->add('etab2_date_fin',ChoiceType::class,[
-
+                'label'=>"ends",
 
                 'required'=> true,
 
@@ -469,10 +495,12 @@ class CvType extends AbstractType
 
 
             ])
-            ->add('skill_pro2')
+            ->add('skill_pro2',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"professional skill"
+            ])
             ->add('skill_pro2_data',ChoiceType::class,[
                 'required'=> true,
-
+                'label'=>"professional skill level",
                 'choices'=>[
                     'select your level'=>'',
                     'Introductory level'=>'Introductory level',
@@ -484,8 +512,11 @@ class CvType extends AbstractType
                 ],
 
             ])
-            ->add('skill_perso2')
+            ->add('skill_perso2',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"personnel skill"
+            ])
             ->add('skill_perso2_data',ChoiceType::class,[
+                'label'=>"personnel skill",
                 'choices'=>[
                     'your level'=>'',
                     '10%'=>'10',
@@ -502,10 +533,12 @@ class CvType extends AbstractType
 
             ])
             ->add('interest2')
-            ->add('lang2')
+            ->add('lang2',\Symfony\Component\Form\Extension\Core\Type\TextType::class,[
+                'label'=>"language2"
+            ])
             ->add('lang2_data',ChoiceType::class,[
                 'required'=> true,
-
+                'label'=>"language2",
                 'choices'=>[
                     'select your level'=>'',
                     'A1 - Introductory level'=>'A1 - Introductory level',
@@ -616,6 +649,7 @@ class CvType extends AbstractType
             ])
             ->add('etabl3')
             ->add('etabl3_type',ChoiceType::class,[
+
                 'choices'=>[
                     'select your degree'=>null,
 
@@ -735,6 +769,7 @@ class CvType extends AbstractType
             ])
             ->add('skill_perso3')
             ->add('skill_perso3_data',ChoiceType::class,[
+
                 'choices'=>[
                     'your level'=>null,
                     '10%'=>'10',
@@ -865,6 +900,7 @@ class CvType extends AbstractType
             ])
             ->add('etabl4')
             ->add('etabl4_type',ChoiceType::class,[
+
                 'choices'=>[
                     'select your degree'=>null,
                     'high school'=>'high school',
@@ -985,6 +1021,7 @@ class CvType extends AbstractType
             ])
             ->add('skill_perso4')
             ->add('skill_perso4_data',ChoiceType::class,[
+
                 'choices'=>[
                     'your level'=>null,
                     '10%'=>'10',
@@ -1025,5 +1062,14 @@ class CvType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Cv::class,
         ]);
+    }
+    public function  compaire(String $a,String $b){
+        $off=false;
+        if (strcmp($a,$b)<=0){
+            $off=true;
+        }else{
+            $off=false;
+        }
+
     }
 }

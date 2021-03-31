@@ -14,7 +14,7 @@
                 <th>Name</th>
                 <th>Adresse</th>
                 <th>Phone</th>
-                <th>Mail</th>
+                <th>category</th>
 
                 <th>actions</th>
             </tr>
@@ -28,11 +28,13 @@
                 <td>{{ cv.name }}</td>
                 <td>{{ cv.adresse }}</td>
                 <td>{{ cv.phone }}</td>
+                <td>{{ cv.categoryType.category }}</td>
 
 
                 <td>
                     <a href="{{ path('cv_show', {'id': cv.id}) }}">show</a>
                     <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
+                    <a href="{{ path('cv_delete', {'id': cv.id}) }}">delete</a>
                 </td>
             </tr>
         {% else %}

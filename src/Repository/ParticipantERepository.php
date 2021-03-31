@@ -18,6 +18,19 @@ class ParticipantERepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ParticipantE::class);
     }
+    /**
+     * @return ParticipantE[] Returns an array of Evenement objects
+     */
+
+    public function age()
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e.age,COUNT(e.age) as Nb')
+            ->groupBy('e.age')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return ParticipantE[] Returns an array of ParticipantE objects

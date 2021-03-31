@@ -1,20 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ParticipantController!{% endblock %}
+ {% block content %}
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" /> {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <canvas id="myChart" width="400" height="100"></canvas>
+    <br>
+    <canvas id="age" width="400" height="100"></canvas>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% endblock %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/farou/Desktop/Flutter/1/Projet-PI/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/ParticipantController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/farou/Desktop/Flutter/1/Projet-PI/templates/admin/index.html.twig'|file_link(0) }}">templates/participant/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block search %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    <script>
+        {% set tab="" %}
+        {% set tab1="" %}
+        {% set i=0 %}
+        {% for e in age %}
+        {% set i=i+1 %}
+        {%  set tab = tab ~ "," ~'"'   ~ e.age  ~'"' %}
+        {%  set tab1 = tab1 ~ ','  ~e.Nb %}
+        {% endfor %}
+        {% set tab = tab|slice(1) %}
+        {% set tab1 = tab1|slice(1) %}
+
+        var ctx = document.getElementById('age');
+        var myChart  = new Chart(ctx,{
+            type : "pie",
+            data : {
+                labels : [{{ tab|raw }}],
+                datasets : [{
+                    label:"repatition des types",
+                    data: [{{ tab1 }}],
+                    backgroundColor:["red","green","bleu"]
+                }
+
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+    </script>
+    <script>
+        {% set tab="" %}
+        {% set tab1="" %}
+        {% set i=0 %}
+        {% for e in events %}
+        {% set i=i+1 %}
+        {%  set tab = tab ~ "," ~'"'   ~ e.type  ~'"' %}
+        {%  set tab1 = tab1 ~ ','  ~e.Nb %}
+        {% endfor %}
+        {% set tab = tab|slice(1) %}
+        {% set tab1 = tab1|slice(1) %}
+
+        var ctx = document.getElementById('myChart');
+        var myChart  = new Chart(ctx,{
+            type : "bar",
+            data : {
+                labels : [{{ tab|raw }}],
+                datasets : [{
+                    label:"repatition des types",
+                    data: [{{ tab1 }}],
+                    backgroundColor:["red","green","bleu"]
+                }
+
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+    </script>
 {% endblock %}

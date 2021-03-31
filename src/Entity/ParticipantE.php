@@ -35,8 +35,14 @@ class ParticipantE
 
     /**
      * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="user")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $eventlikes;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $age;
 
     public function __construct()
     {
@@ -99,6 +105,18 @@ class ParticipantE
                 $eventlike->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }

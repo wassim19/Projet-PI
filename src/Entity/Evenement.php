@@ -80,7 +80,8 @@ class Evenement
     private $Viewed;
 
     /**
-     * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="event")
+     * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="event" )
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $eventlikes;
 
