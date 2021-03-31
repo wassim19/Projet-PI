@@ -19,6 +19,78 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * @return User[] Returns an array of User objects
+     */
+
+    public function findEvenementByname($Username)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.Username Like :Username')
+            ->setParameter('Username', '%'.$Username.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    /**
+     * @return User[] Returns an array of user objects
+     */
+
+    public function sortByTitleASC()
+    {
+        $user = $this->createQueryBuilder('e')
+            ->orderBy('e.Username', 'ASC');
+        $query = $user->getQuery();
+        return $query->execute();
+    }
+    /**
+     * @return User[] Returns an array of user objects
+     */
+
+    public function sortBynameeASC()
+    {
+        $user = $this->createQueryBuilder('e')
+            ->orderBy('e.first_name', 'ASC');
+        $query = $user->getQuery();
+        return $query->execute();
+    }
+    /**
+     * @return User[] Returns an array of user objects
+     */
+
+    public function sortByTitleDESC()
+    {
+        $user = $this->createQueryBuilder('s')
+            ->orderBy('s.Username', 'DESC');
+        $query = $user->getQuery();
+        return $query->execute();
+    }
+    /**
+     * @return User[] Returns an array of user objects
+     */
+
+    public function sortBystatusDESC()
+    {
+        $user = $this->createQueryBuilder('f')
+            ->orderBy('f.role','DESC');
+        $query = $user->getQuery();
+        return $query->execute();
+    }
+    /**
+     * @return User[] Returns an array of User objects
+     */
+
+    public function findsurferByname($first_name)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.first_name Like :first_name')
+            ->setParameter('first_name', '%'.$first_name.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

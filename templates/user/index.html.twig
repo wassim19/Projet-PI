@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!--=================================
+blog -->
+    <a class="btn btn-primary" href="{{ path('userfront') }}">Create new</a>
+
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    {% for c in user %}
+                        <div class="blog-post text-center mt-4">
+                            <div class="blog-post-image">
+                                <img src="{{ asset('/images/'~c.images) }}" alt="" width="150">
+
+                            </div>
+                            <div class="blog-post-content">
+                                <div class="blog-post-details">
+
+                                    <div class="blog-post-title">
+                                        <p class="mb-0">{{ c.Username}}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <p class="mb-0">{{ c.localisation }}</p>
+                                    </div>
+                                    <div class="blog-post-description">
+                                        <a href="#"></i>{{ c.numero }}</a>
+                                    </div>
+
+
+
+                                    <div class="blog-post-share">
+                                        <div class="share-box">
+                                            <a href="#"> <i class="fas fa-share-alt"></i><span class="pl-2">Share</span></a>
+                                            <ul class="list-unstyled share-box-social">
+                                                <li> <a href="#"><i class="fab fa-facebook-f"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-twitter"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-linkedin"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-instagram"></i></a> </li>
+                                                <li> <a href="#"><i class="fab fa-pinterest"></i></a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="blog-sidebar">
+
+
+
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Subscribe & Follow</h5>
+                            </div>
+                            <div class="social">
+                                <ul class="list-unstyled">
+                                    <li class="facebook">
+                                        <a class="text-uppercase" href="https://www.facebook.com/hand.calsp"> <i class="fab fa-facebook-f mr-3"></i>Facebook</a>
+                                        <a class="follow ml-auto" href="https://www.facebook.com/hand.calsp">Like </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a class="text-uppercase" href="https://www.instagram.com/hand_clasp/?hl=en"> <i class="fab fa-instagram mr-3"></i>instagram</a>
+                                        <a class="follow ml-auto" href="https://www.instagram.com/hand_clasp/?hl=en">Follow </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5>Popular Tags</h5>
+                            </div>
+                            <div class="popular-tag">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!--=================================
+    blog -->
+
+{% endblock %}
+
+
+
+

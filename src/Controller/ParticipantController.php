@@ -72,8 +72,8 @@ class ParticipantController extends AbstractController
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'eya.souissi@esprit.tn';             // SMTP username
-                $mail->Password   = 'eyaeyaeya';                               // SMTP password
+                $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+                $mail->Password   = 'farouk1998';                               // SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
