@@ -1,10 +1,35 @@
- <h4 align="center"> list formations </h4>
-    <table border="2">
+<html>
+<body>
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2;}
+
+    tr:hover {background-color: #ddd;}
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+<h2 align="center" > list formations </h2>
+    <table>
         <thead>
         <tr>
-            <th> image </th>
             <th> title </th>
-            <th> description </th>
+            <th > description </th>
             <th> date </th>
             <th> localisation </th>
         </tr>
@@ -13,11 +38,10 @@
         <tbody>
         {% for I in formation %}
         <tr>
-            <td> <img class="img-fluid" src="images/laravel.png"></td>
-            <td> {{ I.title }} </td>
-            <td>  {{ I.description }} </td>
-            <td>  {{ I.dateAt|date('Y-m-d H:i:s') }} </td>
-            <td>   {{ I.localisation }} </td>
+            <td > {{ I.title }} </td>
+            <td >  {{ I.description }} </td>
+            <td >  {{ I.dateAt|date('Y-m-d H:i:s') }} </td>
+            <td >   {{ I.localisation }} </td>
 
 
         </tr>
@@ -28,6 +52,8 @@
 
 
     </table>
-    <a class="btn btn-primary" value="download" href="{{ path('printformation') }}"><i class="fa fa-print"></i></a>
 
 
+
+</body>
+</html>

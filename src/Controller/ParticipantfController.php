@@ -30,7 +30,7 @@ class ParticipantfController extends AbstractController
         {
 
             $em=$this->getDoctrine()->getManager();
-            $em->persist($formations);
+            $em->persist($formation);
             $em->flush();
 
             //mailing
@@ -68,7 +68,7 @@ class ParticipantfController extends AbstractController
             }
 
             //end mailing
-            return $this->redirectToRoute('afficheformationcandidat');
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($formation);
             $em->flush();
@@ -92,8 +92,6 @@ class ParticipantfController extends AbstractController
         return $this->render('participantf/index.html.twig', [
             'controller_name' => 'ParticipantfController',
         ]);
-    }
-        return $this->render('participantf/index.html.twig', ['form' => $form->createView(),]);
 
     }
     /**
