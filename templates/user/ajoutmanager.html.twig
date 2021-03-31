@@ -1,9 +1,6 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'basebackadmin.html.twig' %}
 {% block body %}
-
     <section class="space-ptb">
-
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10 col-md-12">
@@ -32,45 +29,31 @@
                         </fieldset>
                         <div class="tab-content">
                             <div class="tab-pane active" id="candidate" role="tabpanel">
-
                                 {{ form_start(form) }}
+                                {{ form_row(form.Username,{ 'attr':{ 'placeholder':"name of company",'class':"form-control"}}) }}
+                                {{ form_row(form.description,{ 'attr':{ 'placeholder':"describe the function of the company",'class':"form-control"}}) }}
+                                {{ form_row(form.tax_registration_number,{ 'attr':{ 'placeholder':"your tax number please for the security",'class':"form-control"}}) }}
 
-                                <div class="g-recaptcha" data-sitekey="6LezZHoaAAAAADzHuijwpBNJZfKeaydmQaLw25wC"></div>
 
 
+                                {{ form_row(form.localisation,{ 'attr':{ 'placeholder':"where is your company?",'class':"form-control"}}) }}
+                                {{ form_row(form.numero,{ 'attr':{ 'placeholder':"your phone number please",'class':"form-control"}}) }}
+                                {{ form_row(form.images,{ 'attr':{ 'class':"upload-file"}}) }}
+                                {{ form_row(form.emailadresse,{ 'attr':{ 'placeholder':"your email adress please",'class':"form-control"}})}}
+                                {{ form_row(form.password,{ 'attr':{ 'placeholder':"choose your password",'class':"form-control"}})}}
+                                {{ form_row(form.save,{ 'attr':{ 'class':"btn btn-primary"}}) }}
                                 {{ form_end(form) }}
-
-
                             </div>
 
                         </div>
-                        <div class="mt-4">
-                            <fieldset>
-                                <legend class="px-2">Login or Sign up with</legend>
-                                <div class="social-login">
-                                    <ul class="list-unstyled d-flex mb-0">
-                                        <li class="facebook text-center">
-                                            <a href="#"> <i class="fab fa-facebook-f mr-4"></i>Login with Facebook</a>
-                                        </li>
-                                        <li class="twitter text-center">
-                                            <a href="#"> <i class="fab fa-twitter mr-4"></i>Login with Twitter</a>
-                                        </li>
-                                        <li class="google text-center">
-                                            <a href="#"> <i class="fab fa-google mr-4"></i>Login with Google</a>
-                                        </li>
-                                        <li class="linkedin text-center">
-                                            <a href="#"> <i class="fab fa-linkedin-in mr-4"></i>Login with Linkedin</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </fieldset>
-                        </div>
+
+                        </fieldset>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        </div>
     </section>
-
-
 {% endblock %}
+
+
