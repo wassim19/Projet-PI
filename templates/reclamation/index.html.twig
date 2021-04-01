@@ -65,6 +65,9 @@ inner banner -->
                     <button>
                         <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">update</a>
                     </button>
+                    <button>
+                        <a href="{{ path('reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    </button>
                 </td>
             </tr>
         {% else %}
