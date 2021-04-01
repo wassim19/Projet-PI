@@ -58,6 +58,22 @@ class AdminCvController extends AbstractController
         return $response;
     }
     /**
+     * @Route ("/adminCvByName",name="adminCvByName")
+     * @return RedirectResponse
+     */
+    public function AdminCvByName(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Cv::class);
+        $result= $rep->sortByName();
+        dump($result);
+
+        return $this->render('admin_cv/archive.html.twig', [
+            'cvs'=>$result
+        ]);
+
+
+    }
+    /**
      * @Route("/adminCvTechList", name="adminCvTechList", methods={"GET"})
      * @param CvRepository $cvRepository
      * @param Request $request

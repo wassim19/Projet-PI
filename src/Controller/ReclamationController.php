@@ -7,6 +7,9 @@ use App\Entity\Evenement;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,6 +83,41 @@ class ReclamationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $mail = new PHPMailer(true);
+
+            try {
+
+                $nom = "wael bannani";
+                $email = "wael.bannani@esprit.tn";
+
+
+
+
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+                $mail->Password   = 'farouk1998';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
+                // Content
+                $corps="hello ".$nom. " your complaint has been saved -we will process soon" ;
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'cv';
+                $mail->Body    = $corps;
+
+                $mail->send();
+                $this->addFlash('message','the email has been sent');
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reclamation);

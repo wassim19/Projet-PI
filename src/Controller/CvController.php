@@ -14,6 +14,9 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Easybook\SluggerInterface;
 use Knp\Bundle\SnappyBundle\KnpSnappyBundle;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -169,7 +172,41 @@ class CvController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid())
+
         {
+
+            $mail = new PHPMailer(true);
+
+            try {
+
+                $nom = $form->get('name')->getData();
+                $email = $form->get('mail')->getData();
+
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+                $mail->Password   = 'farouk1998';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
+                // Content
+                $corps="Bonjour/bonsoir Monsieur/Madame ".$nom. " your cv is created  " ;
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'cv';
+                $mail->Body    = $corps;
+
+                $mail->send();
+                $this->addFlash('message','the email has been sent');
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
             $photoFile = $form->get('photo')->getData();
 
 
@@ -179,7 +216,7 @@ class CvController extends AbstractController
                 $upload_directory,
                 $newphoto
             );
-
+            $cv->setPhoto($newphoto);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cv);
             $entityManager->flush();
@@ -218,6 +255,22 @@ class CvController extends AbstractController
         dump($result);
 
         return $this->render('cv/index.html.twig', [
+            'cvs'=>$result
+        ]);
+
+
+    }
+    /**
+     * @Route ("/CvByNamee",name="CvByNamee")
+     * @return RedirectResponse
+     */
+    public function CvByNamee(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Cv::class);
+        $result= $rep->sortByName();
+        dump($result);
+
+        return $this->render('cv/archive.html.twig', [
             'cvs'=>$result
         ]);
 
