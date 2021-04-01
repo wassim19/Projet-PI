@@ -423,6 +423,7 @@ class Cv
     {
         return $this->categoryType;
     }
+
     /**
      * @param mixed $categoryType
      */
