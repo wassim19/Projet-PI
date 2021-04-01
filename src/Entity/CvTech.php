@@ -27,6 +27,11 @@ class CvTech
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->category;
+    }
+
     public function getCategory(): ?string
     {
         return $this->category;

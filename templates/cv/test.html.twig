@@ -1,0 +1,16 @@
+
+
+{% block body %}
+    <header>
+        <h1>CV of {{ cv.name|upper}} </h1>
+    </header>
+    <a href="{{path('snappy',{'id':cv.id})}}"><i class="fas fa-file-pdf"></i><span class="pl-2">Print PDF</span></a>
+    <section>
+    <div class="photo">
+        <img src="{{ asset('/images/cv/'~cv.photo) }}" alt="" width="150">
+    </div>
+    <div class="prez">
+        <h2>who am i ?</h2>
+        <p>{{cv.description  }}</p>
+    </div>
+{% endblock %}

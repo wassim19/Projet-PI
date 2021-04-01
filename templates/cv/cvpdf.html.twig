@@ -1,9 +1,6 @@
-{% extends 'base.html.twig' %}
+
 {% block head %}
     <title>CV </title>
-    <a href="{{path('cvpdf',{'id':cv.id})}}"><i class="fas fa-file-pdf"></i><span class="pl-2">Print PDF</span></a>
-
-
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no">
@@ -13,6 +10,7 @@
     <header>
         <h1>CV of {{ cv.name|upper}} </h1>
     </header>
+    <a href="{{path('cvpdf',{'id':cv.id})}}"><i class="fas fa-file-pdf"></i><span class="pl-2">Print PDF</span></a>
     <section>
         <div class="photo">
             <img src="{{ asset('/images/cv/'~cv.photo) }}" alt="" width="150">
@@ -68,28 +66,28 @@
 
             </div>
 
-        {% if cv.pro3titre != null%}
-            <div class="exp">
-
-                <div class="exp-info">
-                    <h3>{{cv. pro3titre }}</h3>
-                    <h4>{{cv. pro3socie  }}</h4>
-                    <h4>{{cv.pro3datedebut }}->{{cv.pro3datefin }}</h4>
-                </div>
-
-            </div>
-            {% if cv.pro4titre != null%}
+            {% if cv.pro3titre != null%}
                 <div class="exp">
 
                     <div class="exp-info">
-                        <h3>{{cv. pro4titre }}</h3>
-                        <h4>{{cv. pro4socie  }}</h4>
-                        <h4>{{cv.pro3datedebut }}->{{cv.pro4datefin }}</h4>
+                        <h3>{{cv. pro3titre }}</h3>
+                        <h4>{{cv. pro3socie  }}</h4>
+                        <h4>{{cv.pro3datedebut }}->{{cv.pro3datefin }}</h4>
                     </div>
 
                 </div>
+                {% if cv.pro4titre != null%}
+                    <div class="exp">
+
+                        <div class="exp-info">
+                            <h3>{{cv. pro4titre }}</h3>
+                            <h4>{{cv. pro4socie  }}</h4>
+                            <h4>{{cv.pro3datedebut }}->{{cv.pro4datefin }}</h4>
+                        </div>
+
+                    </div>
+                {% endif %}
             {% endif %}
-        {% endif %}
         {% endif %}
 
 
@@ -176,12 +174,12 @@
 
             {% if cv.skillpro1data == 'Introductory level' %}
                 <div class="conteneur-barre"><span class="barre c20"></span></div>
-                {% elseif cv.skillpro1data == 'Intermediate level'%}
-                    <div class="conteneur-barre"><span class="barre c40"></span></div>
-                {% elseif cv.skillpro1data == 'Advanced level' %}
-                    <div class="conteneur-barre"><span class="barre c80"></span></div>
-                {% else%}
-                    <div class="conteneur-barre"><span class="barre c90"></span></div>
+            {% elseif cv.skillpro1data == 'Intermediate level'%}
+                <div class="conteneur-barre"><span class="barre c40"></span></div>
+            {% elseif cv.skillpro1data == 'Advanced level' %}
+                <div class="conteneur-barre"><span class="barre c80"></span></div>
+            {% else%}
+                <div class="conteneur-barre"><span class="barre c90"></span></div>
 
             {% endif %}
 
@@ -201,36 +199,36 @@
 
         </div>
         {% if cv.skillpro3!= null%}
-        <div class="comp">
-            <p>{{ cv.skillpro3 }}</p>
-            {% if cv.skillpro3data == 'Introductory level' %}
-                <div class="conteneur-barre"><span class="barre c20"></span></div>
-            {% elseif cv.skillpro3data == 'Intermediate level'%}
-                <div class="conteneur-barre"><span class="barre c40"></span></div>
-            {% elseif cv.skillpro3data == 'Advanced level' %}
-                <div class="conteneur-barre"><span class="barre c80"></span></div>
-            {% else%}
-                <div class="conteneur-barre"><span class="barre c90"></span></div>
+            <div class="comp">
+                <p>{{ cv.skillpro3 }}</p>
+                {% if cv.skillpro3data == 'Introductory level' %}
+                    <div class="conteneur-barre"><span class="barre c20"></span></div>
+                {% elseif cv.skillpro3data == 'Intermediate level'%}
+                    <div class="conteneur-barre"><span class="barre c40"></span></div>
+                {% elseif cv.skillpro3data == 'Advanced level' %}
+                    <div class="conteneur-barre"><span class="barre c80"></span></div>
+                {% else%}
+                    <div class="conteneur-barre"><span class="barre c90"></span></div>
 
-            {% endif %}
+                {% endif %}
 
-        </div>
+            </div>
         {% endif %}
         {% if cv.skillpro4 != null%}
-        <div class="comp">
-            <p>{{ cv.skillpro4 }}</p>
-            {% if cv.skillpro4data == 'Introductory level' %}
-                <div class="conteneur-barre"><span class="barre c20"></span></div>
-            {% elseif cv.skillpro4data == 'Intermediate level'%}
-                <div class="conteneur-barre"><span class="barre c40"></span></div>
-            {% elseif cv.skillpro4data == 'Advanced level' %}
-                <div class="conteneur-barre"><span class="barre c80"></span></div>
-            {% else%}
-                <div class="conteneur-barre"><span class="barre c90"></span></div>
+            <div class="comp">
+                <p>{{ cv.skillpro4 }}</p>
+                {% if cv.skillpro4data == 'Introductory level' %}
+                    <div class="conteneur-barre"><span class="barre c20"></span></div>
+                {% elseif cv.skillpro4data == 'Intermediate level'%}
+                    <div class="conteneur-barre"><span class="barre c40"></span></div>
+                {% elseif cv.skillpro4data == 'Advanced level' %}
+                    <div class="conteneur-barre"><span class="barre c80"></span></div>
+                {% else%}
+                    <div class="conteneur-barre"><span class="barre c90"></span></div>
 
-            {% endif %}
+                {% endif %}
 
-        </div>
+            </div>
         {% endif %}
 
 
@@ -271,14 +269,14 @@
             <button class="btn btn-primary accordion-style">{{ cv.interest2 }}</button>
         </figure>
         {% if cv.interest3!= null %}
-        <figure  class="interet">
-            <button class="btn btn-primary accordion-style">{{ cv.interest3 }}</button>
-        </figure>
+            <figure  class="interet">
+                <button class="btn btn-primary accordion-style">{{ cv.interest3 }}</button>
+            </figure>
         {% endif %}
         {% if cv.interest4!= null %}
-        <figure class="interet">
-            <button class="btn btn-primary accordion-style">{{ cv.interest4}}</button>
-        </figure>
+            <figure class="interet">
+                <button class="btn btn-primary accordion-style">{{ cv.interest4}}</button>
+            </figure>
         {% endif %}
 
     </section>
@@ -296,10 +294,10 @@
                 <div class="conteneur-barre"><span class="barre c30"></span></div>
 
             {% elseif cv.lang1data == 'B1 - Threshold level' %}
-              <div class="conteneur-barre"><span class="barre c50"></span></div>
+                <div class="conteneur-barre"><span class="barre c50"></span></div>
 
             {% elseif cv.lang1data == 'B2 - Advanced level' %}
-             <div class="conteneur-barre"><span class="barre c60"></span></div>
+                <div class="conteneur-barre"><span class="barre c60"></span></div>
 
             {% elseif cv.lang1data == 'C1 - Autonomous level'%}
                 <div class="conteneur-barre"><span class="barre c80"></span></div>
