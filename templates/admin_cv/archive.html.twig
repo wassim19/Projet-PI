@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basebackadmin.html.twig' %}
 
 {% block title %}Cv index{% endblock %}
 
@@ -22,7 +22,6 @@
                 </form>
             </div>
         </div>
-
         <div class="collapse show" id="dateposted">
             {{ form_start(form) }}
             <h4> Types </h4>
@@ -67,7 +66,6 @@
         </tbody>
         <tbody id="search"></tbody>
     </table>
-    <a  href="{{ path('CvByName') }}"><button type="submit"  >sort by name</button></a>
 
 
 {% endblock %}

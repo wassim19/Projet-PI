@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basebackadmin.html.twig' %}
 
 {% block title %}MY CVS{% endblock %}
 
@@ -11,7 +11,7 @@
                 <th>Id</th>
                 <th>Photo</th>
                 <th>Description</th>
-                <th> name</th>
+                <th>Name</th>
                 <th>Adresse</th>
                 <th>Phone</th>
                 <th>category</th>
@@ -44,7 +44,6 @@
         {% endfor %}
         </tbody>
     </table>
-    <a  href="{{ path('CvByName') }}"><button type="submit"  >sort by name</button></a>
 
 
     <div align="center"> <a  href="{{ path('cv_new') }}"><button type="submit" class="btn btn-primary btn-md" >add</button></a></div>

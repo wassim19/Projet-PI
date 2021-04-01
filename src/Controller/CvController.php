@@ -30,26 +30,7 @@ use Knp\Snappy\Pdf;
 
 class CvController extends AbstractController
 {
-    /**
-     * @Route("/snappy{id}", name="snappy")
-     */
 
-
-    public function pdf(int  $id, \Knp\Snappy\Image $knpSnappyImage)
-    {
-        $rep = $this->getDoctrine()->getRepository(Cv::class);
-        $cv = $rep->find($id);
-
-        $filename = "mypdf";
-        $html = $this->renderView('cv/test.html.twig', array(
-            'cv' => $cv,
-        ));
-
-        return new JpegResponse(
-            $knpSnappyImage->getOutputFromHtml($html),
-            'image.jpg'
-        );
-    }
     /**
      * @Route("/cvpdf{id}", name="cvpdf")
      */
@@ -123,7 +104,7 @@ class CvController extends AbstractController
 
                 'cvs'=>$cv=$cvRepository->findAll(),
             ]);
- }
+    }
     /**
      * @Route("/CvTechList", name="CvTechList", methods={"GET"})
      * @param CvRepository $cvRepository
@@ -226,6 +207,22 @@ class CvController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route ("/CvByName",name="CvByName")
+     * @return RedirectResponse
+     */
+    public function CvByName(): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(Cv::class);
+        $result= $rep->sortByName();
+        dump($result);
+
+        return $this->render('cv/index.html.twig', [
+            'cvs'=>$result
+        ]);
+
+
+    }
     /**
      * @Route("/{id}edit", name="cv_edit", methods={"GET","POST"})
      * @param Request $request

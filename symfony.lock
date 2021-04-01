@@ -123,6 +123,12 @@
     "monolog/monolog": {
         "version": "1.26.0"
     },
+    "mpdf/mpdf": {
+        "version": "v8.0.10"
+    },
+    "myclabs/deep-copy": {
+        "version": "1.10.2"
+    },
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
@@ -173,6 +179,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "setasign/fpdi": {
+        "version": "v2.3.6"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.7"

@@ -97,7 +97,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route("/reclamationshow {id}", name="reclamation_show", methods={"GET"})
+     * @Route("/reclamationshow{id}", name="reclamation_show", methods={"GET"})
      * @param Reclamation $reclamation
      * @return Response
      */
@@ -109,7 +109,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route("/reclamationedit {id}", name="reclamation_edit", methods={"GET","POST"})
+     * @Route("/reclamationedit{id}", name="reclamation_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Reclamation $reclamation
      * @return Response
@@ -132,7 +132,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route("/reclamationdelete/{id}", name="reclamation_delete", methods={"DELETE"})
+     * @Route("/reclamationdelete{id}", name="reclamation_delete", methods={"DELETE"})
      * @param Request $request
      * @param Reclamation $reclamation
      * @return Response
