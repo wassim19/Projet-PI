@@ -8,6 +8,9 @@ use App\Entity\ParticipantE;
 use App\Entity\ParticipationE;
 use App\Form\ParticipantEType;
 use App\Form\SearchType;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,13 +60,41 @@ class ParticipantController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $data = $form->getData();
-            $message=(new \Swift_Message('nouveau msg'))
-                ->setFrom(['faroukgasaraa@gmail.com'])
-                ->setTo(['faroukgasaraa@gmail.com'])
-                ->setBody($this->renderView('evenement_societe/participationmail.html.twig',compact('data')),'text/html');
-            $mailer->send($message);
-            $this->addFlash('message','the email has been sent');
+            $mail = new PHPMailer(true);
+
+            try {
+
+                $nom = $form->get('nom')->getData();
+                $email = $form->get('mail')->getData();
+
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+                $mail->Password   = 'farouk1998';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
+                // Content
+                $corps="Bonjour Monsieur/Madame ".$nom. " votre particpation est bien rcu " ;
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'participation';
+                $mail->Body    = $corps;
+
+                $mail->send();
+                $this->addFlash('message','the email has been sent');
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
+            //end mailing
+
 
 
 
@@ -76,7 +107,7 @@ class ParticipantController extends AbstractController
             $entityManager->persist($participation);
             $entityManager->flush();
 
-            //return $this->redirectToRoute("evenementsociete");
+            return $this->redirectToRoute("evenementsociete");
         }
 
         return $this->render('participant_e/index.html.twig', [

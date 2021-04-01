@@ -2,12 +2,18 @@
 
 namespace App\Controller;
 
+use App\Data\SearchCV;
 use App\Entity\Cv;
 use App\Entity\CvTech;
+use App\Entity\Evenement;
 use App\Form\CvTechType;
 use App\Form\CvType;
+use App\Form\SearchCVType;
 use App\Repository\CvRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Easybook\SluggerInterface;
+use Knp\Bundle\SnappyBundle\KnpSnappyBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +23,66 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use App\Controller\Knp\Snappy\Image;
+use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
+use Knp\Snappy\Pdf;
 
 
 class CvController extends AbstractController
 {
+    /**
+     * @Route("/snappy{id}", name="snappy")
+     */
+
+
+    public function pdf(int  $id, \Knp\Snappy\Image $knpSnappyImage)
+    {
+        $rep = $this->getDoctrine()->getRepository(Cv::class);
+        $cv = $rep->find($id);
+
+        $filename = "mypdf";
+        $html = $this->renderView('cv/test.html.twig', array(
+            'cv' => $cv,
+        ));
+
+        return new JpegResponse(
+            $knpSnappyImage->getOutputFromHtml($html),
+            'image.jpg'
+        );
+    }
+    /**
+     * @Route("/cvpdf{id}", name="cvpdf")
+     */
+    public function cvpdf(int $id): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Cv::class);
+        $cv=$rep->find($id);
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->renderView('cv/cvpdf.html.twig', [
+            'title' => "Welcome to our PDF Test",'cv' => $cv
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        $dompdf->stream("mmypdf.pdf", [
+            "Attachment" => false
+        ]);
+
+        // Send some text response
+        return new Response("sd");
+    }
 
     /**
      * @Route("/searchcv ", name="searchcv")
@@ -48,16 +110,48 @@ class CvController extends AbstractController
 
         return $response;
     }
+
     /**
      * @Route("/Cv", name="cv_index", methods={"GET"})
      * @param CvRepository $cvRepository
+     * @param Request $request
      * @return Response
      */
-    public function index(CvRepository $cvRepository): Response
+    public function index(CvRepository $cvRepository,Request $request): Response
     {
-        return $this->render('cv/archive.html.twig', [
-            'cvs' => $cvRepository->findAll(),
-        ]);
+           return $this->render('cv/index.html.twig',[
+
+                'cvs'=>$cv=$cvRepository->findAll(),
+            ]);
+ }
+    /**
+     * @Route("/CvTechList", name="CvTechList", methods={"GET"})
+     * @param CvRepository $cvRepository
+     * @param Request $request
+     * @return Response
+     */
+    public function CvTechList(CvRepository $cvRepository,Request $request): Response
+    {
+
+        $data = new SearchCV();
+        $form = $this->createForm(SearchCVType::class,$data);
+        $form->handleRequest($request);
+        $var = $form->get('type')->getData();
+        dump($var);
+        if ($var ==null){
+            return $this->render('cv/archive.html.twig',[
+                'form' => $form->createView(),
+                'cvs'=>$cv=$cvRepository->findAll(),
+            ]);
+
+        }else{
+            $var1=$var->getId();
+            $cv=$cvRepository->findSearchCv($var1);
+            return $this->render('cv/archive.html.twig', [
+                'form' => $form->createView(),'cvs' => $cv
+            ]);
+        }
+
     }
 
     /**
@@ -93,7 +187,8 @@ class CvController extends AbstractController
 
 
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $photoFile = $form->get('photo')->getData();
 
 

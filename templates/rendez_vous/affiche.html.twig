@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
-
+{% block content %}
+    <div class="add-listing">
+        <a class="btn btn-white btn-md" value="notif" href="{{ path('notificationrdv') }}"><i class="fa fa-bell"></i></a>
+    </div>
+{% endblock %}
 {% block title %}Hello RendezVousController!{% endblock %}
 
 

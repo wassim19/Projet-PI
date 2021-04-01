@@ -22,6 +22,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use DateTime;
 
 
 class FormationController extends AbstractController
@@ -99,7 +100,7 @@ class FormationController extends AbstractController
             $em->persist($formation);
             $em->flush();
 
-            return $this->redirectToRoute("afficheformation");
+            return $this->redirectToRoute("calendar");
 
         }
 
@@ -335,6 +336,62 @@ class FormationController extends AbstractController
             ]
         );
 
+    }
+
+    /**
+     * @param Formation|null $calender
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     * @Route ("/api/{id}/edit",name="api",methods={"PUT"})
+     */
+    public function api(?Formation $calender,Request $request){
+        $donnes=json_decode($request->getContent());
+        if(
+            isset($donnes->title) && isset($donnes->localisation) && isset($donnes->dateAt)
+        ){
+            $code=200;
+            if(!$calender){
+                $calender= new Formation();
+                $code=201;
+            }
+            $calender->setTitle($donnes->title);
+            $calender->setDateAt(new DateTime($donnes->dateAt));
+            $calender->setLocalisation($donnes->localisation);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($calender);
+            $em->flush();
+            return new Response('ok',$code);
+        }else{
+            return new Response('Data missed',404);
+        }
+        return $this->render('formation/calendarformation.html.twig', [
+            'controller_name' => 'FormationController',
+        ]);
+    }
+
+
+
+
+    /**
+     * @return Response
+     * @Route ("/calendar",name="calendar")
+     */
+    public function calendar(FormationRepository $repository){
+        $events=$repository->findAll();
+        $formation=[];
+        foreach ($events as $event){
+            $formation[]=[
+                'id'=>$event->getId(),
+                'title'=>$event->getTitle(),
+                'date'=>$event->getDateAt()->format('Y-m-d H:i:s'),
+                'localisation'=>$event->getLocalisation()
+
+            ];
+        }
+        $data= json_encode($formation);
+
+        return $this->render('formation/calendarformation.html.twig',compact('data'));
     }
 
 }

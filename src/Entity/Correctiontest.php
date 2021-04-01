@@ -19,121 +19,121 @@ class Correctiontest
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ1;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ2;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ3;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ4;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ5;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ6;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ7;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ8;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ9;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ10;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ11;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ12;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ13;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ14;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ15;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ16;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ17;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ18;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ19;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Choice({"a", "b", "c", "d"})
      */
     private $reponseQ20;

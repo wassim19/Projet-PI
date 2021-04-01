@@ -1,0 +1,57 @@
+{% extends 'basecalenderformation.html.twig'%}
+
+
+{% block title %}Calender{% endblock %}
+
+{% block stylesheets %}
+<style>
+    #calendrier{
+        width:80%;
+        margin: auto;
+    }
+</style>
+
+{% endblock %}
+{% block calender %}
+    <div class="example-wrapper">
+        {% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    <a href="{{ path('afficheformation') }}">return</a>
+<div id="calendrier"></div>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+    window.onload=()=>{
+        let calendarElt=document.querySelector("#calendrier")
+        let calendar=new FullCalendar.Calendar(calendarElt,{
+            initialView: 'timeGridWeek',
+            headerToolbar:{
+                start:'prev,next today',
+                center:'title',
+                end:'dayGridMonth,timeGridWeek'
+            },
+            events:{{ data|raw }},
+            editable: true,
+            eventResizableFromStart: true
+        })
+        calendar.on('eventChange',(e)=>{
+            console.log(e)
+            let url=`/api/${e.event.id}/edit`
+            let donnes={
+                "title":e.event.extendedProps.title,
+                "date":e.event.start,
+
+                "localisation":e.event.extendedProps.localisation
+            }
+            let xhr= new XMLHttpRequest()
+            xhr.open("PUT",url)
+            xhr.send(JSON.stringify(donnes))
+        })
+        calendar.render()
+    }
+</script>
+{% endblock %}

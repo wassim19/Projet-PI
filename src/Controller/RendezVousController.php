@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Notificationrdv;
 use App\Form\SurferType;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -119,6 +120,9 @@ class RendezVousController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             $em=$this->getDoctrine()->getManager();
+            $notif = new Notificationrdv();
+            $notif->setNotification('New meet');
+            $em->persist($notif);
             $em->persist($rendezvous);
             $em->flush();
 
@@ -164,6 +168,22 @@ class RendezVousController extends AbstractController
         return $this->render("rendez_vous/index.html.twig",array('form'=>$form->createView()));
 
     }
+    /**
+     * @Route("/notificationrdv", name="notificationrdv")
+     */
+    public function notificationrdv(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(Notificationrdv::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('rendez_vous/notificationrdv.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
+    }
 
     /**
      * @Route ("/supprdv{id}",name="d")
@@ -176,6 +196,10 @@ class RendezVousController extends AbstractController
         $rendezvous = $repository-> find($id);
         $em=$this->getDoctrine()->getManager();
         $em->remove($rendezvous);
+        $title = $rendezvous->getDate()->format('Y-m-d H:i:s');
+        $notif= new Notificationrdv();
+        $notif->setNotification('meet '.$title.'Deleted');
+        $em->persist($notif);
         $em->flush();
         return $this->redirectToRoute('rendezvous');
     }

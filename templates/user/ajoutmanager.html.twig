@@ -1,0 +1,59 @@
+{% extends 'basebackadmin.html.twig' %}
+{% block body %}
+    <section class="space-ptb">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10 col-md-12">
+                    <div class="login-register">
+                        <div class="section-title">
+                            <h4 class="text-center">Create Your Account</h4>
+                        </div>
+                        <fieldset>
+                            <legend class="px-2">Choose your Account Type</legend>
+                            <ul class="nav nav-tabs nav-tabs-border d-flex" role="tablist">
+                                <li class="nav-item mr-4">
+                                    <a class="nav-link active"  data-toggle="tab" href="#candidate" role="tab" >
+                                        <div class="d-flex">
+                                            <div class="tab-icon">
+                                                <i class="flaticon-users"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <h6 class="mb-0">Company</h6>
+                                                <p class="mb-0">I want to discover companies.</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </fieldset>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="candidate" role="tabpanel">
+                                {{ form_start(form) }}
+                                {{ form_row(form.Username,{ 'attr':{ 'placeholder':"name of company",'class':"form-control"}}) }}
+                                {{ form_row(form.description,{ 'attr':{ 'placeholder':"describe the function of the company",'class':"form-control"}}) }}
+                                {{ form_row(form.tax_registration_number,{ 'attr':{ 'placeholder':"your tax number please for the security",'class':"form-control"}}) }}
+
+
+
+                                {{ form_row(form.localisation,{ 'attr':{ 'placeholder':"where is your company?",'class':"form-control"}}) }}
+                                {{ form_row(form.numero,{ 'attr':{ 'placeholder':"your phone number please",'class':"form-control"}}) }}
+                                {{ form_row(form.images,{ 'attr':{ 'class':"upload-file"}}) }}
+                                {{ form_row(form.emailadresse,{ 'attr':{ 'placeholder':"your email adress please",'class':"form-control"}})}}
+                                {{ form_row(form.password,{ 'attr':{ 'placeholder':"choose your password",'class':"form-control"}})}}
+                                {{ form_row(form.save,{ 'attr':{ 'class':"btn btn-primary"}}) }}
+                                {{ form_end(form) }}
+                            </div>
+
+                        </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
+
