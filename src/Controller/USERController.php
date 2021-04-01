@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\NotifEvent;
 
+use App\Entity\NotifUser;
 use App\Entity\User;
 use App\Form\WorkreseacherType;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -27,6 +28,22 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class USERController extends AbstractController
 {
+    /**
+     * @Route("/notificationn", name="notificationn")
+     */
+    public function notificationn(): Response
+    {
+
+        $rep=$this->getDoctrine()->getRepository(NotifUser::class);
+        $notif=$rep->findAll();
+
+
+        return $this->render('user/notiff.html.twig', [
+                'notif' => $notif,
+            ]
+        );
+
+    }
 
     /**
      * @Route("/searchecompany ", name="searchecompany")
@@ -146,6 +163,9 @@ class USERController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $hash =$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($hash);
+            $notif = new NotifUser();
+            $notif->setNotifuser('New User');
+            $entityManager->persist($notif);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -174,7 +194,7 @@ class USERController extends AbstractController
                 $mail->Port       = 587;
 
                 //Recipients
-                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->setFrom('faroukgasaraa@gmail.com', 'Hand Clasper');
                 $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
 
                 // Content
