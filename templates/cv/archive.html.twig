@@ -3,29 +3,46 @@
 {% block title %}Cv index{% endblock %}
 
 {% block body %}
+     <div class="header-inner bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
     <h1>Cv index</h1>
     <div class="col-12">
         <div class="job-search-field job-search-field-02 search-under-banner">
+
             <div class="job-search-item">
                 <form class="form-row basic-select-wrapper">
                     <div class="form-group col-lg col-md-6">
                         <div class="form-group-search">
                             <label>Search</label>
-                            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="your reason for the search"></div>
+                            <div class="d-flex align-items-center"><input class="form-control" type="search" id="search" placeholder="search by name"></div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
 
+        <div class="collapse show" id="dateposted">
+            {{ form_start(form) }}
+            <h4> Types </h4>
+            {{ form_row(form.type) }}
+            <button type="submit" class="btn btn-primary" >Filtrer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+           </div>
+        </div>
+    </div>
+     </div>
     <table id="non" class="table">
         <thead>
         <tr>
             <th id="non">Id</th>
 
             <th id="non">category</th>
-
+            <th id="non">name</th>
+            <th id="non">actions</th>
 
         </tr>
         </thead>
@@ -35,12 +52,11 @@
                 <td>{{ cv.id }}</td>
 
                 <td>{{ cv.categoryType.category }}</td>
-
+                <td>{{ cv.name }}</td>
 
                 <td>
-                    <a href="{{ path('cv_show', {'id': cv.id}) }}">show</a>
-                    <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
-                    <a href="{{ path('cv_delete', {'id': cv.id}) }}">delete</a>
+                    <a href="{{ path('cv_show', {'id': cv.id}) }}">More Detail</a>
+
                 </td>
             </tr>
         {% else %}
@@ -52,7 +68,7 @@
         <tbody id="search"></tbody>
     </table>
 
-    <a href="{{ path('cv_new') }}">Create new</a>
+
 {% endblock %}
 
 {% block search %}
@@ -83,6 +99,7 @@
 
 
                                 '<th >category</th>'+
+                                '<th >name</th>'+
                                 '</tr>'+
                                 '</thead>'+
                                 '<tr>'+
@@ -93,6 +110,9 @@
 
                                 '<td><div class="blog-post-title">'+
                                 '<p class="mb-0">'+value.categoryType.category +'</p>'+
+                                '</td></div>'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.name +'</p>'+
                                 '</td></div>'+
                                 '<td>'+
                                 '<div class="blog-post-description">'+

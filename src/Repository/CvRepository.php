@@ -18,19 +18,48 @@ class CvRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Cv::class);
     }
+
     /**
      * @return Cv[] Returns an array of Evenement objects
      */
 
-    public function findCategory($id)
+    public function findSearchCv($categoryType)
     {
-
         return $this->createQueryBuilder('e')
-            ->andWhere('e.id Like :id')
-            ->setParameter('id', '%'.$id.'%')
+
+            ->andWhere('e.categoryType = :categoryType')
+            ->setParameter('categoryType', $categoryType)
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    public function findCategory($name)
+    {
+
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.name Like :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function sortByName()
+    {
+        // automatically knows to select Products
+        // the "p" is an alias you'll use in the rest of the query
+        $qb = $this->createQueryBuilder('p')
+
+
+            ->orderBy('p.name', 'ASC');
+
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+
+        // to get just one result:
+        // $product = $query->setMaxResults(1)->getOneOrNullResult();
     }
 
     // /**

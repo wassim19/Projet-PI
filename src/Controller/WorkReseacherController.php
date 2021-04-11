@@ -28,7 +28,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-class WorkreseacherController extends AbstractController
+class WorkReseacherController extends AbstractController
 {/**
  * @Route("/findsurferByfirstname ", name="findsurferByfirst")
  */

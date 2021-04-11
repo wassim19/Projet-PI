@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,20 +66,47 @@ class CompanyComlplaintController extends AbstractController
      *  @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @return Response
      */
-    public function validatee(Request $request, Reclamation $reclamation,\Swift_Mailer $mailer): Response
+    public function validatee(Request $request, Reclamation $reclamation): Response
     {
 
         $reclamation->setStatus(true);
+        $mail = new PHPMailer(true);
+
+        try {
+
+            $nom ="wael bannani";
+            $email = "wael.bannani@esprit.tn";
+
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+            $mail->Password   = 'farouk1998';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            //Recipients
+            $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+            $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
+            // Content
+            $corps="hello there".$nom. " your complaint has been validate  " ;
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'cv';
+            $mail->Body    = $corps;
+
+            $mail->send();
+            $this->addFlash('message','the email has been sent');
+
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
 
 
             $this->getDoctrine()->getManager()->flush();
 
-        $message=(new \Swift_Message('nouveau msg'))
-            ->setFrom(['wael.bannani@esprit.tn'])
-            ->setTo(['wael.bannani@esprit.tn'])
-            ->setBody($this->renderView('company_comlplaint/notification.html.twig',compact('reclamation')),'text/html');
-        $mailer->send($message);
-        $this->addFlash('message','the email has been sent');
+
 
 
             return $this->redirectToRoute('company_comlplaint');

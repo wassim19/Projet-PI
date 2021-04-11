@@ -37,6 +37,11 @@ inner banner -->
                                 <div class="section-title-02 mb-0 ">
                                     <a class="btn btn-primary btn-block" href="{{ path('afficheCategorieOffer')}}">Consulter</a>
                                     <a class="btn btn-primary btn-block" href="{{ path('typeoffre')}}">Add type</a>
+                                    <a class="btn btn-primary btn-block" href="{{ path('notificationoffre')}}">Notification</a>
+                                    <a class="btn btn-primary btn-block" href="{{ path('offre_pdf') }}">Exporter PDF</a>
+                                    <a class="btn btn-primary btn-block" href="{{path('sta')}}">Statistique offre</a>
+
+
 
                                 </div>
                             </div>
@@ -51,20 +56,20 @@ inner banner -->
                             <table class="table table-bordered">
                                 <thead class="bg-light">
                                 <tr >
-                                    <th scope="col">ID Localisation</th>
+                                    <th scope="col">ID </th>
+                                    <th scope="col">Localisation</th>
+                                    <th scope="col">Description</th>
                                     <th scope="col">Specialite</th>
-                                    <th scope="col">Nb Demande</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody id="all">
                                 {% for e in offre %}
                                     <tr>
-                                        <th scope="row">{{ e.id }}
-                                            <p class="mb-0">{{ e.localisation }}</p>
-                                        </th>
+                                        <td>{{ e.id  }}</td>
+                                        <td>{{ e.localisation  }}</td>
+                                        <td>{{ e.description  }}</td>
                                         <td>{{ e.specialite  }}</td>
-                                        <td>{{ e.NbDem  }}</td>
                                         <td>
                                             <ul class="list-unstyled mb-0 d-flex">
                                                 <li><a href="{{ path('updateoffreadmin',{'id':e.id})}}" class="text-info" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
@@ -88,6 +93,7 @@ inner banner -->
     </section>
     <!--=================================
     offre gere par la societe  -->
+
 {% endblock %}
 {% block js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -109,9 +115,32 @@ inner banner -->
                         $.each(response, function(index, value) {
                             $('tbody#search').append(
 
+                                '<tbody >'+
+                                '<tr >'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.id +'</p>'+
+                                '</td></div>'+
+                                '<td>'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.description       +'</p>'+
+                                '</td></div>'+
+                                '<td>'+
+                                '<td><div class="blog-post-title">'+
+                                '<p class="mb-0">'+value.specialite+'</p>'+
+                                '</td></div>'+
+                                '<td>'+
+
                                 '<div class="blog-post-description">'+
-                                '<p class="mb-0">'+value.specialite +'</p>'+
-                                '</div>'
+                                '<a href="updateoffreadmin'+'             '+value.id+'">Update</a>'+
+                                '</div>'+
+                                '<div class="blog-post-description">'+
+                                '<a href="deleteoffreadmin'+value.id+'">Delete</a>'+
+                                '</div>'+
+                                '</td>'+
+                                '</tr>'+
+                                '</tbody>'
+
+
 
 
 

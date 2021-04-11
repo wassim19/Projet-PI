@@ -18,6 +18,20 @@
             <tr>
                 <th>Motif</th>
                 <td>{{ reclamation.motif }}</td>
+
+            </tr>
+            <tr>
+                <th>GSM</th>
+                <td>{{ reclamation.GSM }}</td>
+            </tr>
+            <tr>
+                <th>createdAt</th>
+                <td>{{ reclamation.createdAt|date('Y-m-d H:i:s') }}</td>
+
+            </tr>
+            <tr>
+                <th>company</th>
+                <td>{{ reclamation.company.name_company }}</td>
             </tr>
         </tbody>
     </table>

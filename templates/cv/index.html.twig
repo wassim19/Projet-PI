@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cv index{% endblock %}
+{% block title %}MY CVS{% endblock %}
 
 {% block body %}
-    <h1>Cv index</h1>
+    <h1  ALIGN="CENTER">MY CVS</h1>
 
     <table class="table">
         <thead>
@@ -11,7 +11,7 @@
                 <th>Id</th>
                 <th>Photo</th>
                 <th>Description</th>
-                <th>Name</th>
+                <th> name</th>
                 <th>Adresse</th>
                 <th>Phone</th>
                 <th>category</th>
@@ -44,6 +44,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <a  href="{{ path('CvByName') }}"><button type="submit"  >sort by name</button></a>
 
-    <a href="{{ path('cv_new') }}">Create new</a>
+
+    <div align="center"> <a  href="{{ path('cv_new') }}"><button type="submit" class="btn btn-primary btn-md" >add</button></a></div>
+
 {% endblock %}

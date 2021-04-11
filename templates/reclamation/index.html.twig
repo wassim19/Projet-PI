@@ -65,6 +65,9 @@ inner banner -->
                     <button>
                         <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">update</a>
                     </button>
+                    <button>
+                        <a href="{{ path('reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    </button>
                 </td>
             </tr>
         {% else %}
@@ -142,11 +145,9 @@ inner banner -->
                                ' <p> studied<i class="fas fa-check"></i> </p>'+
                             '</td></div>'+
                                 '<td> '+
-                                '  <button >delete '+
-                                ' </button> '+
-                                '  <button> update'+
-
-                                ' </button> '+
+                                '<a href="reclamationedit'+value.id+'">edit </a>'+
+                                '<a href="reclamationdelete'+value.id+'">delete </a>'+
+                                '<a href="reclamationshow'+value.id+'">show</a>'+
                                 ' </td> '+
                                 '</tr>'+
                                 '</table>'

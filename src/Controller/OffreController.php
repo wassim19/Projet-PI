@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\CategorieOffre;
+
+use PHPMailer\PHPMailer\SMTP;
 use App\Entity\Evenement;
 use App\Entity\Formation;
 use App\Entity\NotifEvent;
@@ -13,6 +15,7 @@ use App\Form\EventType;
 use App\Form\OffreEmployeType;
 use App\Form\OffreType;
 use App\Repository\OffreRepository;
+use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +25,23 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class OffreController extends AbstractController
 {
 
+    /**
+     * @route("/socoffrebackaffiche/statistique",name="sta")
+     */
+    public function statisti(OffreRepository $repository)
+    {
+
+        $opp=$repository->findAll();
+
+        return $this->render("offre/statistique.html.twig",['off'=>$opp]);
+
+    }
     /**
      * @Route("/notificationoffre", name="notificationoffre")
      */
@@ -101,13 +116,38 @@ class OffreController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            $data = $form->getData();
-            $message=(new \Swift_Message('nouveau msg'))
-                ->setFrom(['marwa.hadidan@esprit.tn'])
-                ->setTo(['marwa.hadidan@esprit.tn'])
-                ->setBody($this->renderView('offre/offremail.html.twig',compact('data')),'text/html');
-            $mailer->send($message);
-            $this->addFlash('message','the email has been sent');
+            $mail = new PHPMailer(true);
+
+            try {
+
+                $nom = $form->get('mail')->getData();
+
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+                $mail->Password   = 'farouk1998';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                //Recipients
+                $mail->setFrom('faroukgasaraa@gmail.com', 'Hand Clasper');
+                $mail->addAddress($nom, 'Hand Clasper user');     // Add a recipient
+                // Content
+                $corps="Bonjour Monsieur/Madame ".$nom. " votre particpation est bien rcu " ;
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'participation';
+                $mail->Body    = $corps;
+
+                $mail->send();
+                $this->addFlash('message','the email has been sent');
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
 
 
 
@@ -218,6 +258,7 @@ class OffreController extends AbstractController
 
         $rep=$this->getDoctrine()->getRepository(Offre::class);
         $offre=$rep->findAll();
+        dump($offre);
 
 
 
@@ -272,6 +313,40 @@ class OffreController extends AbstractController
         return $this->render('backoffre/updatebackadmin.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    /**
+     * @Route("/list", name="offre_pdf", methods={"GET"})
+     */
+    public function pdf(OffreRepository $offreRepository): Response
+    {
+
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $Offre = $offreRepository->findAll();
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('offre/Listepdfoffre.html.twig', [
+            'offre' => $Offre ,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Listepdfpub.pdf", [
+            "Attachment" => true
+        ]);
+
     }
 
 

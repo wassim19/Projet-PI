@@ -141,13 +141,13 @@ class RendezVousController extends AbstractController
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'eya.souissi@esprit.tn';             // SMTP username
-                $mail->Password   = 'eyaeyaeya';                               // SMTP password
+                $mail->Username   = 'faroukgasaraa@gmail.com';             // SMTP username
+                $mail->Password   = 'farouk1998';                               // SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
                 //Recipients
-                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->setFrom('faroukgasaraa@gmail.com', 'Hand Clasper');
                 $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
                 // Content
                 $corps="Bonjour Monsieur/Madame  voici votre lien meet pour passer l'entretien en ligne: ".$meet. "  la date ".$date->format('Y-m-d H:i:s')." votre description est comme suit: " .$description ;

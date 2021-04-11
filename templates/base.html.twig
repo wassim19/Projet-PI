@@ -104,7 +104,7 @@ Header -->
             <div class="navbar-collapse collapse justify-content-start">
                 <ul class="nav navbar-nav">
 
-                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="yahala" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <B><FONT face="Helvetica">Home</FONT></B><i class="fas fa-chevron-down fa-xs"></i></a>
 
@@ -177,6 +177,20 @@ Header -->
                         <ul class="dropdown-menu">
 
 
+                            <li><a href="{{ path('reclamation_index') }}">complaints</a></li>
+                            <li><a href="{{ path('reclamation_new') }}">add complaint</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <B><FONT face="Helvetica"> my cv</FONT></B> <i class="fas fa-chevron-down fa-xs"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="{{ path('cv_new') }}">add new cv</a></li>
+                            <li><a href="{{ path('cv_index') }}">check my cvs</a></li>
+                            <li><a href="{{ path('CvTechList') }}">library of cv</a></li>
+
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -197,6 +211,7 @@ Header -->
                         <li class="nav-item">
                             <a href="{{ path('security_logout') }}" class="nav-link">Disconnection</a></li>
                     {% endif %}
+                </ul>
             </div>
             {% block content %}
 
