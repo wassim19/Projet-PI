@@ -6,6 +6,8 @@ use App\Repository\EvenementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @ORM\Entity(repositoryClass=EvenementRepository::class)
@@ -20,6 +22,7 @@ class Evenement
      *      joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="id_participant", referencedColumnName="id")}
      *      )
+     *
      */
     private $events;
 
@@ -34,6 +37,7 @@ class Evenement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("event")
      */
     private $id;
 
@@ -41,47 +45,56 @@ class Evenement
 
     /**
      * @ORM\Column(type="string")
+     * @Groups("event")
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("event")
      */
     private $dateAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("event")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("event")
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("event")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("event")
      */
     private $localitation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("event")
      */
     private $id_societe;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("event")
      */
     private $Viewed;
 
     /**
      * @ORM\OneToMany(targetEntity=Eventlikes::class, mappedBy="event" )
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Groups("event")
      */
     private $eventlikes;
 
