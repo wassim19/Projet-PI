@@ -269,4 +269,11 @@ class User implements UserInterface
         return['role'];
     }
 
+    public function setUsername(?string $Username): self
+    {
+        $this->Username = $Username;
+
+        return $this;
+    }
+
 }
