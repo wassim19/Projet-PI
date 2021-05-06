@@ -44,6 +44,25 @@ class WebserviceseventController extends AbstractController
     }
 
     /**
+     * @Route("/webserviceseventupdateevent/{id}", name="webserviceseventupdateevent")
+     */
+    public function updateEvent(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
+    {
+        $content = $request->getContent();
+        $event = $entityManager->getRepository(Evenement::class)->find($id);
+        $data = json_decode($content, true);
+        //$event->setDateAt($data['dateAt']);
+        $event->setTitle($data['title']);
+        $event->setType($data['type']);
+        $event->setDescription($data['description']);
+        $event->setLocalitation($data['localitation']);
+        $entityManager->persist($event);
+        $entityManager->flush();
+        //$nom = $data->get('title');
+        return new Response("Succes");
+    }
+
+    /**
      * @Route("/webserviceseventdeleteevent/{id}", name="webserviceseventdeleteevent")
      */
     public function deleteEvent(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
