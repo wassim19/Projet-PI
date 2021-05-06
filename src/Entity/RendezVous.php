@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RendezVousRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=RendezVousRepository::class)
  */
@@ -14,6 +15,7 @@ class RendezVous
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("rdv")
      */
     private $id;
 
@@ -23,17 +25,20 @@ class RendezVous
      *      min = "now",
      *      max = "+1 month"
      * )
+     * @Groups("rdv")
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Url
+     * @Groups("rdv")
      */
     private $meet;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("rdv")
      */
     private $description;
 
@@ -41,6 +46,7 @@ class RendezVous
 
     /**
      * @ORM\ManyToOne(targetEntity=Surfer::class, inversedBy="rendezVouses")
+     * @Groups("rdv")
      */
     private $mail;
 
