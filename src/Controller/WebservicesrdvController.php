@@ -39,6 +39,24 @@ class WebservicesrdvController extends AbstractController
     }
 
     /**
+     * @Route("/webservicesupdaterdv/{id}", name="webservicesupdaterdv")
+    */
+    public function updateEvent(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
+    {
+        $content = $request->getContent();
+        $event = $entityManager->getRepository(RendezVous::class)->find($id);
+        $data = json_decode($content, true);
+        $event->setDate($data['date']);
+        $event->setMeet($data['meet']);
+        $event->setMail($data['mail_id']);
+        $event->setDescription($data['description']);
+        $entityManager->persist($event);
+        $entityManager->flush();
+        //$nom = $data->get('title');
+        return new Response("Succes");
+    }
+
+    /**
      * @Route("/webservicesdeleterdv/{id}", name="webservicesdeleterdv")
      */
     public function deleterdv(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
