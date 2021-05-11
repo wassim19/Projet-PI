@@ -52,7 +52,7 @@ class ParticipantfController extends AbstractController
                 $mail->Port       = 587;
 
                 //Recipients
-                $mail->setFrom('eya.souissi@esprit.tn', 'Hand Clasper');
+                $mail->setFrom('faroukgasaraa@gmail.com', 'Hand Clasper');
                 $mail->addAddress($email, 'Hand Clasper user');     // Add a recipient
                 // Content
                 $corps="Bonjour Monsieur/Madame ".$nom. " votre particpation est bien rcu " ;
