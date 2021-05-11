@@ -62,7 +62,7 @@ class WebservicesrdvController extends AbstractController
         $data = json_decode($content, true);
         $event->setDate(new DateTime($data['date']));
         $event->setMeet($data['meet']);
-        //$event->setMail($data['mail']);
+        $event->setMail($data['mail']);
         $event->setDescription($data['description']);
         $entityManager->persist($event);
         $entityManager->flush();
