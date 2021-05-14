@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @ORM\Entity(repositoryClass=FormationRepository::class)
@@ -31,36 +33,43 @@ class Formation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("formation")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("formation")
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("formation")
      */
     private $dateAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("formation")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("formation")
      */
     private $localisation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("formation")
      */
     private $id_soc;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("formation")
      */
     private $imagef;
 

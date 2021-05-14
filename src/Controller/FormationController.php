@@ -394,5 +394,6 @@ class FormationController extends AbstractController
         return $this->render('formation/calendarformation.html.twig',compact('data'));
     }
 
-    
+
+
 }
