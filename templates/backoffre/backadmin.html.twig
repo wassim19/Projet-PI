@@ -95,78 +95,12 @@ inner banner -->
     offre gere par la societe  -->
 
 {% endblock %}
-{% block js %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $("#search").keyup(function(e){
-            var value = $(this).val();
-            $.ajax({
-                url : "{{ path('rechercheoffre') }}",
-                data: {
-                    'searchValue' : value
-                },
-                type: "POST",
-                success : function(response)
-                {
-                    if(response){
-
-                        $(' tbody#search').empty();
-
-                        $.each(response, function(index, value) {
-                            $('tbody#search').append(
-
-                                '<tbody >'+
-                                '<tr >'+
-                                '<td><div class="blog-post-title">'+
-                                '<p class="mb-0">'+value.id +'</p>'+
-                                '</td></div>'+
-                                '<td>'+
-                                '<td><div class="blog-post-title">'+
-                                '<p class="mb-0">'+value.description       +'</p>'+
-                                '</td></div>'+
-                                '<td>'+
-                                '<td><div class="blog-post-title">'+
-                                '<p class="mb-0">'+value.specialite+'</p>'+
-                                '</td></div>'+
-                                '<td>'+
-
-                                '<div class="blog-post-description">'+
-                                '<a href="updateoffreadmin'+'             '+value.id+'">Update</a>'+
-                                '</div>'+
-                                '<div class="blog-post-description">'+
-                                '<a href="deleteoffreadmin'+value.id+'">Delete</a>'+
-                                '</div>'+
-                                '</td>'+
-                                '</tr>'+
-                                '</tbody>'
-
-
-
-
-
-
-
-                            );
-                        });
-                        $('tbody#all').hide();
-                    }else
-                    {
-                        $('tbody#all').show();
-                        $('tbody#search').empty();
-                        $('tbody#search').fadeIn('fast');
-                    }
-
-
-                }
-
-
-            });
-
-        });
-
-
-
-
-    </script>
-{% endblock %}
+{</div>
+</div>
+<div class="col-md-5 col-sm-7 mt-3 mt-sm-0">
+    <div class="search">
+        <i class="fas fa-search"></i>
+        <input id="search" type="text" class="form-control" placeholder="Search....">
+    </div>
+</div>
 
