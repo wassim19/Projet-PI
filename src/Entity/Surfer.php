@@ -6,6 +6,7 @@ use App\Repository\SurferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SurferRepository::class)
@@ -16,47 +17,56 @@ class Surfer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("surfer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=240, nullable=true)
+     *  @Groups("surfer")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=240, nullable=true)
+     * @Groups("surfer")
      */
 
     private $first_name;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("surfer")
      */
     private $cin;
 
     /**
      * @ORM\Column(type="string", length=240, nullable=true)
+     * @Groups("surfer")
      */
     private $emailadress;
 
     /**
      * @ORM\Column(type="string", length=240, nullable=true)
+     * @Groups("surfer")
      */
     private $password;
 
     /**
      * @ORM\OneToMany(targetEntity=RendezVous::class, mappedBy="mail",cascade={"all"},orphanRemoval=true)
+     * @Groups("surfer")
      */
     private $rendezVouses;
 
     /**
      * @ORM\OneToMany(targetEntity=Test::class, mappedBy="mail",cascade={"all"},orphanRemoval=true)
+     * @Groups("surfer")
      */
     private $tests;
 
     /**
      * @ORM\OneToMany(targetEntity=Correctiontest::class, mappedBy="mail",cascade={"all"},orphanRemoval=true)
+     * @Groups("surfer")
      */
     private $correctiontests;
 
