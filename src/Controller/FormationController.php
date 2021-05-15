@@ -218,7 +218,7 @@ class FormationController extends AbstractController
     public function triformation(): Response
     {
         $repo=$this->getDoctrine()->getRepository(Formation::class);
-        $formations= $repo->findBy([],['title'=>'ASC']);
+        $formations= $repo->findBy([],['title'=>'DESC']);
         dump($formations);
         return $this->render('formation/afficheformation.html.twig', ['formations'=>$formations]);
 
@@ -393,5 +393,7 @@ class FormationController extends AbstractController
 
         return $this->render('formation/calendarformation.html.twig',compact('data'));
     }
+
+
 
 }
