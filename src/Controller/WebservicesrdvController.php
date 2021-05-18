@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RendezVous;
+use App\Entity\Surfer;
 use App\Repository\RendezVousRepository;
 use App\Repository\SurferRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,8 @@ class WebservicesrdvController extends AbstractController
         $response = new Response();
         $jsonContent = $serializer->serialize($event,'json',['groups' =>'rdv']);
         $response->headers->set('Content-Type', 'application/json');
+        //$mail=$request->query->get("mail");
+        //$event1->setMail($this->getDoctrine()->getManager()->getRepository(Surfer::class)->find($mail));
         $response->setContent($jsonContent);
         return $response;
     }
@@ -55,14 +58,14 @@ class WebservicesrdvController extends AbstractController
     /**
      * @Route("/webservicesupdaterdv/{id}", name="webservicesupdaterdv")
     */
-    public function updateEvent(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
+    public function updaterdv(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
     {
         $content = $request->getContent();
         $event = $entityManager->getRepository(RendezVous::class)->find($id);
         $data = json_decode($content, true);
         $event->setDate(new DateTime($data['date']));
         $event->setMeet($data['meet']);
-       // $event->setMail($data['mail']);
+
         $event->setDescription($data['description']);
         $entityManager->persist($event);
         $entityManager->flush();
