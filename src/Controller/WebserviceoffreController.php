@@ -2,25 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Booking;
 use App\Entity\Evenement;
+use App\Entity\Offre;
 use App\Entity\ParticipantE;
-use App\Entity\ParticipationE;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Form\FormTypeInterface;
-use DateTime;
 
-class WebserviceseventController extends AbstractController
+class WebserviceoffreController extends AbstractController
 {
     /**
      * @Route("/webserviceseventeventdetails/{id}", name="webserviceseventeventdetails")
@@ -69,15 +62,14 @@ class WebserviceseventController extends AbstractController
     public function updateEvent(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
     {
         $content = $request->getContent();
-        $event = $entityManager->getRepository(Evenement::class)->find($id);
+        $offre = $entityManager->getRepository(Offre::class)->find($id);
         $data = json_decode($content, true);
         //$event->setDateAt($data['dateAt']);
-        $event->setDateAt(new DateTime($data['dateAt']));
-        $event->setTitle($data['title']);
-        $event->setType($data['type']);
-        $event->setDescription($data['description']);
-        $event->setLocalitation($data['localitation']);
-        $entityManager->persist($event);
+        $offre->setspecialite($data['specialite']);
+        $offre->setType($data['type']);
+        $offre->setDescription($data['description']);
+        $offre->setLocalitation($data['localitation']);
+        $entityManager->persist($offre);
         $entityManager->flush();
         //$nom = $data->get('title');
         return new Response("Succes");
@@ -139,7 +131,7 @@ class WebserviceseventController extends AbstractController
         $stmt1->execute();
         $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
         $stmt->execute();
-        
+
         $entityManager->remove($par);
 
         $entityManager->flush();
@@ -168,81 +160,14 @@ class WebserviceseventController extends AbstractController
     public function addpar(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
     {
 
-
-
         $content = $request->getContent();
-        $data1 = json_decode($content, true);
-        $seat = $data1['seat'];
-        $sql = "UPDATE booking SET " .$seat. "=". 1 ." WHERE id_event=" . $id. " ";
-
-
-        $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
-        $stmt->execute();
-
         $data = $serializer->deserialize($content,ParticipantE::class,'json');
         $entityManager->persist($data);
         $entityManager->flush();
 
-        $participation= new ParticipationE();
-        $participation->setIdEvenement($id)
-            ->setIdParticipant($data->getId());
-        $entityManager->persist($participation);
-        $entityManager->flush();
-
-
-
-        return new Response($seat);
+        return new Response($content);
 
     }
-
-    /**
-     * @Route("/webserviceseventeventssearch/{title}", name="webserviceseventeventssearch")
-     */
-    public function Search(EvenementRepository $evenementRepository,SerializerInterface $serializer,$title)
-    {
-        $rep = $this->getDoctrine()->getRepository(Evenement::class);
-        $event = $rep->findBy(array('title' => $title));
-        $response = new Response();
-        $jsonContent = $serializer->serialize($event,'json',['groups' =>'event']);
-        $response->headers->set('Content-Type', 'application/json');
-        $response->setContent($jsonContent);
-        return $response;
-    }
-
-
-    /**
-     * @Route("/statage", name="statage")
-     */
-    public function statage(SerializerInterface $serializer)
-    {
-        $sql = "SELECT age , COUNT(participant_e.age) AS nbage FROM `participant_e` GROUP BY(age)";
-        $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
-        $stmt->execute();
-        $jsonContent = $serializer->serialize($stmt,'json');
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
-        $response->setContent($jsonContent);
-        return $response;
-
-    }
-
-    /**
-     * @Route("/stat", name="stat")
-     */
-    public function stat(SerializerInterface $serializer)
-    {
-        $sql = "SELECT MONTH(date_at) AS Mois,COUNT(id) AS NB from evenement group by MONTH(date_at)";
-        $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
-        $stmt->execute();
-        $jsonContent = $serializer->serialize($stmt,'json');
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
-        $response->setContent($jsonContent);
-        return $response;
-
-    }
-
-
 
 
 

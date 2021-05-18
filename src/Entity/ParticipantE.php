@@ -44,6 +44,11 @@ class ParticipantE
      */
     private $age;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $seat;
+
     public function __construct()
     {
         $this->eventlikes = new ArrayCollection();
@@ -117,6 +122,18 @@ class ParticipantE
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getSeat(): ?string
+    {
+        return $this->seat;
+    }
+
+    public function setSeat(?string $seat): self
+    {
+        $this->seat = $seat;
 
         return $this;
     }
