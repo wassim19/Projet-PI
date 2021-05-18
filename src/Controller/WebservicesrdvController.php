@@ -83,4 +83,19 @@ class WebservicesrdvController extends AbstractController
         $entityManager->flush();
         return new Response("Succes");
     }
+    /**
+     * @Route("/statrdv", name="statrdv")
+     */
+    public function stat(SerializerInterface $serializer)
+    {
+        $sql = "SELECT WEEK(date) AS Mois,COUNT(id) AS NB from rendez_vous group by WEEK(date)";
+        $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $jsonContent = $serializer->serialize($stmt,'json');
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        return $response;
+
+    }
 }
