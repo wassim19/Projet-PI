@@ -5,13 +5,10 @@ namespace App\Controller;
 use App\Entity\CategorieOffre;
 
 use PHPMailer\PHPMailer\SMTP;
-use App\Entity\Evenement;
-use App\Entity\Formation;
-use App\Entity\NotifEvent;
+
 use App\Entity\NotifOffre;
 use App\Entity\Offre;
 use App\Entity\OffreEmploye;
-use App\Form\EventType;
 use App\Form\OffreEmployeType;
 use App\Form\OffreType;
 use App\Repository\OffreRepository;
