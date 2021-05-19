@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OffreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 
@@ -19,10 +20,12 @@ class Offre
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("offre")
      */
     private $id;
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("offre")
      */
     private $specialite;
 
@@ -32,26 +35,31 @@ class Offre
     }
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("offre")
      */
     private $localisation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("offre")
      */
     private $nb_dem;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("offre")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("offre")
      */
     private $imagesoffre;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategorieOffre::class, inversedBy="types")
+     *  @Groups("offre")
      */
     private $typecategorie;
 
