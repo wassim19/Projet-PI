@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ParticipantfRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantfRepository::class)
@@ -15,6 +16,7 @@ class ParticipantF
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("participantsf")
      */
     private $id;
 
@@ -23,11 +25,13 @@ class ParticipantF
      * @Assert\Email(
      * message = "The email '{{ value }}' is not a valid email."
      * )
+     * @Groups("participantsf")
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("participantsf")
      */
     private $nom;
 
