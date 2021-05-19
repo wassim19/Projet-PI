@@ -20,10 +20,10 @@ class ReclamationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reclamation::class);
     }
 
-    // /**
-    //  * @return Reclamation[] Returns an array of Reclamation objects
-    //  */
-    /*
+     /**
+      * @return Reclamation[] Returns an array of Reclamation objects
+      */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('r')
@@ -35,7 +35,7 @@ class ReclamationRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Reclamation
@@ -182,4 +182,5 @@ class ReclamationRepository extends ServiceEntityRepository
         // to get just one result:
         // $product = $query->setMaxResults(1)->getOneOrNullResult();
     }
+
 }
