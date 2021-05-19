@@ -99,6 +99,11 @@ class Reclamation
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status2;
+
 
 
 
@@ -159,6 +164,18 @@ class Reclamation
     public function setStatus(?bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStatus2(): ?string
+    {
+        return $this->status2;
+    }
+
+    public function setStatus2(?string $status2): self
+    {
+        $this->status2 = $status2;
 
         return $this;
     }

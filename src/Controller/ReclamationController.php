@@ -7,10 +7,12 @@ use App\Entity\Evenement;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +21,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class ReclamationController extends AbstractController
@@ -316,6 +320,107 @@ class ReclamationController extends AbstractController
 
 
     }
+    /**
+     * @Route("/displayReclamations", name="display_reclamation")
+     */
+    public function allRecAction()
+    {
 
+        $reclamation = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+
+        return new JsonResponse($formatted);
+
+    }
+    /******************Ajouter Reclamation*****************************************/
+    /**
+     * @Route("/addReclamation", name="add_reclamation")
+     */
+
+    public function ajouterReclamationAction(Request $request)
+    {
+        $reclamation = new Reclamation();
+        $message=$request->query->get("message");
+        $motif=$request->query->get("motif");
+        $gsm=$request->query->get("gsm");
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $date = new \DateTime('now');
+        $status="in proress";
+
+        $reclamation->setGSM($gsm);
+        $reclamation->setMessage($message);
+        $reclamation->setCreatedAt($date);
+        $reclamation->setStatus(0);
+        $reclamation->setMotif($motif);
+        $reclamation->setStatus2($status);
+        $em->persist($reclamation);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+       // echo $formatted;
+        return new JsonResponse($formatted);
+
+    }
+    /**
+     * @Route("/deleteReclamation", name="delete_reclamation")
+
+     */
+
+    public function deleteReclamationAction(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+        if($reclamation!=null ) {
+            $em->remove($reclamation);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Reclamation a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id reclamation invalide.");
+
+
+    }
+    /******************Modifier Reclamation*****************************************/
+    /**
+     * @Route("/updateReclamation2", name="update_reclamation")
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
+    public function modifierReclamationAction(Request $request): JsonResponse
+    {   $reclamation =new Reclamation();
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $this->getDoctrine()->getManager()
+            ->getRepository(Reclamation::class)
+            ->find($request->get("id"));
+
+        $reclamation->setMessage($request->get("message"));
+        $reclamation->setMotif($request->get("motif"));
+        $reclamation->setGSM($request->get("gsm"));
+
+
+        $em->persist($reclamation);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+        return new JsonResponse("Reclamation a ete modifiee avec success.");
+
+    }
+    /**
+     * @Route("/apiupdate/{id}", name="api_update_reclamation")
+     */
+    public function updateReclamation (Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id){
+        $content=$request->getContent();
+        $rec=$entityManager->getRepository(Reclamation::class)->find($id);
+        $data=json_decode($content,true);
+        $rec->setMessage();
+
+    }
 
 }

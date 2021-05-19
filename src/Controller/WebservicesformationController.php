@@ -23,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class WebservicesformationController extends AbstractController
 {
-
     /**
      * @Route("/webservicesafficheformation", name="webservicesafficheformation")
      */
@@ -36,6 +35,7 @@ class WebservicesformationController extends AbstractController
         $response->setContent($jsonContent);
         return $response;
     }
+
 
     /**
      * @Route("/webserviceseventaddformation", name="webserviceseventaddformation")
