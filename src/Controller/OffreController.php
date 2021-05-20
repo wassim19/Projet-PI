@@ -217,7 +217,7 @@ class OffreController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
             $notif = new NotifOffre();
-            $notif->setNotif('New offre Is Here');
+            $notif->setNotifoffre('New offre Is Here');
             $entityManager->persist($notif);
 
             $entityManager->flush();
