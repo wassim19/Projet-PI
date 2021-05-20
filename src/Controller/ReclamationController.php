@@ -6,6 +6,7 @@ use App\Entity\Company;
 use App\Entity\Evenement;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
+use App\Repository\EvenementRepository;
 use App\Repository\ReclamationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPMailer\PHPMailer\Exception;
@@ -413,14 +414,79 @@ class ReclamationController extends AbstractController
 
     }
     /**
-     * @Route("/apiupdate/{id}", name="api_update_reclamation")
+     * @Route("/webserviceseventupdaterec/{id}", name="webserviceseventupdaterec")
      */
-    public function updateReclamation (Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id){
-        $content=$request->getContent();
-        $rec=$entityManager->getRepository(Reclamation::class)->find($id);
-        $data=json_decode($content,true);
-        $rec->setMessage();
+    public function updateRec(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
+    {
+        $content = $request->getContent();
+        $rec = $entityManager->getRepository(Reclamation::class)->find($id);
+        $data = json_decode($content, true);
+        //$event->setDateAt($data['dateAt']);
+        //$rec->setDateAt(new DateTime($data['dateAt']));
+        $rec->setMessage($data['message']);
+        $rec->setMotif($data['motif']);
+        $rec->setGSM($data['gsm']);
+
+        $entityManager->persist($rec);
+        $entityManager->flush();
+        //$nom = $data->get('title');
+        return new Response("Succes");
+    }
+    /**
+     * @Route("/ValiderApi/{id}", name="ValiderApi")
+     */
+    public function ValiderApi(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
+    {
+        $content = $request->getContent();
+        $rec = $entityManager->getRepository(Reclamation::class)->find($id);
+        $data = json_decode($content, true);
+        //$event->setDateAt($data['dateAt']);
+        //$rec->setDateAt(new DateTime($data['dateAt']));
+        $sta="studied";
+        $rec->setStatus2($sta);
+
+        $entityManager->persist($rec);
+        $entityManager->flush();
+        //$nom = $data->get('title');
+        return new Response("Succes");
+    }
+    /**
+     * @Route("/webserviceseventdeleterec/{id}", name="webserviceseventdeleterec")
+     */
+    public function deleteRec(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,$id)
+    {
+        $event = $entityManager->getRepository(Reclamation::class)->find($id);
+        $entityManager->remove($event);
+
+        $entityManager->flush();
+        return new Response("Succes");
+    }
+    /**
+     * @Route("/searchRec/{motif}", name="searchRec")
+     */
+    public function searchRec(EvenementRepository $evenementRepository,SerializerInterface $serializer,$motif)
+    {
+        $rep = $this->getDoctrine()->getRepository(Reclamation::class);
+        $event = $rep->findBy(array('motif' => $motif));
+        $response = new Response();
+        $jsonContent = $serializer->serialize($event,'json',['groups' =>'reclamation']);
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        return $response;
+    }
+    /**
+     * @Route("/statmotif", name="statmotif")
+     */
+    public function statmotif(SerializerInterface $serializer)
+    {
+        $sql = "SELECT DAY (created_at) AS week, COUNT(id) AS nb FROM `reclamation` GROUP BY(motif)";
+        $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $jsonContent = $serializer->serialize($stmt,'json');
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($jsonContent);
+        return $response;
 
     }
-
 }
